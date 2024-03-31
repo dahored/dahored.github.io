@@ -1,0 +1,28 @@
+.#{$prefix}-button {
+   border-radius: var(--custom-button-radius, $default-radius);
+   padding: var(--custom-button-padding, $default-button-padding);
+   font-size: var(--font-size);
+   list-style: 1.5;
+   cursor: pointer;
+   border-width: var(--custom-button-border-size, $default-border-size);
+   border-style: var(--custom-button-border-style, $default-border-style);
+
+   background-color: var(--custom-button-primary-background, $default-button-primary-background);
+   color: var(--custom-button-primary-color, $default-button-primary-color);
+   border-color: var(--custom-button-border-color, $default-button-primary-background);
+   transition: background-color var(--custom-button-transition, $default-button-transition), color var(--custom-button-transition, $default-button-transition);
+
+   &:hover {
+      background-color: var(--custom-button-primary-background-hover, darken($default-button-primary-background, 15%));
+   }
+
+   &--secondary {
+      background-color: var(--custom-button-secondary-background, $default-button-secondary-background);
+      color: var(--custom-button-secondary-color, $default-button-secondary-color);
+      border-color: var(--custom-button-border-color, $default-button-secondary-color);
+
+      &:hover {
+         background-color: var(--custom-button-secondary-background-hover,  rgba($default-button-secondary-color, 15%));
+      }
+   }
+}

@@ -1,0 +1,38 @@
+$theme-name: "theme-simple";
+$prefix: $theme-name;
+
+:root {
+    --max-width: 1200px;
+    --font-size: 1rem;
+    --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+    
+    --line-height: 24px;
+
+    --foreground-rgb: 0, 0, 0;
+    --transition-duration: 0.3s;
+}
+
+// components
+$default-radius: 4px;
+$default-border-size: 1px;
+$default-border-style: solid;
+$default-border-color: #e0e0e0;
+
+// buttons
+$default-button-transition: var(--transition-duration);
+$default-button-padding: 0.375rem 0.75rem;
+$default-button-primary-background: #9b59b6;
+$default-button-primary-color: #fff;
+$default-button-secondary-background: #fff;
+$default-button-secondary-color: #9b59b6;
+
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground-rgb: 255, 255, 255;
+    }
+}
+
+@import "../components/button.component.scss";
