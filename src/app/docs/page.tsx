@@ -1,6 +1,5 @@
 import Image from "next/image";
 import styles from "@/app/assets/styles/modules/example.module.scss";
-import variables from "@/app/assets/styles/variables.module.scss";
 
 export default function Docs() {
   return (
@@ -12,7 +11,6 @@ export default function Docs() {
         </p>
         <div>
           <a
-            style={{ color: variables.primaryColor }}
             href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
