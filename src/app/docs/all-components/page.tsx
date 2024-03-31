@@ -11,6 +11,15 @@ export default function AllComponents() {
                 <div className={`${styles.components} ${styles.componentsInline}`}>
                     <Button>Primary</Button>
                     <Button variant="secondary">Secondary</Button>
+                    <Button>
+                        <Icon icon="arrow-down-circle"/> With icon
+                    </Button>
+                    <Button>
+                        With icon <Icon icon="arrow-down-circle"/>
+                    </Button>
+                    <Button>
+                        <Icon icon="arrow-down-circle"/>
+                    </Button>
                 </div>
             </div>
             <div className={styles.wrapper}>

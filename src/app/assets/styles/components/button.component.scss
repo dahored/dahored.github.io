@@ -12,6 +12,10 @@
    border-color: var(--custom-button-border-color, $default-button-primary-background);
    transition: background-color var(--custom-button-transition, $default-button-transition), color var(--custom-button-transition, $default-button-transition);
 
+   display: flex;
+   gap: 8px;
+   align-items: center;
+
    &:hover {
       background-color: var(--custom-button-primary-background-hover, darken($default-button-primary-background, 15%));
    }
