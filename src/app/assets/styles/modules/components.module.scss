@@ -1,11 +1,15 @@
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 24px;
+    padding: 40px 24px 24px;
 
     h1 {
         margin-bottom: 16px;
     }
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .wrapper {
