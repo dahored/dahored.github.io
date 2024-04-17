@@ -9,6 +9,10 @@
 
 html {
   font-size: 16px;
+
+  @media screen and (max-width: 992px) {
+      font-size: 12.8px;
+  }
 }
 
 html,
@@ -27,15 +31,8 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
-
-
 .responsive-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 24px;
 }

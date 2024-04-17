@@ -2,6 +2,6 @@
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 16px;
-    color: var(--custom-text-color, $default-text-color);
+    color: var(--custom-text-color, var(--default-text-color));
 }
 
