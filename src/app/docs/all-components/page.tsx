@@ -23,6 +23,9 @@ export default function AllComponents() {
                     <Button>
                         <Icon icon="arrow-down-circle"/>
                     </Button>
+                    <Button onlyIcon>
+                        <Icon icon="arrow-down-circle"/>
+                    </Button>
                 </div>
             </div>
 
