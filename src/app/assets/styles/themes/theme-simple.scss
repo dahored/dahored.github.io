@@ -17,6 +17,10 @@ $prefix: $theme-name;
     --transition-duration: 0.3s;
 }
 
+// colors
+$default-title-color: #333;
+$default-text-color: #333;
+
 // components
 $default-radius: 4px;
 $default-border-size: 1px;
@@ -40,3 +44,5 @@ $default-button-secondary-color: #9b59b6;
 
 @import "../components/button.component.scss";
 @import "../components/icon.component.scss";
+@import "../components/title.component.scss";
+@import "../components/paragraph.component.scss";

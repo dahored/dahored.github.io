@@ -1,0 +1,50 @@
+{
+    "eslint.format.enable": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.stylelint": "explicit"
+    },
+    "[html]": {
+        "editor.formatOnSave": true,
+        "editor.rulers": [79, 120], 
+    },
+
+    "[vue-html]": {
+        "editor.formatOnSave": true,
+        "editor.rulers": [79, 120]
+    },
+    "[css]": {
+        "editor.rulers": [50, 70]
+    },
+    "[scss]": {
+        "editor.rulers": [50, 70]
+    },
+    "[js]": {
+        "editor.formatOnSave": true,
+        "editor.rulers": [79, 120],
+    },
+    "[javascript]": {
+        "editor.formatOnSave": true,
+        "editor.rulers": [79, 120],
+    },
+    "[ts]": {
+        "editor.formatOnSave": true,
+        "editor.rulers": [79, 120],
+    },
+    "[typescript]": {
+        "editor.formatOnSave": true,
+        "editor.rulers": [79, 120],
+    },
+    "[vue]": {
+        "editor.formatOnSave": true,
+        "editor.rulers": [79, 120]
+    },
+    "[json]": {
+        "editor.formatOnSave": true,
+    },
+    //stylelint
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+}
+    

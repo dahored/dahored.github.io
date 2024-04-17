@@ -17,6 +17,7 @@
    align-items: center;
 
    &:hover {
+      cursor: pointer;
       background-color: var(--custom-button-primary-background-hover, darken($default-button-primary-background, 15%));
    }
 
