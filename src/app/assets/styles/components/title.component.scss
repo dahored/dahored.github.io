@@ -1,0 +1,38 @@
+.#{$prefix}-title {
+    font-weight: 600;
+    color: var(--custom-title-color, $default-title-color);
+
+    &.light {
+        font-weight: 300;
+    }
+}
+
+h1.#{$prefix}-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+
+h2.#{$prefix}-title {
+    font-size: 2rem;
+    line-height: 1.3;
+}
+
+h3.#{$prefix}-title {
+    font-size: 1.75rem;
+    line-height: 1.4;
+}
+
+h4.#{$prefix}-title {
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
+
+h5.#{$prefix}-title {
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
+
+h6.#{$prefix}-title {
+    font-size: 1rem;
+    line-height: 1.7;
+}

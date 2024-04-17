@@ -1,11 +1,11 @@
 import GlobalConfig from "@/app/app.config";
 
 type Props = {
-  icon: string
+    icon: string
 }
 
 const defaultProps: Props = {
-  icon: "icon"
+    icon: "icon"
 }
 
 export default function Icon(props: Props = defaultProps) {
