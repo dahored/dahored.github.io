@@ -3,23 +3,9 @@ $prefix: $theme-name;
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-:root {
-    --max-width: 1200px;
-    --font-size: 1rem;
-    --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-    --font-family: "Poppins", sans-serif;
-    
-    --line-height: 24px;
-
-    --foreground-rgb: 0, 0, 0;
-    --transition-duration: 0.3s;
-}
-
 // colors
-$default-title-color: #333;
-$default-text-color: #333;
+$default-title-color: rgba(20, 20, 20, 1);
+$default-text-color: rgba(20, 20, 20, 1);
 
 // components
 $default-radius: 4px;
@@ -35,10 +21,39 @@ $default-button-primary-color: #fff;
 $default-button-secondary-background: #fff;
 $default-button-secondary-color: #9b59b6;
 
+$default-waves-color: #9b59b6;
+$default-waves-color-contrast: #9b59b6;
+
+:root {
+    --max-width: 1200px;
+    --font-size: 1rem;
+    --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+    --font-family: "Poppins", sans-serif;
+    
+    --line-height: 24px;
+
+    --foreground-rgb: 0, 0, 0;
+    --transition-duration: 0.3s;
+
+    --waves-color: #9b59b6;
+    --waves-color-contrast: #9b59b6;
+    
+    --main-banner-bg: #f9f9f9;
+    --main-banner-title-color: rgba(20, 20, 20, 1);
+    --main-banner-subtitle-color: rgba(20, 20, 20, 0.5);
+    --main-banner-image-border-color: #ffffff;
+}
+
 
 @media (prefers-color-scheme: dark) {
     :root {
         --foreground-rgb: 255, 255, 255;
+
+        --main-banner-bg: #000000;
+        --main-banner-title-color: rgba(245, 245, 247, 1);
+        --main-banner-subtitle-color: rgba(245, 245, 247, 0.5);
     }
 }
 
@@ -46,3 +61,4 @@ $default-button-secondary-color: #9b59b6;
 @import "../components/icon.component.scss";
 @import "../components/title.component.scss";
 @import "../components/paragraph.component.scss";
+@import "../components/image.component.scss";

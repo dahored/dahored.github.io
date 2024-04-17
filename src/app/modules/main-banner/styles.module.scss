@@ -1,6 +1,8 @@
 .mainBanner {
-    background-color: var(--main-banner-bg, #000000);
+    background-color: var(--custom-main-banner-bg, var(--main-banner-bg));
     height: 100vh;
+    position: relative;
+    overflow: hidden;
 }
 
 .mainBannerWrapper {
@@ -8,8 +10,82 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 4;
 
-    h2 {
-       color: var(--main-banner-title-color, rgb(245, 245, 247))
+    h1 {
+        color: var(--custom-main-banner-title-color, var(--main-banner-title-color))
     }
+
+    h3 {
+        color: var(--custom-main-banner-subtitle-color, var(--main-banner-subtitle-color))
+    }
+}
+
+.image {
+    background-color: white;
+    margin-bottom: 24px;
+    border: 5px solid var(--custom-main-banner-image-border-color, var(--main-banner-image-border-color));
+
+}
+
+.image--square {
+    border-radius: 0;
+}
+
+.image--circle {
+    border-radius: 50%;
+}
+
+.image--rounded {
+    border-radius: 24px;
+}
+
+$wave-size: 900px;
+$wave-time: 15000ms;
+$wave-opacity: 0.3;
+
+.wave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: var(--custom-wave-color, var(--waves-color));
+    width: $wave-size;
+    height: $wave-size;
+    margin-left: calc($wave-size / -2);
+    margin-top: calc($wave-size / -2);
+    transform-origin: 50% 48%;
+    border-radius: 40%;
+    z-index: 3;
+    opacity: $wave-opacity;
+}
+
+.wave1 {
+    left: 51%;
+    top: 49%;
+    animation: drift calc($wave-time * 3) infinite linear;
+}
+
+.wave2 {
+    left: 48%;
+    top: 51%;
+    animation: drift calc($wave-time * 1) infinite linear;
+    background-color: var(--custom-wave-color-contrast, var(--waves-color-contrast));
+    z-index: 2;
+    opacity: $wave-opacity / 2;
+}
+
+.wave3 {
+    left: 51%;
+    top: 51%;
+    animation: drift calc($wave-time * 2) infinite linear;
+    background-color: var(--custom-wave-color, var(--waves-color));
+    z-index: 1;
+    opacity: $wave-opacity / 2;
+}
+
+@keyframes drift {
+    from { transform: rotate(0deg); }
+    from { transform: rotate(360deg); }
 }
