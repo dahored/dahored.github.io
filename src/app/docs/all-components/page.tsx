@@ -1,8 +1,9 @@
+import styles from "@/app/assets/styles/modules/components.module.scss";
 import Button from "@/app/components/button";
 import Icon from "@/app/components/icon";
 import Title from "@/app/components/title";
-import styles from "@/app/assets/styles/modules/components.module.scss";
 import Paragraph from "@/app/components/paragraph";
+import Image from "next/image";
 
 export default function AllComponents() {
     return (
@@ -50,6 +51,20 @@ export default function AllComponents() {
                 <h2 className={styles.sectionTitle}>Paragraphs</h2>
                 <div className={`${styles.components}`}>
                     <Paragraph>Paragraph</Paragraph>
+                </div>
+            </div>
+
+            <div className={styles.wrapper}>
+                <h2 className={styles.sectionTitle}>Images</h2>
+                <div className={`${styles.components}`}>
+                    <Image
+                        src="/vercel.svg"
+                        alt="Vercel Logo"
+                        className={styles.vercelLogo}
+                        width={100}
+                        height={24}
+                        priority
+                    />
                 </div>
             </div>
         </main>
