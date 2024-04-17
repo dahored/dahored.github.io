@@ -1,18 +1,21 @@
 .mainBanner {
     background-color: var(--custom-main-banner-bg, var(--main-banner-bg));
-    height: 100vh;
+    height: calc(100vh);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .mainBannerWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    flex: 6;
     text-align: center;
     position: relative;
-    z-index: 4;
+    padding: 40px 0px 20px;
+    max-height: 992px;
 
     h1 {
         color: var(--custom-main-banner-title-color, var(--main-banner-title-color))
@@ -21,13 +24,63 @@
     h3 {
         color: var(--custom-main-banner-subtitle-color, var(--main-banner-subtitle-color))
     }
+
+    @media screen and (max-width: 1200px) {
+        padding: 24px 0px;
+        flex: 6;
+    }
+
+    @media screen and (max-width: 992px) {
+        max-height: 640px;
+    }
+
+    @media screen and (max-width: 768px) {
+        max-height: 480px;
+    }
 }
+
+.mainBannerContent {
+    position: relative;
+    z-index: 4;
+}
+
+.mainBannerExtraContent {
+    padding: 24px 0px;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+
+    @media screen and (max-width: 1200px) {
+        flex: 4;
+    }
+}
+
+.mainBannerCard {
+    max-width: 600px;
+    padding: 20px;
+    // background-color: white;
+    // color: invert($color: white);
+    border-radius: 12px;
+    display: flex;
+    gap: 12px;
+}
+
+
 
 .image {
     background-color: white;
-    margin-bottom: 24px;
-    border: 5px solid var(--custom-main-banner-image-border-color, var(--main-banner-image-border-color));
+    margin-bottom: 12px;
+    border: 4px solid var(--custom-main-banner-image-border-color, var(--main-banner-image-border-color));
 
+    @media screen and (max-width: 1200px) {
+        width: 150px;
+        height: 150px;
+    }
+
+    @media screen and (max-width: 992px) {
+        width: 120px;
+        height: 120px;
+    }
 }
 
 .image--square {
@@ -42,7 +95,7 @@
     border-radius: 24px;
 }
 
-$wave-size: 900px;
+$wave-size: 800px;
 $wave-time: 15000ms;
 $wave-opacity: 0.3;
 
@@ -51,14 +104,43 @@ $wave-opacity: 0.3;
     top: 50%;
     left: 50%;
     background-color: var(--custom-wave-color, var(--waves-color));
+    
     width: $wave-size;
     height: $wave-size;
     margin-left: calc($wave-size / -2);
     margin-top: calc($wave-size / -2);
+
     transform-origin: 50% 48%;
     border-radius: 40%;
     z-index: 3;
     opacity: $wave-opacity;
+
+    @media screen and (max-width: 1200px) {
+        $wave-size: 600px;
+
+        width: $wave-size;
+        height: $wave-size;
+        margin-left: calc($wave-size / -2);
+        margin-top: calc($wave-size / -2);
+    }
+
+    @media screen and (max-width: 992px) {
+        $wave-size: 520px;
+
+        width: $wave-size;
+        height: $wave-size;
+        margin-left: calc($wave-size / -2);
+        margin-top: calc($wave-size / -2);
+    }
+
+    @media screen and (max-width: 768px) {
+        $wave-size: 360px;
+
+        width: $wave-size;
+        height: $wave-size;
+        margin-left: calc($wave-size / -2);
+        margin-top: calc($wave-size / -2);
+    }
 }
 
 .wave1 {

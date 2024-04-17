@@ -1,7 +1,6 @@
 .#{$prefix}-button {
    border-radius: var(--custom-button-radius, $default-radius);
-   padding: var(--custom-button-padding, $default-button-padding);
-   font-size: var(--font-size);
+   font-size: var(--font-size, 1rem);
    list-style: 1.5;
    cursor: pointer;
    border-width: var(--custom-button-border-size, $default-border-size);
@@ -16,6 +15,9 @@
    gap: 8px;
    align-items: center;
 
+   padding: var(--custom-button-padding, $default-button-padding);
+   height: 38px;
+
    &:hover {
       cursor: pointer;
       background-color: var(--custom-button-primary-background-hover, darken($default-button-primary-background, 15%));
@@ -29,5 +31,40 @@
       &:hover {
          background-color: var(--custom-button-secondary-background-hover,  rgba($default-button-secondary-color, 15%));
       }
+   }
+
+   &--small {
+      padding: var(--custom-button-padding-small, $default-button-padding-small);
+      font-size: var(--font-size-small, 1rem);
+      height: 32px;
+
+      .theme-simple-icon {
+         font-size: 0.8rem;
+      }
+   }
+
+   &--large {
+      padding: var(--custom-button-padding-large, $default-button-padding-large);
+      font-size: var(--font-size-large, 1.5rem);
+      height: 48px;
+
+      .theme-simple-icon {
+         font-size: 1.2rem;
+      }
+   }
+
+   &--only-icon {
+      width: 38px;
+      padding: 0px;
+      justify-content: center;
+   }
+
+   &--only-icon.#{$prefix}-button--small {
+      width: 32px;
+     
+   }
+
+   &--only-icon.#{$prefix}-button--large {
+      width: 48px;
    }
 }
