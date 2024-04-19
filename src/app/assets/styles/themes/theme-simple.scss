@@ -3,61 +3,55 @@ $prefix: $theme-name;
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-// colors
-$default-title-color: rgba(20, 20, 20, 1);
-$default-text-color: rgba(20, 20, 20, 1);
-
-// components
-$default-radius: 4px;
-$default-border-size: 1px;
-$default-border-style: solid;
-$default-border-color: #e0e0e0;
-
-// buttons
-$default-button-transition: var(--transition-duration);
-$default-button-padding: 0.375rem 0.75rem;
-$default-button-padding-small: 0.25rem 0.5rem;
-$default-button-padding-large: 0.5rem 1rem;
-$default-button-primary-background: #9b59b6;
-$default-button-primary-color: #fff;
-$default-button-secondary-background: #fff;
-$default-button-secondary-color: #9b59b6;
-
-$default-waves-color: #9b59b6;
-$default-waves-color-contrast: #9b59b6;
-
 :root {
-    --max-width: 1200px;
-    --font-size: 1rem;
+    color-scheme: dark;
+    /* 
+    ------------------------------
+    DEFAULT VARS 
+    ------------------------------
+    */
+
+    // fonts
     --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
     --font-family: "Poppins", sans-serif;
-    
+    --font-size: 1rem;
     --line-height: 24px;
 
-    --foreground-rgb: 0, 0, 0;
+    // general
     --transition-duration: 0.3s;
-
-    --waves-color: #9b59b6;
-    --waves-color-contrast: #9b59b6;
+    --max-width-container: 1200px;
     
-    --main-banner-bg: #f9f9f9;
-    --main-banner-title-color: rgba(20, 20, 20, 1);
-    --main-banner-subtitle-color: rgba(20, 20, 20, 0.5);
-    --main-banner-image-border-color: #ffffff;
-}
+    // colors
+    --main-color-theme: #8e44ad;
+    --main-color-theme-hover: #623077;
+    --secondary-color-theme: #9b59b6;
 
+    --main-text-color: #212121;
+    --secondary-text-color: #4c4c4c;
+
+    --white-color: #ffffff;
+
+    --default-title-color: var(--main-text-color);
+    --default-subtitle-color: var(--secondary-text-color);
+    --default-text-color: var(--main-text-color);
+    
+    // components
+    --default-border-radius: 4px;
+    --default-border-size: 1px;
+    --default-border-style: solid;
+    --default-border-color: #e0e0e0;
+}
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --foreground-rgb: 255, 255, 255;
-
-        --main-banner-bg: #000000;
-        --main-banner-title-color: rgba(245, 245, 247, 1);
-        --main-banner-subtitle-color: rgba(245, 245, 247, 0.5);
+        --main-text-color: #ffffff;
+        --secondary-text-color: #e3e3e3;
     }
 }
+
+
 
 @import "../components/button.component.scss";
 @import "../components/icon.component.scss";

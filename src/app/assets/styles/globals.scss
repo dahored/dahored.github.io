@@ -31,13 +31,6 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
-
-
 .responsive-content {
   max-width: 1200px;
   margin: 0 auto;
