@@ -6,4 +6,40 @@
     justify-content: center;
     font-size: 1rem;
     color: var(--custom-color-icon, inherit);
+
+    &__size--small {
+        height: 0.75rem;
+        width: 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    &__size--medium {
+        height: 1.50rem;
+        width: 1.50rem;
+        font-size: 1.50rem;
+    }
+
+    &__size--large {
+        height: 2rem;
+        width: 2rem;
+        font-size: 2rem;
+    }
+
+    &__size--xlarge {
+        height: 3rem;
+        width: 3rem;
+        font-size: 3rem;
+    }
+
+    &__size--xxlarge {
+        height: 4rem;
+        width: 4rem;
+        font-size: 4rem;
+    }
+
+    &__size--xxxlarge {
+        height: 5rem;
+        width: 5rem;
+        font-size: 5rem;
+    }
 }

@@ -11,7 +11,7 @@ $prefix: $theme-name;
     ------------------------------
     */
 
-    // fonts
+    // FONTS
     --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
@@ -19,36 +19,49 @@ $prefix: $theme-name;
     --font-size: 1rem;
     --line-height: 24px;
 
-    // general
+    // GENERAL
     --transition-duration: 0.3s;
     --max-width-container: 1200px;
+
+    --default-border-radius: 4px;
+    --default-card-border-radius: 40px;
+    --default-border-size: 1px;
+    --default-border-style: solid;
+    --default-border-color: #e0e0e0;
     
-    // colors
+    // NORMAL COLORS
     --main-color-theme: #8e44ad;
     --main-color-theme-hover: #623077;
     --secondary-color-theme: #9b59b6;
-
+    --contrast-color-theme: #ecf0f1;
+    
     --main-text-color: #212121;
     --secondary-text-color: #4c4c4c;
 
     --white-color: #ffffff;
 
+    // INVERSE COLORS
+    --inverse-color-theme: #ffffff;
+
+    --inverse-text-color: #212121;
+    --inverse-secondary-text-color: #4c4c4c;
+
+
+    // REDEFINE COLORS
     --default-title-color: var(--main-text-color);
     --default-subtitle-color: var(--secondary-text-color);
     --default-text-color: var(--main-text-color);
-    
-    // components
-    --default-border-radius: 4px;
-    --default-border-size: 1px;
-    --default-border-style: solid;
-    --default-border-color: #e0e0e0;
+
+    --default-title-inverse-color: var(--inverse-text-color);
+    --default-subtitle-inverse-color: var(--inverse-secondary-text-color);
+    --default-text-inverse-color: var(--inverse-text-color);    
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --main-text-color: #ffffff;
-        --secondary-text-color: #e3e3e3;
-    }
+    // :root {
+    //     --main-text-color: #ffffff;
+    //     --secondary-text-color: #e3e3e3;
+    // }
 }
 
 
