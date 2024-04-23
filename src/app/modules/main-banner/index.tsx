@@ -13,7 +13,7 @@ type Props = {
   styles?: object
 }
 
-function getMainBannerStyles(props: Props): CSS.Properties {
+function getStyles(props: Props): CSS.Properties {
   return {
     ...props.styles,
     backgroundImage: props.backgroundImage ? `url(${props.backgroundImage})` : 'none',
@@ -21,11 +21,12 @@ function getMainBannerStyles(props: Props): CSS.Properties {
 }
 
 export default function MainBanner(props: Props) {
-  return <div className={`${styles.mainBanner}`} style={getMainBannerStyles(props)}>
+  return <div className={`${styles.mainBanner}`} style={getStyles(props)}>
     <div className={`${styles.mainBannerWrapper}`}>
       <div className={`${styles.mainBannerContent} responsive-content`}>
         {props.image && 
-        <Image
+        <div>
+          <Image
             src={props.image}
             alt="Main photo"
             className={`${styles.image} ${styles[`image--${props.imageType}`] || styles[`image--square`]}`}
@@ -33,10 +34,11 @@ export default function MainBanner(props: Props) {
             height={200}
             priority
             objectFit="cover"
-        />
+          />
+        </div>
         }
-        <Title title={props.title} variant="h1"></Title>
-        {props.subtitle && <Title title={props.subtitle} variant="h3" light></Title>}
+        <Title title={props.title} variant="h1" class={`${styles.mainBannerTitle}`}></Title>
+        {props.subtitle && <Title title={props.subtitle} variant="h3" light  class={`${styles.mainBannerSubTitle}`}></Title>}
       </div>
       <div className="waves">
         {props.wave && <div className={`${styles.wave} ${styles.wave1}`}></div>}

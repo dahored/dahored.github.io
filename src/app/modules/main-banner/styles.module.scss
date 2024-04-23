@@ -1,7 +1,5 @@
 .mainBanner {
-    // waves
-    --waves-color: var(--white-color);
-    --waves-color-contrast: var(--white-color);
+    
 
     // banner colors
     --main-banner-bg: var(--main-color-theme);
@@ -9,9 +7,16 @@
     --main-banner-subtitle-color: var(--default-subtitle-color);
     --main-banner-image-border-color: var(--white-color);
 
+    --main-banner-max-height: 840px;
+
+    // waves
+    --waves-color: var(--white-color);
+    --waves-color-contrast: var(--white-color);
+    --waves-max-height: calc(var(--main-banner-max-height) * 0.7);
+
     background-color: var(--custom-main-banner-bg, var(--main-banner-bg));
     height: calc(100vh);
-    max-height: 992px;
+    max-height: var(--main-banner-max-height);
     position: relative;
     overflow: hidden;
     display: flex;
@@ -33,15 +38,16 @@
     }
 
     @media screen and (max-width: 1200px) {
-        max-height: 800px;
+        --main-banner-max-height: 800px;
+        // max-height: 800px;
     }
 
     @media screen and (max-width: 992px) {
-        max-height: 640px;
+        --main-banner-max-height: 640px;
     }
 
     @media screen and (max-width: 768px) {
-        max-height: 480px;
+        --main-banner-max-height: 480px;
     }
 }
 
@@ -53,14 +59,14 @@
     text-align: center;
     position: relative;
     padding: 40px 0px 20px;
+}
 
-    h1 {
-        color: var(--custom-main-banner-title-color, var(--main-banner-title-color));
-    }
+.mainBannerTitle {
+    color: var(--custom-main-banner-title-color, var(--main-banner-title-color));
+}
 
-    h3 {
-        color: var(--custom-main-banner-subtitle-color, var(--main-banner-subtitle-color));
-    }
+.mainBannerSubTitle {
+    color: var(--custom-main-banner-subtitle-color, var(--main-banner-subtitle-color));
 }
 
 .mainBannerContent {
@@ -106,52 +112,25 @@ $wave-opacity: 0.3;
     left: 50%;
     background-color: var(--custom-wave-color, var(--waves-color));
     
-    width: $wave-size;
-    height: $wave-size;
-    margin-left: calc($wave-size / -2);
-    margin-top: calc($wave-size / -2);
+    width: var(--waves-max-height);
+    height: var(--waves-max-height);
+    margin-left: calc(var(--waves-max-height) / -2);
+    margin-top: calc(var(--waves-max-height) / -2);
 
     transform-origin: 50% 48%;
     border-radius: 40%;
     z-index: 3;
     opacity: $wave-opacity;
-
-    @media screen and (max-width: 1200px) {
-        $wave-size: 600px;
-
-        width: $wave-size;
-        height: $wave-size;
-        margin-left: calc($wave-size / -2);
-        margin-top: calc($wave-size / -2);
-    }
-
-    @media screen and (max-width: 992px) {
-        $wave-size: 520px;
-
-        width: $wave-size;
-        height: $wave-size;
-        margin-left: calc($wave-size / -2);
-        margin-top: calc($wave-size / -2);
-    }
-
-    @media screen and (max-width: 768px) {
-        $wave-size: 360px;
-
-        width: $wave-size;
-        height: $wave-size;
-        margin-left: calc($wave-size / -2);
-        margin-top: calc($wave-size / -2);
-    }
 }
 
 .wave1 {
-    left: 51%;
-    top: 49%;
+    left: 50%;
+    top: 50%;
     animation: drift calc($wave-time * 3) infinite linear;
 }
 
 .wave2 {
-    left: 48%;
+    left: 49%;
     top: 51%;
     animation: drift calc($wave-time * 1) infinite linear;
     background-color: var(--custom-wave-color-contrast, var(--waves-color-contrast));
@@ -161,7 +140,7 @@ $wave-opacity: 0.3;
 
 .wave3 {
     left: 51%;
-    top: 51%;
+    top: 49%;
     animation: drift calc($wave-time * 2) infinite linear;
     background-color: var(--custom-wave-color, var(--waves-color));
     z-index: 1;
