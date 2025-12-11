@@ -32,4 +32,31 @@ export const NAV_MENU = [
       },
     ],
   },
+  {
+    label: "Projects",
+    href: "/projects",
+    submenus: [
+      {
+        label: "Explore projects networks",
+        items: [
+          {
+            label: "Github",
+            href: "https://github.com/",
+          },
+          {
+            label: "Linkedin",
+            href: "https://www.linkedin.com/",
+          },
+          {
+            label: "Stackoverflow",
+            href: "https://stackoverflow.com/",
+          },
+          {
+            label: "Medium",
+            href: "https://medium.com/",
+          },
+        ],
+      },
+    ],
+  },
 ];

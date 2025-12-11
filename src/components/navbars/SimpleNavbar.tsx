@@ -55,7 +55,7 @@ export default function SimpleNavbar() {
 
     const updateHeight = () => {
       requestAnimationFrame(() => {
-        setSubmenuHeight(node.scrollHeight * 2);
+        setSubmenuHeight(node.scrollHeight);
       });
     };
 
@@ -178,24 +178,24 @@ export default function SimpleNavbar() {
         aria-hidden="true"
       />
       <div
-        className={`simple-navbar__submenu fixed left-0 top-14 w-full border-b overflow-hidden delay-400 transition-[max-height] duration-700 ease-in-out z-50 ${submenuBg} ${submenuBorderClass} ${
+        className={`simple-navbar__submenu fixed left-0 top-14 w-full border-b overflow-hidden transition-[height] duration-500 ease-in-out z-50 ${submenuBg} ${submenuBorderClass} ${
           isSubmenuOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
         style={{
-          maxHeight: isSubmenuOpen ? submenuHeight || 600 : 0,
+          height: isSubmenuOpen ? submenuHeight : 0,
         }}
         onMouseEnter={() => activeSubmenu && setActiveMenu(activeSubmenu.label)}
       >
         <div
           ref={submenuContentRef}
-          className={`max-w-7xl mx-auto px-4 grid gap-8 sm:grid-cols-2 md:grid-cols-3 transition-all duration-500 ${
+          className={`max-w-7xl mx-auto px-4 grid gap-8 py-0 pb-16 sm:grid-cols-2 md:grid-cols-3 transition-all duration-300 ${
             isSubmenuOpen
-              ? "opacity-100 translate-y-0 delay-300 py-8 pb-16"
-              : "opacity-0 translate-y-4 delay-0 py-0 pb-0"
+              ? "opacity-100 translate-y-0 delay-300"
+              : "opacity-0 translate-y-4 delay-0"
           }`}
         >
           {activeSubmenu?.submenus?.map((section) => (
-            <div key={section.label}>
+            <div key={section.label} className="pt-8">
               <p
                 className={`text-sm ${
                   isDarkMode ? "text-gray-300" : "text-gray-500"
