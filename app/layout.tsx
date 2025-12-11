@@ -26,14 +26,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ThemeLoader />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ThemeLoader />
         <div className="app-header">
           <SimpleNavbar />
         </div>
-        <div className="app-wrapper">{children}</div>
+        <div className="app-wrapper min-h-screen bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
+          {children}
+        </div>
       </body>
     </html>
   );

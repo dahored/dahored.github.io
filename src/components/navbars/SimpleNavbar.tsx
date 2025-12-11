@@ -2,14 +2,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import {
-  MoonStarsIcon,
-  ShoppingCartSimpleIcon,
-  SunDimIcon,
-  UserIcon,
-} from "@phosphor-icons/react";
+import { ShoppingCartSimpleIcon, UserIcon } from "@phosphor-icons/react";
 import { NAV_MENU } from "@/src/constants/menu.constants";
-import { THEME_STORAGE_KEY } from "@/src/constants/general.constants";
+import ThemeButton from "@/src/components/theme/ThemeButton";
 
 const DEFAULT_ICON_SIZE_NAVBAR = 20;
 
@@ -24,12 +19,6 @@ export default function SimpleNavbar() {
     const isDarkActive = document.documentElement.classList.contains("dark");
     setTheme(isDarkActive ? "dark" : "light");
   }, []);
-
-  const handleThemeChange = (mode: "light" | "dark") => {
-    setTheme(mode);
-    document.documentElement.classList.toggle("dark", mode === "dark");
-    window.localStorage.setItem(THEME_STORAGE_KEY, mode);
-  };
 
   const isDarkMode = theme === "dark";
   const inactiveLinkClass = isDarkMode
@@ -152,23 +141,7 @@ export default function SimpleNavbar() {
               isDarkMode ? "text-gray-200" : "text-gray-700"
             }`}
           >
-            {isDarkMode ? (
-              <button
-                aria-label="Switch to light theme"
-                className="hover:text-gray-300 cursor-pointer"
-                onClick={() => handleThemeChange("light")}
-              >
-                <SunDimIcon size={DEFAULT_ICON_SIZE_NAVBAR} />
-              </button>
-            ) : (
-              <button
-                aria-label="Switch to dark theme"
-                className="hover:text-gray-500 cursor-pointer"
-                onClick={() => handleThemeChange("dark")}
-              >
-                <MoonStarsIcon size={DEFAULT_ICON_SIZE_NAVBAR} />
-              </button>
-            )}
+            <ThemeButton onThemeChange={(mode) => setTheme(mode)} />
             <Link
               href="/cart"
               aria-label="Bag"
@@ -192,7 +165,7 @@ export default function SimpleNavbar() {
       </nav>
       <div className="h-14" aria-hidden />
       <div
-        className={`fixed inset-x-0 top-14 bottom-0 z-40 transition-opacity duration-300 ${
+        className={`fixed inset-x-0 top-14 bottom-0 z-40 transition-opacity duration-500 ${
           isSubmenuOpen
             ? "opacity-100 pointer-events-auto cursor-pointer"
             : "opacity-0 pointer-events-none"
@@ -205,7 +178,7 @@ export default function SimpleNavbar() {
         aria-hidden="true"
       />
       <div
-        className={`simple-navbar__submenu fixed left-0 top-14 w-full border-b overflow-hidden transition-[max-height] duration-500 ease-in-out z-50 ${submenuBg} ${submenuBorderClass} ${
+        className={`simple-navbar__submenu fixed left-0 top-14 w-full border-b overflow-hidden delay-400 transition-[max-height] duration-700 ease-in-out z-50 ${submenuBg} ${submenuBorderClass} ${
           isSubmenuOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
         style={{
@@ -215,10 +188,10 @@ export default function SimpleNavbar() {
       >
         <div
           ref={submenuContentRef}
-          className={`max-w-7xl mx-auto px-4 grid gap-8 sm:grid-cols-2 md:grid-cols-3 transition-all duration-300 ${
+          className={`max-w-7xl mx-auto px-4 grid gap-8 sm:grid-cols-2 md:grid-cols-3 transition-all duration-500 ${
             isSubmenuOpen
-              ? "opacity-100 translate-y-0 delay-200 py-8 pb-16"
-              : "opacity-0 translate-y-4 delay-0 py-0"
+              ? "opacity-100 translate-y-0 delay-300 py-8 pb-16"
+              : "opacity-0 translate-y-4 delay-0 py-0 pb-0"
           }`}
         >
           {activeSubmenu?.submenus?.map((section) => (
