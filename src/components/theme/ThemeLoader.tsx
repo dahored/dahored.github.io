@@ -1,8 +1,7 @@
 "use client";
 
+import { THEME_STORAGE_KEY } from "@/src/constants/general.constants";
 import { useEffect } from "react";
-
-const THEME_STORAGE_KEY = "theme";
 
 function ensureThemePreference(): "light" | "dark" {
   if (typeof window === "undefined") return "light";
