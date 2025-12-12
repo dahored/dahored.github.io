@@ -5,6 +5,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ShoppingCartSimpleIcon, UserIcon } from "@phosphor-icons/react";
 import { NAV_MENU } from "@/src/constants/menu.constants";
 import ThemeButton from "@/src/components/theme/ThemeButton";
+import LocaleSwitcher from "../language/LocaleSwitcher";
 
 const DEFAULT_ICON_SIZE_NAVBAR = 20;
 
@@ -87,10 +88,10 @@ export default function SimpleNavbar() {
       }}
     >
       <nav
-        className={`simple-navbar__menu fixed w-full border-b top-0 left-0 right-0 z-50 ${
+        className={`simple-navbar__menu background z-99 fixed w-full border-b top-0 left-0 right-0 z-50 ${
           isDarkMode
             ? "bg-gray-900 border-gray-800"
-            : "bg-white border-gray-200"
+            : "bg-white border-gray-100"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center gap-4 h-14">
@@ -141,6 +142,7 @@ export default function SimpleNavbar() {
               isDarkMode ? "text-gray-200" : "text-gray-700"
             }`}
           >
+            <LocaleSwitcher />
             <ThemeButton onThemeChange={(mode) => setTheme(mode)} />
             <Link
               href="/cart"

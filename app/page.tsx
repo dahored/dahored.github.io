@@ -1,8 +1,11 @@
+import { useTranslations } from "next-intl";
+
 export default function Home() {
+  const t = useTranslations("HomePage");
   return (
     <div className="max-w-7xl mx-auto px-4 flex gap-4 h-14">
       <div className="app-content">
-        <h1>test home page</h1>
+        <h1>{t("title")}</h1>
         <p>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam
           pariatur aspernatur iure dolorem qui, consectetur aliquid natus

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SimpleNavbar from "@/src/components/navbars/SimpleNavbar";
@@ -29,13 +30,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeLoader />
-        <div className="app-header">
-          <SimpleNavbar />
-        </div>
-        <div className="app-wrapper min-h-screen bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
-          {children}
-        </div>
+        <NextIntlClientProvider>
+          <ThemeLoader />
+          <div className="app-header">
+            <SimpleNavbar />
+          </div>
+          <div className="app-wrapper min-h-screen bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
+            {children}
+          </div>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
