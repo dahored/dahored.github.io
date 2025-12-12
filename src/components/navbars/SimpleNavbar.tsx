@@ -3,13 +3,14 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ShoppingCartSimpleIcon } from "@phosphor-icons/react";
 import { NAV_MENU_ITEMS } from "@/src/constants/menu.constants";
 import ThemeButton from "@/src/components/theme/ThemeButton";
 import LocaleSwitcher from "../language/LocaleSwitcher";
 import ProfileMenu from "../menus/ProfileMenu";
+import CartButton from "../cart/CartButton";
 
 const DEFAULT_ICON_SIZE_NAVBAR = 20;
+const CART_COUNT_STORAGE_KEY = "cartItemsCount";
 
 export default function SimpleNavbar() {
   const tMenuItems = useTranslations("Navbar.menu");
@@ -18,12 +19,40 @@ export default function SimpleNavbar() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [submenuHeight, setSubmenuHeight] = useState(0);
+  const [cartItemsCount, setCartItemsCount] = useState(0);
   const submenuContentRef = useRef<HTMLDivElement | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
     const isDarkActive = document.documentElement.classList.contains("dark");
     setTheme(isDarkActive ? "dark" : "light");
+  }, []);
+
+  useEffect(() => {
+    const parseCartCount = (value: string | null) => {
+      const parsed = Number(value ?? "0");
+      return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
+    };
+
+    const updateCartCount = () => {
+      if (typeof window === "undefined") return;
+      const storedValue = window.localStorage.getItem(CART_COUNT_STORAGE_KEY);
+      setCartItemsCount(parseCartCount(storedValue));
+    };
+
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    updateCartCount();
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === CART_COUNT_STORAGE_KEY) {
+        setCartItemsCount(parseCartCount(event.newValue));
+      }
+    };
+
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
   const isDarkMode = theme === "dark";
@@ -150,15 +179,11 @@ export default function SimpleNavbar() {
           >
             <LocaleSwitcher />
             <ThemeButton onThemeChange={(mode) => setTheme(mode)} />
-            <Link
-              href="/cart"
-              aria-label="Bag"
-              className={`cursor-pointer ${
-                isDarkMode ? "hover:text-gray-300" : "hover:text-gray-500"
-              }`}
-            >
-              <ShoppingCartSimpleIcon size={DEFAULT_ICON_SIZE_NAVBAR} />
-            </Link>
+            <CartButton
+              itemsCount={cartItemsCount}
+              iconSize={DEFAULT_ICON_SIZE_NAVBAR}
+              isDarkMode={isDarkMode}
+            />
             <ProfileMenu />
           </div>
         </div>
