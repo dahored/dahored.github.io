@@ -1,9 +1,10 @@
 "use client";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ShoppingCartSimpleIcon } from "@phosphor-icons/react";
-import { NAV_MENU } from "@/src/constants/menu.constants";
+import { NAV_MENU_ITEMS } from "@/src/constants/menu.constants";
 import ThemeButton from "@/src/components/theme/ThemeButton";
 import LocaleSwitcher from "../language/LocaleSwitcher";
 import ProfileMenu from "../menus/ProfileMenu";
@@ -11,6 +12,9 @@ import ProfileMenu from "../menus/ProfileMenu";
 const DEFAULT_ICON_SIZE_NAVBAR = 20;
 
 export default function SimpleNavbar() {
+  const tMenuItems = useTranslations("Navbar.menu");
+  const tSubmenuSections = useTranslations("Navbar.sections");
+  const tSubmenuItems = useTranslations("Navbar.items");
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [submenuHeight, setSubmenuHeight] = useState(0);
@@ -28,16 +32,16 @@ export default function SimpleNavbar() {
     : "text-gray-800 hover:text-gray-500";
   const activeLinkClass = isDarkMode ? "text-white" : "text-black";
 
-  const handleMenuHover = (menuLabel: string, hasSubmenu?: boolean) => {
+  const handleMenuHover = (menuKey: string, hasSubmenu?: boolean) => {
     if (hasSubmenu) {
-      setActiveMenu(menuLabel);
+      setActiveMenu(menuKey);
     } else {
       setActiveMenu(null);
     }
   };
 
-  const activeSubmenu = NAV_MENU.find(
-    ({ label, submenus }) => label === activeMenu && submenus?.length
+  const activeSubmenu = NAV_MENU_ITEMS.find(
+    ({ key, submenus }) => key === activeMenu && submenus?.length
   );
 
   const isSubmenuOpen = Boolean(activeSubmenu);
@@ -114,14 +118,15 @@ export default function SimpleNavbar() {
           {/* Center links */}
           <div className="flex-1 min-w-[240px] px-4">
             <ul className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm font-medium">
-              {NAV_MENU.map(({ label, href, submenus }) => {
+              {NAV_MENU_ITEMS.map(({ key, href, submenus }) => {
                 const isActive = pathname === href;
                 const hasSubmenu = Boolean(submenus?.length);
+                const label = tMenuItems(key);
                 return (
                   <li
-                    key={label}
-                    onMouseEnter={() => handleMenuHover(label, hasSubmenu)}
-                    onFocus={() => handleMenuHover(label, hasSubmenu)}
+                    key={key}
+                    onMouseEnter={() => handleMenuHover(key, hasSubmenu)}
+                    onFocus={() => handleMenuHover(key, hasSubmenu)}
                   >
                     <Link
                       href={href}
@@ -179,7 +184,7 @@ export default function SimpleNavbar() {
         style={{
           height: isSubmenuOpen ? submenuHeight : 0,
         }}
-        onMouseEnter={() => activeSubmenu && setActiveMenu(activeSubmenu.label)}
+        onMouseEnter={() => activeSubmenu && setActiveMenu(activeSubmenu.key)}
       >
         <div
           ref={submenuContentRef}
@@ -190,13 +195,13 @@ export default function SimpleNavbar() {
           }`}
         >
           {activeSubmenu?.submenus?.map((section) => (
-            <div key={section.label} className="pt-8">
+            <div key={section.key} className="pt-8">
               <p
                 className={`text-sm ${
                   isDarkMode ? "text-gray-300" : "text-gray-500"
                 }`}
               >
-                {section.label}
+                {tSubmenuSections(section.key)}
               </p>
               <ul className="mt-4 space-y-2">
                 {section.items.map((item) => {
@@ -206,8 +211,9 @@ export default function SimpleNavbar() {
                       ? "text-white hover:text-gray-300"
                       : "text-gray-900 hover:text-gray-600"
                   }`;
+                  const label = tSubmenuItems(item.key);
                   return (
-                    <li key={item.label}>
+                    <li key={item.key}>
                       {isExternal ? (
                         <a
                           href={item.href}
@@ -215,11 +221,11 @@ export default function SimpleNavbar() {
                           rel="noreferrer"
                           className={linkClasses}
                         >
-                          {item.label}
+                          {label}
                         </a>
                       ) : (
                         <Link href={item.href} className={linkClasses}>
-                          {item.label}
+                          {label}
                         </Link>
                       )}
                     </li>
