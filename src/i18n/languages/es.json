@@ -1,0 +1,9 @@
+{
+  "HomePage": {
+    "title": "Hola mundo!",
+    "subtitle": "Este es mi sitio en español"
+  },
+  "Navbar": {
+    "contact": "Contacto"
+  }
+}
