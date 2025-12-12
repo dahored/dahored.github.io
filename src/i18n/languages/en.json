@@ -1,0 +1,38 @@
+{
+  "HomePage": {
+    "title": "Hello world!",
+    "subtitle": "This is my site in English"
+  },
+  "Navbar": {
+    "contact": "Contact",
+    "title": "Menu",
+    "menu": {
+      "me": "Me",
+      "social": "Social",
+      "projects": "Projects"
+    },
+    "sections": {
+      "exploreSocialNetworks": "Explore social networks",
+      "viewFollowers": "View followers",
+      "exploreProjectsNetworks": "Explore projects networks"
+    },
+    "items": {
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "instagram": "Instagram",
+      "followers": "Followers",
+      "github": "Github",
+      "linkedin": "LinkedIn",
+      "stackoverflow": "Stack Overflow",
+      "medium": "Medium"
+    }
+  },
+  "ProfileMenu": {
+    "items": {
+      "profile": "Profile",
+      "account": "Account",
+      "billing": "Billing",
+      "closeSession": "Close Session"
+    }
+  }
+}

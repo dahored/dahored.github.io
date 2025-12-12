@@ -1,0 +1,38 @@
+{
+  "HomePage": {
+    "title": "Hola mundo!",
+    "subtitle": "Este es mi sitio en español"
+  },
+  "Navbar": {
+    "contact": "Contacto",
+    "title": "Menú",
+    "menu": {
+      "me": "Yo",
+      "social": "Redes",
+      "projects": "Proyectos"
+    },
+    "sections": {
+      "exploreSocialNetworks": "Explora redes sociales",
+      "viewFollowers": "Ver seguidores",
+      "exploreProjectsNetworks": "Explora redes de proyectos"
+    },
+    "items": {
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "instagram": "Instagram",
+      "followers": "Seguidores",
+      "github": "Github",
+      "linkedin": "LinkedIn",
+      "stackoverflow": "Stack Overflow",
+      "medium": "Medium"
+    }
+  },
+  "ProfileMenu": {
+    "items": {
+      "profile": "Perfil",
+      "account": "Cuenta",
+      "billing": "Facturación",
+      "closeSession": "Cerrar sesión"
+    }
+  }
+}

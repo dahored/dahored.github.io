@@ -24,14 +24,17 @@
         "editor.rulers": [79, 120],
     },
     "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
         "editor.rulers": [79, 120],
     },
     "[ts]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
         "editor.rulers": [79, 120],
     },
     "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
         "editor.rulers": [79, 120],
     },
@@ -39,8 +42,17 @@
         "editor.formatOnSave": true,
         "editor.rulers": [79, 120]
     },
-    "[json]": {
+    "[jsx]": {
         "editor.formatOnSave": true,
+        "editor.rulers": [79, 120]
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
     },
     //stylelint
     "css.validate": false,

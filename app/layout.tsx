@@ -1,0 +1,49 @@
+import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import SimpleNavbar from "@/src/components/navbars/SimpleNavbar";
+import ThemeLoader from "@/src/components/theme/ThemeLoader";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "DAHO | Personal Hub",
+  description: "DAHO's personal site with projects, socials, and experiments.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <NextIntlClientProvider>
+          <ThemeLoader />
+          <div className="app-header">
+            <SimpleNavbar />
+          </div>
+          <div className="app-wrapper min-h-screen bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300">
+            {children}
+          </div>
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}
