@@ -2,10 +2,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ShoppingCartSimpleIcon, UserIcon } from "@phosphor-icons/react";
+import { ShoppingCartSimpleIcon } from "@phosphor-icons/react";
 import { NAV_MENU } from "@/src/constants/menu.constants";
 import ThemeButton from "@/src/components/theme/ThemeButton";
 import LocaleSwitcher from "../language/LocaleSwitcher";
+import ProfileMenu from "../menus/ProfileMenu";
 
 const DEFAULT_ICON_SIZE_NAVBAR = 20;
 
@@ -153,15 +154,7 @@ export default function SimpleNavbar() {
             >
               <ShoppingCartSimpleIcon size={DEFAULT_ICON_SIZE_NAVBAR} />
             </Link>
-            <Link
-              href="/profile"
-              aria-label="Profile"
-              className={`cursor-pointer ${
-                isDarkMode ? "hover:text-gray-300" : "hover:text-gray-500"
-              }`}
-            >
-              <UserIcon size={DEFAULT_ICON_SIZE_NAVBAR} />
-            </Link>
+            <ProfileMenu />
           </div>
         </div>
       </nav>

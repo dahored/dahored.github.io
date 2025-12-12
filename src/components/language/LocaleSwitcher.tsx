@@ -102,7 +102,7 @@ export default function LocaleSwitcher() {
         }`}
         style={{ top: "calc(100% + 0.325rem)" }}
       >
-        <ul role="listbox" className="py-2 px-2 space-y-1">
+        <ul role="listbox" className="py-2 space-y-1">
           {SUPPORTED_LOCALES.map((code) => {
             const isActive = locale === code;
             return (
@@ -111,7 +111,7 @@ export default function LocaleSwitcher() {
                   type="button"
                   role="option"
                   aria-selected={isActive}
-                  className={`flex w-full items-center justify-between rounded-xl px-4 py-2 text-sm uppercase tracking-wide transition cursor-pointer ${
+                  className={`flex w-full items-center justify-between px-4 py-2 text-sm uppercase tracking-wide transition cursor-pointer ${
                     isActive
                       ? theme === "dark"
                         ? "bg-gray-800 text-white"

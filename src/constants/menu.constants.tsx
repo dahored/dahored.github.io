@@ -60,3 +60,10 @@ export const NAV_MENU = [
     ],
   },
 ];
+
+export const PROFILE_MENU = [
+  { label: "Profile", href: "/profile", icon: "UserCircleGearIcon" },
+  { label: "Account", href: "/account", icon: "UserListIcon" },
+  { label: "Billing", href: "/billing", icon: "WalletIcon" },
+  { label: "Close Session", action: "closeSession", icon: "SignOutIcon" },
+];
