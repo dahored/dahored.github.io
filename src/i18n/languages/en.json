@@ -5,6 +5,7 @@
   },
   "Navbar": {
     "contact": "Contact",
+    "title": "Menu",
     "menu": {
       "me": "Me",
       "social": "Social",
