@@ -1,31 +1,50 @@
-export const NAV_MENU = [
-  { label: "Me", href: "/me", submenus: [] },
+type NavMenuItem = {
+  key: string;
+  href: string;
+  submenus?: Array<{
+    key: string;
+    items: Array<{
+      key: string;
+      href: string;
+    }>;
+  }>;
+};
+
+type ProfileMenuItem = {
+  key: string;
+  href?: string;
+  action?: "closeSession";
+  icon: "UserCircleGearIcon" | "UserListIcon" | "WalletIcon" | "SignOutIcon";
+};
+
+export const NAV_MENU_ITEMS: NavMenuItem[] = [
+  { key: "me", href: "/me", submenus: [] },
   {
-    label: "Social",
+    key: "social",
     href: "/social",
     submenus: [
       {
-        label: "Explore social networks",
+        key: "exploreSocialNetworks",
         items: [
           {
-            label: "Facebook",
+            key: "facebook",
             href: "https://www.facebook.com/",
           },
           {
-            label: "Twitter",
+            key: "twitter",
             href: "https://twitter.com/",
           },
           {
-            label: "Instagram",
+            key: "instagram",
             href: "https://www.instagram.com/",
           },
         ],
       },
       {
-        label: "View Followers",
+        key: "viewFollowers",
         items: [
           {
-            label: "Followers",
+            key: "followers",
             href: "/followers",
           },
         ],
@@ -33,26 +52,26 @@ export const NAV_MENU = [
     ],
   },
   {
-    label: "Projects",
+    key: "projects",
     href: "/projects",
     submenus: [
       {
-        label: "Explore projects networks",
+        key: "exploreProjectsNetworks",
         items: [
           {
-            label: "Github",
+            key: "github",
             href: "https://github.com/",
           },
           {
-            label: "Linkedin",
+            key: "linkedin",
             href: "https://www.linkedin.com/",
           },
           {
-            label: "Stackoverflow",
+            key: "stackoverflow",
             href: "https://stackoverflow.com/",
           },
           {
-            label: "Medium",
+            key: "medium",
             href: "https://medium.com/",
           },
         ],
@@ -61,9 +80,9 @@ export const NAV_MENU = [
   },
 ];
 
-export const PROFILE_MENU = [
-  { label: "Profile", href: "/profile", icon: "UserCircleGearIcon" },
-  { label: "Account", href: "/account", icon: "UserListIcon" },
-  { label: "Billing", href: "/billing", icon: "WalletIcon" },
-  { label: "Close Session", action: "closeSession", icon: "SignOutIcon" },
+export const PROFILE_MENU_ITEMS: ProfileMenuItem[] = [
+  { key: "profile", href: "/profile", icon: "UserCircleGearIcon" },
+  { key: "account", href: "/account", icon: "UserListIcon" },
+  { key: "billing", href: "/billing", icon: "WalletIcon" },
+  { key: "closeSession", action: "closeSession", icon: "SignOutIcon" },
 ];

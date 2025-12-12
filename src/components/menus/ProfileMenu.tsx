@@ -7,8 +7,9 @@ import {
   UserListIcon,
   WalletIcon,
 } from "@phosphor-icons/react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-import { PROFILE_MENU } from "@/src/constants/menu.constants";
+import { PROFILE_MENU_ITEMS } from "@/src/constants/menu.constants";
 
 const DROPDOWN_ICON_SIZE = 20;
 
@@ -20,6 +21,7 @@ const ICONS = {
 };
 
 export default function ProfileMenu() {
+  const tProfileMenuItems = useTranslations("ProfileMenu.items");
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -51,7 +53,7 @@ export default function ProfileMenu() {
     return () => observer.disconnect();
   }, []);
 
-  const handleItemClick = (item: (typeof PROFILE_MENU)[number]) => {
+  const handleItemClick = (item: (typeof PROFILE_MENU_ITEMS)[number]) => {
     if (item.href) {
       window.location.href = item.href;
     } else if (item.action === "closeSession") {
@@ -81,11 +83,12 @@ export default function ProfileMenu() {
         style={{ top: "calc(100% + 1rem)" }}
       >
         <ul role="menu" className="py-2 space-y-1">
-          {PROFILE_MENU.map((item) => {
+          {PROFILE_MENU_ITEMS.map((item) => {
             const IconComponent =
               ICONS[item.icon as keyof typeof ICONS] ?? UserCircleGearIcon;
+            const label = tProfileMenuItems(item.key);
             return (
-              <li key={item.label}>
+              <li key={item.key}>
                 <button
                   type="button"
                   className={`flex w-full items-center gap-2 px-4 py-2 text-sm font-medium transition cursor-pointer ${
@@ -96,7 +99,7 @@ export default function ProfileMenu() {
                   onClick={() => handleItemClick(item)}
                 >
                   <IconComponent size={20} />
-                  {item.label}
+                  {label}
                 </button>
               </li>
             );
