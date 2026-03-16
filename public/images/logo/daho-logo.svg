@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" role="img" aria-label="DAHO">
+  <title>DAHO</title>
+
+  <!--
+    DAHO Logo — editable SVG
+    ─────────────────────────────────────
+    Variables to adjust:
+      Bar thickness : ~58px  (stroke weight of D, H verticals)
+      Letter height : 252px  (y: 24 → 276)
+      Gray color    : #3b3b3b
+      Orange color  : #f05522
+    ─────────────────────────────────────
+    Render order (back → front):
+      1. A triangle  (orange, behind H)
+      2. D           (gray)
+      3. H           (gray, clips over A)
+      4. O ring      (orange)
+  -->
+
+  <!-- ── A — orange solid triangle ────────────────────────────── -->
+  <polygon
+    points="285,24 194,276 376,276"
+    fill="#f05522"
+  />
+
+  <!-- ── D — dark gray letterform (evenodd creates hollow) ─────── -->
+  <path
+    fill="#3b3b3b"
+    fill-rule="evenodd"
+    d="
+      M 24,24 L 24,276 L 90,276
+      C 232,276 232,24 90,24 Z
+
+      M 88,68 L 88,232
+      C 183,232 183,68 88,68 Z
+    "
+  />
+
+  <!-- ── H — dark gray, left bar overlaps A triangle ───────────── -->
+  <path
+    fill="#3b3b3b"
+    d="
+      M 348,24 L 348,276 L 406,276 L 406,24 Z
+      M 464,24 L 464,276 L 522,276 L 522,24 Z
+      M 406,121 L 464,121 L 464,179 L 406,179 Z
+    "
+  />
+
+  <!-- ── O — orange ring (evenodd creates hollow center) ─────────── -->
+  <path
+    fill="#f05522"
+    fill-rule="evenodd"
+    d="
+      M 686,24
+      C 756,24 814,82 814,150
+      C 814,218 756,276 686,276
+      C 616,276 558,218 558,150
+      C 558,82 616,24 686,24 Z
+
+      M 686,76
+      C 727,76 762,109 762,150
+      C 762,191 727,224 686,224
+      C 645,224 610,191 610,150
+      C 610,109 645,76 686,76 Z
+    "
+  />
+
+</svg>
