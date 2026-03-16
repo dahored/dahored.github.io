@@ -121,7 +121,7 @@ export default function ExperienceScrollSection() {
   return (
     <div
       ref={containerRef}
-      style={{ height: `${experiences.length * 60 + 40}vh` }}
+      style={{ height: `${experiences.length * 60 + 100}vh` }}
       className="relative"
     >
       <div
