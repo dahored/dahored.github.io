@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import {
-  Code2, Sparkles, ArrowRight, Linkedin, Mail,
+  ArrowRight, Linkedin, Mail,
   Monitor, Smartphone, Wrench, GitBranch, Languages,
   Flame, ShieldCheck, Megaphone, ExternalLink,
 } from 'lucide-react';
@@ -161,54 +161,49 @@ export default async function DeveloperPage() {
         </div>
       </section>
 
-      {/* ── 2. BIO BENTO ────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#0a0a0a] section-padding overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-violet-900/8 blur-3xl pointer-events-none" aria-hidden="true" />
-
+      {/* ── 4. BIO ──────────────────────────────────────────────────────────── */}
+      <section className="relative bg-black section-padding">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center mb-14">
-            <ScrollReveal>
-              <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-3">{t('bio.label')}</p>
-            </ScrollReveal>
-            <ScrollReveal delay={80}>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#f5f5f7]" style={{ letterSpacing: '-0.02em' }}>
-                {t('bio.heading')}
-              </h2>
-            </ScrollReveal>
+          <ScrollReveal>
+            <p className="text-sm text-[#6e6e73] mb-4">{t('bio.label')}</p>
+          </ScrollReveal>
+          <ScrollReveal delay={60}>
+            <h2
+              className="font-bold text-[#f5f5f7] mb-10"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.03em', lineHeight: 1.05 }}
+            >
+              {t('bio.heading')}
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal delay={120}>
+            <div className="max-w-2xl flex flex-col gap-5">
+              <p className="text-lg text-[#6e6e73] leading-relaxed">{t('bio.text1')}</p>
+              <p className="text-lg text-[#6e6e73] leading-relaxed">{t('bio.text2')}</p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── 5. OPEN TO WORK ─────────────────────────────────────────────────── */}
+      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(16,185,129,0.04)' }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex items-center justify-between gap-6 flex-wrap">
+          <div className="flex items-center gap-4">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+            <div>
+              <p className="font-semibold text-[#f5f5f7]">{t('bio.openToWork')}</p>
+              <p className="text-sm text-[#6e6e73]">{t('bio.openToWorkSub')}</p>
+            </div>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-
-            {/* Bio text card — col-span-2 */}
-            <ScrollReveal delay={100} className="sm:col-span-2">
-              <div
-                className="h-full p-8 rounded-3xl flex flex-col gap-5"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
-              >
-                <Code2 className="w-8 h-8 text-violet-400" />
-                <p className="text-[#6e6e73] leading-relaxed">{t('bio.text1')}</p>
-                <p className="text-[#6e6e73] leading-relaxed">{t('bio.text2')}</p>
-              </div>
-            </ScrollReveal>
-
-            {/* Open to work card */}
-            <ScrollReveal delay={150}>
-              <div
-                className="h-full p-6 rounded-3xl flex flex-col gap-4"
-                style={{ background: 'rgba(16,185,129,0.06)', border: '1px solid rgba(16,185,129,0.15)' }}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                  <Sparkles className="w-8 h-8 text-emerald-400" />
-                </div>
-                <div>
-                  <p className="font-bold text-[#f5f5f7] mb-1">{t('bio.openToWork')}</p>
-                  <p className="text-sm text-[#6e6e73] leading-relaxed">{t('bio.openToWorkSub')}</p>
-                </div>
-              </div>
-            </ScrollReveal>
-
-          </div>
+          <a
+            href={`mailto:${site.email}`}
+            className="inline-flex items-center gap-3 pl-5 pr-2 py-2 rounded-full transition-opacity hover:opacity-80 cursor-pointer shrink-0"
+            style={{ background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.25)' }}
+          >
+            <span className="text-sm font-semibold text-emerald-400">{t('cta.contact')}</span>
+            <span className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center shrink-0">
+              <Mail className="w-3.5 h-3.5 text-white" />
+            </span>
+          </a>
         </div>
       </section>
 
