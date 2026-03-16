@@ -34,6 +34,7 @@ export default function WorldCard({ iconName, accent, name, description, highlig
 
   const openModal = () => {
     setMounted(true);
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)));
     setOpen(true);
@@ -44,12 +45,16 @@ export default function WorldCard({ iconName, accent, name, description, highlig
     setOpen(false);
     const t = setTimeout(() => {
       setMounted(false);
+      document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
     }, 350);
     return () => clearTimeout(t);
   };
 
-  useEffect(() => () => { document.body.style.overflow = ''; }, []);
+  useEffect(() => () => {
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }, []);
 
   return (
     <>

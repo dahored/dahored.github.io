@@ -23,10 +23,10 @@ export default async function Footer() {
   ];
 
   const socialLinks = [
-    { label: 'GitHub',   href: site.socials.github,   Icon: Github   },
-    { label: 'LinkedIn', href: site.socials.linkedin,  Icon: Linkedin },
-    { label: 'YouTube',  href: site.socials.youtube,   Icon: Youtube  },
-    { label: 'Twitch',   href: site.socials.twitch,    Icon: Twitch   },
+    { label: 'GitHub',   href: site.socials.github,   Icon: Github,   hover: 'hover:text-white hover:border-white/20 hover:bg-white/10' },
+    { label: 'LinkedIn', href: site.socials.linkedin,  Icon: Linkedin, hover: 'hover:text-[#0077B5] hover:border-[#0077B5]/40 hover:bg-[#0077B5]/10' },
+    { label: 'YouTube',  href: site.socials.youtube,   Icon: Youtube,  hover: 'hover:text-[#FF0000] hover:border-[#FF0000]/40 hover:bg-[#FF0000]/10' },
+    { label: 'Twitch',   href: site.socials.twitch,    Icon: Twitch,   hover: 'hover:text-[#9146FF] hover:border-[#9146FF]/40 hover:bg-[#9146FF]/10' },
   ];
 
   return (
@@ -90,14 +90,14 @@ export default async function Footer() {
               {t('colFollow')}
             </h3>
             <div className="flex gap-2">
-              {socialLinks.map(({ label, href, Icon }) => (
+              {socialLinks.map(({ label, href, Icon, hover }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="p-2 rounded-lg text-[#6e6e73] hover:text-[#f5f5f7] transition-colors"
+                  className={`p-2 rounded-lg text-[#6e6e73] transition-colors cursor-pointer ${hover}`}
                   style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
                 >
                   <Icon className="w-4 h-4" />
