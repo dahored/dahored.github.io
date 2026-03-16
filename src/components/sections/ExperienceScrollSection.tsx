@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import CarouselControls from '@/components/ui/CarouselControls';
 
 const experiences = [
   {
@@ -195,21 +196,15 @@ export default function ExperienceScrollSection() {
 
         {/* Bottom bar */}
         <div className="shrink-0 pb-8 flex items-center gap-6 relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-12">
-          {/* Dot indicators */}
-          <div className="flex items-center gap-1.5">
-            {experiences.map((e, i) => (
-              <div
-                key={i}
-                className="rounded-full"
-                style={{
-                  width: i === displayIndex ? '20px' : '5px',
-                  height: '5px',
-                  background: i === displayIndex ? exp.color : 'rgba(255,255,255,0.15)',
-                  transition: 'width 0.4s ease, background 0.4s ease',
-                }}
-              />
-            ))}
-          </div>
+          <CarouselControls
+            count={experiences.length}
+            current={displayIndex}
+            paused={false}
+            onGoTo={() => {}}
+            onTogglePause={() => {}}
+            theme="dark"
+            showPause={false}
+          />
 
           {/* Scroll hint on first item */}
           {displayIndex === 0 && (
