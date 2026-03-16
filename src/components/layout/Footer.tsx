@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { Github, Linkedin, Youtube, Twitch } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
+import Image from 'next/image';
 import { site } from '@/config/site';
 
 export default async function Footer() {
@@ -38,7 +39,15 @@ export default async function Footer() {
 
           {/* Brand */}
           <div className="flex flex-col gap-4">
-            <span className="font-bold text-xl tracking-tight text-[#f5f5f7]">DAHO</span>
+            <Link href="/">
+              <Image
+                src="/images/logo/logo_daho.png"
+                alt="DAHO"
+                width={80}
+                height={32}
+                className="h-8 w-auto"
+              />
+            </Link>
             <p className="text-sm text-[#6e6e73] leading-relaxed max-w-xs">
               {t('description')}
             </p>

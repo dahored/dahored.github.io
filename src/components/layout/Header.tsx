@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Menu, X } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
+import Image from 'next/image';
 import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
 
 export default function Header() {
@@ -30,12 +31,16 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
 
-        {/* Wordmark */}
-        <Link
-          href="/"
-          className="font-semibold text-lg tracking-tight text-[#f5f5f7] hover:opacity-80 transition-opacity"
-        >
-          DAHO
+        {/* Logo */}
+        <Link href="/" className="hover:opacity-80 transition-opacity">
+          <Image
+            src="/images/logo/logo_daho.png"
+            alt="DAHO"
+            width={80}
+            height={32}
+            className="h-8 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}
