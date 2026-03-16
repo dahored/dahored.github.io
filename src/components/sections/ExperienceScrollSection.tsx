@@ -9,7 +9,7 @@ const experiences = [
     period: 'Jul 2024 — Jan 2026',
     duration: '1 yr 7 mos',
     location: 'Manizales, Colombia',
-    color: '#7c3aed',
+    color: '#0066cc',  // NICE brand blue
   },
   {
     company: 'Playvox',
@@ -17,7 +17,7 @@ const experiences = [
     period: 'Aug 2022 — Sep 2024',
     duration: '2 yrs 2 mos',
     location: 'Manizales, Colombia',
-    color: '#4f46e5',
+    color: '#00b37e',  // Playvox brand green
   },
   {
     company: 'Playvox',
@@ -25,7 +25,7 @@ const experiences = [
     period: 'Jul 2019 — Aug 2022',
     duration: '3 yrs 2 mos',
     location: 'Manizales, Colombia',
-    color: '#0ea5e9',
+    color: '#00b37e',  // Playvox brand green
   },
   {
     company: 'CINNCO',
@@ -33,7 +33,7 @@ const experiences = [
     period: 'Apr 2019 — Jul 2019',
     duration: '4 mos',
     location: 'Manizales, Colombia',
-    color: '#06b6d4',
+    color: '#1a56db',  // CINNCO blue
   },
   {
     company: 'Torres Guarin y Cia',
@@ -41,7 +41,7 @@ const experiences = [
     period: 'Jun 2018 — Apr 2019',
     duration: '11 mos',
     location: 'Manizales, Colombia',
-    color: '#10b981',
+    color: '#64748b',  // neutral slate
   },
   {
     company: 'Brandca',
@@ -49,7 +49,7 @@ const experiences = [
     period: 'Feb 2016 — Apr 2019',
     duration: '3 yrs 3 mos',
     location: 'Bogotá, Colombia',
-    color: '#f59e0b',
+    color: '#e85d26',  // Brandca orange
   },
   {
     company: 'Mundo Creativo CO',
@@ -57,7 +57,7 @@ const experiences = [
     period: 'Sep 2015 — Apr 2019',
     duration: '3 yrs 8 mos',
     location: 'Manizales, Colombia',
-    color: '#f97316',
+    color: '#f97316',  // creative orange
   },
   {
     company: 'MundoBots',
@@ -65,7 +65,7 @@ const experiences = [
     period: 'Aug 2017 — May 2018',
     duration: '10 mos',
     location: 'Manizales, Colombia',
-    color: '#ef4444',
+    color: '#f59e0b',  // MundoBots amber
   },
   {
     company: 'SENA',
@@ -73,7 +73,7 @@ const experiences = [
     period: 'Dec 2014 — Dec 2015',
     duration: '1 yr 1 mo',
     location: 'Manizales, Colombia',
-    color: '#ec4899',
+    color: '#16a34a',  // SENA green
   },
 ];
 
