@@ -271,22 +271,14 @@ export default async function DeveloperPage() {
                   <h3 className="text-2xl font-bold text-[#f5f5f7] mb-3">{t('exp.nice.role')}</h3>
                   <p className="text-[#6e6e73] leading-relaxed">{t('exp.nice.desc')}</p>
                 </div>
-                {/*
-                  IMAGE 2 — WORKSPACE / SETUP PHOTO
-                  Foto de tu setup de trabajo:
-                  · Escritorio con monitores, teclado mecánico, luces
-                  · Vista frontal o ligeramente lateral
-                  · Formato horizontal (landscape), mínimo 800×450 px
-                  · Guárdala en: /public/images/photos/developer/setup.jpg
-                */}
-                <div
-                  className="w-full h-36 rounded-2xl overflow-hidden flex items-center justify-center"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px dashed rgba(255,255,255,0.1)' }}
-                >
-                  <p className="text-xs text-[#3a3a3c] text-center px-4">
-                    📷 Foto de tu workspace / setup<br />
-                    <span className="opacity-60">800×450px → /images/photos/developer/setup.jpg</span>
-                  </p>
+                <div className="relative w-full h-36 rounded-2xl overflow-hidden">
+                  <Image
+                    src="/images/photos/gamer/IMG_0913.jpeg"
+                    alt="Setup — PC RGB, monitores, silla gaming"
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </div>
               </div>
             </ScrollReveal>
@@ -317,20 +309,14 @@ export default async function DeveloperPage() {
                   <h3 className="text-2xl font-bold text-[#f5f5f7] mb-3">{t('exp.playvox.role')}</h3>
                   <p className="text-[#6e6e73] leading-relaxed">{t('exp.playvox.desc')}</p>
                 </div>
-                {/*
-                  IMAGE 3 — WORKING / TEAM PHOTO (optional)
-                  Foto "at work" o en equipo / reunión:
-                  · Tú frente al computador, en una videollamada, o colaborando
-                  · Formato horizontal, mínimo 800×450 px
-                  · Guárdala en: /public/images/photos/developer/work.jpg
-                */}
+                {/* Placeholder — necesitas una foto "working/at desk" sin gaming en pantalla */}
                 <div
                   className="w-full h-36 rounded-2xl overflow-hidden flex items-center justify-center"
                   style={{ background: 'rgba(255,255,255,0.03)', border: '1px dashed rgba(255,255,255,0.1)' }}
                 >
                   <p className="text-xs text-[#3a3a3c] text-center px-4">
-                    📷 Foto &quot;at work&quot; o colaborando<br />
-                    <span className="opacity-60">800×450px → /images/photos/developer/work.jpg</span>
+                    📷 Foto trabajando / frente al computador<br />
+                    <span className="opacity-60">/images/photos/developer/work.jpg</span>
                   </p>
                 </div>
               </div>
