@@ -144,7 +144,7 @@ export default function ExperienceScrollSection() {
         {/* Main content */}
         <div className="flex-1 flex items-center relative z-10">
           <div
-            className="w-full max-w-5xl mx-auto px-6 sm:px-12"
+            className="w-full max-w-6xl mx-auto px-4 sm:px-6"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? 'translateY(0)' : 'translateY(16px)',
@@ -195,7 +195,7 @@ export default function ExperienceScrollSection() {
         </div>
 
         {/* Bottom bar */}
-        <div className="shrink-0 pb-8 flex justify-center items-center relative z-10 w-full">
+        <div className="shrink-0 pb-8 flex justify-center items-center relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6">
           <CarouselControls
             count={experiences.length}
             current={displayIndex}

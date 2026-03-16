@@ -49,7 +49,7 @@ export default async function StackSection() {
     <section id="stack" className="relative bg-black section-padding">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_0%,rgba(124,58,237,0.06),transparent)] pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
 
         {/* Header */}
         <div className="text-center mb-14">
