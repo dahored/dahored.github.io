@@ -5,9 +5,9 @@ import {
   Code2, Sparkles, ArrowRight, Linkedin, Mail,
   Monitor, Smartphone, Wrench, GitBranch, Languages,
   Flame, ShieldCheck, Megaphone, ExternalLink,
-  Building2,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import ExperienceScrollSection from '@/components/sections/ExperienceScrollSection';
 import { site } from '@/config/site';
 
 // ─── Stack data (same as StackSection) ────────────────────────────────────────
@@ -212,91 +212,7 @@ export default async function DeveloperPage() {
       </section>
 
       {/* ── 3. EXPERIENCE ───────────────────────────────────────────────────── */}
-      <section className="relative bg-black section-padding">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(124,58,237,0.05),transparent)] pointer-events-none" />
-
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center mb-14">
-            <ScrollReveal>
-              <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-3">{t('exp.label')}</p>
-            </ScrollReveal>
-            <ScrollReveal delay={80}>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#f5f5f7]" style={{ letterSpacing: '-0.02em' }}>
-                {t('exp.heading')}
-              </h2>
-            </ScrollReveal>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-            {/* NICE */}
-            <ScrollReveal delay={100}>
-              <div
-                className="h-full p-8 rounded-3xl flex flex-col gap-6"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0"
-                    style={{ background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.2)' }}
-                  >
-                    <Building2 className="w-6 h-6 text-violet-400" />
-                  </div>
-                  <span className="text-sm text-[#6e6e73]">{t('exp.nice.period')}</span>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold tracking-widest uppercase text-violet-400 mb-1">{t('exp.nice.company')}</p>
-                  <h3 className="text-2xl font-bold text-[#f5f5f7] mb-3">{t('exp.nice.role')}</h3>
-                  <p className="text-[#6e6e73] leading-relaxed">{t('exp.nice.desc')}</p>
-                </div>
-                <div className="relative w-full h-36 rounded-2xl overflow-hidden">
-                  <Image
-                    src="/images/photos/gamer/IMG_0913.jpeg"
-                    alt="Setup — PC RGB, monitores, silla gaming"
-                    fill
-                    className="object-cover object-center"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Playvox */}
-            <ScrollReveal delay={180}>
-              <div
-                className="h-full p-8 rounded-3xl flex flex-col gap-6"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0"
-                    style={{ background: 'rgba(249,115,22,0.1)', border: '1px solid rgba(249,115,22,0.2)' }}
-                  >
-                    <Building2 className="w-6 h-6 text-orange-400" />
-                  </div>
-                  <span className="text-sm text-[#6e6e73]">{t('exp.playvox.period')}</span>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold tracking-widest uppercase text-orange-400 mb-1">{t('exp.playvox.company')}</p>
-                  <h3 className="text-2xl font-bold text-[#f5f5f7] mb-3">{t('exp.playvox.role')}</h3>
-                  <p className="text-[#6e6e73] leading-relaxed">{t('exp.playvox.desc')}</p>
-                </div>
-                {/* Placeholder — necesitas una foto "working/at desk" sin gaming en pantalla */}
-                <div
-                  className="w-full h-36 rounded-2xl overflow-hidden flex items-center justify-center"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px dashed rgba(255,255,255,0.1)' }}
-                >
-                  <p className="text-xs text-[#3a3a3c] text-center px-4">
-                    📷 Foto trabajando / frente al computador<br />
-                    <span className="opacity-60">/images/photos/developer/work.jpg</span>
-                  </p>
-                </div>
-              </div>
-            </ScrollReveal>
-
-          </div>
-        </div>
-      </section>
+      <ExperienceScrollSection />
 
       {/* ── 4. STACK ────────────────────────────────────────────────────────── */}
       <section className="relative bg-[#0a0a0a] section-padding">
