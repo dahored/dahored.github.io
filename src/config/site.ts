@@ -3,7 +3,7 @@ export const site = {
   fullName: 'Diego Hernández',
   alternateName: 'DAHO',
   siteUrl: 'https://www.dahoofficial.com',
-  email: 'dahoreddiegohernandez@gmail.com',
+  email: 'dahoreddiegohernandez+dahoofficial@gmail.com',
   jobTitle: 'Senior Front End Developer',
   description:
     'Senior Front End Developer with 10+ years of experience. Gamer, Content Creator & Philanthropist. Creator of myappcube.',

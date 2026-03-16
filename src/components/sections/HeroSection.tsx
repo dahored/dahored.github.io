@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
-import { ChevronsDown, ArrowRight, MessageCircle } from 'lucide-react';
+import { ChevronsDown, ArrowRight } from 'lucide-react';
 import AnimatedTagline from '@/components/ui/AnimatedTagline';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
@@ -66,23 +66,13 @@ export default async function HeroSection() {
         <ScrollReveal delay={250}>
           <div className="flex flex-row flex-wrap gap-3 justify-center mt-8">
             <a
-              href="#projects"
+              href="#about"
               className="inline-flex w-fit items-center gap-3 pl-5 pr-2 py-2 rounded-full transition-opacity hover:opacity-80 cursor-pointer"
               style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)' }}
             >
               <span className="text-sm font-semibold text-[#f5f5f7]">{t('ctaPrimary')}</span>
               <span className="w-9 h-9 bg-violet-600 rounded-full flex items-center justify-center shrink-0">
                 <ArrowRight className="w-4 h-4 text-white" />
-              </span>
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex w-fit items-center gap-3 pl-5 pr-2 py-2 rounded-full transition-opacity hover:opacity-80 cursor-pointer"
-              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
-            >
-              <span className="text-sm font-semibold text-[#f5f5f7]">{t('ctaSecondary')}</span>
-              <span className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: 'rgba(255,255,255,0.1)' }}>
-                <MessageCircle className="w-4 h-4 text-[#f5f5f7]" />
               </span>
             </a>
           </div>
