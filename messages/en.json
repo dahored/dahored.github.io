@@ -1,9 +1,9 @@
 {
   "nav": {
-    "about": "About",
-    "worlds": "Worlds",
-    "projects": "Projects",
-    "blog": "Blog",
+    "developer": "Developer",
+    "gamer": "Gamer",
+    "philanthropy": "Philanthropy",
+    "adventures": "Adventures",
     "contact": "Contact"
   },
   "hero": {
@@ -106,11 +106,10 @@
     "colFollow": "Follow me",
     "copyright": "© {year} Daho · dahoofficial.com",
     "nav": {
-      "about": "About",
-      "stack": "Stack",
-      "worlds": "Worlds",
-      "projects": "Projects",
-      "blog": "Blog",
+      "developer": "Developer",
+      "gamer": "Gamer",
+      "philanthropy": "Philanthropy",
+      "adventures": "Adventures",
       "contact": "Contact"
     }
   }

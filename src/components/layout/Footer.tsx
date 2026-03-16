@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { Github, Linkedin, Youtube, Twitch } from 'lucide-react';
+import { Link } from '@/i18n/navigation';
 import { site } from '@/config/site';
 
 export default async function Footer() {
@@ -7,12 +8,11 @@ export default async function Footer() {
   const year = new Date().getFullYear();
 
   const navLinks = [
-    { href: '#about',    labelKey: 'nav.about'    },
-    { href: '#stack',    labelKey: 'nav.stack'    },
-    { href: '#worlds',   labelKey: 'nav.worlds'   },
-    { href: '#projects', labelKey: 'nav.projects' },
-    { href: '#blog',     labelKey: 'nav.blog'     },
-    { href: '#contact',  labelKey: 'nav.contact'  },
+    { href: '/developer',    labelKey: 'nav.developer'    },
+    { href: '/gamer',        labelKey: 'nav.gamer'        },
+    { href: '/philanthropy', labelKey: 'nav.philanthropy' },
+    { href: '/adventures',   labelKey: 'nav.adventures'   },
+    { href: '/#contact',     labelKey: 'nav.contact'      },
   ];
 
   const worldLinks = [
@@ -52,12 +52,12 @@ export default async function Footer() {
             <ul className="flex flex-col gap-3">
               {navLinks.map(({ href, labelKey }) => (
                 <li key={href}>
-                  <a
+                  <Link
                     href={href}
                     className="text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors"
                   >
                     {t(labelKey as Parameters<typeof t>[0])}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
