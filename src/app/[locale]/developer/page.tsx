@@ -116,6 +116,8 @@ export default async function DeveloperPage() {
       <PhotoZoomSection
         src="/images/photos/me/IMG_9872.jpeg"
         alt="Diego Hernández — Developer"
+        label="Senior Front End Developer"
+        heading="Diego Hernández"
         badge={t('bio.openToWork')}
       />
 
