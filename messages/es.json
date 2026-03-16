@@ -2,7 +2,7 @@
   "nav": {
     "developer": "Developer",
     "gamer": "Gamer",
-    "philanthropy": "Filantropía",
+    "philanthropy": "Ayudas",
     "adventures": "Adventures",
     "contact": "Contacto"
   },
@@ -148,7 +148,7 @@
     "nav": {
       "developer": "Developer",
       "gamer": "Gamer",
-      "philanthropy": "Filantropía",
+      "philanthropy": "Ayudas",
       "adventures": "Adventures",
       "contact": "Contacto"
     }
