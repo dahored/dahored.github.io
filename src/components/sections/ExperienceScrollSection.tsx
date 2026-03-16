@@ -208,17 +208,6 @@ export default function ExperienceScrollSection() {
 
         </div>
 
-        {/* Progress line at very bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-[#111] z-10">
-          <div
-            className="h-full"
-            style={{
-              width: `${progress * 100}%`,
-              background: exp.color,
-              transition: 'width 0.1s linear, background 0.6s ease',
-            }}
-          />
-        </div>
       </div>
     </div>
   );
