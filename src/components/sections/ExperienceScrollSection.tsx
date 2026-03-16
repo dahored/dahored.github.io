@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const experiences = [
   {
@@ -78,59 +78,49 @@ const experiences = [
 ];
 
 export default function ExperienceScrollSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [current, setCurrent] = useState(0);
   const [displayIndex, setDisplayIndex] = useState(0);
-  const [overallProgress, setOverallProgress] = useState(0);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    function onScroll() {
-      const section = containerRef.current;
+    const handleScroll = () => {
+      const section = sectionRef.current;
       if (!section) return;
       const rect = section.getBoundingClientRect();
       const scrollable = section.offsetHeight - window.innerHeight;
       if (scrollable <= 0) return;
-
       const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
-      const raw = progress * experiences.length;
-      const idx = Math.min(Math.floor(raw), experiences.length - 1);
-
-      setActiveIndex(idx);
-      setOverallProgress(progress);
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+      setCurrent(Math.min(experiences.length - 1, Math.floor(progress * experiences.length)));
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Fade out → swap content → fade in on index change
   useEffect(() => {
-    if (activeIndex === displayIndex) return;
+    if (current === displayIndex) return;
     setVisible(false);
     const t = setTimeout(() => {
-      setDisplayIndex(activeIndex);
+      setDisplayIndex(current);
       setVisible(true);
     }, 180);
     return () => clearTimeout(t);
-  }, [activeIndex, displayIndex]);
+  }, [current, displayIndex]);
 
   const exp = experiences[displayIndex];
+  const progress = (current + 1) / experiences.length;
 
   return (
     <div
-      ref={containerRef}
-      style={{ height: `${experiences.length * 60 + 100}vh` }}
+      ref={sectionRef}
       className="relative"
+      style={{ height: `${experiences.length * 60 + 100}vh` }}
     >
-      <div
-        className="sticky top-0 h-screen overflow-hidden flex flex-col"
-        style={{
-          background: '#000',
-          transition: 'background 0.8s ease',
-        }}
-      >
+      {/* Sticky panel — needs its own bg to cover content above */}
+      <div className="sticky top-0 h-screen w-full bg-black flex flex-col">
+
         {/* Animated gradient background */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -153,7 +143,7 @@ export default function ExperienceScrollSection() {
         <div className="absolute inset-0 opacity-[0.06] dot-grid pointer-events-none" aria-hidden="true" />
 
         {/* Main content */}
-        <div className="flex-1 flex items-center">
+        <div className="flex-1 flex items-center relative z-10">
           <div
             className="w-full px-6 sm:px-12 lg:px-20"
             style={{
@@ -206,13 +196,13 @@ export default function ExperienceScrollSection() {
         </div>
 
         {/* Bottom bar */}
-        <div className="shrink-0 px-6 sm:px-12 lg:px-20 pb-8 flex items-center gap-6">
+        <div className="shrink-0 px-6 sm:px-12 lg:px-20 pb-8 flex items-center gap-6 relative z-10">
           {/* Dot indicators */}
           <div className="flex items-center gap-1.5">
             {experiences.map((e, i) => (
               <div
                 key={i}
-                className="rounded-full transition-all duration-400"
+                className="rounded-full"
                 style={{
                   width: i === displayIndex ? '20px' : '5px',
                   height: '5px',
@@ -235,13 +225,13 @@ export default function ExperienceScrollSection() {
         </div>
 
         {/* Progress line at very bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-[#111]">
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-[#111] z-10">
           <div
             className="h-full"
             style={{
-              width: `${overallProgress * 100}%`,
+              width: `${progress * 100}%`,
               background: exp.color,
-              transition: 'background 0.6s ease',
+              transition: 'width 0.1s linear, background 0.6s ease',
             }}
           />
         </div>
