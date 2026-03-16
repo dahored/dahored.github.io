@@ -18,20 +18,18 @@ export default function PhotoZoomSection({ src, alt, badge }: PhotoZoomSectionPr
       const section = sectionRef.current;
       if (!section) return;
       const rect = section.getBoundingClientRect();
-      const scrollable = section.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-      setProgress(Math.max(0, Math.min(1, -rect.top / scrollable)));
+      // Start counting from when the section first enters the viewport (bottom)
+      // Total travel = full section height
+      const entered = window.innerHeight - rect.top;
+      setProgress(Math.max(0, Math.min(1, entered / section.offsetHeight)));
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Dead zone: first 25% of scroll the photo stays still,
-  // then grows from 0.5 → 1.0 over the remaining 75%
-  const delayed = Math.max(0, (progress - 0.25) / 0.75);
-  const scale = 0.5 + delayed * 0.5;
-  const radius = Math.round(36 * (1 - delayed));
+  const scale = 0.38 + progress * 0.62;
+  const radius = Math.round(40 * (1 - progress));
 
   return (
     <div
@@ -58,10 +56,10 @@ export default function PhotoZoomSection({ src, alt, badge }: PhotoZoomSectionPr
             style={{ background: 'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7) 100%)' }}
           />
           {/* Badge */}
-          {badge && delayed > 0.7 && (
+          {badge && progress > 0.75 && (
             <div
               className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2"
-              style={{ opacity: (delayed - 0.7) / 0.3, transition: 'opacity 0.2s' }}
+              style={{ opacity: (progress - 0.75) / 0.25, transition: 'opacity 0.2s' }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
               <span className="text-sm font-medium text-emerald-400">{badge}</span>
