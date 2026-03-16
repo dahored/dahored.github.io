@@ -123,17 +123,14 @@ export default async function DeveloperPage() {
 
       {/* ── 3. STATS STRIP ──────────────────────────────────────────────────── */}
       <section className="bg-black" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 grid grid-cols-1 sm:grid-cols-3">
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 grid grid-cols-1 sm:grid-cols-3 gap-10">
           {[
             { sup: t('hero.stat1Label'), value: t('hero.stat1Value'), sub: 'de experiencia en la industria' },
             { sup: t('hero.stat2Label'), value: t('hero.stat2Value'), sub: 'empresas líderes a nivel global' },
             { sup: t('hero.stat3Label'), value: t('hero.stat3Value'), sub: 'líneas de código escritas' },
           ].map(({ sup, value, sub }, i) => (
             <ScrollReveal key={sup} delay={i * 80}>
-              <div
-                className="flex flex-col gap-2 px-8 py-10"
-                style={{ borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.08)' : 'none' }}
-              >
+              <div className="flex flex-col gap-2 py-4">
                 <p className="text-sm text-[#6e6e73]">{sup}</p>
                 <p
                   className="font-bold text-[#f5f5f7]"
@@ -152,7 +149,7 @@ export default async function DeveloperPage() {
       <section className="relative bg-[#0a0a0a] section-padding overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-violet-900/8 blur-3xl pointer-events-none" aria-hidden="true" />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 relative z-10">
           <div className="text-center mb-14">
             <ScrollReveal>
               <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-3">{t('bio.label')}</p>
@@ -206,7 +203,7 @@ export default async function DeveloperPage() {
       <section className="relative bg-[#0a0a0a] section-padding">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_40%_at_50%_0%,rgba(124,58,237,0.06),transparent)] pointer-events-none" />
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 relative z-10">
           <div className="text-center mb-14">
             <ScrollReveal>
               <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-3">{ts('label')}</p>
@@ -255,7 +252,7 @@ export default async function DeveloperPage() {
       <section className="relative bg-black section-padding">
         <div className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full bg-orange-900/8 blur-3xl pointer-events-none" aria-hidden="true" />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 relative z-10">
           <div className="text-center mb-16">
             <ScrollReveal>
               <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-3">Proyecto</p>
@@ -342,7 +339,7 @@ export default async function DeveloperPage() {
       <section className="relative bg-[#0a0a0a] section-padding overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-64 rounded-full bg-violet-900/10 blur-3xl pointer-events-none" aria-hidden="true" />
 
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 relative z-10 text-center flex flex-col items-center gap-8">
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 relative z-10 text-center flex flex-col items-center gap-8">
           <ScrollReveal>
             <div className="flex flex-col items-center gap-4">
               <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73]">{t('exp.label')}</p>
