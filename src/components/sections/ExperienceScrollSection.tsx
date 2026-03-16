@@ -81,27 +81,23 @@ export default function ExperienceScrollSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [displayIndex, setDisplayIndex] = useState(0);
-  const [itemProgress, setItemProgress] = useState(0);
+  const [overallProgress, setOverallProgress] = useState(0);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     function onScroll() {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const windowH = window.innerHeight;
-      const scrolled = -rect.top;
-      const totalScrollable = rect.height - windowH;
+      const section = containerRef.current;
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const scrollable = section.offsetHeight - window.innerHeight;
+      if (scrollable <= 0) return;
 
-      if (scrolled <= 0) { setActiveIndex(0); setItemProgress(0); return; }
-      if (scrolled >= totalScrollable) { setActiveIndex(experiences.length - 1); setItemProgress(1); return; }
-
-      const itemH = totalScrollable / experiences.length;
-      const raw = scrolled / itemH;
+      const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
+      const raw = progress * experiences.length;
       const idx = Math.min(Math.floor(raw), experiences.length - 1);
-      const prog = raw - Math.floor(raw);
 
       setActiveIndex(idx);
-      setItemProgress(prog);
+      setOverallProgress(progress);
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -121,12 +117,11 @@ export default function ExperienceScrollSection() {
   }, [activeIndex, displayIndex]);
 
   const exp = experiences[displayIndex];
-  const overallProgress = (activeIndex + itemProgress) / experiences.length;
 
   return (
     <div
       ref={containerRef}
-      style={{ height: `${experiences.length * 100}vh` }}
+      style={{ height: `${experiences.length * 60 + 40}vh` }}
       className="relative"
     >
       <div
