@@ -62,9 +62,9 @@ const worlds: WorldCardData[] = [
   {
     iconName: 'Heart',
     accent: '#e11d48',
-    nameKey: 'coexist.name',
-    descKey: 'coexist.description',
-    highlightKey: 'coexist.highlight',
+    nameKey: 'personal.name',
+    descKey: 'personal.description',
+    highlightKey: 'personal.highlight',
     socials: [
       { label: 'Instagram', href: 'https://www.instagram.com/diego.hernandezorrego/', iconName: 'Instagram', color: '#e1306c' },
       { label: 'Facebook',  href: 'https://www.facebook.com/diego.hernandezorrego/',  iconName: 'Facebook',  color: '#1877f2' },
