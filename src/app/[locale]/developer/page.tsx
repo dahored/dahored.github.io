@@ -51,6 +51,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function DeveloperPage() {
   const t = await getTranslations('developer');
   const ts = await getTranslations('stack');
+  const tp = await getTranslations('projects');
 
   return (
     <div className="bg-black min-h-screen">
@@ -267,11 +268,11 @@ export default async function DeveloperPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-12">
             <ScrollReveal>
-              <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-3">{t('projects.label')}</p>
+              <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-3">{tp('label')}</p>
             </ScrollReveal>
             <ScrollReveal delay={80}>
               <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#f5f5f7]" style={{ letterSpacing: '-0.02em' }}>
-                {t('projects.heading')}
+                {tp('heading')}
               </h2>
             </ScrollReveal>
           </div>
@@ -281,11 +282,11 @@ export default async function DeveloperPage() {
               {
                 id: 'myappcube',
                 name: 'myappcube',
-                tagline: t('projects.myappcube.tagline'),
+                tagline: tp('myappcube.tagline'),
                 banner: '/images/projects/myappcube-banner.png',
                 logo: '/images/projects/myappcube-logo.png',
                 href: 'https://myappcube.com',
-                exploreLabel: t('projects.myappcube.cta'),
+                exploreLabel: tp('myappcube.cta'),
               } satisfies ProjectSlide,
             ]} />
           </ScrollReveal>
