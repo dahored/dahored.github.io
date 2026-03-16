@@ -27,9 +27,11 @@ export default function PhotoZoomSection({ src, alt, badge }: PhotoZoomSectionPr
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 0.55 → 1.0 scale,  32px → 0px border-radius
-  const scale = 0.55 + progress * 0.45;
-  const radius = Math.round(32 * (1 - progress));
+  // Dead zone: first 25% of scroll the photo stays still,
+  // then grows from 0.5 → 1.0 over the remaining 75%
+  const delayed = Math.max(0, (progress - 0.25) / 0.75);
+  const scale = 0.5 + delayed * 0.5;
+  const radius = Math.round(36 * (1 - delayed));
 
   return (
     <div
@@ -56,10 +58,10 @@ export default function PhotoZoomSection({ src, alt, badge }: PhotoZoomSectionPr
             style={{ background: 'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7) 100%)' }}
           />
           {/* Badge */}
-          {badge && progress > 0.6 && (
+          {badge && delayed > 0.7 && (
             <div
               className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2"
-              style={{ opacity: (progress - 0.6) / 0.4, transition: 'opacity 0.2s' }}
+              style={{ opacity: (delayed - 0.7) / 0.3, transition: 'opacity 0.2s' }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
               <span className="text-sm font-medium text-emerald-400">{badge}</span>
