@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import {
   ArrowRight, Linkedin, Mail,
   Monitor, Smartphone, Wrench, GitBranch, Languages,
-  Flame, ShieldCheck, Megaphone, ExternalLink,
+  Flame, ShieldCheck, Megaphone,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import ExperienceScrollSection from '@/components/sections/ExperienceScrollSection';
 import PhotoZoomSection from '@/components/sections/PhotoZoomSection';
+import ProjectsCarousel from '@/components/ui/ProjectsCarousel';
+import type { ProjectSlide } from '@/components/ui/ProjectsCarousel';
 import { site } from '@/config/site';
 
 // ─── Stack data (same as StackSection) ────────────────────────────────────────
@@ -264,84 +265,29 @@ export default async function DeveloperPage() {
         <div className="absolute bottom-1/3 left-1/4 w-96 h-96 rounded-full bg-orange-900/8 blur-3xl pointer-events-none" aria-hidden="true" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <ScrollReveal>
-              <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-3">Proyecto</p>
+              <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-3">{t('projects.label')}</p>
             </ScrollReveal>
             <ScrollReveal delay={80}>
               <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#f5f5f7]" style={{ letterSpacing: '-0.02em' }}>
-                myappcube
+                {t('projects.heading')}
               </h2>
             </ScrollReveal>
           </div>
 
           <ScrollReveal delay={150}>
-            <div
-              className="relative rounded-3xl overflow-hidden"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
-            >
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: 'radial-gradient(ellipse 70% 60% at 30% 50%, rgba(124,58,237,0.10) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 75% 50%, rgba(249,115,22,0.06) 0%, transparent 70%)',
-                }}
-                aria-hidden="true"
-              />
-              <div className="relative z-10 flex flex-col lg:flex-row items-center gap-10 p-10 lg:p-16">
-
-                {/* Logo */}
-                <div className="shrink-0">
-                  <div className="relative w-28 h-28 sm:w-36 sm:h-36">
-                    <div className="absolute inset-0 rounded-2xl bg-violet-600/20 blur-xl scale-110" />
-                    <Image
-                      src="/images/projects/myappcube-logo.png"
-                      alt="myappcube"
-                      width={144}
-                      height={144}
-                      className="relative z-10 rounded-2xl shadow-2xl"
-                      sizes="144px"
-                    />
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-col gap-4 text-center lg:text-left">
-                  <div>
-                    <p className="text-xs font-semibold tracking-widest uppercase text-violet-400 mb-1">Indie Studio</p>
-                    <p className="text-xl text-[#6e6e73]">Fundador & Desarrollador</p>
-                  </div>
-                  <p className="text-[#6e6e73] leading-relaxed max-w-lg">
-                    Estudio de juegos móviles indie. Dos juegos sociales disponibles en iOS y Android: El Infiltrado y Oculto. Construido con React Native, Firebase, RevenueCat y AdMob.
-                  </p>
-                  <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                    {['React Native', 'Next.js', 'Firebase', 'TypeScript', 'i18n'].map((t) => (
-                      <span
-                        key={t}
-                        className="px-3 py-1 rounded-lg text-sm font-medium text-[#f5f5f7]"
-                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                    <a
-                      href="https://myappcube.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-3 pl-5 pr-2 py-2 rounded-full transition-opacity hover:opacity-80 cursor-pointer"
-                      style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)' }}
-                    >
-                      <span className="text-sm font-semibold text-[#f5f5f7]">Ver sitio</span>
-                      <span className="w-9 h-9 bg-violet-600 rounded-full flex items-center justify-center shrink-0">
-                        <ExternalLink className="w-4 h-4 text-white" />
-                      </span>
-                    </a>
-                  </div>
-                </div>
-
-              </div>
-            </div>
+            <ProjectsCarousel projects={[
+              {
+                id: 'myappcube',
+                name: 'myappcube',
+                tagline: t('projects.myappcube.tagline'),
+                banner: '/images/projects/myappcube-banner.png',
+                logo: '/images/projects/myappcube-logo.png',
+                href: 'https://myappcube.com',
+                exploreLabel: t('projects.myappcube.cta'),
+              } satisfies ProjectSlide,
+            ]} />
           </ScrollReveal>
         </div>
       </section>
