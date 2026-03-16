@@ -195,7 +195,7 @@ export default function ExperienceScrollSection() {
         </div>
 
         {/* Bottom bar */}
-        <div className="shrink-0 pb-8 flex items-center gap-6 relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-12">
+        <div className="shrink-0 pb-8 flex justify-center items-center relative z-10 w-full">
           <CarouselControls
             count={experiences.length}
             current={displayIndex}
@@ -206,15 +206,6 @@ export default function ExperienceScrollSection() {
             showPause={false}
           />
 
-          {/* Scroll hint on first item */}
-          {displayIndex === 0 && (
-            <p
-              className="text-xs text-[#3a3a3c] ml-auto"
-              style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.3s' }}
-            >
-              scroll to explore
-            </p>
-          )}
         </div>
 
         {/* Progress line at very bottom */}
