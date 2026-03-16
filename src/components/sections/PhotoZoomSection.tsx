@@ -18,10 +18,10 @@ export default function PhotoZoomSection({ src, alt, badge }: PhotoZoomSectionPr
       const section = sectionRef.current;
       if (!section) return;
       const rect = section.getBoundingClientRect();
-      // Start counting from when the section first enters the viewport (bottom)
-      // Total travel = full section height
-      const entered = window.innerHeight - rect.top;
-      setProgress(Math.max(0, Math.min(1, entered / section.offsetHeight)));
+      // Progress 0 → 1 as section enters from bottom until rect.top = 0
+      // So zoom is complete exactly when the section hits the top of the viewport
+      const p = (window.innerHeight - rect.top) / window.innerHeight;
+      setProgress(Math.max(0, Math.min(1, p)));
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
@@ -35,7 +35,7 @@ export default function PhotoZoomSection({ src, alt, badge }: PhotoZoomSectionPr
     <div
       ref={sectionRef}
       className="relative bg-black"
-      style={{ height: '220vh' }}
+      style={{ height: '130vh' }}
     >
       <div className="sticky top-0 h-screen w-full flex items-center justify-center bg-black overflow-hidden">
         <div
