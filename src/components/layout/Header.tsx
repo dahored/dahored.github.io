@@ -21,7 +21,7 @@ export default function Header() {
   const links = [
     { href: '/developer',   label: t('developer')   },
     { href: '/gamer',       label: t('gamer')        },
-    { href: '/philanthropy',label: t('philanthropy') },
+    { href: '/coexist',label: t('coexist') },
     { href: '/adventures',  label: t('adventures')   },
     { href: '/#contact',    label: t('contact')      },
   ];

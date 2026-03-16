@@ -10,7 +10,7 @@ export default async function Footer() {
   const navLinks = [
     { href: '/developer',    labelKey: 'nav.developer'    },
     { href: '/gamer',        labelKey: 'nav.gamer'        },
-    { href: '/philanthropy', labelKey: 'nav.philanthropy' },
+    { href: '/coexist', labelKey: 'nav.coexist' },
     { href: '/adventures',   labelKey: 'nav.adventures'   },
     { href: '/#contact',     labelKey: 'nav.contact'      },
   ];

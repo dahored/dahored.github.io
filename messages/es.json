@@ -2,7 +2,7 @@
   "nav": {
     "developer": "Developer",
     "gamer": "Gamer",
-    "philanthropy": "Ayudas",
+    "coexist": "Coexist",
     "adventures": "Adventures",
     "contact": "Contacto"
   },
@@ -12,7 +12,7 @@
     "name": "DAHO",
     "tagline0": "Developer. 10+ años de experiencia.",
     "tagline1": "Gamer & Creador de contenido.",
-    "tagline2": "Aventurero & Filántropo.",
+    "tagline2": "Aventurero & Coexister.",
     "ctaPrimary": "Conocer más",
     "scrollDown": "Desplázate hacia abajo"
   },
@@ -62,7 +62,7 @@
     "name": "Diego Hernández",
     "subtitle": "Senior Front End Developer",
     "bio1": "Soy un desarrollador frontend apasionado con más de 10 años de experiencia construyendo aplicaciones web modernas. He trabajado como Senior Front End Developer en empresas como NICE y Playvox, creando experiencias de usuario excepcionales a escala.",
-    "bio2": "Además de programar, soy creador de contenido, gamer, aventurero y filántropo. Creo en el poder de la tecnología para conectar personas y crear impacto positivo.",
+    "bio2": "Además de programar, soy creador de contenido, gamer, aventurero y coexister. Creo en el poder de la tecnología para conectar personas y crear impacto positivo.",
     "skillsTitle": "Tecnologías",
     "exp1Value": "10+ años",
     "exp1Label": "Experiencia",
@@ -100,10 +100,10 @@
       "description": "Aventuras, viajes y [[h]] alrededor del mundo.",
       "highlight": "experiencias únicas"
     },
-    "philanthropy": {
+    "coexist": {
       "name": "Diego Hernández",
-      "description": "Iniciativas de [[h]] y filantropía para construir un mundo mejor.",
-      "highlight": "impacto social"
+      "description": "Un espacio de [[h]], motivación y ayuda para crecer juntos.",
+      "highlight": "coexistir juntos"
     }
   },
   "projects": {
@@ -140,7 +140,7 @@
     "socialsHeading": "Mis marcas"
   },
   "footer": {
-    "description": "Desarrollador frontend, gamer, aventurero y filántropo. Construyendo cosas que importan.",
+    "description": "Desarrollador frontend, gamer, aventurero y coexister. Construyendo cosas que importan.",
     "colNav": "Navegar",
     "colWorlds": "Mis Mundos",
     "colFollow": "Sígueme",
@@ -148,7 +148,7 @@
     "nav": {
       "developer": "Developer",
       "gamer": "Gamer",
-      "philanthropy": "Ayudas",
+      "coexist": "Coexist",
       "adventures": "Adventures",
       "contact": "Contacto"
     }
