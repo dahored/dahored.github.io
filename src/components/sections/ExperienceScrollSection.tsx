@@ -153,7 +153,7 @@ export default function ExperienceScrollSection() {
           >
             {/* Counter */}
             <p
-              className="font-mono text-sm mb-10 lg:mb-14"
+              className="font-mono text-sm mb-10 lg:mb-14 text-center sm:text-left"
               style={{ color: `${exp.color}80` }}
             >
               {String(displayIndex + 1).padStart(2, '0')}&nbsp;&nbsp;/&nbsp;&nbsp;{String(experiences.length).padStart(2, '0')}
@@ -161,7 +161,7 @@ export default function ExperienceScrollSection() {
 
             {/* Company name */}
             <h2
-              className="font-bold leading-none mb-5"
+              className="font-bold leading-none mb-5 text-center sm:text-left"
               style={{
                 fontSize: 'clamp(2.8rem, 9vw, 8.5rem)',
                 letterSpacing: '-0.04em',
@@ -174,7 +174,7 @@ export default function ExperienceScrollSection() {
 
             {/* Role */}
             <p
-              className="font-light text-[#f5f5f7] mb-6"
+              className="font-light text-[#f5f5f7] mb-6 text-center sm:text-left"
               style={{
                 fontSize: 'clamp(1.25rem, 3vw, 2.25rem)',
                 letterSpacing: '-0.01em',
@@ -184,7 +184,7 @@ export default function ExperienceScrollSection() {
             </p>
 
             {/* Period · duration · location */}
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[#6e6e73] text-base sm:text-lg">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-5 gap-y-1 text-[#6e6e73] text-base sm:text-lg">
               <span>{exp.period}</span>
               <span className="w-1 h-1 rounded-full bg-[#3a3a3c] shrink-0" />
               <span>{exp.duration}</span>
