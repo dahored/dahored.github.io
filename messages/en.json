@@ -16,6 +16,46 @@
     "ctaPrimary": "Learn more",
     "scrollDown": "Scroll down"
   },
+  "developer": {
+    "hero": {
+      "label": "Developer",
+      "heading": "Crafting digital experiences.",
+      "subtitle": "Senior Front End Developer with 10+ years building modern web and mobile products at scale.",
+      "stat1Value": "10+", "stat1Label": "Years of experience",
+      "stat2Value": "2",   "stat2Label": "Top-tier companies",
+      "stat3Value": "∞",   "stat3Label": "Lines of code"
+    },
+    "bio": {
+      "label": "About me",
+      "heading": "Code runs in my veins.",
+      "text1": "I'm a passionate frontend developer with 10+ years of experience building modern web applications. I've worked as a Senior Front End Developer at companies like NICE and Playvox, crafting exceptional user experiences at scale.",
+      "text2": "I specialize in Vue, React, Next.js and TypeScript. Beyond web, I build mobile apps with React Native — including my own indie studio myappcube, with two social games live on iOS and Android.",
+      "openToWork": "Open to work",
+      "openToWorkSub": "Available for new projects and collaborations."
+    },
+    "exp": {
+      "label": "Experience",
+      "heading": "Where I've worked.",
+      "nice": {
+        "role": "Senior Front End Developer",
+        "company": "NICE",
+        "period": "2022 — Present",
+        "desc": "Building enterprise-grade web applications for one of the world's leading customer experience companies. Crafting scalable UI systems used by thousands of agents globally."
+      },
+      "playvox": {
+        "role": "Senior Front End Developer",
+        "company": "Playvox",
+        "period": "2020 — 2022",
+        "desc": "Developed the core frontend of a workforce management platform for contact centers. Worked with Vue 3, TypeScript and large-scale data visualization."
+      }
+    },
+    "cta": {
+      "heading": "Let's build something great.",
+      "sub": "Open to new opportunities, freelance projects and collaborations.",
+      "linkedin": "Connect on LinkedIn",
+      "contact": "Send a message"
+    }
+  },
   "about": {
     "label": "About me",
     "heading": "Code, gaming and adventures.",

@@ -16,6 +16,46 @@
     "ctaPrimary": "Conocer más",
     "scrollDown": "Desplázate hacia abajo"
   },
+  "developer": {
+    "hero": {
+      "label": "Developer",
+      "heading": "Construyendo experiencias digitales.",
+      "subtitle": "Senior Front End Developer con 10+ años construyendo productos web y móviles modernos a escala.",
+      "stat1Value": "10+", "stat1Label": "Años de experiencia",
+      "stat2Value": "2",   "stat2Label": "Empresas top",
+      "stat3Value": "∞",   "stat3Label": "Líneas de código"
+    },
+    "bio": {
+      "label": "Sobre mí",
+      "heading": "El código corre por mis venas.",
+      "text1": "Soy un desarrollador frontend apasionado con más de 10 años de experiencia construyendo aplicaciones web modernas. He trabajado como Senior Front End Developer en empresas como NICE y Playvox, creando experiencias de usuario excepcionales a escala.",
+      "text2": "Me especializo en Vue, React, Next.js y TypeScript. Además del web, construyo apps móviles con React Native — incluyendo mi propio estudio indie myappcube, con dos juegos sociales disponibles en iOS y Android.",
+      "openToWork": "Open to work",
+      "openToWorkSub": "Disponible para nuevos proyectos y colaboraciones."
+    },
+    "exp": {
+      "label": "Experiencia",
+      "heading": "Dónde he trabajado.",
+      "nice": {
+        "role": "Senior Front End Developer",
+        "company": "NICE",
+        "period": "2022 — Presente",
+        "desc": "Construyendo aplicaciones web de nivel empresarial para una de las compañías líderes en experiencia de cliente del mundo. Creando sistemas de UI escalables usados por miles de agentes globalmente."
+      },
+      "playvox": {
+        "role": "Senior Front End Developer",
+        "company": "Playvox",
+        "period": "2020 — 2022",
+        "desc": "Desarrollé el frontend principal de una plataforma de workforce management para contact centers. Trabajé con Vue 3, TypeScript y visualización de datos a gran escala."
+      }
+    },
+    "cta": {
+      "heading": "Construyamos algo grande.",
+      "sub": "Disponible para nuevas oportunidades, proyectos freelance y colaboraciones.",
+      "linkedin": "Conectar en LinkedIn",
+      "contact": "Enviar mensaje"
+    }
+  },
   "about": {
     "label": "Sobre mí",
     "heading": "Código, juegos y aventuras.",
