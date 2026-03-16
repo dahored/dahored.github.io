@@ -5,7 +5,7 @@ import {
   Code2, Sparkles, ArrowRight, Linkedin, Mail,
   Monitor, Smartphone, Wrench, GitBranch, Languages,
   Flame, ShieldCheck, Megaphone, ExternalLink,
-  Building2, Calendar,
+  Building2,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import { site } from '@/config/site';
@@ -67,16 +67,6 @@ export default async function DeveloperPage() {
 
           {/* Left: text */}
           <div className="flex-1 flex flex-col gap-8 text-center lg:text-left items-center lg:items-start">
-            <ScrollReveal>
-              <span
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold text-violet-400"
-                style={{ background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.25)' }}
-              >
-                <Code2 className="w-3.5 h-3.5" />
-                {t('hero.label')}
-              </span>
-            </ScrollReveal>
-
             <ScrollReveal delay={80}>
               <h1
                 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#f5f5f7] leading-tight"
@@ -160,15 +150,9 @@ export default async function DeveloperPage() {
                 priority
               />
               <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)' }} />
-              {/* Open to work badge */}
-              <div className="absolute bottom-5 left-5 right-5">
-                <div
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-emerald-400"
-                  style={{ background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.25)' }}
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  {t('bio.openToWork')}
-                </div>
+              <div className="absolute bottom-5 left-5 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <span className="text-sm font-medium text-emerald-400">{t('bio.openToWork')}</span>
               </div>
             </div>
           </ScrollReveal>
@@ -258,13 +242,7 @@ export default async function DeveloperPage() {
                   >
                     <Building2 className="w-6 h-6 text-violet-400" />
                   </div>
-                  <div
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs text-[#6e6e73]"
-                    style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
-                  >
-                    <Calendar className="w-3 h-3" />
-                    {t('exp.nice.period')}
-                  </div>
+                  <span className="text-sm text-[#6e6e73]">{t('exp.nice.period')}</span>
                 </div>
                 <div>
                   <p className="text-xs font-semibold tracking-widest uppercase text-violet-400 mb-1">{t('exp.nice.company')}</p>
@@ -296,13 +274,7 @@ export default async function DeveloperPage() {
                   >
                     <Building2 className="w-6 h-6 text-orange-400" />
                   </div>
-                  <div
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs text-[#6e6e73]"
-                    style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
-                  >
-                    <Calendar className="w-3 h-3" />
-                    {t('exp.playvox.period')}
-                  </div>
+                  <span className="text-sm text-[#6e6e73]">{t('exp.playvox.period')}</span>
                 </div>
                 <div>
                   <p className="text-xs font-semibold tracking-widest uppercase text-orange-400 mb-1">{t('exp.playvox.company')}</p>
@@ -423,12 +395,7 @@ export default async function DeveloperPage() {
                 {/* Content */}
                 <div className="flex flex-col gap-4 text-center lg:text-left">
                   <div>
-                    <span
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-violet-400 mb-3"
-                      style={{ background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.3)' }}
-                    >
-                      ⭐ Indie Studio
-                    </span>
+                    <p className="text-xs font-semibold tracking-widest uppercase text-violet-400 mb-1">Indie Studio</p>
                     <p className="text-xl text-[#6e6e73]">Fundador & Desarrollador</p>
                   </div>
                   <p className="text-[#6e6e73] leading-relaxed max-w-lg">
