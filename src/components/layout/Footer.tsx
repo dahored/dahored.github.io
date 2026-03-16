@@ -20,7 +20,7 @@ export default async function Footer() {
     { href: 'https://www.youtube.com/@dahogaming',            label: 'Daho Gaming'     },
     { href: 'https://www.instagram.com/daho.coexist/',        label: 'Daho Coexist'    },
     { href: 'https://www.instagram.com/daho.adventures/',     label: 'Daho Adventures' },
-    { href: 'https://www.instagram.com/diego.hernandezorrego/', label: 'Filantropía'   },
+    { href: 'https://www.instagram.com/diego.hernandezorrego/', label: 'Diego Hernández' },
   ];
 
   const socialLinks = [
@@ -43,9 +43,10 @@ export default async function Footer() {
               <Image
                 src="/images/logo/logo_daho.png"
                 alt="DAHO"
-                width={80}
-                height={32}
-                className="h-8 w-auto"
+                width={100}
+                height={40}
+                className="h-10 w-auto"
+                priority
               />
             </Link>
             <p className="text-sm text-[#6e6e73] leading-relaxed max-w-xs">

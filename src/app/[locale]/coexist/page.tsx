@@ -3,11 +3,11 @@ import { getTranslations } from 'next-intl/server';
 import { Heart } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Filantropía',
-  description: 'Iniciativas de impacto social y filantropía para construir un mundo mejor.',
+  title: 'Coexist',
+  description: 'Un espacio de motivación, ayuda y coexistir juntos.',
 };
 
-export default async function PhilanthropyPage() {
+export default async function CoexistPage() {
   const t = await getTranslations('nav');
 
   return (
@@ -17,10 +17,10 @@ export default async function PhilanthropyPage() {
           <Heart className="w-8 h-8 text-pink-400" />
         </div>
         <h1 className="text-5xl sm:text-6xl font-bold text-[#f5f5f7]" style={{ letterSpacing: '-0.02em' }}>
-          {t('philanthropy')}
+          {t('coexist')}
         </h1>
         <p className="text-xl text-[#6e6e73] max-w-md">
-          Coming soon — social impact initiatives and philanthropy.
+          Coming soon — un espacio para coexistir juntos.
         </p>
       </div>
     </main>

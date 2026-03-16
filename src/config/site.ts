@@ -6,7 +6,7 @@ export const site = {
   email: 'dahoreddiegohernandez+dahoofficial@gmail.com',
   jobTitle: 'Senior Front End Developer',
   description:
-    'Senior Front End Developer with 10+ years of experience. Gamer, Content Creator & Philanthropist. Creator of myappcube.',
+    'Senior Front End Developer with 10+ years of experience. Gamer, Content Creator & Coexister. Creator of myappcube.',
   keywords: [
     'Diego Hernandez',
     'Diego Hernández',
@@ -28,7 +28,7 @@ export const site = {
     'myappcube',
     'El Infiltrado',
     'Oculto',
-    'philanthropist',
+    'coexister',
   ],
   socials: {
     github: 'https://github.com/dahored',

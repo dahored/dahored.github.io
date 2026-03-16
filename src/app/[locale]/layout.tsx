@@ -28,8 +28,8 @@ export async function generateMetadata({
   };
 
   const localeDescription: Record<string, string> = {
-    es: 'Senior Front End Developer con 10+ años de experiencia. Gamer, Creador de contenido y Filántropo. Creador de myappcube.',
-    en: 'Senior Front End Developer with 10+ years of experience. Gamer, Content Creator & Philanthropist. Creator of myappcube.',
+    es: 'Senior Front End Developer con 10+ años de experiencia. Gamer, Creador de contenido y Coexister. Creador de myappcube.',
+    en: 'Senior Front End Developer with 10+ years of experience. Gamer, Content Creator & Coexister. Creator of myappcube.',
   };
 
   return {
