@@ -165,7 +165,7 @@ export default async function DeveloperPage() {
       <section className="relative bg-black section-padding">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
           <ScrollReveal>
-            <p className="text-sm text-[#6e6e73] mb-4">{t('bio.label')}</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-4">{t('bio.label')}</p>
           </ScrollReveal>
           <ScrollReveal delay={60}>
             <h2
