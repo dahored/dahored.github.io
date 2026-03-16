@@ -119,33 +119,31 @@ export default function ExperienceScrollSection() {
       style={{ height: `${experiences.length * 60 + 100}vh` }}
     >
       {/* Sticky panel — needs its own bg to cover content above */}
-      <div className="sticky top-0 h-screen w-full bg-black flex flex-col">
+      <div
+        className="sticky top-0 h-screen w-full flex flex-col"
+        style={{
+          background: `color-mix(in srgb, ${exp.color} 10%, #000)`,
+          transition: 'background 0.8s ease',
+        }}
+      >
 
-        {/* Animated gradient background */}
+        {/* Subtle radial glow */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: `radial-gradient(ellipse 70% 70% at 50% 50%, ${exp.color}18 0%, transparent 65%)`,
-            transition: 'background 0.7s ease',
-          }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `radial-gradient(ellipse 40% 40% at 20% 80%, ${exp.color}0d 0%, transparent 60%)`,
+            background: `radial-gradient(ellipse 60% 60% at 50% 50%, ${exp.color}22 0%, transparent 70%)`,
             transition: 'background 0.7s ease',
           }}
           aria-hidden="true"
         />
 
         {/* Dot grid */}
-        <div className="absolute inset-0 opacity-[0.06] dot-grid pointer-events-none" aria-hidden="true" />
+        <div className="absolute inset-0 opacity-[0.05] dot-grid pointer-events-none" aria-hidden="true" />
 
         {/* Main content */}
         <div className="flex-1 flex items-center relative z-10">
           <div
-            className="w-full px-6 sm:px-12 lg:px-20"
+            className="w-full max-w-5xl mx-auto px-6 sm:px-12"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? 'translateY(0)' : 'translateY(16px)',
@@ -196,7 +194,7 @@ export default function ExperienceScrollSection() {
         </div>
 
         {/* Bottom bar */}
-        <div className="shrink-0 px-6 sm:px-12 lg:px-20 pb-8 flex items-center gap-6 relative z-10">
+        <div className="shrink-0 pb-8 flex items-center gap-6 relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-12">
           {/* Dot indicators */}
           <div className="flex items-center gap-1.5">
             {experiences.map((e, i) => (
