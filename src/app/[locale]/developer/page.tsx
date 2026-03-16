@@ -122,17 +122,26 @@ export default async function DeveloperPage() {
       />
 
       {/* ── 3. STATS STRIP ──────────────────────────────────────────────────── */}
-      <section className="bg-black" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 grid grid-cols-3 gap-6">
+      <section className="bg-black" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 grid grid-cols-1 sm:grid-cols-3">
           {[
-            { value: t('hero.stat1Value'), label: t('hero.stat1Label') },
-            { value: t('hero.stat2Value'), label: t('hero.stat2Label') },
-            { value: t('hero.stat3Value'), label: t('hero.stat3Label') },
-          ].map(({ value, label }, i) => (
-            <ScrollReveal key={label} delay={i * 80}>
-              <div className="text-center">
-                <p className="text-4xl sm:text-5xl font-bold text-[#f5f5f7]" style={{ letterSpacing: '-0.03em' }}>{value}</p>
-                <p className="text-sm text-[#6e6e73] mt-2">{label}</p>
+            { sup: t('hero.stat1Label'), value: t('hero.stat1Value'), sub: 'de experiencia en la industria' },
+            { sup: t('hero.stat2Label'), value: t('hero.stat2Value'), sub: 'empresas líderes a nivel global' },
+            { sup: t('hero.stat3Label'), value: t('hero.stat3Value'), sub: 'líneas de código escritas' },
+          ].map(({ sup, value, sub }, i) => (
+            <ScrollReveal key={sup} delay={i * 80}>
+              <div
+                className="flex flex-col gap-2 px-8 py-10"
+                style={{ borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.08)' : 'none' }}
+              >
+                <p className="text-sm text-[#6e6e73]">{sup}</p>
+                <p
+                  className="font-bold text-[#f5f5f7]"
+                  style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', letterSpacing: '-0.04em', lineHeight: 1 }}
+                >
+                  {value}
+                </p>
+                <p className="text-sm text-[#6e6e73] leading-snug max-w-45">{sub}</p>
               </div>
             </ScrollReveal>
           ))}
