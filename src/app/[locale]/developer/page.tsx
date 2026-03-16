@@ -53,111 +53,102 @@ export default async function DeveloperPage() {
   return (
     <div className="bg-black min-h-screen">
 
-      {/* ── 1. HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black pt-16">
-        {/* Glow orbs */}
-        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden" aria-hidden="true">
-          <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-175 h-175 rounded-full bg-violet-600/12 blur-3xl animate-glow-pulse" />
-          <div className="absolute bottom-[10%] right-[15%] w-96 h-96 rounded-full bg-orange-500/8 blur-3xl animate-glow-pulse [animation-delay:2s]" />
+      {/* ── 1. HERO — heading full screen ───────────────────────────────────── */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center bg-black pt-20 pb-16 overflow-hidden">
+        {/* Glow */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full bg-violet-600/10 blur-3xl animate-glow-pulse" />
         </div>
-        {/* Dot grid */}
-        <div className="absolute inset-0 -z-20 opacity-10 dot-grid" aria-hidden="true" />
+        <div className="absolute inset-0 opacity-[0.07] dot-grid" aria-hidden="true" />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full py-24 flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-
-          {/* Left: text */}
-          <div className="flex-1 flex flex-col gap-8 text-center lg:text-left items-center lg:items-start">
-            <ScrollReveal delay={80}>
-              <h1
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#f5f5f7] leading-tight"
-                style={{ letterSpacing: '-0.03em' }}
-              >
-                {t('hero.heading')}
-              </h1>
-            </ScrollReveal>
-
-            <ScrollReveal delay={140}>
-              <p className="text-xl text-[#6e6e73] max-w-lg leading-relaxed">
-                {t('hero.subtitle')}
-              </p>
-            </ScrollReveal>
-
-            {/* Stats */}
-            <ScrollReveal delay={200}>
-              <div className="flex gap-6 sm:gap-10">
-                {[
-                  { value: t('hero.stat1Value'), label: t('hero.stat1Label') },
-                  { value: t('hero.stat2Value'), label: t('hero.stat2Label') },
-                  { value: t('hero.stat3Value'), label: t('hero.stat3Label') },
-                ].map(({ value, label }) => (
-                  <div key={label}>
-                    <p className="text-3xl sm:text-4xl font-bold text-[#f5f5f7]" style={{ letterSpacing: '-0.02em' }}>{value}</p>
-                    <p className="text-xs text-[#6e6e73] mt-1">{label}</p>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
-
-            {/* CTAs */}
-            <ScrollReveal delay={260}>
-              <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                <a
-                  href={site.socials.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 pl-5 pr-2 py-2 rounded-full transition-opacity hover:opacity-80 cursor-pointer"
-                  style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)' }}
-                >
-                  <Linkedin className="w-4 h-4 text-[#f5f5f7]" />
-                  <span className="text-sm font-semibold text-[#f5f5f7]">{t('cta.linkedin')}</span>
-                  <span className="w-9 h-9 bg-violet-600 rounded-full flex items-center justify-center shrink-0">
-                    <ArrowRight className="w-4 h-4 text-white" />
-                  </span>
-                </a>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="inline-flex items-center gap-3 pl-5 pr-2 py-2 rounded-full transition-opacity hover:opacity-80 cursor-pointer"
-                  style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
-                >
-                  <span className="text-sm font-semibold text-[#f5f5f7]">{t('cta.contact')}</span>
-                  <span className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: 'rgba(255,255,255,0.1)' }}>
-                    <Mail className="w-4 h-4 text-[#f5f5f7]" />
-                  </span>
-                </a>
-              </div>
-            </ScrollReveal>
-          </div>
-
-          {/* Right: portrait photo */}
-          <ScrollReveal delay={100} className="shrink-0">
-            {/*
-              IMAGE 1 — PORTRAIT / HERO PHOTO
-              Foto profesional o "at work":
-              · Tú en tu escritorio, de pie con laptop, o fondo tech/bokeh
-              · Formato vertical (portrait), mínimo 600×800 px
-              · Guárdala en: /public/images/photos/developer/portrait.jpg
-            */}
-            <div
-              className="relative w-72 h-96 sm:w-80 sm:h-112 rounded-3xl overflow-hidden"
-              style={{ border: '1px solid rgba(255,255,255,0.08)' }}
-            >
-              <Image
-                src="/images/photos/me/IMG_9872.jpeg"
-                alt="Diego Hernández — Developer"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 640px) 288px, 320px"
-                priority
-              />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)' }} />
-              <div className="absolute bottom-5 left-5 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                <span className="text-sm font-medium text-emerald-400">{t('bio.openToWork')}</span>
-              </div>
-            </div>
+        <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-10 text-center flex flex-col items-center gap-8">
+          <ScrollReveal delay={60}>
+            <p className="text-xs font-semibold tracking-widest uppercase text-violet-400">{t('hero.label')}</p>
           </ScrollReveal>
 
+          <ScrollReveal delay={120}>
+            <h1
+              className="font-bold text-[#f5f5f7]"
+              style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', letterSpacing: '-0.04em', lineHeight: 1.05 }}
+            >
+              {t('hero.heading')}
+            </h1>
+          </ScrollReveal>
+
+          <ScrollReveal delay={180}>
+            <p className="text-xl sm:text-2xl text-[#6e6e73] max-w-xl leading-relaxed">
+              {t('hero.subtitle')}
+            </p>
+          </ScrollReveal>
+
+          <ScrollReveal delay={240}>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <a
+                href={site.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 pl-5 pr-2 py-2 rounded-full transition-opacity hover:opacity-80 cursor-pointer"
+                style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)' }}
+              >
+                <Linkedin className="w-4 h-4 text-[#f5f5f7]" />
+                <span className="text-sm font-semibold text-[#f5f5f7]">{t('cta.linkedin')}</span>
+                <span className="w-9 h-9 bg-violet-600 rounded-full flex items-center justify-center shrink-0">
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </span>
+              </a>
+              <a
+                href={`mailto:${site.email}`}
+                className="inline-flex items-center gap-3 pl-5 pr-2 py-2 rounded-full transition-opacity hover:opacity-80 cursor-pointer"
+                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
+              >
+                <span className="text-sm font-semibold text-[#f5f5f7]">{t('cta.contact')}</span>
+                <span className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: 'rgba(255,255,255,0.1)' }}>
+                  <Mail className="w-4 h-4 text-[#f5f5f7]" />
+                </span>
+              </a>
+            </div>
+          </ScrollReveal>
         </div>
+      </section>
+
+      {/* ── 2. PHOTO + STATS ────────────────────────────────────────────────── */}
+      <section className="relative bg-[#0a0a0a]" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+
+        {/* Full-width photo */}
+        <div className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden">
+          <Image
+            src="/images/photos/me/IMG_9872.jpeg"
+            alt="Diego Hernández — Developer"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, transparent 30%, rgba(10,10,10,0.85) 100%)' }} />
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+            <span className="text-sm font-medium text-emerald-400">{t('bio.openToWork')}</span>
+          </div>
+        </div>
+
+        {/* Stats strip */}
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <div className="max-w-5xl mx-auto px-6 sm:px-10 py-12 grid grid-cols-3 gap-6">
+            {[
+              { value: t('hero.stat1Value'), label: t('hero.stat1Label') },
+              { value: t('hero.stat2Value'), label: t('hero.stat2Label') },
+              { value: t('hero.stat3Value'), label: t('hero.stat3Label') },
+            ].map(({ value, label }, i) => (
+              <ScrollReveal key={label} delay={i * 80}>
+                <div className="text-center">
+                  <p className="text-4xl sm:text-5xl font-bold text-[#f5f5f7]" style={{ letterSpacing: '-0.03em' }}>{value}</p>
+                  <p className="text-sm text-[#6e6e73] mt-2">{label}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+
       </section>
 
       {/* ── 2. BIO BENTO ────────────────────────────────────────────────────── */}
