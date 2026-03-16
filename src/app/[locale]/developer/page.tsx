@@ -138,7 +138,7 @@ export default async function DeveloperPage() {
             },
           ].map(({ sup, value, sub, gradient }, i) => (
             <ScrollReveal key={sup} delay={i * 80}>
-              <div className="flex flex-col gap-2 py-4">
+              <div className="flex flex-col gap-2 py-4 items-center text-center sm:items-start sm:text-left">
                 <p className="text-sm text-[#6e6e73]">{sup}</p>
                 <p
                   className="font-bold"
