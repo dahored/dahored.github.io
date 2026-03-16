@@ -1,0 +1,118 @@
+{
+  "nav": {
+    "about": "Sobre mí",
+    "worlds": "Mundos",
+    "projects": "Proyectos",
+    "blog": "Blog",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "badge": "Senior Front End Developer",
+    "greeting": "Hola, soy",
+    "name": "DAHO",
+    "tagline0": "Developer. 10+ años de experiencia.",
+    "tagline1": "Gamer & Creador de contenido.",
+    "tagline2": "Aventurero & Filántropo.",
+    "ctaPrimary": "Ver proyectos",
+    "ctaSecondary": "Contactar",
+    "scrollDown": "Desplázate hacia abajo"
+  },
+  "about": {
+    "label": "Sobre mí",
+    "heading": "Código, juegos y aventuras.",
+    "name": "Diego Hernández",
+    "subtitle": "Senior Front End Developer",
+    "bio1": "Soy un desarrollador frontend apasionado con más de 10 años de experiencia construyendo aplicaciones web modernas. He trabajado como Senior Front End Developer en empresas como NICE y Playvox, creando experiencias de usuario excepcionales a escala.",
+    "bio2": "Además de programar, soy creador de contenido, gamer, aventurero y filántropo. Creo en el poder de la tecnología para conectar personas y crear impacto positivo.",
+    "skillsTitle": "Tecnologías",
+    "exp1Value": "10+ años",
+    "exp1Label": "Experiencia",
+    "exp2Value": "Senior FE Dev",
+    "exp2Label": "Último cargo",
+    "exp3Value": "Open to work",
+    "exp3Label": "Estado",
+    "linkedinBtn": "Ver perfil en LinkedIn"
+  },
+  "stack": {
+    "label": "Stack",
+    "heading": "Tecnologías",
+    "subheading": "Herramientas y frameworks con los que construyo productos web y móviles.",
+    "group": {
+      "web": "Web",
+      "mobile": "Mobile",
+      "tools": "Herramientas"
+    }
+  },
+  "worlds": {
+    "label": "Mis Mundos",
+    "heading": "Más allá del código",
+    "gaming": {
+      "name": "Daho Gaming",
+      "description": "Gaming, streams en vivo y [[h]] en múltiples plataformas.",
+      "highlight": "contenido de videojuegos"
+    },
+    "coexist": {
+      "name": "Daho Coexist",
+      "description": "Un canal de ayuda, motivación y bienestar para [[h]].",
+      "highlight": "crecer juntos"
+    },
+    "adventures": {
+      "name": "Daho Adventures",
+      "description": "Aventuras, viajes y [[h]] alrededor del mundo.",
+      "highlight": "experiencias únicas"
+    },
+    "philanthropy": {
+      "name": "Diego Hernández",
+      "description": "Iniciativas de [[h]] y filantropía para construir un mundo mejor.",
+      "highlight": "impacto social"
+    }
+  },
+  "projects": {
+    "label": "Proyectos",
+    "heading": "Lo que construyo",
+    "featured": "Proyecto Destacado",
+    "myappcube": {
+      "tagline": "Estudio de juegos móviles indie",
+      "description": "Plataforma web para mi estudio de juegos móviles indie. Dos juegos sociales en el mercado: El Infiltrado y Oculto.",
+      "cta": "Ver sitio"
+    }
+  },
+  "blog": {
+    "label": "Blog",
+    "heading": "Próximamente",
+    "description": "Pronto compartiré artículos sobre desarrollo frontend, gaming, viajes y más.",
+    "subscribe": "Notificarme",
+    "placeholder": "Tu correo electrónico",
+    "categories": {
+      "dev": "Dev",
+      "gaming": "Gaming",
+      "travel": "Viajes",
+      "motivation": "Motivación"
+    }
+  },
+  "contact": {
+    "label": "Contacto",
+    "heading": "Hablemos",
+    "subheading": "¿Tienes un proyecto en mente o quieres colaborar? Escríbeme.",
+    "cta": "Escríbeme",
+    "emailLabel": "Email",
+    "linkedinLabel": "LinkedIn",
+    "githubLabel": "GitHub",
+    "socialsHeading": "Mis marcas"
+  },
+  "footer": {
+    "description": "Desarrollador frontend, gamer, aventurero y filántropo. Construyendo cosas que importan.",
+    "colNav": "Navegar",
+    "colWorlds": "Mis Mundos",
+    "colFollow": "Sígueme",
+    "copyright": "© {year} Daho · dahoofficial.com",
+    "nav": {
+      "about": "Sobre mí",
+      "stack": "Stack",
+      "worlds": "Mundos",
+      "projects": "Proyectos",
+      "blog": "Blog",
+      "contact": "Contacto"
+    }
+  }
+}
