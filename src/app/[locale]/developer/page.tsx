@@ -124,16 +124,33 @@ export default async function DeveloperPage() {
       <section className="bg-black" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid grid-cols-1 sm:grid-cols-3 gap-10">
           {[
-            { sup: t('hero.stat1Label'), value: t('hero.stat1Value'), sub: 'de experiencia en la industria' },
-            { sup: t('hero.stat2Label'), value: t('hero.stat2Value'), sub: 'empresas líderes a nivel global' },
-            { sup: t('hero.stat3Label'), value: t('hero.stat3Value'), sub: 'líneas de código escritas' },
-          ].map(({ sup, value, sub }, i) => (
+            {
+              sup: t('hero.stat1Label'), value: t('hero.stat1Value'), sub: 'de experiencia en la industria',
+              gradient: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%)',
+            },
+            {
+              sup: t('hero.stat2Label'), value: t('hero.stat2Value'), sub: 'empresas líderes a nivel global',
+              gradient: 'linear-gradient(135deg, #34d399 0%, #06b6d4 100%)',
+            },
+            {
+              sup: t('hero.stat3Label'), value: t('hero.stat3Value'), sub: 'líneas de código escritas',
+              gradient: 'linear-gradient(135deg, #fb923c 0%, #f472b6 100%)',
+            },
+          ].map(({ sup, value, sub, gradient }, i) => (
             <ScrollReveal key={sup} delay={i * 80}>
               <div className="flex flex-col gap-2 py-4">
                 <p className="text-sm text-[#6e6e73]">{sup}</p>
                 <p
-                  className="font-bold text-[#f5f5f7]"
-                  style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', letterSpacing: '-0.04em', lineHeight: 1 }}
+                  className="font-bold"
+                  style={{
+                    fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                    letterSpacing: '-0.04em',
+                    lineHeight: 1,
+                    background: gradient,
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
                 >
                   {value}
                 </p>
