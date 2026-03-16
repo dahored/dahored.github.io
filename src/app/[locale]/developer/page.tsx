@@ -118,7 +118,6 @@ export default async function DeveloperPage() {
         alt="Diego Hernández — Developer"
         label="Senior Front End Developer"
         heading="Diego Hernández"
-        badge={t('bio.openToWork')}
       />
 
       {/* ── 3. STATS STRIP ──────────────────────────────────────────────────── */}
