@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import ExperienceScrollSection from '@/components/sections/ExperienceScrollSection';
+import PhotoZoomSection from '@/components/sections/PhotoZoomSection';
 import { site } from '@/config/site';
 
 // ─── Stack data (same as StackSection) ────────────────────────────────────────
@@ -111,44 +112,29 @@ export default async function DeveloperPage() {
         </div>
       </section>
 
-      {/* ── 2. PHOTO + STATS ────────────────────────────────────────────────── */}
-      <section className="relative bg-[#0a0a0a]" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      {/* ── 2. PHOTO ZOOM ───────────────────────────────────────────────────── */}
+      <PhotoZoomSection
+        src="/images/photos/me/IMG_9872.jpeg"
+        alt="Diego Hernández — Developer"
+        badge={t('bio.openToWork')}
+      />
 
-        {/* Full-width photo */}
-        <div className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden">
-          <Image
-            src="/images/photos/me/IMG_9872.jpeg"
-            alt="Diego Hernández — Developer"
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, transparent 30%, rgba(10,10,10,0.85) 100%)' }} />
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-            <span className="text-sm font-medium text-emerald-400">{t('bio.openToWork')}</span>
-          </div>
+      {/* ── 3. STATS STRIP ──────────────────────────────────────────────────── */}
+      <section className="bg-black" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 grid grid-cols-3 gap-6">
+          {[
+            { value: t('hero.stat1Value'), label: t('hero.stat1Label') },
+            { value: t('hero.stat2Value'), label: t('hero.stat2Label') },
+            { value: t('hero.stat3Value'), label: t('hero.stat3Label') },
+          ].map(({ value, label }, i) => (
+            <ScrollReveal key={label} delay={i * 80}>
+              <div className="text-center">
+                <p className="text-4xl sm:text-5xl font-bold text-[#f5f5f7]" style={{ letterSpacing: '-0.03em' }}>{value}</p>
+                <p className="text-sm text-[#6e6e73] mt-2">{label}</p>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
-
-        {/* Stats strip */}
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <div className="max-w-5xl mx-auto px-6 sm:px-10 py-12 grid grid-cols-3 gap-6">
-            {[
-              { value: t('hero.stat1Value'), label: t('hero.stat1Label') },
-              { value: t('hero.stat2Value'), label: t('hero.stat2Label') },
-              { value: t('hero.stat3Value'), label: t('hero.stat3Label') },
-            ].map(({ value, label }, i) => (
-              <ScrollReveal key={label} delay={i * 80}>
-                <div className="text-center">
-                  <p className="text-4xl sm:text-5xl font-bold text-[#f5f5f7]" style={{ letterSpacing: '-0.03em' }}>{value}</p>
-                  <p className="text-sm text-[#6e6e73] mt-2">{label}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-
       </section>
 
       {/* ── 2. BIO BENTO ────────────────────────────────────────────────────── */}
