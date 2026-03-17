@@ -2,8 +2,8 @@
   "nav": {
     "developer": "Developer",
     "gamer": "Gamer",
-    "coexist": "Coexist",
-    "adventures": "Adventures",
+    "coexist": "Coexistir",
+    "adventures": "Aventuras",
     "contact": "Contacto"
   },
   "hero": {
@@ -159,8 +159,8 @@
     "nav": {
       "developer": "Developer",
       "gamer": "Gamer",
-      "coexist": "Coexist",
-      "adventures": "Adventures",
+      "coexist": "Coexistir",
+      "adventures": "Aventuras",
       "contact": "Contacto"
     }
   }
