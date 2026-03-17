@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
-import Script from 'next/script';
 import { getLocale } from 'next-intl/server';
 import './globals.css';
 import { site } from '@/config/site';
-
-const GA_ID = 'G-FDPG9H95RT';
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 
 const geist = Geist({
   variable: '--font-geist-sans',
@@ -56,8 +54,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale} className="dark scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="preload" href="/images/logo/logo_daho.png" as="image" fetchPriority="high" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
       <body className={`${geist.variable} font-sans antialiased bg-zinc-950 text-zinc-50 min-h-screen`}>
         <script
@@ -80,14 +76,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           }}
         />
         {children}
-
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="lazyOnload" />
-        <Script id="ga-init" strategy="lazyOnload">{`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${GA_ID}');
-        `}</Script>
+        <GoogleAnalytics />
       </body>
     </html>
   );
