@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 
 export default async function AdventuresPage() {
   const t = await getTranslations('nav');
+  const tc = await getTranslations('comingSoon');
 
   return (
     <main className="min-h-screen bg-black flex items-center justify-center px-4">
@@ -20,7 +21,7 @@ export default async function AdventuresPage() {
           {t('adventures')}
         </h1>
         <p className="text-xl text-[#6e6e73] max-w-md">
-          Coming soon — travel, adventures and unique experiences around the world.
+          {tc('label')} — {tc('adventures')}
         </p>
       </div>
     </main>

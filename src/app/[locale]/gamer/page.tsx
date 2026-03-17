@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 
 export default async function GamerPage() {
   const t = await getTranslations('nav');
+  const tc = await getTranslations('comingSoon');
 
   return (
     <main className="min-h-screen bg-black flex items-center justify-center px-4">
@@ -20,7 +21,7 @@ export default async function GamerPage() {
           {t('gamer')}
         </h1>
         <p className="text-xl text-[#6e6e73] max-w-md">
-          Coming soon — Daho Gaming, streams and video game content.
+          {tc('label')} — {tc('gamer')}
         </p>
       </div>
     </main>

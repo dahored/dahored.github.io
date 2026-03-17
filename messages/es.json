@@ -121,6 +121,12 @@
       "cta": "Ver sitio"
     }
   },
+  "comingSoon": {
+    "label": "Próximamente",
+    "gamer": "Daho Gaming — streams y contenido de videojuegos en múltiples plataformas.",
+    "adventures": "Viajes, aventuras y experiencias únicas alrededor del mundo.",
+    "coexist": "Un espacio de motivación y ayuda para crecer juntos."
+  },
   "blog": {
     "label": "Blog",
     "heading": "Próximamente",
