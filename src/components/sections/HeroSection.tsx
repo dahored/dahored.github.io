@@ -1,10 +1,7 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { ChevronsDown, ArrowRight } from 'lucide-react';
-import AnimatedTagline from '@/components/ui/AnimatedTagline';
-
-// Hero is above-the-fold — no ScrollReveal (would hide content until JS hydrates)
-// Use CSS keyframe animations instead (render immediately, no JS dependency)
+import HeroTagline from '@/components/ui/HeroTagline';
 
 export default async function HeroSection() {
   const t = await getTranslations('hero');
@@ -54,9 +51,9 @@ export default async function HeroSection() {
           </h1>
         </div>
 
-        {/* Tagline — LCP element, must be immediately visible */}
+        {/* Tagline — static SSR <p> is the LCP element, replaced by animated version after hydration */}
         <div className="animate-fade-slide-up" style={{ animationDelay: '180ms' }}>
-          <AnimatedTagline
+          <HeroTagline
             lines={taglines}
             className="text-2xl sm:text-3xl lg:text-4xl text-[#6e6e73] font-light"
           />
