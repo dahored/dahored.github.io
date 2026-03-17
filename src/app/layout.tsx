@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import Script from 'next/script';
+import { getLocale } from 'next-intl/server';
 import './globals.css';
 import { site } from '@/config/site';
 
@@ -49,10 +50,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale();
   return (
-    <html className="dark scroll-smooth" suppressHydrationWarning>
+    <html lang={locale} className="dark scroll-smooth" suppressHydrationWarning>
       <head>
+        <link rel="preload" href="/images/logo/logo_daho.png" as="image" fetchPriority="high" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
