@@ -70,7 +70,12 @@
     "exp2Label": "Last role",
     "exp3Value": "Open to work",
     "exp3Label": "Status",
-    "linkedinBtn": "View LinkedIn profile"
+    "linkedinBtn": "View LinkedIn profile",
+    "devCardTitle": "10+ years of experience",
+    "openToWorkSub": "Available for new projects and collaborations.",
+    "beyondCode": "Beyond the code",
+    "ctaHeading": "Let's work together?",
+    "ctaSub": "Let's connect on LinkedIn and talk about your project."
   },
   "stack": {
     "label": "Stack",

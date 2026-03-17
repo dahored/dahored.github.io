@@ -49,7 +49,7 @@ export default async function AboutSection() {
               <div className="absolute inset-0" style={{ background: 'linear-gradient(to left, rgba(10,10,10,0.5) 0%, transparent 30%)' }} />
               <div className="absolute bottom-0 left-0 p-6">
                 <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-1">
-                  Senior Front End Developer
+                  {t('subtitle')}
                 </p>
                 <h3 className="text-3xl sm:text-4xl font-bold text-[#f5f5f7]" style={{ letterSpacing: '-0.02em' }}>
                   {t('name')}
@@ -66,8 +66,8 @@ export default async function AboutSection() {
             >
               <Code2 className="w-8 h-8 text-violet-400" />
               <div>
-                <p className="font-bold text-[#f5f5f7] mb-1">{t('exp1Value')} de experiencia</p>
-                <p className="text-sm text-[#6e6e73] leading-relaxed">{t('bio1').slice(0, 80)}…</p>
+                <p className="font-bold text-[#f5f5f7] mb-1">{t('devCardTitle')}</p>
+                <p className="text-sm text-[#6e6e73] leading-relaxed line-clamp-4">{t('bio1')}</p>
               </div>
             </div>
           </ScrollReveal>
@@ -83,8 +83,8 @@ export default async function AboutSection() {
                 <Sparkles className="w-8 h-8 text-emerald-400" />
               </div>
               <div>
-                <p className="font-bold text-[#f5f5f7] mb-1">Open to work</p>
-                <p className="text-sm text-[#6e6e73] leading-relaxed">Disponible para nuevos proyectos y colaboraciones.</p>
+                <p className="font-bold text-[#f5f5f7] mb-1">{t('exp3Value')}</p>
+                <p className="text-sm text-[#6e6e73] leading-relaxed">{t('openToWorkSub')}</p>
               </div>
             </div>
           </ScrollReveal>
@@ -97,8 +97,8 @@ export default async function AboutSection() {
             >
               <Globe className="w-8 h-8 text-orange-400" />
               <div>
-                <p className="font-bold text-[#f5f5f7] mb-1">Más allá del código</p>
-                <p className="text-sm text-[#6e6e73] leading-relaxed">{t('bio2').slice(0, 80)}…</p>
+                <p className="font-bold text-[#f5f5f7] mb-1">{t('beyondCode')}</p>
+                <p className="text-sm text-[#6e6e73] leading-relaxed line-clamp-4">{t('bio2')}</p>
               </div>
             </div>
           </ScrollReveal>
@@ -110,8 +110,8 @@ export default async function AboutSection() {
               style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)' }}
             >
               <div>
-                <p className="font-bold text-lg text-[#f5f5f7]">¿Trabajamos juntos?</p>
-                <p className="text-sm text-[#6e6e73] mt-1">Conectemos en LinkedIn y hablemos de tu proyecto.</p>
+                <p className="font-bold text-lg text-[#f5f5f7]">{t('ctaHeading')}</p>
+                <p className="text-sm text-[#6e6e73] mt-1">{t('ctaSub')}</p>
               </div>
               <a
                 href={site.socials.linkedin}
