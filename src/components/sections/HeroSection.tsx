@@ -2,7 +2,9 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { ChevronsDown, ArrowRight } from 'lucide-react';
 import AnimatedTagline from '@/components/ui/AnimatedTagline';
-import ScrollReveal from '@/components/ui/ScrollReveal';
+
+// Hero is above-the-fold — no ScrollReveal (would hide content until JS hydrates)
+// Use CSS keyframe animations instead (render immediately, no JS dependency)
 
 export default async function HeroSection() {
   const t = await getTranslations('hero');
@@ -27,7 +29,7 @@ export default async function HeroSection() {
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 w-full pt-16 pb-24 flex flex-col items-center text-center gap-7">
 
         {/* Avatar */}
-        <ScrollReveal>
+        <div className="animate-fade-slide-up" style={{ animationDelay: '0ms' }}>
           <div className="relative w-36 h-36 rounded-[40px] p-0.5" style={{ background: 'linear-gradient(135deg, #7c3aed, #c026d3, #f97316)' }}>
             <div className="w-full h-full rounded-[40px] overflow-hidden" style={{ background: '#0a0a0a' }}>
               <Image
@@ -40,30 +42,28 @@ export default async function HeroSection() {
               />
             </div>
           </div>
-        </ScrollReveal>
+        </div>
 
         {/* Name */}
-        <ScrollReveal delay={100}>
-          <div>
-            <p className="text-xl text-[#6e6e73] mb-2">{t('greeting')}</p>
-            <h1 className="text-8xl sm:text-9xl md:text-[10rem] font-bold leading-none" style={{ letterSpacing: '-0.02em' }}>
-              <span className="bg-linear-to-r from-violet-400 via-fuchsia-300 to-orange-400 bg-clip-text text-transparent">
-                {t('name')}
-              </span>
-            </h1>
-          </div>
-        </ScrollReveal>
+        <div className="animate-fade-slide-up" style={{ animationDelay: '100ms' }}>
+          <p className="text-xl text-[#6e6e73] mb-2">{t('greeting')}</p>
+          <h1 className="text-8xl sm:text-9xl md:text-[10rem] font-bold leading-none" style={{ letterSpacing: '-0.02em' }}>
+            <span className="bg-linear-to-r from-violet-400 via-fuchsia-300 to-orange-400 bg-clip-text text-transparent">
+              {t('name')}
+            </span>
+          </h1>
+        </div>
 
-        {/* Tagline */}
-        <ScrollReveal delay={150}>
+        {/* Tagline — LCP element, must be immediately visible */}
+        <div className="animate-fade-slide-up" style={{ animationDelay: '180ms' }}>
           <AnimatedTagline
             lines={taglines}
             className="text-2xl sm:text-3xl lg:text-4xl text-[#6e6e73] font-light"
           />
-        </ScrollReveal>
+        </div>
 
         {/* Buttons */}
-        <ScrollReveal delay={250}>
+        <div className="animate-fade-slide-up" style={{ animationDelay: '280ms' }}>
           <div className="flex flex-row flex-wrap gap-3 justify-center mt-8">
             <a
               href="#about"
@@ -76,7 +76,7 @@ export default async function HeroSection() {
               </span>
             </a>
           </div>
-        </ScrollReveal>
+        </div>
 
       </div>
 
