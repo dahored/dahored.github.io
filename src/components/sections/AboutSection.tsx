@@ -67,7 +67,7 @@ export default async function AboutSection() {
               <Code2 className="w-8 h-8 text-violet-400" />
               <div>
                 <p className="font-bold text-[#f5f5f7] mb-1">{t('devCardTitle')}</p>
-                <p className="text-sm text-[#6e6e73] leading-relaxed line-clamp-4">{t('bio1')}</p>
+                <p className="text-sm text-[#6e6e73] leading-relaxed">{t('devCardSub')}</p>
               </div>
             </div>
           </ScrollReveal>
