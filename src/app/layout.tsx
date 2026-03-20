@@ -4,6 +4,7 @@ import { getLocale } from 'next-intl/server';
 import './globals.css';
 import { site } from '@/config/site';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const geist = Geist({
   variable: '--font-geist-sans',
@@ -77,6 +78,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
         {children}
         <GoogleAnalytics />
+        <SpeedInsights />
       </body>
     </html>
   );
