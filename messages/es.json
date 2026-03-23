@@ -122,6 +122,16 @@
       "cta": "Ver sitio"
     }
   },
+  "coexist": {
+    "pageTitle": "Coexist by Daho",
+    "pageDescription": "Coexistimos respetando la diversidad. Inspiración, conciencia y conexión humana. Frases, reflexiones y contenido de Daho.",
+    "description": "Coexistimos respetando la diversidad. Inspiración, conciencia y conexión humana.",
+    "feedLabel": "Contenido",
+    "feedHeading": "Frases & reflexiones",
+    "follow": "Seguir",
+    "close": "Cerrar",
+    "allTopics": "Todos"
+  },
   "comingSoon": {
     "label": "Próximamente",
     "gamer": "Daho Gaming — streams y contenido de videojuegos en múltiples plataformas.",

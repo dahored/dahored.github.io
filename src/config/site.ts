@@ -39,12 +39,21 @@ export const site = {
   sameAs: [
     'https://github.com/dahored',
     'https://www.linkedin.com/in/dahored/',
+    // Gaming
     'https://www.youtube.com/@dahogaming',
     'https://www.twitch.tv/dahored',
+    'https://kick.com/dahored',
     'https://www.instagram.com/daho.gaming/',
     'https://x.com/daho_gaming',
-    'https://kick.com/dahored',
     'https://www.tiktok.com/@dahored',
     'https://www.facebook.com/dahored',
+    // Coexist
+    'https://www.youtube.com/@daho.coexist',
+    'https://www.instagram.com/daho.coexist/',
+    'https://www.facebook.com/dahocoexist/',
+    'https://x.com/daho_coexist',
+    'https://www.tiktok.com/@daho.coexist',
+    // Adventures
+    'https://www.instagram.com/daho.adventures/',
   ],
 };

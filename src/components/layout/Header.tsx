@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
@@ -9,6 +10,9 @@ import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
 
 export default function Header() {
   const t = useTranslations('nav');
+  const rawPathname = usePathname();
+  // Strip locale prefix e.g. /en/coexist → /coexist
+  const pathname = rawPathname.replace(/^\/[a-z]{2}(\/|$)/, '/');
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
@@ -45,15 +49,23 @@ export default function Header() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="px-4 py-2 text-sm font-medium text-[#f5f5f7]/70 hover:text-[#f5f5f7] transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map((link) => {
+            const isActive = link.href !== '/#contact' && pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  isActive ? 'text-[#f5f5f7]' : 'text-[#f5f5f7]/50 hover:text-[#f5f5f7]'
+                }`}
+              >
+                {link.label}
+                {isActive && (
+                  <span className="block h-0.5 mt-0.5 rounded-full bg-violet-500" />
+                )}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Right side */}
@@ -72,16 +84,21 @@ export default function Header() {
       {/* Mobile nav */}
       {mobileOpen && (
         <nav className="md:hidden bg-black/90 backdrop-blur-xl px-4 py-4 flex flex-col gap-1">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="px-4 py-3 text-base font-medium text-[#f5f5f7]/70 hover:text-[#f5f5f7] transition-colors"
-              onClick={() => setMobileOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map((link) => {
+            const isActive = link.href !== '/#contact' && pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`px-4 py-3 text-base font-medium transition-colors ${
+                  isActive ? 'text-[#f5f5f7]' : 'text-[#f5f5f7]/50 hover:text-[#f5f5f7]'
+                }`}
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
       )}
     </header>
