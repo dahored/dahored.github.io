@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import Image from 'next/image';
 import {
   ArrowRight, Linkedin, Mail,
   Monitor, Smartphone, Wrench, GitBranch, Languages,
@@ -66,13 +67,19 @@ export default async function DeveloperPage() {
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center gap-8">
           <ScrollReveal delay={60}>
-            <p className="text-xs font-semibold tracking-widest uppercase text-violet-400">{t('hero.label')}</p>
+            <Image
+              src="/images/logo/logo_daho_developer.png"
+              alt="Daho Developer"
+              width={280}
+              height={80}
+              className="h-14 w-auto"
+            />
           </ScrollReveal>
 
           <ScrollReveal delay={120}>
             <h1
               className="font-bold text-[#f5f5f7]"
-              style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', letterSpacing: '-0.04em', lineHeight: 1.05 }}
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.04em', lineHeight: 1.05 }}
             >
               {t('hero.heading')}
             </h1>
