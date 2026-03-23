@@ -1,18 +1,9 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { getTranslations, getLocale } from 'next-intl/server';
-import { Youtube, Instagram, Facebook, Twitter } from 'lucide-react';
 import CoexistFeed from '@/components/coexist/CoexistFeed';
 import postsData from '@/data/coexist-posts.json';
 import { site } from '@/config/site';
-
-const SOCIALS = [
-  { href: 'https://www.tiktok.com/@daho.coexist', label: 'TikTok', Icon: null },
-  { href: 'https://www.youtube.com/@daho.coexist', label: 'YouTube', Icon: Youtube },
-  { href: 'https://www.instagram.com/daho.coexist/', label: 'Instagram', Icon: Instagram },
-  { href: 'https://www.facebook.com/daho.coexist/', label: 'Facebook', Icon: Facebook },
-  { href: 'https://x.com/daho_coexist', label: 'X / Twitter', Icon: Twitter },
-];
 
 function TikTokIcon({ className }: { className?: string }) {
   return (
@@ -71,13 +62,7 @@ export default async function CoexistPage() {
             url,
             image: `${site.siteUrl}/images/logo/logo_daho_coexist_bg.png`,
             isPartOf: { '@type': 'Person', name: site.fullName, url: site.siteUrl },
-            sameAs: [
-              'https://www.youtube.com/@daho.coexist',
-              'https://www.instagram.com/daho.coexist/',
-              'https://www.facebook.com/daho.coexist/',
-              'https://x.com/daho_coexist',
-              'https://www.tiktok.com/@daho.coexist',
-            ],
+            sameAs: site.worldSocials.coexist.map(s => s.href),
           }),
         }}
       />
@@ -105,7 +90,7 @@ export default async function CoexistPage() {
           </p>
 
           <div className="flex flex-wrap gap-3 justify-center">
-            {SOCIALS.map(({ href, label, Icon }) => (
+            {site.worldSocials.coexist.map(({ href, label }) => (
               <a
                 key={label}
                 href={href}
@@ -114,11 +99,7 @@ export default async function CoexistPage() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white transition-opacity hover:opacity-80"
                 style={{ background: 'rgba(200,52,74,0.15)', border: '1px solid rgba(200,52,74,0.3)' }}
               >
-                {label === 'TikTok' ? (
-                  <TikTokIcon className="w-4 h-4" />
-                ) : Icon ? (
-                  <Icon className="w-4 h-4" />
-                ) : null}
+                {label === 'TikTok' && <TikTokIcon className="w-4 h-4" />}
                 {label}
               </a>
             ))}

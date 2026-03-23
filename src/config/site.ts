@@ -36,24 +36,41 @@ export const site = {
     youtube: 'https://www.youtube.com/@dahogaming',
     twitch: 'https://www.twitch.tv/dahored',
   },
-  sameAs: [
-    'https://github.com/dahored',
-    'https://www.linkedin.com/in/dahored/',
-    // Gaming
-    'https://www.youtube.com/@dahogaming',
-    'https://www.twitch.tv/dahored',
-    'https://kick.com/dahored',
-    'https://www.instagram.com/daho.gaming/',
-    'https://x.com/daho_gaming',
-    'https://www.tiktok.com/@dahored',
-    'https://www.facebook.com/dahored',
-    // Coexist
-    'https://www.youtube.com/@daho.coexist',
-    'https://www.instagram.com/daho.coexist/',
-    'https://www.facebook.com/daho.coexist/',
-    'https://x.com/daho_coexist',
-    'https://www.tiktok.com/@daho.coexist',
-    // Adventures
-    'https://www.instagram.com/daho.adventures/',
-  ],
+
+  // ── Per-world social links (single source of truth) ───────────────────────
+  worldSocials: {
+    gaming: [
+      { label: 'YouTube',   href: 'https://www.youtube.com/@dahogaming',          iconName: 'Youtube',   color: '#ff0000' },
+      { label: 'Twitch',    href: 'https://www.twitch.tv/dahored',                iconName: 'Twitch',    color: '#9146ff' },
+      { label: 'TikTok',    href: 'https://www.tiktok.com/@dahored',              iconName: 'Music2',    color: '#69c9d0' },
+      { label: 'Instagram', href: 'https://www.instagram.com/daho.gaming/',       iconName: 'Instagram', color: '#e1306c' },
+      { label: 'Twitter/X', href: 'https://x.com/daho_gaming',                   iconName: 'Twitter',   color: '#e7e7e7' },
+      { label: 'Kick',      href: 'https://kick.com/dahored',                     iconName: 'Zap',       color: '#53fc18' },
+      { label: 'Facebook',  href: 'https://www.facebook.com/dahored',             iconName: 'Facebook',  color: '#1877f2' },
+    ],
+    coexist: [
+      { label: 'TikTok',    href: 'https://www.tiktok.com/@daho.coexist',         iconName: 'Music2',    color: '#69c9d0' },
+      { label: 'YouTube',   href: 'https://www.youtube.com/@daho.coexist',        iconName: 'Youtube',   color: '#ff0000' },
+      { label: 'Instagram', href: 'https://www.instagram.com/daho.coexist/',      iconName: 'Instagram', color: '#e1306c' },
+      { label: 'Facebook',  href: 'https://www.facebook.com/daho.coexist/',       iconName: 'Facebook',  color: '#1877f2' },
+      { label: 'X / Twitter', href: 'https://x.com/daho_coexist',                iconName: 'Twitter',   color: '#e7e7e7' },
+    ],
+    adventures: [
+      { label: 'Instagram', href: 'https://www.instagram.com/daho.adventures/',   iconName: 'Instagram', color: '#e1306c' },
+    ],
+    personal: [
+      { label: 'Instagram', href: 'https://www.instagram.com/diego.hernandezorrego/', iconName: 'Instagram', color: '#e1306c' },
+      { label: 'Facebook',  href: 'https://www.facebook.com/diego.hernandezorrego/',  iconName: 'Facebook',  color: '#1877f2' },
+    ],
+  },
+
+  get sameAs() {
+    return [
+      this.socials.github,
+      this.socials.linkedin,
+      ...this.worldSocials.gaming.map(s => s.href),
+      ...this.worldSocials.coexist.map(s => s.href),
+      ...this.worldSocials.adventures.map(s => s.href),
+    ];
+  },
 };

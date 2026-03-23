@@ -1,75 +1,13 @@
 import { getTranslations } from 'next-intl/server';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import WorldCard from '@/components/ui/WorldCard';
+import { site } from '@/config/site';
 
-interface SocialLink {
-  label: string;
-  href: string;
-  iconName: string;
-  color: string;
-}
-
-interface WorldCardData {
-  iconName: string;
-  accent: string;
-  nameKey: string;
-  descKey: string;
-  highlightKey: string;
-  socials: SocialLink[];
-}
-
-const worlds: WorldCardData[] = [
-  {
-    iconName: 'Gamepad2',
-    accent: '#f97316',
-    nameKey: 'gaming.name',
-    descKey: 'gaming.description',
-    highlightKey: 'gaming.highlight',
-    socials: [
-      { label: 'YouTube',    href: 'https://www.youtube.com/@dahogaming',        iconName: 'Youtube',   color: '#ff0000' },
-      { label: 'Twitch',     href: 'https://www.twitch.tv/dahored',              iconName: 'Twitch',    color: '#9146ff' },
-      { label: 'TikTok',     href: 'https://www.tiktok.com/@dahored',            iconName: 'Music2',    color: '#69c9d0' },
-      { label: 'Instagram',  href: 'https://www.instagram.com/daho.gaming/',     iconName: 'Instagram', color: '#e1306c' },
-      { label: 'Twitter/X',  href: 'https://x.com/daho_gaming',                  iconName: 'Twitter',   color: '#e7e7e7' },
-      { label: 'Kick',       href: 'https://kick.com/dahored',                   iconName: 'Zap',       color: '#53fc18' },
-      { label: 'Facebook',   href: 'https://www.facebook.com/dahored',           iconName: 'Facebook',  color: '#1877f2' },
-    ],
-  },
-  {
-    iconName: 'Leaf',
-    accent: '#10b981',
-    nameKey: 'coexist.name',
-    descKey: 'coexist.description',
-    highlightKey: 'coexist.highlight',
-    socials: [
-      { label: 'YouTube',   href: 'https://www.youtube.com/@dahocoexist',        iconName: 'Youtube',   color: '#ff0000' },
-      { label: 'Instagram', href: 'https://www.instagram.com/daho.coexist/',     iconName: 'Instagram', color: '#e1306c' },
-      { label: 'TikTok',   href: 'https://www.tiktok.com/@daho.coexist',         iconName: 'Music2',    color: '#69c9d0' },
-      { label: 'Twitter/X', href: 'https://x.com/daho_coexist',                  iconName: 'Twitter',   color: '#e7e7e7' },
-      { label: 'Facebook',  href: 'https://www.facebook.com/daho.coexist/',       iconName: 'Facebook',  color: '#1877f2' },
-    ],
-  },
-  {
-    iconName: 'Mountain',
-    accent: '#0ea5e9',
-    nameKey: 'adventures.name',
-    descKey: 'adventures.description',
-    highlightKey: 'adventures.highlight',
-    socials: [
-      { label: 'Instagram', href: 'https://www.instagram.com/daho.adventures/', iconName: 'Instagram', color: '#e1306c' },
-    ],
-  },
-  {
-    iconName: 'Heart',
-    accent: '#e11d48',
-    nameKey: 'personal.name',
-    descKey: 'personal.description',
-    highlightKey: 'personal.highlight',
-    socials: [
-      { label: 'Instagram', href: 'https://www.instagram.com/diego.hernandezorrego/', iconName: 'Instagram', color: '#e1306c' },
-      { label: 'Facebook',  href: 'https://www.facebook.com/diego.hernandezorrego/',  iconName: 'Facebook',  color: '#1877f2' },
-    ],
-  },
+const worlds = [
+  { iconName: 'Gamepad2', accent: '#f97316', nameKey: 'gaming.name',    descKey: 'gaming.description',    highlightKey: 'gaming.highlight',    socials: site.worldSocials.gaming    },
+  { iconName: 'Leaf',     accent: '#10b981', nameKey: 'coexist.name',   descKey: 'coexist.description',   highlightKey: 'coexist.highlight',   socials: site.worldSocials.coexist   },
+  { iconName: 'Mountain', accent: '#0ea5e9', nameKey: 'adventures.name',descKey: 'adventures.description',highlightKey: 'adventures.highlight',socials: site.worldSocials.adventures},
+  { iconName: 'Heart',    accent: '#e11d48', nameKey: 'personal.name',  descKey: 'personal.description',  highlightKey: 'personal.highlight',  socials: site.worldSocials.personal  },
 ];
 
 export default async function WorldsSection() {
