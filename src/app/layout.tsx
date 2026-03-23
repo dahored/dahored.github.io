@@ -43,10 +43,6 @@ export const metadata: Metadata = {
     images: ['/images/og/og-cover.png'],
   },
   robots: { index: true, follow: true },
-  icons: {
-    icon: '/images/logo/favicon.png',
-    apple: '/images/logo/favicon.png',
-  },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
