@@ -10,7 +10,7 @@ const SOCIALS = [
   { href: 'https://www.tiktok.com/@daho.coexist', label: 'TikTok', Icon: null },
   { href: 'https://www.youtube.com/@daho.coexist', label: 'YouTube', Icon: Youtube },
   { href: 'https://www.instagram.com/daho.coexist/', label: 'Instagram', Icon: Instagram },
-  { href: 'https://www.facebook.com/dahocoexist/', label: 'Facebook', Icon: Facebook },
+  { href: 'https://www.facebook.com/daho.coexist/', label: 'Facebook', Icon: Facebook },
   { href: 'https://x.com/daho_coexist', label: 'X / Twitter', Icon: Twitter },
 ];
 
@@ -74,7 +74,7 @@ export default async function CoexistPage() {
             sameAs: [
               'https://www.youtube.com/@daho.coexist',
               'https://www.instagram.com/daho.coexist/',
-              'https://www.facebook.com/dahocoexist/',
+              'https://www.facebook.com/daho.coexist/',
               'https://x.com/daho_coexist',
               'https://www.tiktok.com/@daho.coexist',
             ],

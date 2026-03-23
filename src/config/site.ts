@@ -50,7 +50,7 @@ export const site = {
     // Coexist
     'https://www.youtube.com/@daho.coexist',
     'https://www.instagram.com/daho.coexist/',
-    'https://www.facebook.com/dahocoexist/',
+    'https://www.facebook.com/daho.coexist/',
     'https://x.com/daho_coexist',
     'https://www.tiktok.com/@daho.coexist',
     // Adventures

@@ -46,7 +46,7 @@ const worlds: WorldCardData[] = [
       { label: 'Instagram', href: 'https://www.instagram.com/daho.coexist/',     iconName: 'Instagram', color: '#e1306c' },
       { label: 'TikTok',   href: 'https://www.tiktok.com/@daho.coexist',         iconName: 'Music2',    color: '#69c9d0' },
       { label: 'Twitter/X', href: 'https://x.com/daho_coexist',                  iconName: 'Twitter',   color: '#e7e7e7' },
-      { label: 'Facebook',  href: 'https://www.facebook.com/dahocoexist/',       iconName: 'Facebook',  color: '#1877f2' },
+      { label: 'Facebook',  href: 'https://www.facebook.com/daho.coexist/',       iconName: 'Facebook',  color: '#1877f2' },
     ],
   },
   {
