@@ -85,10 +85,10 @@ export default function Header() {
                     isActive ? 'text-[#f5f5f7]' : 'text-[#f5f5f7]/50 hover:text-[#f5f5f7]'
                   }`}
                 >
-                  <span>
+                  <span className="relative">
                     {link.label}
                     {isActive && (
-                      <span className="block h-0.5 mt-0.5 rounded-full" style={{ background: link.color }} />
+                      <span className="absolute -bottom-5.5 left-0 right-0 h-0.5 rounded-full" style={{ background: link.color }} />
                     )}
                   </span>
                   {hasSubmenu && (
