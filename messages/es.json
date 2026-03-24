@@ -138,6 +138,9 @@
     "gridHeading": "Todos los posts",
     "noPostsAvailable": "No hay posts disponibles.",
     "pageLikes": "Me gusta",
+    "viewAllPosts": "Ver todos los posts",
+    "allPostsTitle": "Todos los posts · Adventures",
+    "backTo": "Volver a Adventures",
     "followLabel": "Sígueme",
     "followHeading": "Encuéntrame en"
   },
@@ -164,6 +167,9 @@
     "noPostsAvailable": "No hay posts disponibles.",
     "pageLikes": "Me gusta",
     "subscribers": "Suscriptores",
+    "viewAllPosts": "Ver todos los posts",
+    "allPostsTitle": "Todos los posts · Coexist",
+    "backTo": "Volver a Coexist",
     "followLabel": "Sígueme",
     "followHeading": "Encuéntrame en"
   },

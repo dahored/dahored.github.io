@@ -6,6 +6,7 @@ import { site } from '@/config/site';
 import SocialCard from '@/components/ui/SocialCard';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import AdventuresCarousel from '@/components/adventures/AdventuresCarousel';
+import { Link } from '@/i18n/navigation';
 import { Heart, Instagram, Facebook, ArrowRight, ArrowDown, ChevronsDown, Play } from 'lucide-react';
 import socialStats from '@/data/social-stats.json';
 
@@ -280,7 +281,7 @@ export default async function CoexistPage() {
             </h2>
           </ScrollReveal>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {postsList.map(post => {
+            {postsList.slice(0, 8).map(post => {
               const img = getPostImage(post);
               return (
                 <ScrollReveal key={post.id}>
@@ -315,6 +316,20 @@ export default async function CoexistPage() {
               );
             })}
           </div>
+          <ScrollReveal>
+            <div className="flex justify-center mt-10">
+              <Link
+                href="/coexist/posts"
+                className="inline-flex items-center gap-3 pl-5 pr-2 py-2 rounded-full transition-opacity hover:opacity-80"
+                style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)' }}
+              >
+                <span className="text-sm font-semibold text-[#f5f5f7]">{t('viewAllPosts')}</span>
+                <span className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: '#C8344A' }}>
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </span>
+              </Link>
+            </div>
+          </ScrollReveal>
         </section>
       )}
 
