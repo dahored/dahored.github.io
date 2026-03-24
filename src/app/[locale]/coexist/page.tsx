@@ -45,16 +45,25 @@ export default async function CoexistPage() {
   const locale = await getLocale();
   const url = `${site.siteUrl}/${locale}/coexist`;
   const igId = process.env.IG_COEXIST_ID!;
+  const igPersonalId = process.env.IG_PERSONAL_ID!;
 
-  const [posts, account, fbPage] = await Promise.allSettled([
+  const [posts, personalPosts, account, fbPage] = await Promise.allSettled([
     fetchInstagramPosts(igId, 24),
+    fetchInstagramPosts(igPersonalId, 24),
     fetchInstagramAccount(igId),
     fetchFacebookPage('daho.coexist'),
   ]);
 
-  const postsList = posts.status === 'fulfilled' ? posts.value : [];
-  const accountData = account.status === 'fulfilled' ? account.value : null;
-  const fbData = fbPage.status === 'fulfilled' ? fbPage.value : null;
+  const coexistList  = posts.status         === 'fulfilled' ? posts.value         : [];
+  const personalList = personalPosts.status === 'fulfilled' ? personalPosts.value : [];
+  const accountData  = account.status       === 'fulfilled' ? account.value       : null;
+  const fbData       = fbPage.status        === 'fulfilled' ? fbPage.value        : null;
+
+  // Merge & sort by timestamp newest first
+  const seen = new Set<string>();
+  const postsList = [...coexistList, ...personalList]
+    .filter(p => { if (seen.has(p.id)) return false; seen.add(p.id); return true; })
+    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
 
   const featuredPost = postsList.find(p => p.media_type === 'IMAGE') ?? postsList[0];
   const featuredImg = featuredPost ? getPostImage(featuredPost) : null;
