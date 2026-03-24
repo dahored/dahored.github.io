@@ -1,0 +1,59 @@
+name: Update Social Stats
+
+on:
+  # Every Monday at 10:00 UTC
+  schedule:
+    - cron: '0 10 * * 1'
+
+  # Manual trigger — leave blank to auto-fetch, or enter values to override
+  workflow_dispatch:
+    inputs:
+      coexist_tiktok_followers:
+        description: 'TikTok @daho.coexist followers (leave blank to scrape)'
+        required: false
+        type: string
+      gaming_tiktok_followers:
+        description: 'TikTok @dahored followers (leave blank to scrape)'
+        required: false
+        type: string
+      coexist_yt_subscribers:
+        description: 'YouTube Coexist subscribers (leave blank to fetch from API)'
+        required: false
+        type: string
+      gaming_yt_subscribers:
+        description: 'YouTube Gaming subscribers (leave blank to fetch from API)'
+        required: false
+        type: string
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run update script
+        run: node .github/scripts/update-social-stats.js
+        env:
+          YOUTUBE_API_KEY:          ${{ secrets.YOUTUBE_API_KEY }}
+          COEXIST_TIKTOK_FOLLOWERS: ${{ inputs.coexist_tiktok_followers }}
+          GAMING_TIKTOK_FOLLOWERS:  ${{ inputs.gaming_tiktok_followers }}
+          COEXIST_YT_SUBSCRIBERS:   ${{ inputs.coexist_yt_subscribers }}
+          GAMING_YT_SUBSCRIBERS:    ${{ inputs.gaming_yt_subscribers }}
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/social-stats.json
+          git diff --staged --quiet && echo "No changes to commit" && exit 0
+          git commit -m "chore: update social stats (TikTok + YouTube)"
+          git push

@@ -2,11 +2,13 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import {
-  ArrowRight, Linkedin, Mail,
+  ArrowRight, Linkedin, Mail, ChevronsDown,
   Monitor, Smartphone, Wrench, GitBranch, Languages,
   Flame, ShieldCheck, Megaphone,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import SocialButton from '@/components/ui/SocialButton';
+import SocialCard from '@/components/ui/SocialCard';
 import ExperienceScrollSection from '@/components/sections/ExperienceScrollSection';
 import PhotoZoomSection from '@/components/sections/PhotoZoomSection';
 import ProjectsCarousel from '@/components/ui/ProjectsCarousel';
@@ -72,7 +74,7 @@ export default async function DeveloperPage() {
               alt="Daho Developer"
               width={280}
               height={80}
-              className="h-14 w-auto"
+              className="h-16 w-auto"
             />
           </ScrollReveal>
 
@@ -119,6 +121,11 @@ export default async function DeveloperPage() {
             </div>
           </ScrollReveal>
         </div>
+
+        {/* Scroll indicator */}
+        <a href="#bio" className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[#6e6e73] hover:text-[#f5f5f7] transition-colors">
+          <ChevronsDown className="w-9 h-9 animate-bounce-slow" />
+        </a>
       </section>
 
       {/* ── 2. PHOTO ZOOM ───────────────────────────────────────────────────── */}
@@ -300,7 +307,30 @@ export default async function DeveloperPage() {
         </div>
       </section>
 
-      {/* ── 6. CTA ──────────────────────────────────────────────────────────── */}
+      {/* ── 6. SOCIALS ──────────────────────────────────────────────────────── */}
+      <section className="relative bg-black section-padding" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-16">
+            <ScrollReveal>
+              <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-3">Sígueme</p>
+            </ScrollReveal>
+            <ScrollReveal delay={80}>
+              <h2 className="text-4xl sm:text-5xl font-bold text-[#f5f5f7]" style={{ letterSpacing: '-0.02em' }}>
+                Encuéntrame en
+              </h2>
+            </ScrollReveal>
+          </div>
+          <ScrollReveal delay={140}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+              {site.worldSocials.developer.map(({ href, label, iconName, color, description, highlight }) => (
+                <SocialCard key={label} href={href} label={label} iconName={iconName} color={color} description={description} highlight={highlight} />
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── 7. CTA ──────────────────────────────────────────────────────────── */}
       <section className="relative bg-[#0a0a0a] section-padding overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-64 rounded-full bg-violet-900/10 blur-3xl pointer-events-none" aria-hidden="true" />
 

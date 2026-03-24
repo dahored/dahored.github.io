@@ -1,0 +1,18 @@
+{
+  "tiktok": {
+    "coexist": { "followers": 0, "handle": "@daho.coexist" },
+    "gaming": { "followers": 0, "handle": "@dahored" }
+  },
+  "youtube": {
+    "coexist": {
+      "subscribers": 0,
+      "channelId": "UCt8BxNAxnQLKBVp_RWDaiuA",
+      "handle": "@CoexistbyDaho"
+    },
+    "gaming": {
+      "subscribers": 0,
+      "channelId": "UC4OPFQDumPVNn7fxPZCvuFw",
+      "handle": "@dahogaming"
+    }
+  }
+}

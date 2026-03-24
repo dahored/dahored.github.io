@@ -23,6 +23,9 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [
       { protocol: 'https', hostname: 'res.cloudinary.com' },
+      { protocol: 'https', hostname: 'scontent.cdninstagram.com' },
+      { protocol: 'https', hostname: '*.cdninstagram.com' },
+      { protocol: 'https', hostname: '*.fbcdn.net' },
     ],
   },
   async headers() {
