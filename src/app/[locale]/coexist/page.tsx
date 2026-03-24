@@ -216,6 +216,20 @@ export default async function CoexistPage() {
               </div>
             </div>
 
+            {/* Tagline */}
+            <div
+              className="col-span-2 lg:col-span-4 relative rounded-3xl p-7 flex flex-col justify-between overflow-hidden"
+              style={{ background: 'linear-gradient(135deg, rgba(200,52,74,0.1) 0%, rgba(200,52,74,0.05) 100%)', border: '1px solid rgba(200,52,74,0.15)' }}
+            >
+              <Heart className="w-10 h-10 text-rose-400" />
+              <div>
+                <p className="text-xl font-semibold text-white leading-snug">
+                  {t('tagline')}
+                </p>
+                <p className="text-sm text-zinc-500 mt-2">@daho.coexist</p>
+              </div>
+            </div>
+
           </div>
         </ScrollReveal>
       </section>
