@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { getTranslations, getLocale } from 'next-intl/server';
-import { fetchInstagramPosts, fetchInstagramAccount, getPostImage } from '@/lib/instagram';
+import { fetchInstagramPosts, fetchInstagramAccount, fetchFacebookPage, getPostImage } from '@/lib/instagram';
 import { site } from '@/config/site';
 import SocialCard from '@/components/ui/SocialCard';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import AdventuresCarousel from '@/components/adventures/AdventuresCarousel';
 import { Link } from '@/i18n/navigation';
-import { Instagram, ArrowRight, ArrowDown, ChevronsDown, Play, HandHeart } from 'lucide-react';
+import { Instagram, Facebook, ArrowRight, ArrowDown, ChevronsDown, Play, HandHeart } from 'lucide-react';
+import socialStats from '@/data/social-stats.json';
 
 const BRAND   = '#d97706'; // gold
 const GLOW    = '#6d28d9'; // purple
@@ -47,13 +48,15 @@ export default async function GivePage() {
   const url = `${site.siteUrl}/${locale}/give`;
   const igId = process.env.IG_PERSONAL_ID!;
 
-  const [posts, account] = await Promise.allSettled([
+  const [posts, account, fbPage] = await Promise.allSettled([
     fetchInstagramPosts(igId, 24),
     fetchInstagramAccount(igId),
+    fetchFacebookPage('daho.give'),
   ]);
 
-  const postsList  = posts.status   === 'fulfilled' ? posts.value   : [];
+  const postsList   = posts.status   === 'fulfilled' ? posts.value   : [];
   const accountData = account.status === 'fulfilled' ? account.value : null;
+  const fbData      = fbPage.status  === 'fulfilled' ? fbPage.value  : null;
 
   const featuredPost = postsList.find(p => p.media_type === 'IMAGE') ?? postsList[0];
   const featuredImg  = featuredPost ? getPostImage(featuredPost) : null;
@@ -82,7 +85,7 @@ export default async function GivePage() {
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full opacity-25 blur-3xl"
-            style={{ background: `radial-gradient(circle, ${GLOW} 0%, #4c1d95 50%, transparent 70%)` }}
+            style={{ background: `radial-gradient(circle, ${BRAND} 0%, #92400e 50%, transparent 70%)` }}
           />
           <div className="absolute inset-0 opacity-[0.04] dot-grid" />
         </div>
@@ -90,11 +93,14 @@ export default async function GivePage() {
         <div className="relative z-10 flex flex-col items-center gap-6 text-center max-w-3xl mx-auto">
           <h1 className="sr-only">Daho Give</h1>
           <ScrollReveal>
-            {/* Logo placeholder — replace with Image once logo PNG is ready */}
-            <div className="flex flex-col items-center gap-1 select-none">
-              <span className="text-6xl font-black text-white tracking-tight">DAHO<HandHeart className="inline w-12 h-12 ml-2 -mt-2" style={{ color: BRAND }} /></span>
-              <span className="text-3xl font-black tracking-widest uppercase" style={{ color: BRAND }}>GIVE</span>
-            </div>
+            <Image
+              src="/images/logo/logo_daho_give.png"
+              alt="Daho Give"
+              width={320}
+              height={100}
+              className="h-16 w-auto"
+              priority
+            />
           </ScrollReveal>
 
           <ScrollReveal delay={80}>
@@ -165,7 +171,37 @@ export default async function GivePage() {
               </div>
             </div>
 
-            {/* Tagline */}
+            {/* Facebook page likes */}
+            <div
+              className="relative rounded-3xl p-7 flex flex-col justify-between overflow-hidden"
+              style={{ background: 'linear-gradient(135deg, rgba(24,119,242,0.15) 0%, rgba(24,119,242,0.05) 100%)', border: '1px solid rgba(24,119,242,0.25)' }}
+            >
+              <Facebook className="w-10 h-10 text-blue-500" />
+              <div>
+                <p className="text-4xl font-bold text-white">
+                  {fbData ? formatNumber(fbData.fan_count) : '—'}
+                </p>
+                <p className="text-base text-zinc-400 mt-1">{t('pageLikes')}</p>
+              </div>
+            </div>
+
+            {/* YouTube subscribers (static) */}
+            <div
+              className="relative rounded-3xl p-7 flex flex-col justify-between overflow-hidden"
+              style={{ background: 'linear-gradient(135deg, rgba(255,0,0,0.15) 0%, rgba(180,0,0,0.08) 100%)', border: '1px solid rgba(255,0,0,0.25)' }}
+            >
+              <svg className="w-10 h-10" style={{ color: '#FF0000' }} viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+              <div>
+                <p className="text-4xl font-bold text-white">
+                  {formatNumber(socialStats.youtube.give.subscribers)}
+                </p>
+                <p className="text-base text-zinc-400 mt-1">{t('subscribers')}</p>
+              </div>
+            </div>
+
+            {/* Tagline icon card */}
             <div
               className="relative rounded-3xl p-7 flex flex-col justify-between overflow-hidden"
               style={{ background: `linear-gradient(135deg, rgba(109,40,217,0.15) 0%, rgba(109,40,217,0.05) 100%)`, border: `1px solid rgba(109,40,217,0.25)` }}

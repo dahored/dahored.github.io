@@ -24,6 +24,10 @@ on:
         description: 'YouTube Gaming subscribers (leave blank to fetch from API)'
         required: false
         type: string
+      give_yt_subscribers:
+        description: 'YouTube Give subscribers (leave blank to fetch from API)'
+        required: false
+        type: string
 
 jobs:
   update-stats:
@@ -48,6 +52,7 @@ jobs:
           GAMING_TIKTOK_FOLLOWERS:  ${{ inputs.gaming_tiktok_followers }}
           COEXIST_YT_SUBSCRIBERS:   ${{ inputs.coexist_yt_subscribers }}
           GAMING_YT_SUBSCRIBERS:    ${{ inputs.gaming_yt_subscribers }}
+          GIVE_YT_SUBSCRIBERS:      ${{ inputs.give_yt_subscribers }}
 
       - name: Commit & push if changed
         run: |

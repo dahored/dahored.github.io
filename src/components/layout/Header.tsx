@@ -29,15 +29,17 @@ export default function Header() {
   }, []);
 
   const links: NavLink[] = [
-    { href: '/give',       label: t('give'),        color: '#d97706', submenu: [
-      { href: '/give/posts', label: t('submenuPosts') },
-    ]},
     { href: '/developer',  label: t('developer'),  color: '#6366f1', submenu: [
       { href: '/developer/posts', label: t('submenuPosts') },
     ]},
-    { href: '/gamer',      label: t('gamer'),       color: '#4ade80' },
+    { href: '/gamer',      label: t('gamer'),       color: '#dc2626', submenu: [
+      { href: '/gamer/posts', label: t('submenuPosts') },
+    ]},
     { href: '/coexist',    label: t('coexist'),     color: '#C8344A', submenu: [
       { href: '/coexist/posts', label: t('submenuPosts') },
+    ]},
+    { href: '/give',       label: t('give'),        color: '#d97706', submenu: [
+      { href: '/give/posts', label: t('submenuPosts') },
     ]},
     { href: '/adventures', label: t('adventures'),  color: '#4ade80', submenu: [
       { href: '/adventures/posts', label: t('submenuPosts') },

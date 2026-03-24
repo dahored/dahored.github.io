@@ -1,10 +1,20 @@
 'use client';
 
+import Image from 'next/image';
 import { Youtube, Instagram, Facebook, Twitter, Twitch, Zap, Linkedin, Github, ArrowUpRight } from 'lucide-react';
+
+function KickIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
+  return (
+    <span className={className} style={style}>
+      <Image src="/images/icons/kick_icon.png" alt="Kick" width={44} height={44} className="w-full h-full object-contain" unoptimized />
+    </span>
+  );
+}
 
 const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
   Youtube, Instagram, Facebook, Twitter, Twitch, Zap, Linkedin, Github,
   Music2: TikTokIcon,
+  Kick: KickIcon,
 };
 
 function TikTokIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {

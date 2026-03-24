@@ -46,6 +46,7 @@ async function scrapeTikTokFollowers(username) {
 const YOUTUBE_CHANNELS = [
   { key: 'coexist', channelId: 'UCt8BxNAxnQLKBVp_RWDaiuA', envKey: 'COEXIST_YT_SUBSCRIBERS' },
   { key: 'gaming',  channelId: 'UC4OPFQDumPVNn7fxPZCvuFw', envKey: 'GAMING_YT_SUBSCRIBERS'  },
+  { key: 'give',    channelId: 'UCstiiqknsxrlEo39P7UPdoQ',  envKey: 'GIVE_YT_SUBSCRIBERS'     },
 ];
 
 async function fetchYouTubeSubscribers(channelId) {
@@ -112,6 +113,8 @@ async function main() {
     if (manualValue && manualValue.trim() !== '') {
       newSubscribers = parseInt(manualValue, 10);
       console.log(`[${key}] Manual override: ${newSubscribers}`);
+    } else if (!channelId) {
+      console.log(`[${key}] No channelId set — skipped`);
     } else {
       console.log(`[${key}] Fetching channel ${channelId}...`);
       newSubscribers = await fetchYouTubeSubscribers(channelId);

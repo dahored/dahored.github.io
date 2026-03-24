@@ -45,7 +45,7 @@ export const site = {
       { label: 'TikTok',    href: 'https://www.tiktok.com/@dahored',              iconName: 'Music2',    color: '#69c9d0', description: 'Clips cortos de los mejores momentos.' },
       { label: 'Instagram', href: 'https://www.instagram.com/daho.gaming/',       iconName: 'Instagram', color: '#e1306c', description: 'Fotos y highlights del mundo gaming.' },
       { label: 'Twitter/X', href: 'https://x.com/daho_gaming',                   iconName: 'Twitter',   color: '#e7e7e7', description: 'Opiniones y novedades del mundo gamer.' },
-      { label: 'Kick',      href: 'https://kick.com/dahored',                     iconName: 'Zap',       color: '#53fc18', description: 'Streams alternativos en vivo.' },
+      { label: 'Kick',      href: 'https://kick.com/dahored',                     iconName: 'Kick',      color: '#53fc18', description: 'Streams alternativos en vivo.' },
       { label: 'Facebook',  href: 'https://www.facebook.com/dahored',             iconName: 'Facebook',  color: '#1877f2', description: 'Comunidad y eventos gaming.' },
     ],
     coexist: [
