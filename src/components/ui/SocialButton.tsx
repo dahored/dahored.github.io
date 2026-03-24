@@ -1,6 +1,6 @@
 import { Youtube, Instagram, Facebook, Twitter, Twitch, Zap, Linkedin, Github } from 'lucide-react';
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
   Youtube: Youtube,
   Instagram: Instagram,
   Facebook: Facebook,
