@@ -183,7 +183,7 @@ export default async function AdventuresPage() {
 
             {/* Quote / tagline */}
             <div
-              className="col-span-2 lg:col-span-4 relative rounded-3xl p-8 overflow-hidden flex flex-col sm:flex-row sm:items-center gap-6"
+              className="col-span-2 relative rounded-3xl p-8 overflow-hidden flex flex-col sm:flex-row sm:items-center gap-6"
               style={{ background: 'linear-gradient(135deg, rgba(14,165,233,0.12) 0%, rgba(14,165,233,0.04) 100%)', border: '1px solid rgba(14,165,233,0.2)' }}
             >
               <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full opacity-20 blur-3xl pointer-events-none" style={{ background: '#0ea5e9' }} />
