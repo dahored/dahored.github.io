@@ -183,15 +183,18 @@ export default async function AdventuresPage() {
 
             {/* Quote / tagline */}
             <div
-              className="col-span-2 relative rounded-3xl p-7 flex flex-col justify-between overflow-hidden"
-              style={{ background: 'linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(56,189,248,0.05) 100%)', border: '1px solid rgba(14,165,233,0.15)' }}
+              className="col-span-2 lg:col-span-4 relative rounded-3xl p-8 overflow-hidden flex flex-col sm:flex-row sm:items-center gap-6"
+              style={{ background: 'linear-gradient(135deg, rgba(14,165,233,0.12) 0%, rgba(14,165,233,0.04) 100%)', border: '1px solid rgba(14,165,233,0.2)' }}
             >
-              <MapPin className="w-10 h-10 text-sky-400" />
-              <div>
-                <p className="text-2xl font-semibold text-white leading-snug">
-                  {t('tagline')}
-                </p>
-                <p className="text-sm text-zinc-500 mt-2">@daho.adventures</p>
+              <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full opacity-20 blur-3xl pointer-events-none" style={{ background: '#0ea5e9' }} />
+              <div className="flex items-center gap-5 relative z-10">
+                <MapPin className="w-14 h-14 text-sky-400 shrink-0" />
+                <div>
+                  <p className="text-2xl sm:text-3xl font-bold text-white leading-tight">
+                    {t('tagline')}
+                  </p>
+                  <p className="text-base text-zinc-400 mt-1">{t('taglineDesc')}</p>
+                </div>
               </div>
             </div>
 
