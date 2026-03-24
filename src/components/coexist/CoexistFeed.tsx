@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { X } from 'lucide-react';
+import { Link } from '@/i18n/navigation';
 
 interface Post {
   id: number;
+  slug: string;
   topic: string;
   default_phrase?: string;
   meta_content: string;
@@ -22,9 +23,8 @@ interface Props {
   closeLabel: string;
 }
 
-export default function CoexistFeed({ posts, allTopics, allLabel, closeLabel }: Props) {
+export default function CoexistFeed({ posts, allTopics, allLabel }: Props) {
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
-  const [selected, setSelected] = useState<Post | null>(null);
 
   const filtered = activeTopic ? posts.filter(p => p.topic === activeTopic) : posts;
 
@@ -62,10 +62,10 @@ export default function CoexistFeed({ posts, allTopics, allLabel, closeLabel }: 
       {/* Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         {filtered.map(post => (
-          <button
+          <Link
             key={post.id}
-            onClick={() => setSelected(post)}
-            className="group relative aspect-square rounded-2xl overflow-hidden focus:outline-none cursor-pointer"
+            href={`/coexist/${post.slug}`}
+            className="group relative aspect-square rounded-2xl overflow-hidden"
           >
             {post.media_path_remote ? (
               <Image
@@ -89,65 +89,9 @@ export default function CoexistFeed({ posts, allTopics, allLabel, closeLabel }: 
                 {post.default_phrase}
               </p>
             </div>
-          </button>
+          </Link>
         ))}
       </div>
-
-      {/* Modal */}
-      {selected && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)' }}
-          onClick={() => setSelected(null)}
-        >
-          <div
-            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl"
-            style={{ background: '#111', border: '1px solid rgba(255,255,255,0.1)' }}
-            onClick={e => e.stopPropagation()}
-          >
-            {/* Image */}
-            {selected.media_path_remote && (
-              <div className="relative w-full aspect-square">
-                <Image
-                  src={selected.media_path_remote}
-                  alt={selected.default_phrase || selected.topic}
-                  fill
-                  className="object-cover rounded-t-3xl"
-                  sizes="672px"
-                />
-              </div>
-            )}
-
-            {/* Content */}
-            <div className="p-6 flex flex-col gap-4">
-              <span className="text-xs font-semibold tracking-widest uppercase text-[#C8344A]">
-                {selected.topic}
-              </span>
-              <p className="text-lg font-semibold text-white leading-snug">
-                {selected.default_phrase}
-              </p>
-              <p className="text-sm text-zinc-400 leading-relaxed">
-                {selected.meta_content}
-              </p>
-              {(selected.hashtags_instagram?.length ?? 0) > 0 && (
-                <p className="text-xs text-zinc-600 leading-relaxed">
-                  {selected.hashtags_instagram?.join(' ')}
-                </p>
-              )}
-            </div>
-
-            {/* Close */}
-            <button
-              onClick={() => setSelected(null)}
-              className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center transition-colors"
-              style={{ background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)' }}
-              aria-label={closeLabel}
-            >
-              <X className="w-4 h-4 text-white" />
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 }

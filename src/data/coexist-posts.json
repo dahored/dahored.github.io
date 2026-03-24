@@ -5,105 +5,120 @@
       "topic": "Amor sin condiciones",
       "meta_content": "Amar es caminar junto al otro incluso cuando sus pasos no siguen el mismo ritmo. Es aceptar que la luz y la sombra bailan juntas y que en esa danza descubrimos el amor verdadero. Cuando soltamos la necesidad de controlar, abrazamos lo que realmente une. El amor crece cuando entendemos que no es necesario compartir todas las ideas, solo el corazón dispuesto.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746430246/uploads/image_file_1.png",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "amor-sin-condiciones"
     },
     {
       "id": 2,
       "topic": "Fuerza en la vulnerabilidad",
       "meta_content": "Mostrar nuestras heridas es un acto de fuerza silenciosa. La vulnerabilidad nos conecta, nos humaniza y nos enseña que solo quienes se atreven a mostrarse son realmente fuertes. En cada grieta nace una luz que permite sanar no solo a uno mismo, sino a quien observa. Al atrevernos a ser reales, permitimos que otros encuentren el coraje para hacer lo mismo.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746430822/uploads/image_file_2.png",
-      "theme": "light"
+      "theme": "light",
+      "slug": "fuerza-en-la-vulnerabilidad"
     },
     {
       "id": 3,
       "topic": "El valor del silencio compartido",
       "meta_content": "En el silencio compartido, dos almas se escuchan sin hablar. Es allí donde la soledad pierde su nombre y la presencia del otro se convierte en un lenguaje sagrado. Porque no siempre hace falta hablar para estar, a veces basta con no irse. El verdadero encuentro ocurre en los espacios donde las palabras no logran entrar.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746453622/uploads/image_file_3.png",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "el-valor-del-silencio-compartido"
     },
     {
       "id": 4,
       "topic": "Caos como maestro",
       "meta_content": "El caos no llega a destruirnos.  \n\nLlega para sacudirnos, romper lo que ya no nos sirve y abrir espacio a lo inesperado. Cuando todo cae, lo que queda en pie nos muestra quiénes somos.  \n\nEl caos nos enseña que no somos lo que poseemos, ni lo que controlamos, sino lo que somos capaces de reconstruir con lo que queda. En el temblor, aprendemos a bailar.  \n\nY en ese baile con lo incierto, descubrimos una versión de nosotros mismos que jamás hubiéramos conocido en la calma.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746462815/uploads/image_file_4.png",
-      "theme": "light"
+      "theme": "light",
+      "slug": "caos-como-maestro"
     },
     {
       "id": 5,
       "topic": "Unidad en la diferencia",
       "meta_content": "Caminar juntos no significa pensar igual.  \n\nLa unidad nace cuando dejamos de temer al desacuerdo y aprendemos a escuchar sin imponer. Es entender que la diversidad de pensamientos enriquece, no amenaza.  \n\nCuando el diálogo sustituye al juicio, cuando el puente reemplaza al muro, descubrimos que no necesitamos renunciar a lo que somos para abrazar al otro.  \n\nPorque la verdadera unión no se construye borrando diferencias, sino celebrándolas como parte de un mismo paisaje humano.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746464764/uploads/image_file_5.png",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "unidad-en-la-diferencia"
     },
     {
       "id": 6,
       "topic": "Redención y perdón",
       "meta_content": "Perdonar no es olvidar.  \n\nEs soltar la cadena que nos mantiene atados al pasado, no para borrar la herida, sino para dejar de sangrar.  \n\nCuando entendemos que el perdón no es un regalo para quien nos hirió, sino una liberación para nosotros mismos, el alma respira.  \n\nPerdonar es un acto de valentía silenciosa, porque quien se atreve a soltar el rencor elige abrir espacio para la paz.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746468079/uploads/image_file_6.png",
-      "theme": "light"
+      "theme": "light",
+      "slug": "redencion-y-perdon"
     },
     {
       "id": 7,
       "topic": "Rendirse al misterio de la vida",
       "meta_content": "Hay preguntas que no tienen respuesta.  \n\nRendirse al misterio de la vida no es rendirse a la derrota, es abrazar lo que no entendemos y encontrar paz en el no saber.  \n\nCuando soltamos la necesidad de controlar cada giro del destino, descubrimos que el verdadero descanso está en confiar. No todo tiene que resolverse para que podamos vivir plenos.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746493507/uploads/image_file_7.png",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "rendirse-al-misterio-de-la-vida"
     },
     {
       "id": 8,
       "topic": "Sabiduría en la humildad",
       "meta_content": "La humildad no es pensar menos de ti.  \n\nEs entender que el mundo no gira a tu alrededor y que cada persona que encuentras sabe algo que tú no sabes.  \n\nLa humildad nos abre las puertas del aprendizaje. Nos enseña que no somos menos, pero tampoco más. Y desde ese lugar, podemos caminar juntos, no por encima ni por debajo, sino al lado.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746497598/uploads/image_file_8.png",
-      "theme": "light"
+      "theme": "light",
+      "slug": "sabiduria-en-la-humildad"
     },
     {
       "id": 9,
       "topic": "Luz en medio de la oscuridad",
       "meta_content": "La oscuridad no niega la existencia de la luz.  \n\nA veces, es en la noche más larga donde aprendemos a encender nuestra propia llama.  \n\nLa esperanza no es ingenuidad: es rebelión contra el vacío. Cada pequeño acto de bondad, cada palabra amable, cada abrazo ofrecido en silencio es una chispa que perfora la sombra.  \n\nLa luz no siempre grita. A veces, apenas susurra, pero basta para guiarnos.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746497509/uploads/image_file_9.png",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "luz-en-medio-de-la-oscuridad"
     },
     {
       "id": 10,
       "topic": "Destino y elección",
       "meta_content": "El destino escribe las líneas, pero nosotros elegimos el tono.  \n\nCada paso consciente es un acto de rebelión amorosa contra lo inevitable.  \n\nAceptar lo que no controlamos no significa rendirse, sino encontrar espacios de libertad en medio de lo escrito.  \n\nCuando abrazamos el misterio, descubrimos que lo importante no es cambiar el guion, sino cómo lo interpretamos.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746543636/uploads/image_file_10.png",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "destino-y-eleccion"
     },
     {
       "id": 11,
       "topic": "Caos como maestro",
       "meta_content": "En el caos, nacemos de nuevo. No para ser quienes éramos, sino para ser lo que nunca imaginamos.  \n\nEl desorden revela el coraje oculto.  \n\nCada fragmento roto es una oportunidad de reconstrucción, no una sentencia. Cuando aceptamos la tormenta, entendemos que lo importante no es lo que cae, sino lo que aprendemos a levantar.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746563243/uploads/image_file_11.png",
-      "theme": "light"
+      "theme": "light",
+      "slug": "caos-como-maestro-2"
     },
     {
       "id": 12,
       "topic": "Rendirse al misterio de la vida",
       "meta_content": "El misterio no pide ser resuelto, pide ser honrado.  \n\nDejar de luchar contra lo desconocido es un acto de sabiduría.  \n\nCuando aceptamos no tener todas las respuestas, abrimos espacio para asombrarnos. La vida florece en las grietas de lo incomprendido.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746563360/uploads/image_file_12.png",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "rendirse-al-misterio-de-la-vida-2"
     },
     {
       "id": 13,
       "topic": "Sabiduría en la humildad",
       "meta_content": "El sabio sabe que no lo sabe todo.  \n\nLa humildad no nos reduce: nos expande, nos hace permeables a lo nuevo.  \n\nAl reconocer nuestras limitaciones, creamos espacio para el aprendizaje. La verdadera grandeza no está en imponer, sino en inspirar desde la sencillez.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746630785/uploads/image_file_13.png",
-      "theme": "light"
+      "theme": "light",
+      "slug": "sabiduria-en-la-humildad-2"
     },
     {
       "id": 14,
       "topic": "Luz en medio de la oscuridad",
       "meta_content": "La oscuridad es solo el lienzo donde la luz pinta su historia.  \n\nCada gesto de bondad es un destello que rompe la noche.  \n\nLa esperanza no es ceguera: es coraje. La luz más poderosa suele ser la que se enciende cuando menos fuerzas tenemos.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746639224/uploads/image_file_14.png",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "luz-en-medio-de-la-oscuridad-2"
     },
     {
       "id": 15,
       "topic": "Amor sin condiciones",
       "meta_content": "Amar sin condiciones es abrir la puerta incluso cuando no entendemos lo que llega.  \n\nEs elegir abrazar antes que explicar.  \n\nEl amor crece cuando soltamos la necesidad de tener razón y aprendemos a simplemente estar presentes para el otro.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746651604/uploads/image_file_15.png",
-      "theme": "light"
+      "theme": "light",
+      "slug": "amor-sin-condiciones-2"
     },
     {
       "id": 16,
@@ -112,7 +127,8 @@
       "meta_content": "Amar sin condiciones es una de las experiencias más valientes y transformadoras que podemos tener. No se trata de cerrar los ojos ante las sombras del otro, sino de verlas con claridad y decidir permanecer allí, sosteniendo una luz que ilumina incluso los rincones más oscuros.\n\nEl amor incondicional no es signo de debilidad, sino de una fuerza interna que desafía el miedo y el juicio. Es atreverse a desarmarse frente al otro, quitándose las corazas que nos protegen, y exponerse en la vulnerabilidad más pura. Es un acto de confianza, entrega y valentía que nos invita a ver la belleza en lo imperfecto.\n\nEs fácil amar bajo condiciones, cuando todo parece perfecto. Pero el verdadero desafío y la verdadera grandeza residen en ese amor que no pone límites ni restricciones, que no exige cambios ni perfección. Nos reta a abrir el corazón plenamente, a aceptar y acoger cada faceta del ser amado, comprendiendo que sus sombras son solo parte del todo, igual que las nuestras.\n\nAl elegir amar de esta manera, nos permitimos crecer juntos. Construimos relaciones basadas en la autenticidad y el respeto, donde cada uno puede ser exactamente quién es, sin miedo al rechazo. Es entender que amar no es poseer, sino acompañar, apoyar y celebrar la luz y la sombra de cada uno en su camino.\n\nAsí que, la próxima vez que te enfrentes a la oportunidad de amar sin condiciones, recuérdalo: no es debilidad, es un acto de coraje. Es elegir decir \"sí\" no solo a la persona que está delante de ti, sino también a la persona que eres capaz de ser cuando amas con todo tu ser. Porque al final del día, amar es desarmarse y, aún así, seguir de pie, juntos, iluminando el camino hacia adelante.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746910840/uploads/image_file_16.png",
       "post_type": "prompt_to_media",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "amar-sin-condiciones-no-es-ser-debil-es-tener-el-coraje-de-v"
     },
     {
       "id": 17,
@@ -121,7 +137,8 @@
       "meta_content": "✨ Descubre un lugar donde la vulnerabilidad se transforma en fortaleza. Aquí no solo compartimos historias; revelamos la belleza de nuestras grietas y aprendemos a brillar con más intensidad. 🌟 Si estás listo para un viaje de autodescubrimiento y autenticidad, este es el espacio perfecto para ti. Únete a nuestra creciente comunidad y sé parte de algo más grande. Nos encantaría que formes parte de esta aventura. 🚀 ¿Te atreves a caminar con nosotros este inspirador camino? ¡Síguenos y descubre tu verdadero poder! 🌈",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746904941/uploads/image_file_17.png",
       "post_type": "metadata_to_media",
-      "theme": "light"
+      "theme": "light",
+      "slug": "cuando-muestro-mis-grietas-no-me-rompo-me-revelo-es-en-lo-qu"
     },
     {
       "id": 18,
@@ -130,7 +147,8 @@
       "meta_content": "Hay momentos en la vida en que el silencio cobra más significado que cualquier palabra. Son esos instantes mágicos e indescriptibles en los que dos almas se encuentran y, sin necesidad de emitir sonido alguno, logran comunicarse en un nivel más profundo. Este fenómeno ocurre cuando las miradas se cruzan y los corazones laten al unísono, cuando las sonrisas tímidas lo dicen todo y cuando el aire se llena de una paz inexplicable.\n\nEs en esos momentos de silencio compartido que nos damos cuenta de que hemos encontrado un refugio verdadero. Un espacio seguro donde podemos ser auténticos, sin máscaras, y sentirnos aceptados tal cual somos. En este lugar, las preocupaciones y los miedos se desvanecen, dejando espacio para una conexión genuina y pura.\n\nEl silencio, en este contexto, no es un vacío incómodo, sino un puente que nos une. Nos invita a explorar la esencia del otro y nos permite ver más allá de lo superficial. Nos enseña que el amor no siempre necesita ser ruidoso para ser profundo, y que a veces, en la tranquilidad de un momento compartido, podemos descubrir la inmensidad de un sentimiento.\n\nEncontrar a alguien con quien compartir este tipo de silencio es una bendición. Es reconocer que hemos hallado un alma afín, un compañero de vida que comprende nuestras pausas y respeta nuestro ser. Porque al final, el verdadero refugio está en aquellas personas que, en silencio, nos permiten ser nosotros mismos. 💫\n\nValoremos estos momentos únicos y guardémoslos como tesoros, porque en un mundo lleno de ruido, encontrar una conexión que hable en silencio es un regalo que no tiene precio.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746914244/uploads/image_file_18.png",
       "post_type": "prompt_to_media",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "hay-momentos-en-que-el-silencio-entre-dos-almas-grita-verdad"
     },
     {
       "id": 19,
@@ -139,7 +157,8 @@
       "meta_content": "🌟 ¡Descubre tu verdadero potencial! 🌟 El caos en tu vida no es el fin, sino el comienzo de un nuevo tú. Cada grieta es una oportunidad de crecimiento y revelación. No te resistas al cambio, ¡abraza la transformación! 🚀 Únete a nosotros y despierta a tu mejor versión. ¡Síguenos para más inspiración!",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746973801/uploads/image_file_19.png",
       "post_type": "metadata_to_media",
-      "theme": "light"
+      "theme": "light",
+      "slug": "el-caos-no-llega-a-destruirte-llega-a-revelarte-cada-grieta"
     },
     {
       "id": 20,
@@ -148,7 +167,8 @@
       "meta_content": "🌟 ¡Descubre un mundo donde las diferencias nos unen! 🌟 Únete a nuestra comunidad y sé parte de una magia única, donde cada perspectiva enriquece y cada voz importa. No te pierdas la oportunidad de conectar con lo diverso. ¡Síguenos y sé parte del cambio! 🎉👏",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746985511/uploads/image_file_20.png",
       "post_type": "metadata_to_media_with_background",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "no-somos-espejos-ni-iguales-y-ahi-esta-la-magia-la-verdadera"
     },
     {
       "id": 21,
@@ -157,7 +177,8 @@
       "meta_content": "✨ ¡Descubre un nuevo horizonte con nosotros! 🌟 Si buscas inspiración, motivación y momentos que transformen tu día, has llegado al lugar correcto. Únete a nuestra comunidad y sé parte del cambio. ¡Dale al botón de seguir y empieza esta aventura juntos! 🚀👥",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1746995598/uploads/image_file_21.png",
       "post_type": "metadata_to_media",
-      "theme": "light"
+      "theme": "light",
+      "slug": "el-perdon-no-es-olvido-ni-indulgencia-es-rebelion-es-mirarte"
     },
     {
       "id": 22,
@@ -166,7 +187,8 @@
       "meta_content": "En un mundo que a menudo demanda respuestas claras y certezas, hay un rincón especial para lo inexplicable, para lo que simplemente es. No todo en la vida está diseñado para ser descifrado; algunos misterios existen solo para ser disfrutados desde el corazón. Amar no siempre requiere comprensión total; a veces, la verdadera belleza yace en la aceptación de lo desconocido. Cuando nos rendimos al misterio, permitimos que la vida nos sorprenda y nos enseñe en formas que nunca imaginamos. Las respuestas no siempre llegan en palabras, a veces se viven, se sienten, se experimentan. Así que, en lugar de buscar entenderlo todo, abraza la libertad de no saber, y descubre la magia en el simple acto de ser.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1747060426/uploads/image_file_22.png",
       "post_type": "prompt_to_media",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "no-todo-tiene-que-ser-entendido-para-ser-amado-hay-belleza-e"
     },
     {
       "id": 23,
@@ -175,7 +197,8 @@
       "meta_content": "🌟 ¡Descubre un mundo de sabiduría y aprendizaje! ✨ Aquí celebramos el poder de la humildad y el crecimiento personal. Únete a nuestra comunidad y atrévete a aprender algo nuevo cada día. 🚀 ¡Síguenos y transforma tu visión del conocimiento! 📖❤️",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1747071001/uploads/image_file_23.png",
       "post_type": "metadata_to_media",
-      "theme": "light"
+      "theme": "light",
+      "slug": "el-sabio-no-es-el-que-lo-sabe-todo-sino-el-que-se-atreve-a-a"
     },
     {
       "id": 24,
@@ -184,7 +207,8 @@
       "meta_content": "La oscuridad no es el enemigo; es la madre de toda chispa. En tiempos de penumbra, cuando el mundo parece cubrirse de sombras, es fácil querer huir. Pero, ¿y si te dijera que justo allí, donde la luz parece haberse extinguido, es donde puedes descubrir lo más auténtico de ti? La vida nos lleva a través de túneles oscuros, y aunque el instinto nos grita que corramos, es el caminar lento lo que nos revela los destellos escondidos en nuestro interior. Cada paso en la negrura te desafía y, al mismo tiempo, te muestra de qué está hecha tu verdadera luz. No temas la oscuridad; abrázala, porque solo al atravesarla comprenderás que la chispa que buscas siempre ha estado en ti, esperando el momento exacto para brillar con toda su fuerza.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1747084021/uploads/image_file_24.png",
       "post_type": "prompt_to_media",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "la-oscuridad-no-es-el-enemigo-es-la-madre-de-toda-chispa-no"
     },
     {
       "id": 25,
@@ -193,7 +217,8 @@
       "meta_content": "🌟 ¡Descubre tu camino y vive la danza del destino! Cada paso que das te acerca más a lo que está escrito para ti. Únete a nuestra comunidad de soñadores y viajeros. ✨ Aquí compartimos inspiración, aventuras y momentos que transforman. Síguenos y forma parte de esta travesía única. ¡Tu viaje comienza ahora! 🚀💕",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1747113168/uploads/image_file_25.png",
       "post_type": "metadata_to_media",
-      "theme": "light"
+      "theme": "light",
+      "slug": "tal-vez-el-destino-ya-esta-escrito-pero-cada-paso-que-das-lo"
     },
     {
       "id": 26,
@@ -202,7 +227,8 @@
       "meta_content": "🌟 ¡Únete a nuestra comunidad! Aquí celebramos la belleza de la imperfección y el amor en todas sus formas. 💖 Descubre frases inspiradoras, reflexiones profundas y momentos que te harán sentir comprendido. 💬 ¡No te lo pierdas! Síguenos y acompáñanos en este viaje de autodescubrimiento y conexión. 🌈✨ ¡Te estamos esperando!",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1747113434/uploads/image_file_26.png",
       "post_type": "metadata_to_media_with_background",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "amar-es-decir-te-veo-completo-con-tus-demonios-y-tus-angeles"
     },
     {
       "id": 27,
@@ -211,7 +237,8 @@
       "meta_content": "🌟 ¡Únete a nuestra comunidad! Aquí celebramos la fuerza de ser vulnerables y el poder de la conexión. 💖 Tus lágrimas son un puente hacia la empatía y el entendimiento. Siguenos y descubre un espacio donde cada emoción cuenta. Juntos, aprendemos, crecemos y encontramos consuelo. 🌈 No temas ser tú mismo, ¡te esperamos con los brazos abiertos! 🤗✨",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1747116613/uploads/image_file_27.png",
       "post_type": "metadata_to_media",
-      "theme": "light"
+      "theme": "light",
+      "slug": "no-es-debil-quien-llora-es-fuerte-quien-no-teme-romperse-fre"
     },
     {
       "id": 28,
@@ -220,7 +247,8 @@
       "meta_content": "En un mundo que grita para existir, sentarse en silencio junto a otro es un acto revolucionario. Ahí, entre respiraciones, se confiesan las verdades más puras. Es en la quietud donde las emociones fluyen sin prisas, donde el bullicio de la vida cotidiana se desvanece y se da paso a la conexión auténtica. En ese espacio compartido, los miedos se disipan y las inseguridades se desnudan, revelando la esencia de lo que realmente somos.\n\nLa simplicidad del silencio puede desarmar resentimientos y crear puentes donde antes había muros. Es un momento sagrado que nos permite escuchar no solo las palabras, sino también los pensamientos no expresados. En la intimidad de ese silencio, descubrimos que, a veces, las respuestas más profundas no necesitan ser dichas; simplemente están ahí, esperando ser abrazadas. Este acto de estar presente, de ser testigos de la existencia del otro, transforma nuestro ser y el mundo que nos rodea.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1747114123/uploads/image_file_28.png",
       "post_type": "prompt_to_media",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "en-un-mundo-que-grita-para-existir-sentarse-en-silencio-junt"
     },
     {
       "id": 29,
@@ -229,7 +257,8 @@
       "meta_content": "No maldigas al caos, pregúntale qué quiere mostrarte. Solo quien atraviesa la tormenta sin cerrar los ojos, descubre qué estrellas estaban ocultas detrás de las nubes. Cada desafío trae consigo una lección, un trozo de luz que ilumina nuestro camino. La vida se revela a quienes tienen la valentía de ver más allá del desorden, de abrazar lo incierto y encontrar belleza en el proceso. Así, el caos se convierte en un maestro y las estrellas en guías.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1747265448/uploads/image_file_29.png",
       "post_type": "metadata_to_media",
-      "theme": "light"
+      "theme": "light",
+      "slug": "no-maldigas-al-caos-preguntale-que-quiere-mostrarte-solo-qui"
     },
     {
       "id": 30,
@@ -238,7 +267,8 @@
       "meta_content": "La armonía no nace de hacer que todos piensen igual, sino de aprender a danzar con las diferencias, sin intentar borrarlas, porque ahí vive la belleza del nosotros. En un mundo donde la diversidad nos enriquece, cada voz, cada experiencia, cada perspectiva aporta un matiz único al lienzo de la vida. La verdadera conexión surge al aceptar que no todos somos iguales, y que esa diversidad es lo que nos hace fuertes. \n\nEn vez de buscar el consenso a toda costa, aprendamos a escuchar y valorar lo que cada quien trae a la mesa. Cultivar empatía es esencial; permite que nuestras diferencias se conviertan en puentes en lugar de muros. Cuando celebramos nuestras singularidades, creamos una sinfonía de ideas y emociones, donde la verdadera belleza resplandece en el arte compartido de vivir juntos. Así, cada paso que damos se convierte en un baile colectivo, lleno de color y significado.",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1747116826/uploads/image_file_30.png",
       "post_type": "prompt_to_media",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "la-armonia-no-nace-de-hacer-que-todos-piensen-igual-sino-de"
     },
     {
       "id": 31,
@@ -247,7 +277,8 @@
       "meta_content": "✨ ¡Descubre un espacio donde cada historia cuenta! 🌟 Aquí celebramos el poder de nuestras cicatrices, transformando el pasado en fuerza y esperanza. 💪❤️ Únete a nosotros para inspirarte, compartir y crecer juntos. Cada día es una nueva página en nuestra historia, y queremos que seas parte de la nuestra. ¡Síguenos y acompáñanos en este viaje de redención y autodescubrimiento! 🌈✍️",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1747345314/uploads/image_file_31.png",
       "post_type": "metadata_to_media",
-      "theme": "light"
+      "theme": "light",
+      "slug": "redimirte-no-es-borrar-tu-historia-es-abrazarla-cada-cicatri"
     },
     {
       "id": 32,
@@ -256,7 +287,8 @@
       "meta_content": "🌟 ¡Bienvenidos a un espacio donde la vida se respira y se siente! Aquí compartimos momentos, reflexiones y preguntas que realmente importan. Si estás listo para dejar de buscar respuestas y empezar a disfrutar del viaje, síguenos en esta aventura. Respira profundo, conecta con tu esencia y transforma tus días. 🌱✨ ¡Te esperamos con los brazos abiertos! No te pierdas la magia que cada instante puede ofrecer. 💖 #ViveElMomento",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1747345433/uploads/image_file_32.png",
       "post_type": "metadata_to_media_with_background",
-      "theme": "dark"
+      "theme": "dark",
+      "slug": "la-vida-no-pide-ser-entendida-pide-ser-respirada-si-dejas-de"
     },
     {
       "id": 33,
@@ -265,7 +297,8 @@
       "meta_content": "🌟 ¡Bienvenidos a nuestra comunidad! Aquí celebramos la sabiduría de saber cuándo luchar y cuándo soltar la espada. Únete a nosotros para descubrir reflexiones, inspiración y crecimiento personal. 🌱 Te invitamos a seguirnos y ser parte de un viaje donde aprenderás que a veces la verdadera victoria está en elegir las batallas adecuadas. ¡Tu mejor versión te espera! 💪✨",
       "media_path_remote": "https://res.cloudinary.com/donbyy2ev/image/upload/v1747348010/uploads/image_file_33.png",
       "post_type": "metadata_to_media",
-      "theme": "light"
+      "theme": "light",
+      "slug": "humilde-es-el-guerrero-que-sabe-cuando-soltar-la-espada-no-p"
     },
     {
       "id": 34,
@@ -279,7 +312,8 @@
         "#LuzInterior",
         "#AmanecerEnPotencia",
         "#NocheYEsperanza"
-      ]
+      ],
+      "slug": "no-se-trata-de-encender-una-luz-fuera-sino-de-recordar-que-s"
     },
     {
       "id": 35,
@@ -292,7 +326,8 @@
       "hashtags_instagram": [
         "#DecisionesQueTransforman",
         "#AlmaDespertando"
-      ]
+      ],
+      "slug": "elegir-no-siempre-cambia-el-destino-pero-si-cambia-quien-ere"
     },
     {
       "id": 36,
@@ -305,7 +340,8 @@
       "hashtags_instagram": [
         "#AmorAuténtico",
         "#RelacionesSanadoras"
-      ]
+      ],
+      "slug": "el-amor-autentico-no-busca-moldear-sino-sostener-es-aquel-qu"
     },
     {
       "id": 37,
@@ -321,7 +357,8 @@
         "#TransformaciónPersonal",
         "#FuerzaInterior",
         "#NuevosComienzos"
-      ]
+      ],
+      "slug": "cuando-todo-se-derrumba-escucha-el-caos-no-habla-con-palabra"
     },
     {
       "id": 38,
@@ -337,7 +374,8 @@
         "#CrecimientoPersonal",
         "#Transformación",
         "#LuzYSombra"
-      ]
+      ],
+      "slug": "perdonarte-no-es-negar-lo-que-hiciste-es-aceptar-que-puedes"
     },
     {
       "id": 39,
@@ -350,7 +388,8 @@
       "hashtags_instagram": [
         "#RespetoMutuo",
         "#UnidadEnLaDiversidad"
-      ]
+      ],
+      "slug": "aceptar-al-otro-no-es-dejar-de-ser-tu-es-entender-que-la-uni"
     },
     {
       "id": 40,
@@ -369,7 +408,8 @@
         "#DejarIr",
         "#VidaAutentica",
         "#Aceptacion"
-      ]
+      ],
+      "slug": "controlar-no-es-vivir-la-vida-se-revela-cuando-dejas-de-exig"
     },
     {
       "id": 41,
@@ -386,7 +426,8 @@
         "#SerReal",
         "#CrecimientoPersonal",
         "#FuerzaInterior"
-      ]
+      ],
+      "slug": "quien-se-atreve-a-mostrarse-sin-escudos-no-se-expone-se-libe"
     },
     {
       "id": 42,
@@ -404,7 +445,8 @@
         "#Humildad",
         "#PoderDeLaSilencio",
         "#InteligenciaEmocional"
-      ]
+      ],
+      "slug": "el-que-sabe-calla-mas-de-lo-que-habla-no-por-orgullo-sino-po"
     },
     {
       "id": 43,
@@ -423,7 +465,8 @@
         "#ComunicaciónNoVerbal",
         "#EspaciosDePaz",
         "#SentimientosProfundos"
-      ]
+      ],
+      "slug": "no-todos-los-encuentros-necesitan-palabras-hay-almas-que-se"
     },
     {
       "id": 44,
@@ -441,7 +484,8 @@
         "#HabitarElMomento",
         "#CrecimientoPersonal",
         "#ReflexionesDiarias"
-      ]
+      ],
+      "slug": "no-siempre-elegimos-lo-que-vivimos-pero-si-como-lo-habitamos"
     },
     {
       "id": 45,
@@ -460,7 +504,8 @@
         "#CompromisoDiario",
         "#ImperfecciónBela",
         "#DignosDeAmar"
-      ]
+      ],
+      "slug": "el-amor-no-es-una-promesa-de-perfeccion-es-una-decision-diar"
     },
     {
       "id": 46,
@@ -477,7 +522,8 @@
         "#EscuchaTuAlma",
         "#CaosConstructivo",
         "#EspacioParaLoNuevo"
-      ]
+      ],
+      "slug": "la-destruccion-es-la-forma-que-tiene-el-alma-de-hacer-espaci"
     },
     {
       "id": 47,
@@ -494,7 +540,8 @@
         "#Autenticidad",
         "#VulnerabilidadValiente",
         "#SanaciónEmocional"
-      ]
+      ],
+      "slug": "la-herida-que-mas-ocultas-es-la-que-mas-necesita-ser-vista-n"
     },
     {
       "id": 48,
@@ -509,7 +556,8 @@
         "#AprendizajeContinuo",
         "#CrecimientoPersonal",
         "#Sabiduría"
-      ]
+      ],
+      "slug": "solo-quien-se-vacia-puede-volver-a-llenarse-la-humildad-no-e"
     },
     {
       "id": 49,
@@ -523,7 +571,8 @@
         "#Diversidad",
         "#UnidosEnLaDiversidad",
         "#CaminosHaciaLaVeracidad"
-      ]
+      ],
+      "slug": "dos-caminos-distintos-pueden-llevar-al-mismo-horizonte-la-di"
     },
     {
       "id": 50,
@@ -536,7 +585,8 @@
       "hashtags_instagram": [
         "#AmarLasPreguntas",
         "#FlorecerElAlma"
-      ]
+      ],
+      "slug": "vivir-no-es-encontrar-todas-las-respuestas-sino-aprender-a-a"
     },
     {
       "id": 51,
@@ -551,7 +601,8 @@
         "#BrillaConFuerza",
         "#ChispaInterior",
         "#SuperaciónPersonal"
-      ]
+      ],
+      "slug": "no-eres-la-sombra-que-te-cubre-eres-la-chispa-que-aun-no-ha"
     },
     {
       "id": 52,
@@ -568,7 +619,8 @@
         "#Aprendizaje",
         "#VidaConsciente",
         "#AlmaFuerte"
-      ]
+      ],
+      "slug": "no-estas-roto-estas-formando-raices-cada-vez-que-caes-tu-alm"
     },
     {
       "id": 53,
@@ -584,7 +636,8 @@
         "#Mindfulness",
         "#PazMental",
         "#Resiliencia"
-      ]
+      ],
+      "slug": "la-calma-no-se-encuentra-se-cultiva-no-es-ausencia-de-ruido"
     },
     {
       "id": 54,
@@ -597,7 +650,8 @@
       "hashtags_instagram": [
         "#NoRendirnos",
         "#RevoluciónSilenciosa"
-      ]
+      ],
+      "slug": "no-necesitas-brillar-todo-el-tiempo-a-veces-basta-con-no-ren"
     },
     {
       "id": 55,
@@ -613,7 +667,8 @@
         "#DolorYSanación",
         "#VivirConscientemente",
         "#EleccionesConscientes"
-      ]
+      ],
+      "slug": "no-huyas-de-lo-que-duele-huye-de-no-sentir-porque-es-en-el-d"
     },
     {
       "id": 56,
@@ -632,7 +687,8 @@
         "#CrecimientoPersonal",
         "#AmorPropio",
         "#SanaciónEmocional"
-      ]
+      ],
+      "slug": "mostrar-tus-grietas-no-es-caer-es-permitir-que-la-luz-entre"
     },
     {
       "id": 57,
@@ -645,7 +701,8 @@
       "hashtags_instagram": [
         "#AmorSinCláusulas",
         "#AcompañamientoReal"
-      ]
+      ],
+      "slug": "no-es-amor-si-tiene-clausulas-quien-te-ama-de-verdad-no-te-c"
     },
     {
       "id": 58,
@@ -661,7 +718,8 @@
         "#Florecer",
         "#Reflexiones",
         "#Sabiduría"
-      ]
+      ],
+      "slug": "no-todos-los-inviernos-matan-algunos-te-ensenan-a-florecer-p"
     },
     {
       "id": 59,
@@ -677,7 +735,8 @@
         "#AceptaLoDesconocido",
         "#RendirteEsConfiar",
         "#EspiritualidadConsciente"
-      ]
+      ],
+      "slug": "estas-aqui-para-vivir-no-para-entenderlo-todo-rendirte-al-mi"
     },
     {
       "id": 60,
@@ -691,7 +750,8 @@
         "#Sabiduría",
         "#Grandeza",
         "#Humildad"
-      ]
+      ],
+      "slug": "no-hay-sabio-que-no-haya-sido-necio-y-no-hay-grandeza-sin-la"
     },
     {
       "id": 61,
@@ -704,7 +764,8 @@
       "hashtags_instagram": [
         "#JuntosVamosMásLejos",
         "#AmistadSinFronteras"
-      ]
+      ],
+      "slug": "entre-tu-y-yo-no-hay-que-elegir-quien-tiene-razon-tal-vez-am"
     },
     {
       "id": 62,
@@ -722,7 +783,8 @@
         "#MomentosDePaz",
         "#AmistadSilenciosa",
         "#ReflexionesDelAlma"
-      ]
+      ],
+      "slug": "si-podemos-estar-en-silencio-sin-incomodarnos-entonces-ya-no"
     },
     {
       "id": 63,
@@ -741,7 +803,8 @@
         "#Autoayuda",
         "#Transformación",
         "#FortalezaEmocional"
-      ]
+      ],
+      "slug": "no-necesitas-ser-perdonado-para-empezar-de-nuevo-a-veces-bas"
     },
     {
       "id": 64,
@@ -759,7 +822,8 @@
         "#Superación",
         "#EmpiezaHoy",
         "#SéTuMejorVersión"
-      ]
+      ],
+      "slug": "no-estas-tarde-no-estas-mal-estas-justo-en-el-punto-donde-te"
     },
     {
       "id": 65,
@@ -773,7 +837,8 @@
         "#CuandoTodoArde",
         "#Observa",
         "#Revelaciones"
-      ]
+      ],
+      "slug": "cuando-todo-arde-no-corras-observa-a-veces-el-fuego-no-destr"
     },
     {
       "id": 66,
@@ -789,7 +854,8 @@
         "#ElegirLaPaz",
         "#RespetoMutuo",
         "#VivirConSciencia"
-      ]
+      ],
+      "slug": "ser-paz-en-un-mundo-que-grita-no-es-ser-ingenuo-es-elegir-no"
     },
     {
       "id": 67,
@@ -802,7 +868,8 @@
       "hashtags_instagram": [
         "#SigueAdelante",
         "#ValentíaEsPersistir"
-      ]
+      ],
+      "slug": "no-se-trata-de-ganar-siempre-a-veces-basta-con-seguir-aunque"
     },
     {
       "id": 68,
@@ -815,7 +882,8 @@
       "hashtags_instagram": [
         "#AmorConsciente",
         "#RelacionesSanas"
-      ]
+      ],
+      "slug": "amar-no-es-llenar-vacios-es-mirar-al-otro-y-no-querer-cambia"
     },
     {
       "id": 69,
@@ -831,7 +899,8 @@
         "#ElecciónConsciente",
         "#VidaAuténtica",
         "#PasosConSignificado"
-      ]
+      ],
+      "slug": "tal-vez-el-destino-es-el-mapa-pero-cada-paso-es-tu-firma-la"
     },
     {
       "id": 70,
@@ -845,7 +914,8 @@
         "#Sabiduría",
         "#ReflexionesProfundas",
         "#EscucharEsAprender"
-      ]
+      ],
+      "slug": "los-que-mas-saben-son-los-que-mas-dudan-porque-la-sabiduria"
     },
     {
       "id": 71,
@@ -863,7 +933,8 @@
         "#VivirElPresente",
         "#DejaIr",
         "#TuHistoria"
-      ]
+      ],
+      "slug": "no-perdones-para-olvidar-perdona-para-soltar-no-por-ellos-po"
     },
     {
       "id": 72,
@@ -876,7 +947,8 @@
       "hashtags_instagram": [
         "#ValentíaCotidiana",
         "#CrecimientoPersonal"
-      ]
+      ],
+      "slug": "no-necesitas-tenerlo-todo-resuelto-a-veces-lo-valiente-es-si"
     },
     {
       "id": 73,
@@ -895,7 +967,8 @@
         "#MomentoPresente",
         "#ConexiónInterior",
         "#PazMental"
-      ]
+      ],
+      "slug": "el-ahora-no-es-un-puente-hacia-algo-mas-es-el-altar-donde-to"
     },
     {
       "id": 74,
@@ -909,7 +982,8 @@
         "#CrecimientoPersonal",
         "#Renovación",
         "#SabiduríaInterior"
-      ]
+      ],
+      "slug": "no-temas-repetir-ciclos-cada-vuelta-trae-una-version-tuya-ma"
     },
     {
       "id": 75,
@@ -923,7 +997,8 @@
         "#LibertadInterior",
         "#Autoconocimiento",
         "#CrecimientoPersonal"
-      ]
+      ],
+      "slug": "ser-libre-no-es-no-tener-ataduras-es-no-depender-de-ellas-pa"
     },
     {
       "id": 76,
@@ -942,7 +1017,8 @@
         "#HeridasQueSanar",
         "#MiradaInterna",
         "#ReflexiónConsciente"
-      ]
+      ],
+      "slug": "el-tiempo-no-cura-revela-si-aprendes-a-habitar-el-presente-v"
     },
     {
       "id": 77,
@@ -961,7 +1037,8 @@
         "#SuperaciónPersonal",
         "#SanaciónEmocional",
         "#VivirConPropósito"
-      ]
+      ],
+      "slug": "no-te-construyas-de-nuevo-recuerdate-lo-esencial-de-ti-nunca"
     },
     {
       "id": 78,
@@ -976,7 +1053,8 @@
         "#Reflexiones",
         "#CrecimientoPersonal",
         "#Sabiduría"
-      ]
+      ],
+      "slug": "la-verdad-no-se-posee-se-visita-y-cada-vez-que-crees-haber-l"
     },
     {
       "id": 79,
@@ -994,7 +1072,8 @@
         "#SinMáscaras",
         "#ConexiónInterior",
         "#EleccionesConscientes"
-      ]
+      ],
+      "slug": "tal-vez-elegiste-antes-de-nacer-y-ahora-solo-estas-recordand"
     },
     {
       "id": 80,
@@ -1008,7 +1087,8 @@
         "#DespertarInterior",
         "#CrecimientoPersonal",
         "#Transformación"
-      ]
+      ],
+      "slug": "hay-personas-que-no-llegan-a-quedarse-sino-a-desencadenar-el"
     },
     {
       "id": 81,
@@ -1023,7 +1103,8 @@
         "#SuperaciónPersonal",
         "#CrecimientoEmocional",
         "#Desapego"
-      ]
+      ],
+      "slug": "la-armadura-te-salva-pero-tambien-te-encierra-la-verdadera-l"
     },
     {
       "id": 82,
@@ -1039,7 +1120,8 @@
         "#CrecimientoPersonal",
         "#SanaciónEmocional",
         "#DestinoConsciente"
-      ]
+      ],
+      "slug": "el-alma-no-busca-al-ideal-busca-al-espejo-y-cuando-encuentra"
     },
     {
       "id": 83,
@@ -1057,7 +1139,8 @@
         "#ProfundidadEmocional",
         "#AmorSutil",
         "#ComunicaciónNoVerbal"
-      ]
+      ],
+      "slug": "callar-junto-a-otro-no-es-ausencia-de-palabras-es-presencia"
     },
     {
       "id": 84,
@@ -1076,7 +1159,8 @@
         "#Mindfulness",
         "#Autoconocimiento",
         "#BienestarEmocional"
-      ]
+      ],
+      "slug": "algunas-respuestas-no-llegan-porque-el-alma-aun-esta-haciend"
     },
     {
       "id": 85,
@@ -1092,7 +1176,8 @@
         "#CrecimientoPersonal",
         "#Autenticidad",
         "#SanaciónInterior"
-      ]
+      ],
+      "slug": "perdonar-no-es-liberar-al-otro-es-liberarte-del-papel-que-tu"
     },
     {
       "id": 86,
@@ -1112,7 +1197,8 @@
         "#AceptarElMomento",
         "#EscucharElCorazón",
         "#FluirConLaVida"
-      ]
+      ],
+      "slug": "la-vida-no-se-controla-ni-se-entiende-se-escucha-se-atravies"
     },
     {
       "id": 87,
@@ -1127,7 +1213,8 @@
         "#MemoriaViva",
         "#FuerzaInterior",
         "#SuperaciónPersonal"
-      ]
+      ],
+      "slug": "cada-vez-que-volviste-a-levantarte-no-fue-por-fuerza-fue-por"
     },
     {
       "id": 88,
@@ -1141,7 +1228,8 @@
         "#UnidadEnLaDiversidad",
         "#AmorAuténtico",
         "#FuegosQueBrillan"
-      ]
+      ],
+      "slug": "la-unidad-no-es-borrar-limites-es-amar-sin-necesidad-de-fusi"
     },
     {
       "id": 89,
@@ -1160,7 +1248,8 @@
         "#Transformación",
         "#DesarrolloPersonal",
         "#SerAuténtico"
-      ]
+      ],
+      "slug": "no-necesitas-llenarte-para-avanzar-a-veces-es-en-el-vacio-do"
     },
     {
       "id": 90,
@@ -1176,7 +1265,8 @@
         "#Autenticidad",
         "#CrecimientoPersonal",
         "#TransformaciónInterior"
-      ]
+      ],
+      "slug": "el-ego-no-es-tu-enemigo-es-tu-disfraz-te-enseno-a-sobrevivir"
     },
     {
       "id": 91,
@@ -1193,7 +1283,8 @@
         "#IniciaciónEspiritual",
         "#Renacimiento",
         "#VerdadInterior"
-      ]
+      ],
+      "slug": "hay-caos-que-no-son-castigo-sino-iniciacion-la-noche-oscura"
     },
     {
       "id": 92,
@@ -1211,7 +1302,8 @@
         "#Transformación",
         "#SabiduríaInterior",
         "#Aceptación"
-      ]
+      ],
+      "slug": "no-busques-la-luz-como-escape-busca-como-alquimia-no-estas-a"
     },
     {
       "id": 93,
@@ -1225,7 +1317,8 @@
         "#SilencioInterno",
         "#EscuchaTuVoz",
         "#PazMental"
-      ]
+      ],
+      "slug": "el-silencio-interno-no-se-logra-apagando-el-mundo-sino-dejan"
     },
     {
       "id": 94,
@@ -1243,7 +1336,8 @@
         "#CrecimientoPersonal",
         "#ReflexionesDelAlma",
         "#EmpatíaYSanación"
-      ]
+      ],
+      "slug": "no-todos-los-que-te-aman-te-ven-y-no-todos-los-que-te-hieren"
     },
     {
       "id": 95,
@@ -1256,7 +1350,8 @@
       "hashtags_instagram": [
         "#FuerzaInterior",
         "#VerdadEsencial"
-      ]
+      ],
+      "slug": "no-necesitas-mas-fuerza-necesitas-mas-verdad-la-energia-mas"
     },
     {
       "id": 96,
@@ -1272,7 +1367,8 @@
         "#PazMental",
         "#SoltarElControl",
         "#Mindfulness"
-      ]
+      ],
+      "slug": "la-calma-verdadera-no-viene-cuando-todo-esta-en-orden-sino-c"
     },
     {
       "id": 97,
@@ -1289,7 +1385,8 @@
         "#Autoconocimiento",
         "#TransformaciónInterior",
         "#SanaciónEmocional"
-      ]
+      ],
+      "slug": "el-dolor-no-es-enemigo-ni-maestro-es-mensajero-no-vino-a-des"
     },
     {
       "id": 98,
@@ -1305,7 +1402,8 @@
         "#Autenticidad",
         "#Empoderamiento",
         "#Transformación"
-      ]
+      ],
+      "slug": "no-eres-lo-que-te-paso-ni-lo-que-hiciste-para-sobrevivir-ere"
     }
   ]
 }
