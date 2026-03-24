@@ -44,7 +44,6 @@ export default function Header() {
     { href: '/adventures', label: t('adventures'),  color: '#4ade80', submenu: [
       { href: '/adventures/posts', label: t('submenuPosts') },
     ]},
-    { href: '/#contact',   label: t('contact'),     color: '#6366f1' },
   ];
 
   function handleMouseEnter(href: string) {
@@ -137,6 +136,13 @@ export default function Header() {
         {/* Right side */}
         <div className="flex items-center gap-3">
           <LocaleSwitcher />
+          <Link
+            href="/#contact"
+            className="hidden md:inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium text-[#f5f5f7] transition-colors hover:opacity-80"
+            style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}
+          >
+            {t('contact')}
+          </Link>
           <button
             className="md:hidden p-2 text-[#f5f5f7]/70 hover:text-[#f5f5f7] transition-colors"
             onClick={() => setMobileOpen((v) => !v)}
@@ -150,7 +156,7 @@ export default function Header() {
       {/* Mobile nav */}
       {mobileOpen && (
         <nav className="md:hidden bg-black/90 backdrop-blur-xl px-4 py-4 flex flex-col gap-1">
-          {links.map((link) => {
+          {[...links, { href: '/#contact', label: t('contact'), color: '#6366f1' }].map((link) => {
             const isActive = link.href !== '/#contact' && pathname.startsWith(link.href);
             const hasSubmenu = !!link.submenu?.length;
             const expanded = mobileExpanded === link.href;
