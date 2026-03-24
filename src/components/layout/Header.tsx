@@ -24,11 +24,11 @@ export default function Header() {
   }, []);
 
   const links = [
-    { href: '/developer',   label: t('developer')   },
-    { href: '/gamer',       label: t('gamer')        },
-    { href: '/coexist',label: t('coexist') },
-    { href: '/adventures',  label: t('adventures')   },
-    { href: '/#contact',    label: t('contact')      },
+    { href: '/developer',  label: t('developer'),  color: '#6366f1' },
+    { href: '/gamer',      label: t('gamer'),       color: '#4ade80' },
+    { href: '/coexist',    label: t('coexist'),     color: '#C8344A' },
+    { href: '/adventures', label: t('adventures'),  color: '#0ea5e9' },
+    { href: '/#contact',   label: t('contact'),     color: '#6366f1' },
   ];
 
   return (
@@ -61,7 +61,7 @@ export default function Header() {
               >
                 {link.label}
                 {isActive && (
-                  <span className="block h-0.5 mt-0.5 rounded-full bg-violet-500" />
+                  <span className="block h-0.5 mt-0.5 rounded-full" style={{ background: link.color }} />
                 )}
               </Link>
             );
