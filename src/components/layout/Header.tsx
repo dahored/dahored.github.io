@@ -27,7 +27,7 @@ export default function Header() {
     { href: '/developer',  label: t('developer'),  color: '#6366f1' },
     { href: '/gamer',      label: t('gamer'),       color: '#4ade80' },
     { href: '/coexist',    label: t('coexist'),     color: '#C8344A' },
-    { href: '/adventures', label: t('adventures'),  color: '#0ea5e9' },
+    { href: '/adventures', label: t('adventures'),  color: '#4ade80' },
     { href: '/#contact',   label: t('contact'),     color: '#6366f1' },
   ];
 
