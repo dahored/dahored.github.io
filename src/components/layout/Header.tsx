@@ -29,7 +29,9 @@ export default function Header() {
   }, []);
 
   const links: NavLink[] = [
-    { href: '/developer',  label: t('developer'),  color: '#6366f1' },
+    { href: '/developer',  label: t('developer'),  color: '#6366f1', submenu: [
+      { href: '/developer/posts', label: t('submenuPosts') },
+    ]},
     { href: '/gamer',      label: t('gamer'),       color: '#4ade80' },
     { href: '/coexist',    label: t('coexist'),     color: '#C8344A', submenu: [
       { href: '/coexist/posts', label: t('submenuPosts') },

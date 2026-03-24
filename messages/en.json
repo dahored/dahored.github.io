@@ -55,7 +55,10 @@
       "sub": "Open to new opportunities, freelance projects and collaborations.",
       "linkedin": "Connect on LinkedIn",
       "contact": "Send a message"
-    }
+    },
+    "allPostsTitle": "All posts · Developer",
+    "backTo": "Back to Developer",
+    "noPostsAvailable": "No posts available."
   },
   "about": {
     "label": "About me",
