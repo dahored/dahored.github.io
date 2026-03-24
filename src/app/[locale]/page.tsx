@@ -3,6 +3,7 @@ import AboutSection from '@/components/sections/AboutSection';
 import StackSection from '@/components/sections/StackSection';
 import WorldsSection from '@/components/sections/WorldsSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
+import BrandsSection from '@/components/sections/BrandsSection';
 import BlogSection from '@/components/sections/BlogSection';
 import ContactSection from '@/components/sections/ContactSection';
 
@@ -14,6 +15,7 @@ export default function HomePage() {
       <StackSection />
       <WorldsSection />
       <ProjectsSection />
+      <BrandsSection />
       <BlogSection />
       <ContactSection />
     </>

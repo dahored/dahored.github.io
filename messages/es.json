@@ -117,6 +117,11 @@
       "highlight": "coexistir juntos"
     }
   },
+  "brands": {
+    "label": "Mis marcas",
+    "heading": "Mis mundos",
+    "subheading": "Cada marca es un universo distinto — explóralos todos."
+  },
   "projects": {
     "label": "Proyectos",
     "heading": "Lo que construyo",

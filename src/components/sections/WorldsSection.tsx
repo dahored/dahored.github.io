@@ -7,7 +7,7 @@ const worlds = [
   { iconName: 'Gamepad2', accent: '#f97316', nameKey: 'gaming.name',    descKey: 'gaming.description',    highlightKey: 'gaming.highlight',    socials: site.worldSocials.gaming    },
   { iconName: 'Leaf',     accent: '#10b981', nameKey: 'coexist.name',   descKey: 'coexist.description',   highlightKey: 'coexist.highlight',   socials: site.worldSocials.coexist   },
   { iconName: 'Mountain', accent: '#0ea5e9', nameKey: 'adventures.name',descKey: 'adventures.description',highlightKey: 'adventures.highlight',socials: site.worldSocials.adventures},
-  { iconName: 'Heart',    accent: '#e11d48', nameKey: 'personal.name',  descKey: 'personal.description',  highlightKey: 'personal.highlight',  socials: site.worldSocials.personal  },
+  { iconName: 'Heart',    accent: '#e11d48', nameKey: 'personal.name',  descKey: 'personal.description',  highlightKey: 'personal.highlight',  socials: site.worldSocials.give      },
 ];
 
 export default async function WorldsSection() {

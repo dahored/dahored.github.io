@@ -105,8 +105,8 @@ export default async function GamerPage() {
       <section className="relative flex flex-col items-center justify-center min-h-screen pt-32 pb-24 px-4 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-175 rounded-full opacity-20 blur-3xl"
-            style={{ background: `radial-gradient(circle, ${GLOW} 0%, #052e16 55%, transparent 70%)` }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-175 rounded-full opacity-25 blur-3xl"
+            style={{ background: `radial-gradient(circle, ${GLOW} 0%, #1a0000 55%, transparent 70%)` }}
           />
           <div className="absolute inset-0 opacity-[0.04] dot-grid" />
         </div>
@@ -117,9 +117,9 @@ export default async function GamerPage() {
             <Image
               src="/images/logo/logo_daho_gaming.png"
               alt="Daho Gaming"
-              width={320}
-              height={100}
-              className="h-16 w-auto"
+              width={480}
+              height={150}
+              className="h-16 sm:h-20 lg:h-28 w-auto"
               priority
             />
           </ScrollReveal>
@@ -150,7 +150,7 @@ export default async function GamerPage() {
       </section>
 
       {/* ── BENTO STATS ──────────────────────────────────────────────────────── */}
-      <section id="plataformas" className="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-4">
+      <section id="plataformas" className="max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-0 scroll-mt-20">
         <ScrollReveal>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[220px]">
 
@@ -256,7 +256,7 @@ export default async function GamerPage() {
 
       {/* ── INSTAGRAM CAROUSEL ───────────────────────────────────────────────── */}
       {postsList.length > 0 && (
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-24">
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-40 pb-24">
           <ScrollReveal>
             <div className="flex items-end justify-between mb-8">
               <div>

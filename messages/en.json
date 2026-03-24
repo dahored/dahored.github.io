@@ -117,6 +117,11 @@
       "highlight": "coexisting together"
     }
   },
+  "brands": {
+    "label": "My brands",
+    "heading": "My worlds",
+    "subheading": "Each brand is a different universe — explore them all."
+  },
   "projects": {
     "label": "Projects",
     "heading": "What I build",

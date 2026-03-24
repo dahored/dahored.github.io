@@ -63,37 +63,29 @@ export default async function DeveloperPage() {
       <section className="relative min-h-screen flex flex-col items-center justify-center bg-black pt-20 pb-16 overflow-hidden">
         {/* Glow */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full bg-violet-600/10 blur-3xl animate-glow-pulse" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full bg-violet-600/20 blur-3xl animate-glow-pulse" />
         </div>
         <div className="absolute inset-0 opacity-[0.07] dot-grid" aria-hidden="true" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center gap-8">
+          <h1 className="sr-only">Daho Developer</h1>
           <ScrollReveal delay={60}>
             <Image
               src="/images/logo/logo_daho_developer.png"
               alt="Daho Developer"
               width={280}
               height={80}
-              className="h-16 w-auto"
+              className="h-16 sm:h-20 lg:h-28 w-auto"
             />
           </ScrollReveal>
 
           <ScrollReveal delay={120}>
-            <h1
-              className="font-bold text-[#f5f5f7]"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.04em', lineHeight: 1.05 }}
-            >
-              {t('hero.heading')}
-            </h1>
-          </ScrollReveal>
-
-          <ScrollReveal delay={180}>
-            <p className="text-xl sm:text-2xl text-[#6e6e73] max-w-xl leading-relaxed">
+            <p className="text-xl text-zinc-400 leading-relaxed max-w-xl text-center">
               {t('hero.subtitle')}
             </p>
           </ScrollReveal>
 
-          <ScrollReveal delay={240}>
+          <ScrollReveal delay={180}>
             <div className="flex flex-wrap gap-3 justify-center">
               <a
                 href={site.socials.linkedin}

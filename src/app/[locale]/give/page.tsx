@@ -98,7 +98,7 @@ export default async function GivePage() {
               alt="Daho Give"
               width={320}
               height={100}
-              className="h-16 w-auto"
+              className="h-16 sm:h-20 lg:h-28 w-auto"
               priority
             />
           </ScrollReveal>
@@ -129,7 +129,7 @@ export default async function GivePage() {
       </section>
 
       {/* ── BENTO STATS ──────────────────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-16">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-0 scroll-mt-20">
         <ScrollReveal>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[220px]">
 
@@ -233,7 +233,7 @@ export default async function GivePage() {
 
       {/* ── CAROUSEL ─────────────────────────────────────────────────────────── */}
       {postsList.length > 0 && (
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-40 pb-20">
           <ScrollReveal>
             <div className="flex items-end justify-between mb-8">
               <div>

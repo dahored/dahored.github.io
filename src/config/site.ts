@@ -40,13 +40,13 @@ export const site = {
   // ── Per-world social links (single source of truth) ───────────────────────
   worldSocials: {
     gaming: [
-      { label: 'YouTube',   href: 'https://www.youtube.com/@dahogaming',          iconName: 'Youtube',   color: '#ff0000', description: 'Videos de gameplay, reviews y contenido gaming.' },
-      { label: 'Twitch',    href: 'https://www.twitch.tv/dahored',                iconName: 'Twitch',    color: '#9146ff', description: 'Streams en vivo de videojuegos.' },
-      { label: 'TikTok',    href: 'https://www.tiktok.com/@dahored',              iconName: 'Music2',    color: '#69c9d0', description: 'Clips cortos de los mejores momentos.' },
-      { label: 'Instagram', href: 'https://www.instagram.com/daho.gaming/',       iconName: 'Instagram', color: '#e1306c', description: 'Fotos y highlights del mundo gaming.' },
-      { label: 'Twitter/X', href: 'https://x.com/daho_gaming',                   iconName: 'Twitter',   color: '#e7e7e7', description: 'Opiniones y novedades del mundo gamer.' },
-      { label: 'Kick',      href: 'https://kick.com/dahored',                     iconName: 'Kick',      color: '#53fc18', description: 'Streams alternativos en vivo.' },
-      { label: 'Facebook',  href: 'https://www.facebook.com/dahored',             iconName: 'Facebook',  color: '#1877f2', description: 'Comunidad y eventos gaming.' },
+      { label: 'YouTube',   href: 'https://www.youtube.com/@dahogaming',          iconName: 'Youtube',   color: '#ff0000', description: 'Videos de [[h]]gameplay[[/h]], reviews y contenido gaming.',   highlight: 'gameplay' },
+      { label: 'Twitch',    href: 'https://www.twitch.tv/dahored',                iconName: 'Twitch',    color: '#9146ff', description: '[[h]]Streams en vivo[[/h]] de videojuegos.',                       highlight: 'Streams en vivo' },
+      { label: 'TikTok',    href: 'https://www.tiktok.com/@dahored',              iconName: 'Music2',    color: '#69c9d0', description: '[[h]]Clips cortos[[/h]] de los mejores momentos.',                 highlight: 'Clips cortos' },
+      { label: 'Instagram', href: 'https://www.instagram.com/daho.gaming/',       iconName: 'Instagram', color: '#e1306c', description: 'Fotos y [[h]]highlights[[/h]] del mundo gaming.',                  highlight: 'highlights' },
+      { label: 'Twitter/X', href: 'https://x.com/daho_gaming',                   iconName: 'Twitter',   color: '#e7e7e7', description: '[[h]]Opiniones y novedades[[/h]] del mundo gamer.',               highlight: 'Opiniones y novedades' },
+      { label: 'Kick',      href: 'https://kick.com/dahored',                     iconName: 'Kick',      color: '#53fc18', description: '[[h]]Streams alternativos[[/h]] en vivo.',                          highlight: 'Streams alternativos' },
+      { label: 'Facebook',  href: 'https://www.facebook.com/dahored',             iconName: 'Facebook',  color: '#1877f2', description: '[[h]]Comunidad[[/h]] y eventos gaming.',                           highlight: 'Comunidad' },
     ],
     coexist: [
       { label: 'TikTok',    href: 'https://www.tiktok.com/@daho.coexist',         iconName: 'Music2',    color: '#69c9d0', description: 'Videos cortos de [[h]]motivación[[/h]] y bienestar.',        highlight: 'motivación' },
