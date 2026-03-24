@@ -9,18 +9,20 @@ export default async function Footer() {
   const year = new Date().getFullYear();
 
   const navLinks = [
-    { href: '/developer',    labelKey: 'nav.developer'    },
-    { href: '/gamer',        labelKey: 'nav.gamer'        },
-    { href: '/coexist', labelKey: 'nav.coexist' },
-    { href: '/adventures',   labelKey: 'nav.adventures'   },
-    { href: '/#contact',     labelKey: 'nav.contact'      },
+    { href: '/developer',  labelKey: 'nav.developer'  },
+    { href: '/gamer',      labelKey: 'nav.gamer'      },
+    { href: '/coexist',    labelKey: 'nav.coexist'    },
+    { href: '/give',       labelKey: 'nav.give'       },
+    { href: '/adventures', labelKey: 'nav.adventures' },
+    { href: '/#contact',   labelKey: 'nav.contact'    },
   ];
 
   const worldLinks = [
-    { href: 'https://www.youtube.com/@dahogaming',            label: 'Daho Gaming'     },
-    { href: 'https://www.instagram.com/daho.coexist/',        label: 'Daho Coexist'    },
-    { href: 'https://www.instagram.com/daho.adventures/',     label: 'Daho Adventures' },
-    { href: 'https://www.instagram.com/diego.hernandezorrego/', label: 'Diego Hernández' },
+    { href: 'https://www.youtube.com/@dahogaming',        label: 'Daho Gaming'     },
+    { href: 'https://www.instagram.com/daho.coexist/',    label: 'Daho Coexist'    },
+    { href: 'https://www.instagram.com/daho.give/',       label: 'Daho Give'       },
+    { href: 'https://www.instagram.com/daho.adventures/', label: 'Daho Adventures' },
+    { href: 'https://www.instagram.com/daho.developer/',  label: 'Daho Developer'  },
   ];
 
   const socialLinks = [
