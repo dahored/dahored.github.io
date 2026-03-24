@@ -225,9 +225,7 @@ export default async function CoexistPage() {
               <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full opacity-20 blur-3xl pointer-events-none" style={{ background: '#C8344A' }} />
 
               <div className="flex items-center gap-5 relative z-10">
-                <span className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0" style={{ background: 'rgba(200,52,74,0.2)', border: '1px solid rgba(200,52,74,0.3)' }}>
-                  <Heart className="w-7 h-7 text-rose-400" />
-                </span>
+                <Heart className="w-14 h-14 text-rose-400 shrink-0" />
                 <div>
                   <p className="text-2xl sm:text-3xl font-bold text-white leading-tight">
                     {t('tagline')}
