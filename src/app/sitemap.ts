@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/gamer',       priority: 0.9,  freq: 'monthly' as const },
     { path: '/coexist',priority: 0.9,  freq: 'monthly' as const },
     { path: '/adventures',  priority: 0.9,  freq: 'monthly' as const },
+    { path: '/give',        priority: 0.9,  freq: 'monthly' as const },
   ];
 
   return [

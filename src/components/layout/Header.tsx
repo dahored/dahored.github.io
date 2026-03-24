@@ -29,6 +29,9 @@ export default function Header() {
   }, []);
 
   const links: NavLink[] = [
+    { href: '/give',       label: t('give'),        color: '#d97706', submenu: [
+      { href: '/give/posts', label: t('submenuPosts') },
+    ]},
     { href: '/developer',  label: t('developer'),  color: '#6366f1', submenu: [
       { href: '/developer/posts', label: t('submenuPosts') },
     ]},

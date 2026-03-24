@@ -5,6 +5,7 @@
     "coexist": "Coexist",
     "adventures": "Adventures",
     "contact": "Contact",
+    "give": "Give",
     "submenuPosts": "Posts"
   },
   "hero": {
@@ -174,6 +175,26 @@
     "viewAllPosts": "View all posts",
     "allPostsTitle": "All posts · Coexist",
     "backTo": "Back to Coexist",
+    "followLabel": "Follow me",
+    "followHeading": "Find me on"
+  },
+  "give": {
+    "pageTitle": "Daho Give",
+    "pageDescription": "Simple gestures. Real help. Humanity unfiltered. Let helping others become the norm.",
+    "description": "Simple gestures. Real help. Humanity unfiltered.",
+    "heroCta": "Explore",
+    "featuredPost": "Featured post",
+    "followers": "Followers",
+    "tagline": "Let helping others become the norm.",
+    "taglineDesc": "Small gestures that transform lives. Join the movement of giving without expecting anything in return.",
+    "instagramLabel": "Instagram",
+    "carouselHeading": "Latest gestures",
+    "viewAll": "View all",
+    "gridHeading": "All posts",
+    "noPostsAvailable": "No posts available.",
+    "viewAllPosts": "View all posts",
+    "allPostsTitle": "All posts · Give",
+    "backTo": "Back to Give",
     "followLabel": "Follow me",
     "followHeading": "Find me on"
   },

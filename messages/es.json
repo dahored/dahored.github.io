@@ -5,6 +5,7 @@
     "coexist": "Coexistir",
     "adventures": "Aventuras",
     "contact": "Contacto",
+    "give": "Give",
     "submenuPosts": "Posts"
   },
   "hero": {
@@ -174,6 +175,26 @@
     "viewAllPosts": "Ver todos los posts",
     "allPostsTitle": "Todos los posts · Coexist",
     "backTo": "Volver a Coexist",
+    "followLabel": "Sígueme",
+    "followHeading": "Encuéntrame en"
+  },
+  "give": {
+    "pageTitle": "Daho Give",
+    "pageDescription": "Gestos simples. Ayuda real. Humanidad sin filtros. Que ayudar se ponga de moda.",
+    "description": "Gestos simples. Ayuda real. Humanidad sin filtros.",
+    "heroCta": "Explorar",
+    "featuredPost": "Post destacado",
+    "followers": "Seguidores",
+    "tagline": "Que ayudar se ponga de moda.",
+    "taglineDesc": "Pequeños gestos que transforman vidas. Únete al movimiento de dar sin esperar nada a cambio.",
+    "instagramLabel": "Instagram",
+    "carouselHeading": "Últimos gestos",
+    "viewAll": "Ver todo",
+    "gridHeading": "Todos los posts",
+    "noPostsAvailable": "No hay posts disponibles.",
+    "viewAllPosts": "Ver todos los posts",
+    "allPostsTitle": "Todos los posts · Give",
+    "backTo": "Volver a Give",
     "followLabel": "Sígueme",
     "followHeading": "Encuéntrame en"
   },

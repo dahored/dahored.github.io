@@ -65,9 +65,10 @@ export const site = {
       { label: 'Instagram', href: 'https://www.instagram.com/daho.developer/',     iconName: 'Instagram', color: '#e1306c', description: 'El lado [[h]]visual del desarrollo[[/h]] y la tech.', highlight: 'visual del desarrollo' },
       { label: 'Facebook',  href: 'https://www.facebook.com/daho.developer/',      iconName: 'Facebook',  color: '#1877f2', description: '[[h]]Actualizaciones[[/h]] y noticias de mis proyectos.', highlight: 'Actualizaciones' },
     ],
-    personal: [
-      { label: 'Instagram', href: 'https://www.instagram.com/diego.hernandezorrego/', iconName: 'Instagram', color: '#e1306c', description: 'Mi vida personal, familia y momentos especiales.' },
-      { label: 'Facebook',  href: 'https://www.facebook.com/diego.hernandezorrego/',  iconName: 'Facebook',  color: '#1877f2', description: 'Conecta conmigo de persona a persona.' },
+    give: [
+      { label: 'Instagram', href: 'https://www.instagram.com/daho.give/',       iconName: 'Instagram', color: '#e1306c', description: 'Gestos simples que [[h]]cambian vidas[[/h]].',        highlight: 'cambian vidas' },
+      { label: 'Facebook',  href: 'https://www.facebook.com/daho.give/',        iconName: 'Facebook',  color: '#1877f2', description: 'Comunidad de [[h]]ayuda real[[/h]] sin filtros.',       highlight: 'ayuda real' },
+      { label: 'YouTube',   href: 'https://www.youtube.com/@dahogive',          iconName: 'Youtube',   color: '#ff0000', description: '[[h]]Videos largos[[/h]] de gestos que transforman.',   highlight: 'Videos largos' },
     ],
   },
 
