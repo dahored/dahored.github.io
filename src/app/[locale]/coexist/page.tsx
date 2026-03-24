@@ -218,16 +218,25 @@ export default async function CoexistPage() {
 
             {/* Tagline */}
             <div
-              className="col-span-2 lg:col-span-4 relative rounded-3xl p-7 flex flex-col justify-between overflow-hidden"
-              style={{ background: 'linear-gradient(135deg, rgba(200,52,74,0.1) 0%, rgba(200,52,74,0.05) 100%)', border: '1px solid rgba(200,52,74,0.15)' }}
+              className="col-span-2 lg:col-span-4 relative rounded-3xl p-8 overflow-hidden flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
+              style={{ background: 'linear-gradient(135deg, rgba(200,52,74,0.12) 0%, rgba(200,52,74,0.04) 100%)', border: '1px solid rgba(200,52,74,0.2)' }}
             >
-              <Heart className="w-10 h-10 text-rose-400" />
-              <div>
-                <p className="text-xl font-semibold text-white leading-snug">
-                  {t('tagline')}
-                </p>
-                <p className="text-sm text-zinc-500 mt-2">@daho.coexist</p>
+              {/* Glow */}
+              <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full opacity-20 blur-3xl pointer-events-none" style={{ background: '#C8344A' }} />
+
+              <div className="flex items-center gap-5 relative z-10">
+                <span className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0" style={{ background: 'rgba(200,52,74,0.2)', border: '1px solid rgba(200,52,74,0.3)' }}>
+                  <Heart className="w-7 h-7 text-rose-400" />
+                </span>
+                <div>
+                  <p className="text-2xl sm:text-3xl font-bold text-white leading-tight">
+                    {t('tagline')}
+                  </p>
+                  <p className="text-base text-zinc-400 mt-1">{t('taglineDesc')}</p>
+                </div>
               </div>
+
+              <p className="text-sm text-zinc-500 relative z-10 shrink-0">@daho.coexist</p>
             </div>
 
           </div>
