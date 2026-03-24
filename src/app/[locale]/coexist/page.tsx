@@ -234,7 +234,6 @@ export default async function CoexistPage() {
                 </div>
               </div>
 
-              <p className="text-sm text-zinc-500 relative z-10 shrink-0">@daho.coexist</p>
             </div>
 
           </div>
