@@ -28,7 +28,7 @@ export default async function BlogPage({ params }: Props) {
   return (
     <main className="min-h-screen bg-black text-[#f5f5f7]">
       {/* Hero */}
-      <section className="pt-32 pb-16 px-4 sm:px-6">
+      <section className="pt-40 pb-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col gap-4 max-w-2xl">
             <span
