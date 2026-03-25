@@ -4,6 +4,7 @@ import { getLocale } from 'next-intl/server';
 import './globals.css';
 import { site } from '@/config/site';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
+import Script from 'next/script';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const geist = Geist({
@@ -73,6 +74,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           }}
         />
         {children}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5119314285197382"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <GoogleAnalytics />
         <SpeedInsights />
       </body>
