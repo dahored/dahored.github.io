@@ -1,15 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { generateBlogPost } from '@/lib/gemini';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const geminiEnabled = process.env.USE_GEMINI === 'true';
 
 export async function POST(req: NextRequest) {
-  const { title, brief, locale, category } = await req.json();
+  const { title, brief, locale, category, model = 'gemini' } = await req.json();
 
   if (!title && !brief) {
     return NextResponse.json({ error: 'title o brief es requerido' }, { status: 400 });
   }
 
+  // Gemini (free) — only when enabled
+  if (model === 'gemini' && geminiEnabled) {
+    try {
+      const result = await generateBlogPost({ title, brief, locale, category });
+      return NextResponse.json(result);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : '';
+      const isQuota = msg.includes('429') || msg.includes('quota') || msg.includes('RESOURCE_EXHAUSTED');
+      if (!isQuota) throw err;
+      console.warn('[generate] Gemini quota exceeded, falling back to gpt-4o-mini');
+    }
+  }
+
+  // OpenAI fallback
   const lang = locale === 'en' ? 'English' : 'Spanish';
   const catHint = category ?? 'ia';
 
@@ -32,16 +48,13 @@ export async function POST(req: NextRequest) {
     .join('\n');
 
   const completion = await openai.chat.completions.create({
-    model: 'gpt-4o',
+    model: model === 'gpt-4o' ? 'gpt-4o' : 'gpt-4o-mini',
     messages: [
       {
         role: 'system',
         content: `You are a sharp tech blogger for dahoofficial.com — a personal brand site by Diego "Daho" Hernández, a Colombian full-stack developer and content creator. Write in ${lang}. Style: direct, no fluff, informed opinions, first-person perspective where natural. Return valid JSON only, no markdown fences.`,
       },
-      {
-        role: 'user',
-        content: userPrompt,
-      },
+      { role: 'user', content: userPrompt },
     ],
     response_format: { type: 'json_object' },
     temperature: 0.75,

@@ -22,6 +22,24 @@ export async function GET(req: NextRequest) {
     }
   }
 
+  // Find post by id + locale (for locale switching with different slugs)
+  const id = searchParams.get('id');
+  if (id && locale) {
+    const dir = path.join(contentDir, locale);
+    try {
+      const files = await fs.readdir(dir);
+      for (const file of files.filter((f) => f.endsWith('.mdx'))) {
+        const raw = await fs.readFile(path.join(dir, file), 'utf-8');
+        const { data, content } = matter(raw);
+        if (data.id === id) {
+          const fileSlug = file.replace('.mdx', '');
+          return NextResponse.json({ slug: fileSlug, locale, content, ...data });
+        }
+      }
+    } catch { /* dir doesn't exist */ }
+    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  }
+
   // List all posts
   const locales = ['es', 'en'];
   const posts: Record<string, unknown>[] = [];
@@ -46,7 +64,7 @@ export async function GET(req: NextRequest) {
 // POST - create or update a post
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { locale, slug, title, description, date, category, tags, readTime, featured, content } = body;
+  const { locale, slug, originalSlug, id, title, description, date, category, tags, readTime, featured, content } = body;
 
   if (!locale || !slug || !title) {
     return NextResponse.json({ error: 'locale, slug y title son requeridos' }, { status: 400 });
@@ -56,6 +74,7 @@ export async function POST(req: NextRequest) {
   await fs.mkdir(dir, { recursive: true });
 
   const fileContent = matter.stringify(content ?? '', {
+    id: id || slug,
     title,
     description,
     date,
@@ -66,6 +85,13 @@ export async function POST(req: NextRequest) {
   });
 
   await fs.writeFile(path.join(dir, `${slug}.mdx`), fileContent, 'utf-8');
+
+  // If slug was renamed, delete the old file
+  if (originalSlug && originalSlug !== slug) {
+    const oldPath = path.join(dir, `${originalSlug}.mdx`);
+    await fs.unlink(oldPath).catch(() => null);
+  }
+
   return NextResponse.json({ ok: true });
 }
 

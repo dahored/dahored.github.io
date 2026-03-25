@@ -1,0 +1,76 @@
+---
+id: mejores-extensiones-vscode-2026
+title: Las mejores extensiones de VS Code en 2026 que realmente importan
+description: No más listas de 50 extensiones que nadie usa. Estas son las que tengo instaladas, las que uso todos los días y por qué.
+date: 2026-03-16
+category: herramientas
+tags: [vscode, productividad, herramientas, desarrollo]
+readTime: 6
+featured: false
+---
+
+Cada año alguien publica "las 100 mejores extensiones de VS Code" y cada año esa lista es inútil. Aquí no vas a encontrar eso. Esto es lo que yo tengo instalado, lo que uso de verdad, y lo que te recomiendo si trabajas en desarrollo web full-stack en 2026.
+
+## El criterio que uso
+
+Una extensión tiene que pasar tres filtros para quedarse en mi VS Code:
+
+- **¿La uso a diario?** Si lleva más de dos semanas sin activarse, fuera.
+- **¿Hace algo que VS Code no hace solo?** No instalo cosas que duplican funcionalidad nativa.
+- **¿Afecta el rendimiento?** VS Code con 40 extensiones es un navegador Chrome. No, gracias.
+
+Con ese filtro, mi lista se redujo a 12 extensiones. Te comparto las que considero esenciales.
+
+## Productividad y código
+
+### GitHub Copilot
+
+Sí, sigue siendo la número uno. No por hype, sino porque en 2026 el modelo mejoró bastante y los completados en contexto largo son genuinamente útiles. Lo uso con **autocompletado activado pero sugerencias de chat solo bajo demanda**. Si lo dejas correr solo todo el tiempo, te vuelves dependiente y eso es un problema real.
+
+### Error Lens
+
+Muestra los errores de TypeScript, ESLint y cualquier linter **directo en la línea donde ocurren**, no solo en el panel de problemas. Parece pequeño pero cambia cómo lees el código. Es la extensión que más recomiendo a developers junior porque te fuerza a ver los errores en contexto.
+
+### Pretty TypeScript Errors
+
+Los mensajes de error de TypeScript son famosos por ser ilegibles. Esta extensión los formatea de manera humana. Desde que la instalé, tardé menos tiempo leyendo errores raros de tipos genéricos. Es gratis y hace exactamente lo que promete.
+
+## Git y control de versiones
+
+### GitLens
+
+La uso principalmente por **dos funciones**: el blame en línea (ver quién escribió qué sin salir del archivo) y la vista de historial de un archivo específico. El resto de funcionalidades de GitLens son ruido. Puedes desactivar casi todo en la configuración y quedarte solo con lo que importa.
+
+### Git Graph
+
+Para visualizar ramas. El gráfico visual de GitGraph es mucho más claro que cualquier terminal para entender merges complicados o ver de dónde viene un commit. La uso especialmente cuando trabajo en proyectos con varios colaboradores.
+
+## UI y experiencia de edición
+
+### Symbols
+
+Un explorador de archivos alternativo con iconos más limpios que los predeterminados. Suena superficial pero cuando tienes proyectos grandes con muchos archivos, los iconos correctos reducen el tiempo de búsqueda visual.
+
+### TODO Highlight
+
+Resalta `TODO`, `FIXME`, `HACK` y cualquier keyword que configures. En proyectos propios siempre dejo comentarios de trabajo en progreso. Sin esta extensión, los olvido. Con ella, me gritan desde el código.
+
+### Peacock
+
+Colorea la barra lateral de VS Code por workspace. Si trabajas con múltiples proyectos abiertos en ventanas diferentes, esto es invaluable. Tengo el proyecto personal en verde, el trabajo en azul, los experimentos en naranja. Cero confusión.
+
+## Las que eliminé este año
+
+Hay extensiones populares que borré en 2026 y no extraño:
+
+- **Prettier como extensión**: lo moví a scripts de proyecto, no lo quiero en VS Code global.
+- **Bracket Pair Colorizer**: VS Code lo tiene nativo ahora y es mejor.
+- **Auto Rename Tag**: genera conflictos con frameworks modernos. Framework Language Servers hacen esto mejor.
+
+## Configuración importa más que extensiones
+
+Lo más importante que aprendí este año es que **una buena configuración de VS Code hace más que una extensión nueva**. El archivo `settings.json` bien trabajado, los snippets propios y los atajos de teclado personalizados transforman el editor de una manera que ninguna extensión puede igualar.
+
+Si no tienes un `settings.json` versionado en tu repositorio de dotfiles, ese es tu próximo proyecto de productividad.
+
+Las extensiones son el complemento. La configuración es la base.

@@ -15,6 +15,7 @@ export default function Header() {
   const t = useTranslations('nav');
   const rawPathname = usePathname();
   const pathname = rawPathname.replace(/^\/[a-z]{2}(\/|$)/, '/');
+  const locale = rawPathname.match(/^\/([a-z]{2})(\/|$)/)?.[1] ?? 'es';
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [desktopOpen, setDesktopOpen] = useState<string | null>(null);
@@ -44,7 +45,12 @@ export default function Header() {
     { href: '/adventures', label: t('adventures'),  color: '#4ade80', submenu: [
       { href: '/adventures/posts', label: t('submenuPosts') },
     ]},
-    { href: '/blog',       label: t('blog'),        color: '#6366f1' },
+    { href: '/blog', label: t('blog'), color: '#6366f1', submenu: [
+      { href: '/blog/gaming',                             label: 'Gaming' },
+      { href: locale === 'en' ? '/blog/ai' : '/blog/ia', label: locale === 'en' ? 'AI' : 'IA' },
+      { href: locale === 'en' ? '/blog/tools' : '/blog/herramientas', label: locale === 'en' ? 'Tools' : 'Herramientas' },
+      { href: locale === 'en' ? '/blog/news' : '/blog/noticias',      label: locale === 'en' ? 'News' : 'Noticias' },
+    ]},
   ];
 
   function handleMouseEnter(href: string) {

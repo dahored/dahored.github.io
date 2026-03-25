@@ -1,0 +1,69 @@
+---
+id: como-uso-ia-para-escribir-codigo
+title: Cómo uso IA para escribir código más rápido (mi flujo real)
+description: Mi workflow personal usando Claude y Cursor para escribir código como desarrollador full-stack. Sin teoría, solo lo que realmente uso todos los días.
+date: 2026-03-05
+category: ia
+tags: [IA, Claude, Cursor, workflow]
+readTime: 6
+featured: false
+---
+
+## Esto no es un tutorial genérico
+
+Hay mil posts sobre "cómo usar IA para programar" que se reducen a "escribe buenos prompts" y "revisa el output". Gracias, muy útil.
+
+Este post es diferente. Es mi flujo exacto, las herramientas que uso, las limitaciones que encontré, y lo que cambió (para bien y para mal) en cómo trabajo como desarrollador full-stack.
+
+## Las herramientas que uso
+
+### Cursor como editor principal
+
+**Cursor** reemplazó completamente VS Code para mí hace unos meses. El punto diferenciador no es el autocompletado — es la capacidad de hablar con el codebase completo.
+
+Cuando empiezo a trabajar en un feature nuevo, lo primero que hago es abrir el chat de Cursor y preguntarle: "¿Cómo está estructurado actualmente el módulo de X en este proyecto?". La respuesta me da contexto inmediato sin tener que navegar manualmente por el código.
+
+### Claude para razonamiento pesado
+
+Para las decisiones de arquitectura, reviews de código que requieren análisis profundo, y debugging de problemas complejos, uso **Claude** directamente (generalmente Opus). La razón: en tareas que requieren mantener mucho contexto y razonar en múltiples pasos, Claude Opus consistentemente me da respuestas más útiles que cualquier otro modelo.
+
+Tengo un shortcut configurado para abrir Claude con un template de contexto del proyecto preconfigurado. No empiezo cada conversación desde cero.
+
+## Mi flujo para features nuevos
+
+Cuando me toca implementar algo nuevo, el proceso es este:
+
+1. **Entiendo el requerimiento** sin IA primero. No delego el pensamiento inicial.
+2. **Le pido a Claude que explore el approach** con migo: "Tengo que implementar X en un proyecto con estas restricciones: [contexto]. ¿Cuáles son las formas de hacerlo y qué tradeoffs tiene cada una?"
+3. Elijo el approach y **implemento con Cursor**. El Composer de Cursor genera los archivos base, yo los reviso y edito.
+4. **Testing**: le pido a Cursor que genere tests para el código que escribimos. Los reviso, los complemento.
+5. **Code review propio**: antes de hacer commit, le paso el diff a Claude y le pregunto qué problemas potenciales ve.
+
+Este flujo me ahorra tiempo en las partes mecánicas y me deja más espacio mental para las decisiones que realmente importan.
+
+## Lo que la IA hace bien
+
+- **Boilerplate**: forms, validaciones, endpoints CRUD, configuración de librerías. Todo esto era tiempo muerto. Ya no.
+- **Transformaciones de datos**: "convierte este array de objetos en este otro formato" con lógica compleja. Claude lo hace en segundos.
+- **Explicar código ajeno**: cuando hereda código sin comentarios, le paso el bloque y pregunto qué hace. Funciona muy bien.
+- **Primeros drafts de documentación**: genero el borrador con IA y lo edito. Mucho más rápido que escribir desde cero.
+
+## Lo que la IA hace mal (y dónde no confío)
+
+- **Decisiones de arquitectura sin contexto profundo**: si le preguntás en abstracto "¿qué arquitectura uso?", te va a dar una respuesta genérica. Necesita contexto específico de tu proyecto.
+- **Lógica de negocio compleja**: cuando la lógica tiene muchos edge cases y reglas específicas del dominio, el código generado tiende a ser incompleto. Siempre reviso este tipo de output con más cuidado.
+- **Seguridad**: nunca delego decisiones de seguridad al modelo. Las reviso manualmente o con herramientas dedicadas. Un modelo de lenguaje que "parece seguro" no es lo mismo que código seguro.
+
+## El cambio real en productividad
+
+Soy honesto: al principio sobreestimé el impacto. Pensé que iba a duplicar mi velocidad de desarrollo. No pasó eso.
+
+Lo que sí pasó: **las tareas aburridas desaparecieron casi por completo**. El tiempo que antes gastaba escribiendo tipos de TypeScript repetitivos, configurando cosas básicas, o buscando cómo se usaba tal función de una librería — ese tiempo se recuperó.
+
+Y ese tiempo recuperado lo puedo invertir en las partes del trabajo que realmente me importan: diseño de sistemas, UX de la API, decisiones de arquitectura.
+
+## Lo que te recomiendo
+
+No copies mi flujo. Mirá qué partes de tu trabajo son repetitivas y mecánicas, y empezá por automatizar esas. La IA es mejor para lo que ya sabés hacer que para lo que no sabés — úsala para acelerar, no para reemplazar tu comprensión.
+
+Y nunca hagas commit de código que no entendés completamente, venga de IA o de Stack Overflow.

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Plus, Pencil, Trash2, Star, FileText, X } from 'lucide-react';
 
 interface PostItem {
+  id?: string;
   slug: string;
   locale: string;
   title: string;
@@ -14,7 +15,7 @@ interface PostItem {
 }
 
 interface PairedPost {
-  slug: string;
+  id: string;
   date: string;
   category: string;
   es?: PostItem;
@@ -24,9 +25,10 @@ interface PairedPost {
 function pair(posts: PostItem[]): PairedPost[] {
   const map: Record<string, PairedPost> = {};
   for (const p of posts) {
-    if (!map[p.slug]) map[p.slug] = { slug: p.slug, date: p.date, category: p.category };
-    map[p.slug][p.locale as 'es' | 'en'] = p;
-    if (p.date > map[p.slug].date) map[p.slug].date = p.date;
+    const key = p.id ?? p.slug;
+    if (!map[key]) map[key] = { id: key, date: p.date, category: p.category };
+    map[key][p.locale as 'es' | 'en'] = p;
+    if (p.date > map[key].date) map[key].date = p.date;
   }
   return Object.values(map).sort((a, b) => b.date.localeCompare(a.date));
 }
@@ -47,7 +49,7 @@ function DeleteModal({
   onConfirm: (locale?: 'es' | 'en') => void;
   onClose: () => void;
 }) {
-  const hasBoth = !!post.es && !!post.en;
+  const hasBoth = !!(post.es && post.en);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -56,7 +58,7 @@ function DeleteModal({
         <div className="flex items-start justify-between mb-4">
           <div>
             <h3 className="text-sm font-semibold text-white">Eliminar post</h3>
-            <p className="text-xs text-zinc-500 mt-1 font-mono">{post.slug}</p>
+            <p className="text-xs text-zinc-500 mt-1 font-mono">{post.id}</p>
           </div>
           <button onClick={onClose} className="text-zinc-600 hover:text-white transition-colors cursor-pointer">
             <X size={16} />
@@ -123,23 +125,25 @@ export default function PostsPage() {
 
   const handleDelete = async (locale?: 'es' | 'en') => {
     if (!deleteTarget) return;
-    const slug = deleteTarget.slug;
+    const id = deleteTarget.id;
     setDeleteTarget(null);
-    setDeletingSlug(slug);
+    setDeletingSlug(id);
 
     const localesToDelete = locale ? [locale] : (['es', 'en'] as const);
     for (const loc of localesToDelete) {
+      const locSlug = deleteTarget[loc]?.slug;
+      if (!locSlug) continue;
       await fetch('/api/admin/posts', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ locale: loc, slug }),
+        body: JSON.stringify({ locale: loc, slug: locSlug }),
       }).catch(() => null);
     }
 
     setPairs((prev) =>
       prev
         .map((p) => {
-          if (p.slug !== slug) return p;
+          if (p.id !== id) return p;
           if (!locale) return null;
           const updated = { ...p };
           delete updated[locale];
@@ -153,7 +157,7 @@ export default function PostsPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
-      <div className="max-w-3xl mx-auto px-6 py-8">
+      <div className="max-w-5xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -189,9 +193,9 @@ export default function PostsPage() {
           <div className="space-y-2">
             {pairs.map((p) => (
               <div
-                key={p.slug}
+                key={p.id}
                 className={`bg-zinc-900/50 hover:bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 transition-colors ${
-                  deletingSlug === p.slug ? 'opacity-40 pointer-events-none' : ''
+                  deletingSlug === p.id ? 'opacity-40 pointer-events-none' : ''
                 }`}
               >
                 <div className="flex items-center justify-between gap-4">
@@ -199,7 +203,7 @@ export default function PostsPage() {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 mb-0.5 flex-wrap">
                       <span className="text-sm font-medium truncate max-w-70">
-                        {p.es?.title ?? p.en?.title ?? p.slug}
+                        {p.es?.title ?? p.en?.title ?? p.id}
                       </span>
                       {(p.es?.featured || p.en?.featured) && (
                         <Star size={11} className="text-yellow-500 shrink-0" fill="currentColor" />
@@ -213,7 +217,7 @@ export default function PostsPage() {
                       </span>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-zinc-600">
-                      <span className="font-mono">{p.slug}</span>
+                      <span className="font-mono">{p.id}</span>
                       <span>·</span>
                       <span>{p.date}</span>
                     </div>
@@ -225,7 +229,7 @@ export default function PostsPage() {
                       p[loc] ? (
                         <Link
                           key={loc}
-                          href={`/admin/posts/edit/${loc}/${p.slug}`}
+                          href={`/admin/posts/edit/${loc}/${p[loc]!.slug}`}
                           className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors font-medium"
                         >
                           <Pencil size={10} />
@@ -234,7 +238,7 @@ export default function PostsPage() {
                       ) : (
                         <Link
                           key={loc}
-                          href={`/admin/posts/new?slug=${p.slug}&locale=${loc}`}
+                          href={`/admin/posts/new?locale=${loc}&id=${p.id}`}
                           className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg border border-dashed border-zinc-700 text-zinc-600 hover:border-violet-600/50 hover:text-violet-400 transition-colors font-medium"
                         >
                           <Plus size={10} />

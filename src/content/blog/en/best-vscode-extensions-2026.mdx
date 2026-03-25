@@ -1,0 +1,76 @@
+---
+id: mejores-extensiones-vscode-2026
+title: The Best VS Code Extensions in 2026 That Actually Matter
+description: No more lists of 50 extensions nobody uses. These are the ones I have installed, use every day, and why they earn their place.
+date: 2026-03-16
+category: tools
+tags: [vscode, productivity, tools, development]
+readTime: 6
+featured: false
+---
+
+Every year someone publishes "the 100 best VS Code extensions" and every year that list is useless. You won't find that here. This is what I actually have installed, what I genuinely use, and what I recommend if you work in full-stack web development in 2026.
+
+## The Filter I Use
+
+An extension has to pass three checks to stay in my VS Code:
+
+- **Do I use it daily?** If it hasn't fired in two weeks, it's gone.
+- **Does it do something VS Code can't do natively?** I don't install things that duplicate built-in functionality.
+- **Does it affect performance?** VS Code with 40 extensions is basically Chrome. Hard pass.
+
+With that filter, my list dropped to 12 extensions. Here are the ones I consider essential.
+
+## Productivity and Code
+
+### GitHub Copilot
+
+Still number one. Not because of hype, but because in 2026 the model improved significantly and long-context completions are genuinely useful. I use it with **autocomplete on but chat suggestions only on demand**. If you let it run constantly, you become dependent on it and that's a real problem I've seen tank junior devs' fundamentals.
+
+### Error Lens
+
+Shows TypeScript, ESLint, and any linter errors **directly on the line where they occur**, not just in the problems panel. It sounds minor but it completely changes how you read code. It's the extension I recommend most to junior developers because it forces you to see errors in context.
+
+### Pretty TypeScript Errors
+
+TypeScript error messages are famously unreadable. This extension formats them like a human wrote them. Since I installed it, I spend way less time deciphering weird generic type errors. It's free and does exactly what it promises.
+
+## Git and Version Control
+
+### GitLens
+
+I use it mainly for **two features**: inline blame (seeing who wrote what without leaving the file) and the history view for a specific file. The rest of GitLens features are noise. You can disable almost everything in settings and keep only what matters.
+
+### Git Graph
+
+For visualizing branches. The visual graph from Git Graph is far clearer than any terminal for understanding complicated merges or tracking where a commit came from. I use it especially on projects with multiple collaborators.
+
+## UI and Editing Experience
+
+### Symbols
+
+An alternative file explorer with cleaner icons than the defaults. It sounds superficial but when you have large projects with many files, the right icons reduce visual search time measurably.
+
+### TODO Highlight
+
+Highlights `TODO`, `FIXME`, `HACK` and any keyword you configure. In personal projects I always leave work-in-progress comments. Without this extension, I forget them. With it, they scream at me from the code.
+
+### Peacock
+
+Colors the VS Code sidebar per workspace. If you work with multiple projects open in different windows, this is invaluable. My personal project is green, work is blue, experiments are orange. Zero confusion.
+
+## What I Deleted This Year
+
+Popular extensions I removed in 2026 and don't miss:
+
+- **Prettier as an extension**: moved it to project scripts. I don't want it in global VS Code.
+- **Bracket Pair Colorizer**: VS Code has this natively now and does it better.
+- **Auto Rename Tag**: conflicts with modern frameworks. Framework Language Servers handle this better.
+
+## Configuration Matters More Than Extensions
+
+The most important thing I learned this year is that **a good VS Code configuration does more than any new extension**. A well-crafted `settings.json`, your own snippets, and personalized keyboard shortcuts transform the editor in ways no extension can match.
+
+If you don't have a versioned `settings.json` in your dotfiles repo, that's your next productivity project.
+
+Extensions are the complement. Configuration is the foundation.

@@ -1,30 +1,24 @@
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Link } from '@/i18n/navigation';
-import { ArrowLeft, Brain, Code2, Wrench, Calendar, Clock } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import { getCategory, CATEGORY_REGISTRY } from '@/lib/categories';
 import AdUnit from '@/components/blog/AdUnit';
-import { getAllSlugs, getPost } from '@/lib/blog';
+import { getAllSlugs, getAllPosts, getPost, getPostById, getPostIdBySlug } from '@/lib/blog';
 import { routing } from '@/i18n/routing';
+import PostCard from '@/components/blog/PostCard';
 
 // Custom MDX image component
-// Conventions (in alt text):
-//   ![alt](url)          → normal: rounded, column-width
-//   ![wide|alt](url)     → wide: breaks slightly outside column
-//   ![full|alt](url)     → full-bleed: edge to edge
-// Caption (optional):
-//   ![alt](url "Caption text")
 function BlogImage({ src, alt, title }: React.ImgHTMLAttributes<HTMLImageElement>) {
   const rawAlt = alt ?? '';
   const isFull = rawAlt.startsWith('full|');
   const isWide = rawAlt.startsWith('wide|');
   const cleanAlt = rawAlt.replace(/^(full|wide)\|\s*/, '');
   const imgClass = isFull ? 'img-full' : isWide ? 'img-wide' : '';
-
   // eslint-disable-next-line @next/next/no-img-element
   const imgEl = <img src={src} alt={cleanAlt} className={imgClass} />;
-
   if (title) {
     return (
       <span style={{ display: 'block' }}>
@@ -35,7 +29,6 @@ function BlogImage({ src, alt, title }: React.ImgHTMLAttributes<HTMLImageElement
       </span>
     );
   }
-
   return imgEl;
 }
 
@@ -47,33 +40,33 @@ interface Props {
 
 export function generateStaticParams() {
   const slugs = getAllSlugs();
+  const categories = Object.keys(CATEGORY_REGISTRY);
+  const all = Array.from(new Set([...slugs, ...categories]));
   return routing.locales.flatMap((locale) =>
-    slugs.map((slug) => ({ locale, slug }))
+    all.map((slug) => ({ locale, slug }))
   );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const post = getPost(locale, slug);
-  if (!post) return {};
-  return {
-    title: post.title,
-    description: post.description,
-    openGraph: {
+  if (post) {
+    return {
       title: post.title,
       description: post.description,
-      type: 'article',
-      publishedTime: post.date,
-      tags: post.tags,
-    },
-  };
+      openGraph: {
+        title: post.title,
+        description: post.description,
+        type: 'article',
+        publishedTime: post.date,
+        tags: post.tags,
+      },
+    };
+  }
+  const cat = getCategory(slug, locale);
+  if (cat.displayLabel) return { title: cat.displayLabel };
+  return {};
 }
-
-const categoryColors: Record<string, { bg: string; text: string; label: string; Icon: React.ElementType }> = {
-  ia:           { bg: 'bg-violet-500/10', text: 'text-violet-400', label: 'IA',           Icon: Brain  },
-  desarrollo:   { bg: 'bg-sky-500/10',    text: 'text-sky-400',    label: 'Desarrollo',   Icon: Code2  },
-  herramientas: { bg: 'bg-amber-500/10',  text: 'text-amber-400',  label: 'Herramientas', Icon: Wrench },
-};
 
 function formatDate(date: string, locale: string): string {
   return new Date(date).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', {
@@ -83,102 +76,126 @@ function formatDate(date: string, locale: string): string {
   });
 }
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function BlogSlugPage({ params }: Props) {
   const { locale, slug } = await params;
-  const post = getPost(locale, slug);
-  if (!post) notFound();
+
+  // ── Try post first ──────────────────────────────────────────────
+  let post = getPost(locale, slug);
+  if (!post) {
+    const id = getPostIdBySlug(slug);
+    if (id) {
+      const alternate = getPostById(locale, id);
+      if (alternate) redirect(`/${locale}/blog/${alternate.slug}`);
+    }
+  }
+
+  if (post) {
+    const t = await getTranslations({ locale, namespace: 'blog' });
+    const category = getCategory(post.category, locale);
+    const { icon: CategoryIcon } = category;
+
+    return (
+      <main className="min-h-screen bg-black text-[#f5f5f7]">
+        <div className="pt-24 pb-6 px-4 sm:px-6">
+          <div className="max-w-3xl mx-auto">
+            <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors">
+              <ArrowLeft className="w-4 h-4" />{t('backToBlog')}
+            </Link>
+          </div>
+        </div>
+
+        <header className="px-4 sm:px-6 pb-12">
+          <div className="max-w-3xl mx-auto flex flex-col gap-5">
+            <div className="flex flex-wrap items-center gap-3">
+              <Link href={`/blog/${post.category}`} className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${category.bg} ${category.text} hover:opacity-80 transition-opacity`}>
+                <CategoryIcon className="w-3 h-3" />{category.displayLabel}
+              </Link>
+              <span className="inline-flex items-center gap-1 text-sm text-[#6e6e73]"><Calendar className="w-3.5 h-3.5" />{formatDate(post.date, locale)}</span>
+              <span className="inline-flex items-center gap-1 text-sm text-[#6e6e73]"><Clock className="w-3.5 h-3.5" />{post.readTime} min</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight">{post.title}</h1>
+            <p className="text-lg text-[#6e6e73] leading-relaxed">{post.description}</p>
+            {post.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map((tag) => (
+                  <span key={tag} className="text-xs text-[#6e6e73] px-2 py-0.5 rounded-md" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )}
+            <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+          </div>
+        </header>
+
+        <div className="px-4 sm:px-6 pb-8">
+          <div className="max-w-3xl mx-auto">
+            <AdUnit format="horizontal" slot="post-top" />
+          </div>
+        </div>
+
+        <article className="px-4 sm:px-6 pb-12">
+          <div className="max-w-3xl mx-auto prose-blog">
+            <MDXRemote source={post.content} components={mdxComponents} />
+          </div>
+        </article>
+
+        <div className="px-4 sm:px-6 pb-12">
+          <div className="max-w-3xl mx-auto">
+            <AdUnit format="horizontal" slot="post-bottom" />
+          </div>
+        </div>
+
+        <div className="px-4 sm:px-6 pb-24">
+          <div className="max-w-3xl mx-auto" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '2rem' }}>
+            <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors">
+              <ArrowLeft className="w-4 h-4" />{t('backToBlog')}
+            </Link>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  // ── Try category ────────────────────────────────────────────────
+  const cat = getCategory(slug, locale);
+  if (!cat.displayLabel) notFound();
 
   const t = await getTranslations({ locale, namespace: 'blog' });
-  const category = categoryColors[post.category] ?? {
-    bg: 'bg-zinc-500/10',
-    text: 'text-zinc-400',
-    label: post.category,
-    Icon: Wrench,
-  };
-  const { Icon: CategoryIcon } = category;
+  const { icon: CategoryIcon } = cat;
+  const posts = getAllPosts(locale).filter((p) => p.category === slug);
 
   return (
     <main className="min-h-screen bg-black text-[#f5f5f7]">
-      {/* Back button */}
-      <div className="pt-24 pb-6 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1.5 text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />{t('backToBlog')}
+      <section className="pt-40 pb-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors mb-8">
+            <ArrowLeft className="w-4 h-4" /> {t('backToBlog')}
           </Link>
-        </div>
-      </div>
-
-      {/* Post header */}
-      <header className="px-4 sm:px-6 pb-12">
-        <div className="max-w-3xl mx-auto flex flex-col gap-5">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${category.bg} ${category.text}`}>
-              <CategoryIcon className="w-3 h-3" />{category.label}
+          <div className="flex flex-col gap-4 max-w-2xl mt-4">
+            <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold w-fit ${cat.bg} ${cat.text}`}>
+              <CategoryIcon className="w-3 h-3" />{cat.displayLabel}
             </span>
-            <span className="inline-flex items-center gap-1 text-sm text-[#6e6e73]"><Calendar className="w-3.5 h-3.5" />{formatDate(post.date, locale)}</span>
-            <span className="inline-flex items-center gap-1 text-sm text-[#6e6e73]"><Clock className="w-3.5 h-3.5" />{post.readTime} min</span>
+            <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight">{cat.displayLabel}</h1>
+            <p className="text-lg text-[#6e6e73]">{posts.length} {t('allPostsCount')}</p>
           </div>
-
-          <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
-            {post.title}
-          </h1>
-          <p className="text-lg text-[#6e6e73] leading-relaxed">
-            {post.description}
-          </p>
-
-          {post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs text-[#6e6e73] px-2 py-0.5 rounded-md"
-                  style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.06)' }}
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {/* Divider */}
-          <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)' }} />
         </div>
-      </header>
+      </section>
 
-      {/* Ad — before content */}
-      <div className="px-4 sm:px-6 pb-8">
-        <div className="max-w-3xl mx-auto">
-          <AdUnit format="horizontal" slot="post-top" />
-        </div>
-      </div>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-24 flex flex-col gap-16">
+        <AdUnit format="horizontal" slot="category-top" />
 
-      {/* MDX content */}
-      <article className="px-4 sm:px-6 pb-12">
-        <div className="max-w-3xl mx-auto prose-blog">
-          <MDXRemote source={post.content} components={mdxComponents} />
-        </div>
-      </article>
+        {posts.length === 0 ? (
+          <p className="text-[#6e6e73] text-center py-16">No hay posts en esta categoría todavía.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {posts.map((p) => (
+              <PostCard key={p.slug} post={p} locale={locale} />
+            ))}
+          </div>
+        )}
 
-      {/* Ad — after content */}
-      <div className="px-4 sm:px-6 pb-12">
-        <div className="max-w-3xl mx-auto">
-          <AdUnit format="horizontal" slot="post-bottom" />
-        </div>
-      </div>
-
-      {/* Bottom back link */}
-      <div className="px-4 sm:px-6 pb-24">
-        <div className="max-w-3xl mx-auto" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '2rem' }}>
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1.5 text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />{t('backToBlog')}
-          </Link>
-        </div>
+        <AdUnit format="horizontal" slot="category-bottom" />
       </div>
     </main>
   );

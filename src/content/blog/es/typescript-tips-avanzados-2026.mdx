@@ -1,0 +1,149 @@
+---
+id: typescript-tips-avanzados-2026
+title: 'TypeScript avanzado en 2026: tips que hacen el código más limpio y seguro'
+description: Tips avanzados de TypeScript que uso en proyectos reales para escribir código más limpio, más seguro y más fácil de mantener. Sin teoría, con ejemplos.
+date: 2026-02-25
+category: desarrollo
+tags: [TypeScript, desarrollo, JavaScript, tipado]
+readTime: 7
+featured: false
+---
+
+## TypeScript no es solo agregar tipos
+
+Hay un nivel de TypeScript donde estás poniendo `: string` y `: number` y te sentís bien. Y hay otro nivel donde el sistema de tipos trabaja activamente para hacer tu código más correcto.
+
+Estos son los patrones que más uso y que más impacto tienen en la calidad del código que escribo.
+
+## 1. Branded types para IDs
+
+El problema: `userId`, `postId`, `commentId` son todos `string`. TypeScript no te impide pasar uno donde espera el otro.
+
+La solución: **branded types**.
+
+```typescript
+type UserId = string & { readonly _brand: 'UserId' };
+type PostId = string & { readonly _brand: 'PostId' };
+
+function createUserId(id: string): UserId {
+  return id as UserId;
+}
+
+function getUser(id: UserId) { /* ... */ }
+
+const postId = createPostId('post-123');
+getUser(postId); // Error de TypeScript: PostId no es UserId
+```
+
+Esto parece verboso, pero te salva de bugs donde pasás el ID incorrecto y solo te enterás en runtime (o peor, en producción).
+
+## 2. Template literal types para strings con formato
+
+Cuando un string tiene un formato específico, podés tiparlo con precisión:
+
+```typescript
+type EventName = `on${Capitalize<string>}`;
+type CSSProperty = `${string}-${string}`;
+type ApiRoute = `/api/${string}`;
+
+function registerHandler(event: EventName, handler: () => void) { /* ... */ }
+
+registerHandler('onClick', () => {}); // OK
+registerHandler('click', () => {}); // Error: no empieza con 'on'
+```
+
+Especialmente útil para APIs de eventos, rutas, y cualquier string que siga una convención.
+
+## 3. Discriminated unions en lugar de booleanos
+
+En lugar de:
+```typescript
+type Result = {
+  data?: User;
+  error?: string;
+  loading: boolean;
+};
+```
+
+Usá discriminated unions:
+```typescript
+type Result =
+  | { status: 'loading' }
+  | { status: 'success'; data: User }
+  | { status: 'error'; error: string };
+```
+
+La diferencia: en la versión con booleanos, podés tener `{ loading: false, data: undefined, error: undefined }` que no tiene sentido. Con discriminated unions, **cada estado es un tipo separado y TypeScript garantiza que accedés solo a las propiedades que existen en ese estado**.
+
+## 4. satisfies operator
+
+Introducido en TypeScript 4.9 y todavía subutilizado:
+
+```typescript
+const config = {
+  api: {
+    url: 'https://api.example.com',
+    timeout: 5000,
+  },
+  features: {
+    darkMode: true,
+  },
+} satisfies Record<string, object>;
+
+// config.api.url es string (TypeScript infirió el tipo exacto)
+// Pero también validates que cumple Record<string, object>
+```
+
+`satisfies` valida contra un tipo sin perder la información de tipo inferida. Antes tenías que elegir entre validar o preservar la inferencia — ahora podés hacer las dos cosas.
+
+## 5. Infer en conditional types para extraer tipos
+
+```typescript
+type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
+type UnwrapArray<T> = T extends Array<infer U> ? U : T;
+
+type UserResponse = Promise<User[]>;
+type Users = UnwrapPromise<UserResponse>; // User[]
+type User = UnwrapArray<Users>; // User
+```
+
+Útil para trabajar con los tipos de retorno de funciones asíncronas y transformar tipos complejos sin repetir código.
+
+## 6. const assertions para objetos de configuración
+
+```typescript
+const ROUTES = {
+  HOME: '/',
+  DASHBOARD: '/dashboard',
+  PROFILE: '/profile',
+} as const;
+
+type Route = typeof ROUTES[keyof typeof ROUTES];
+// Route = '/' | '/dashboard' | '/profile'
+```
+
+`as const` convierte los valores en tipos literales. Combinado con `keyof typeof`, podés derivar tipos de unión directamente de tus objetos de configuración. Un cambio en el objeto se refleja automáticamente en el tipo.
+
+## 7. Tipos de utilidad que no uso suficiente
+
+Algunos que tienen en el estándar de TypeScript y que no todos conocen:
+
+- **`NoInfer<T>`** (TS 5.4+): previene que TypeScript infiera un tipo de un parámetro específico
+- **`Awaited<T>`**: similar a mi UnwrapPromise de arriba, pero nativo
+- **`Parameters<T>`**: extrae los tipos de los parámetros de una función
+- **`ReturnType<T>`**: extrae el tipo de retorno de una función
+
+```typescript
+async function fetchUser(id: string): Promise<User> { /* ... */ }
+
+type FetchUserParams = Parameters<typeof fetchUser>; // [string]
+type FetchUserReturn = Awaited<ReturnType<typeof fetchUser>>; // User
+```
+
+## El principio que unifica todo esto
+
+Estos patterns tienen algo en común: **hacen que los errores se detecten en tiempo de compilación, no en runtime**.
+
+Cada vez que agrego un tipo más preciso, estoy moviendo una clase de error potencial de "se descubre cuando el usuario lo encuentra" a "se descubre cuando el desarrollador escribe el código". Eso es TypeScript usado de forma inteligente.
+
+No necesitás implementar todo esto de golpe. Elegí uno o dos patterns por proyecto y empezá a aplicarlos donde más impacto tengan. El sistema de tipos de TypeScript es una herramienta — usala activamente, no como decoración.

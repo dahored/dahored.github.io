@@ -66,13 +66,13 @@ export default async function BlogPage({ params }: Props) {
             locale={locale}
             labels={{
               all: t('filterAll'),
-              ia: t('filterIa'),
-              desarrollo: t('filterDesarrollo'),
-              herramientas: t('filterHerramientas'),
               allPostsCount: t('allPostsCount'),
             }}
           />
         </section>
+
+        {/* Ad — bottom of listing */}
+        <AdUnit format="horizontal" slot="listing-bottom" />
       </div>
     </main>
   );

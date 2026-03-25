@@ -1,20 +1,22 @@
 import PostForm, { type PostFormData } from '../../_components/PostForm';
 
 interface Props {
-  searchParams: Promise<{ slug?: string; locale?: string }>;
+  searchParams: Promise<{ slug?: string; locale?: string; id?: string }>;
 }
 
 export default async function NewPostPage({ searchParams }: Props) {
-  const { slug, locale } = await searchParams;
+  const { slug, locale, id } = await searchParams;
   const initial: Partial<PostFormData> = {};
   if (slug) initial.slug = slug;
   if (locale === 'es' || locale === 'en') initial.locale = locale;
+  if (id) initial.id = id;
 
   return <PostForm mode="new" initial={Object.keys(initial).length ? { ...getDefaults(), ...initial } : undefined} />;
 }
 
 function getDefaults(): PostFormData {
   return {
+    id: '',
     locale: 'es',
     slug: '',
     title: '',

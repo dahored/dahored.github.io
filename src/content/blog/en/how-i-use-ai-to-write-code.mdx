@@ -1,0 +1,69 @@
+---
+id: como-uso-ia-para-escribir-codigo
+title: How I Use AI to Write Code Faster (My Real Workflow)
+description: My personal workflow using Claude and Cursor to write code as a full-stack developer. No theory — just what I actually use every day.
+date: 2026-03-05
+category: ai
+tags: [AI, Claude, Cursor, workflow]
+readTime: 6
+featured: false
+---
+
+## This isn't a generic tutorial
+
+There are a thousand posts about "how to use AI for coding" that boil down to "write good prompts" and "review the output." Thanks, super helpful.
+
+This post is different. It's my exact workflow, the tools I use, the limitations I found, and what changed (for better and worse) in how I work as a full-stack developer.
+
+## The tools I use
+
+### Cursor as my primary editor
+
+**Cursor** completely replaced VS Code for me a few months ago. The differentiator isn't autocomplete — it's the ability to talk to the entire codebase.
+
+When I start working on a new feature, the first thing I do is open Cursor's chat and ask: "How is the X module currently structured in this project?" The response gives me immediate context without having to manually navigate the code.
+
+### Claude for heavy reasoning
+
+For architecture decisions, code reviews that require deep analysis, and debugging complex problems, I use **Claude** directly (usually Opus). The reason: on tasks that require maintaining a lot of context and reasoning through multiple steps, Claude Opus consistently gives me more useful answers than any other model.
+
+I have a shortcut configured to open Claude with a pre-configured project context template. I don't start each conversation from scratch.
+
+## My workflow for new features
+
+When I need to implement something new, the process is:
+
+1. **Understand the requirement** without AI first. I don't delegate initial thinking.
+2. **Ask Claude to explore the approach** with me: "I need to implement X in a project with these constraints: [context]. What are the ways to do it and what are the tradeoffs?"
+3. Choose the approach and **implement with Cursor**. Cursor's Composer generates the base files, I review and edit them.
+4. **Testing**: ask Cursor to generate tests for the code we wrote. I review them, add to them.
+5. **Self code review**: before committing, I feed the diff to Claude and ask what potential problems it sees.
+
+This workflow saves me time on mechanical parts and leaves more mental space for decisions that actually matter.
+
+## What AI does well
+
+- **Boilerplate**: forms, validations, CRUD endpoints, library configuration. All of this was dead time. Not anymore.
+- **Data transformations**: "convert this array of objects into this other format" with complex logic. Claude does it in seconds.
+- **Explaining unfamiliar code**: when inheriting uncommented code, I paste the block and ask what it does. Works very well.
+- **First drafts of documentation**: generate the draft with AI and edit it. Much faster than writing from scratch.
+
+## What AI does badly (and where I don't trust it)
+
+- **Architecture decisions without deep context**: if you ask in the abstract "what architecture should I use?", you'll get a generic answer. It needs specific context from your project.
+- **Complex business logic**: when logic has many edge cases and domain-specific rules, generated code tends to be incomplete. I always review this type of output more carefully.
+- **Security**: I never delegate security decisions to the model. I review them manually or with dedicated tools. A language model that "seems secure" is not the same as secure code.
+
+## The real productivity change
+
+I'll be honest: at first I overestimated the impact. I thought I'd double my development speed. That didn't happen.
+
+What did happen: **the boring tasks almost completely disappeared**. The time I used to spend writing repetitive TypeScript types, setting up basic things, or looking up how a library function worked — that time was recovered.
+
+And that recovered time I can invest in the parts of the work I actually care about: system design, API UX, architecture decisions.
+
+## What I recommend
+
+Don't copy my workflow. Look at which parts of your work are repetitive and mechanical, and start by automating those. AI is better for things you already know how to do than for things you don't — use it to accelerate, not to replace your understanding.
+
+And never commit code you don't fully understand, whether it came from AI or Stack Overflow.

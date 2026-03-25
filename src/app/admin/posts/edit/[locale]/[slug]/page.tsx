@@ -12,6 +12,7 @@ async function fetchPost(locale: string, slug: string): Promise<PostFormData | n
   if (!res.ok) return null;
   const data = await res.json();
   return {
+    id: data.id ?? '',
     locale: data.locale as 'es' | 'en',
     slug: data.slug,
     title: data.title ?? '',

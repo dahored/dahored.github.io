@@ -65,10 +65,50 @@ export function getPost(locale: string, slug: string): Post | null {
 }
 
 export function getAllSlugs(): string[] {
-  const dir = path.join(contentDir, 'es');
-  if (!fs.existsSync(dir)) return [];
-  return fs
-    .readdirSync(dir)
-    .filter((f) => f.endsWith('.mdx'))
-    .map((f) => f.replace(/\.mdx$/, ''));
+  const slugs = new Set<string>();
+  for (const locale of ['es', 'en']) {
+    const dir = path.join(contentDir, locale);
+    if (!fs.existsSync(dir)) continue;
+    fs.readdirSync(dir)
+      .filter((f) => f.endsWith('.mdx'))
+      .forEach((f) => slugs.add(f.replace(/\.mdx$/, '')));
+  }
+  return Array.from(slugs);
+}
+
+/** Get the frontmatter `id` of a post by slug, searching any locale. */
+export function getPostIdBySlug(slug: string): string | null {
+  for (const locale of ['es', 'en']) {
+    const filePath = path.join(contentDir, locale, `${slug}.mdx`);
+    if (fs.existsSync(filePath)) {
+      const { data } = matter(fs.readFileSync(filePath, 'utf-8'));
+      return (data.id as string) || null;
+    }
+  }
+  return null;
+}
+
+/** Find a post in `locale` whose frontmatter `id` matches the given value. */
+export function getPostById(locale: string, id: string): (Post & { slug: string }) | null {
+  const dir = path.join(contentDir, locale);
+  if (!fs.existsSync(dir)) return null;
+  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.mdx'))) {
+    const raw = fs.readFileSync(path.join(dir, file), 'utf-8');
+    const { data, content } = matter(raw);
+    if (data.id === id) {
+      const slug = file.replace(/\.mdx$/, '');
+      return {
+        slug,
+        title: data.title as string,
+        description: data.description as string,
+        date: data.date as string,
+        category: data.category as string,
+        tags: (data.tags as string[]) ?? [],
+        readTime: (data.readTime as number) ?? 5,
+        featured: (data.featured as boolean) ?? false,
+        content,
+      };
+    }
+  }
+  return null;
 }

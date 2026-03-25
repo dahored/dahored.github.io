@@ -5,7 +5,10 @@ import { useRouter } from 'next/navigation';
 import { ArrowLeft, Sparkles, Save, ImagePlus, Eye, Languages } from 'lucide-react';
 import ImagePickerModal from './ImagePickerModal';
 
-const CATEGORY_SUGGESTIONS = ['ia', 'desarrollo', 'herramientas'];
+const CATEGORY_SUGGESTIONS: Record<'es' | 'en', string[]> = {
+  es: ['ia', 'desarrollo', 'herramientas', 'gaming', 'noticias', 'aventura', 'diseño', 'tecnología', 'negocios', 'ciencia', 'consejos', 'coexist'],
+  en: ['ai', 'development', 'tools', 'gaming', 'news', 'adventure', 'design', 'technology', 'business', 'science', 'tips', 'coexist'],
+};
 
 function localDateString() {
   const d = new Date();
@@ -16,6 +19,7 @@ function localDateString() {
 }
 
 export interface PostFormData {
+  id: string;
   locale: 'es' | 'en';
   slug: string;
   title: string;
@@ -35,10 +39,12 @@ function slugify(str: string) {
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9\s-]/g, '')
     .trim()
-    .replace(/\s+/g, '-');
+    .replace(/[\s-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 const defaultForm = (overrides?: Partial<PostFormData>): PostFormData => ({
+  id: '',
   locale: 'es',
   slug: '',
   title: '',
@@ -63,8 +69,10 @@ export default function PostForm({
   const contentRef = useRef<HTMLTextAreaElement>(null);
 
   const [form, setForm] = useState<PostFormData>(initial ?? defaultForm());
+  const [originalSlug] = useState<string>(initial?.slug ?? '');
   const [brief, setBrief] = useState('');
   const [showBrief, setShowBrief] = useState(false);
+  const [generateModel, setGenerateModel] = useState<'gemini' | 'gpt-4o'>('gemini');
   const [showImagePicker, setShowImagePicker] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [translating, setTranslating] = useState(false);
@@ -74,12 +82,20 @@ export default function PostForm({
 
   // Check if the other locale version exists (to show "Traducir" button)
   useEffect(() => {
-    if (!form.slug) { setSourceLocaleExists(false); return; }
     const otherLocale = form.locale === 'es' ? 'en' : 'es';
-    fetch(`/api/admin/posts?slug=${form.slug}&locale=${otherLocale}`)
-      .then((r) => setSourceLocaleExists(r.ok))
-      .catch(() => setSourceLocaleExists(false));
-  }, [form.slug, form.locale]);
+    if (form.id) {
+      // Prefer id-based lookup (works for new translation posts where slug differs)
+      fetch(`/api/admin/posts?id=${form.id}&locale=${otherLocale}`)
+        .then((r) => setSourceLocaleExists(r.ok))
+        .catch(() => setSourceLocaleExists(false));
+    } else if (form.slug) {
+      fetch(`/api/admin/posts?slug=${form.slug}&locale=${otherLocale}`)
+        .then((r) => setSourceLocaleExists(r.ok))
+        .catch(() => setSourceLocaleExists(false));
+    } else {
+      setSourceLocaleExists(false);
+    }
+  }, [form.slug, form.locale, form.id]);
 
   const set = useCallback((key: keyof PostFormData, value: unknown) => {
     setForm((f) => ({ ...f, [key]: value }));
@@ -90,18 +106,27 @@ export default function PostForm({
     if (newLocale === form.locale) return;
 
     // If no slug yet (blank new post), just update the field
-    if (!form.slug) {
+    if (!form.slug && !form.id) {
       set('locale', newLocale);
       return;
     }
 
-    // Check if that locale version already exists
-    const res = await fetch(`/api/admin/posts?slug=${form.slug}&locale=${newLocale}`);
-    if (res.ok) {
-      router.push(`/admin/posts/edit/${newLocale}/${form.slug}`);
-    } else {
-      router.push(`/admin/posts/new?slug=${form.slug}&locale=${newLocale}`);
+    const lookupId = form.id || form.slug;
+
+    // Find the other locale version by id
+    if (lookupId) {
+      const res = await fetch(`/api/admin/posts?id=${lookupId}&locale=${newLocale}`);
+      if (res.ok) {
+        const data = await res.json();
+        router.push(`/admin/posts/edit/${newLocale}/${data.slug}`);
+        return;
+      }
     }
+
+    // Other locale doesn't exist yet — create it
+    const params = new URLSearchParams({ locale: newLocale });
+    if (lookupId) params.set('id', lookupId);
+    router.push(`/admin/posts/new?${params}`);
   };
 
   const handleTranslate = async () => {
@@ -112,7 +137,7 @@ export default function PostForm({
       const res = await fetch('/api/admin/translate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug: form.slug, fromLocale, toLocale: form.locale }),
+        body: JSON.stringify({ slug: form.slug, id: form.id, fromLocale, toLocale: form.locale }),
       });
       if (!res.ok) throw new Error();
       const data = await res.json();
@@ -125,6 +150,10 @@ export default function PostForm({
         tags: Array.isArray(data.tags) ? data.tags.join(', ') : f.tags,
         readTime: data.readTime ?? f.readTime,
         featured: data.featured ?? f.featured,
+        // In new mode, derive slug from the translated title
+        ...(mode === 'new' && data.title ? { slug: slugify(data.title) } : {}),
+        // Carry the source id so both locales share the same pairing key
+        ...(data.id && !f.id ? { id: data.id } : {}),
       }));
       setStatus({ type: 'success', msg: `Traducido desde ${fromLocale.toUpperCase()}` });
     } catch {
@@ -138,7 +167,7 @@ export default function PostForm({
     setForm((f) => ({
       ...f,
       title,
-      ...(mode === 'new' ? { slug: slugify(title) } : {}),
+      ...(mode === 'new' ? { slug: title.trim() ? slugify(title) : 'untitled-1' } : {}),
     }));
   };
 
@@ -194,6 +223,7 @@ export default function PostForm({
           brief,
           locale: form.locale,
           category: form.category,
+          model: generateModel,
         }),
       });
       if (!res.ok) throw new Error();
@@ -217,17 +247,21 @@ export default function PostForm({
   };
 
   const handleSave = async () => {
-    if (!form.slug || !form.title || !form.content) {
+    const cleanSlug = slugify(form.slug);
+    if (!cleanSlug || !form.title || !form.content) {
       setStatus({ type: 'error', msg: 'Slug, título y contenido son requeridos' });
       return;
     }
+    const finalId = form.id || cleanSlug;
+    if (cleanSlug !== form.slug || finalId !== form.id)
+      setForm((f) => ({ ...f, slug: cleanSlug, id: finalId }));
     setSaving(true);
     setStatus(null);
     try {
       const res = await fetch('/api/admin/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, slug: cleanSlug, originalSlug, id: finalId }),
       });
       if (!res.ok) throw new Error();
       setStatus({ type: 'success', msg: 'Post guardado' });
@@ -274,7 +308,7 @@ export default function PostForm({
             <button
               onClick={handleTranslate}
               disabled={translating}
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium border border-zinc-700 text-zinc-300 hover:border-violet-500/50 hover:text-violet-300 disabled:opacity-40 transition-colors"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium border border-zinc-700 text-zinc-300 hover:border-violet-500/50 hover:text-violet-300 disabled:opacity-40 transition-colors cursor-pointer"
             >
               <Languages size={13} />
               {translating
@@ -286,7 +320,7 @@ export default function PostForm({
             <button
               onClick={() => setShowBrief((v) => !v)}
               disabled={generating}
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium bg-violet-600 hover:bg-violet-500 disabled:opacity-40 transition-colors"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium bg-violet-600 hover:bg-violet-500 disabled:opacity-40 transition-colors cursor-pointer"
             >
               <Sparkles size={13} />
               {generating ? 'Generando...' : 'Generar con AI'}
@@ -304,16 +338,31 @@ export default function PostForm({
                   className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 resize-none mb-3"
                   placeholder={`Ej: "Quiero hablar sobre cómo los agentes de IA están cambiando el desarrollo de software en 2026. Incluir ejemplos reales, comparar con el pasado y dar una perspectiva crítica."`}
                 />
+                {/* Model selector */}
+                <div className="flex gap-1.5 mb-3">
+                  <button
+                    onClick={() => setGenerateModel('gemini')}
+                    className={`flex-1 py-1.5 rounded-lg text-xs font-medium border transition-colors cursor-pointer ${generateModel === 'gemini' ? 'border-violet-500 bg-violet-500/10 text-violet-300' : 'border-zinc-700 text-zinc-500 hover:border-zinc-600 hover:text-zinc-300'}`}
+                  >
+                    Gemini Flash · <span className="text-green-400">Gratis</span>
+                  </button>
+                  <button
+                    onClick={() => setGenerateModel('gpt-4o')}
+                    className={`flex-1 py-1.5 rounded-lg text-xs font-medium border transition-colors cursor-pointer ${generateModel === 'gpt-4o' ? 'border-violet-500 bg-violet-500/10 text-violet-300' : 'border-zinc-700 text-zinc-500 hover:border-zinc-600 hover:text-zinc-300'}`}
+                  >
+                    GPT-4o · <span className="text-yellow-500">Pago</span>
+                  </button>
+                </div>
                 <div className="flex gap-2">
                   <button
                     onClick={handleGenerate}
-                    className="flex-1 py-2 rounded-lg text-sm font-medium bg-violet-600 hover:bg-violet-500 transition-colors"
+                    className="flex-1 py-2 rounded-lg text-sm font-medium bg-violet-600 hover:bg-violet-500 transition-colors cursor-pointer"
                   >
                     Generar artículo
                   </button>
                   <button
                     onClick={() => setShowBrief(false)}
-                    className="px-3 py-2 rounded-lg text-sm text-zinc-500 hover:text-white transition-colors"
+                    className="px-3 py-2 rounded-lg text-sm text-zinc-500 hover:text-white transition-colors cursor-pointer"
                   >
                     Cancelar
                   </button>
@@ -362,6 +411,7 @@ export default function PostForm({
               type="text"
               value={form.slug}
               onChange={(e) => set('slug', e.target.value)}
+              onBlur={(e) => set('slug', slugify(e.target.value))}
               className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 font-mono text-zinc-300"
               placeholder="mi-post"
             />
@@ -409,7 +459,7 @@ export default function PostForm({
               placeholder="ia"
             />
             <datalist id="category-suggestions">
-              {CATEGORY_SUGGESTIONS.map((c) => (
+              {CATEGORY_SUGGESTIONS[form.locale].map((c) => (
                 <option key={c} value={c} />
               ))}
             </datalist>

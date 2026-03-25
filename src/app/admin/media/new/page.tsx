@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Sparkles, Upload, Copy, Check, ArrowLeft, Image } from 'lucide-react';
+import GenerateImageForm, { type GenerateResult } from '@/app/admin/_components/GenerateImageForm';
 
 type Tab = 'generate' | 'upload';
 
@@ -11,37 +12,11 @@ export default function MediaNewPage() {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [tab, setTab] = useState<Tab>('generate');
-  const [prompt, setPrompt] = useState('');
-  const [result, setResult] = useState<{ url: string; public_id: string } | null>(null);
+  const [result, setResult] = useState<GenerateResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{ type: 'error' | 'success'; msg: string } | null>(null);
   const [copied, setCopied] = useState(false);
   const [dragOver, setDragOver] = useState(false);
-
-  const handleGenerate = async () => {
-    if (!prompt.trim()) {
-      setStatus({ type: 'error', msg: 'Escribe un prompt' });
-      return;
-    }
-    setLoading(true);
-    setStatus(null);
-    setResult(null);
-    try {
-      const res = await fetch('/api/admin/image', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt }),
-      });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      setResult(data);
-      setStatus({ type: 'success', msg: 'Generada y subida a Cloudinary' });
-    } catch {
-      setStatus({ type: 'error', msg: 'Error generando con DALL-E. Verifica tu crédito de OpenAI.' });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleUpload = async (file: File) => {
     if (file.size > 10 * 1024 * 1024) {
@@ -80,7 +55,7 @@ export default function MediaNewPage() {
         <div className="flex items-center gap-3 mb-8">
           <button
             onClick={() => router.push('/admin/media')}
-            className="flex items-center gap-1.5 text-zinc-500 hover:text-white text-sm transition-colors"
+            className="flex items-center gap-1.5 text-zinc-500 hover:text-white text-sm transition-colors cursor-pointer"
           >
             <ArrowLeft size={14} /> Media
           </button>
@@ -92,15 +67,15 @@ export default function MediaNewPage() {
         <div className="flex gap-1 bg-zinc-900 border border-zinc-800 rounded-xl p-1 mb-6">
           <button
             onClick={() => setTab('generate')}
-            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
               tab === 'generate' ? 'bg-zinc-700 text-white' : 'text-zinc-500 hover:text-zinc-300'
             }`}
           >
-            <Sparkles size={13} /> Generar con DALL-E 3
+            <Sparkles size={13} /> Generar imagen
           </button>
           <button
             onClick={() => setTab('upload')}
-            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
               tab === 'upload' ? 'bg-zinc-700 text-white' : 'text-zinc-500 hover:text-zinc-300'
             }`}
           >
@@ -108,8 +83,8 @@ export default function MediaNewPage() {
           </button>
         </div>
 
-        {/* Status */}
-        {status && (
+        {/* Status (upload tab only) */}
+        {status && tab === 'upload' && (
           <div
             className={`mb-4 px-4 py-3 rounded-xl text-sm border ${
               status.type === 'error'
@@ -123,41 +98,13 @@ export default function MediaNewPage() {
 
         {/* Generate tab */}
         {tab === 'generate' && (
-          <div className="space-y-4">
-            <div>
-              <label className="block text-xs text-zinc-500 mb-2 font-medium">
-                Prompt en inglés{' '}
-                <span className="text-zinc-700 font-normal">— sé descriptivo, menciona estilo visual</span>
-              </label>
-              <textarea
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && e.metaKey && handleGenerate()}
-                rows={5}
-                className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-violet-500 resize-none placeholder-zinc-700"
-                placeholder={`"A futuristic dark UI dashboard with glowing neon blue and purple accents showing AI agent workflow graphs, cinematic lighting, 8K render"`}
-              />
-              <p className="text-xs text-zinc-700 mt-1 text-right">⌘ + Enter para generar</p>
-            </div>
-            <button
-              onClick={handleGenerate}
-              disabled={loading}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium bg-violet-600 hover:bg-violet-500 disabled:opacity-40 transition-colors"
-            >
-              {loading ? (
-                <>
-                  <span className="animate-spin">◌</span> Generando con DALL-E 3...
-                </>
-              ) : (
-                <>
-                  <Sparkles size={14} /> Generar imagen
-                </>
-              )}
-            </button>
-            <p className="text-xs text-zinc-700 text-center">
-              Formato 1792×1024 · ~15 segundos · sube a Cloudinary automáticamente
-            </p>
-          </div>
+          <GenerateImageForm
+            showResult={true}
+            onGenerated={(r) => {
+              setResult(r);
+              setStatus({ type: 'success', msg: 'Generada y subida a Cloudinary' });
+            }}
+          />
         )}
 
         {/* Upload tab */}
@@ -201,35 +148,35 @@ export default function MediaNewPage() {
                 if (file) handleUpload(file);
               }}
             />
-          </div>
-        )}
 
-        {/* Result preview */}
-        {result && (
-          <div className="mt-6 border border-zinc-800 rounded-xl overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={result.url} alt="Resultado" className="w-full object-cover" />
-            <div className="p-4 space-y-3">
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1.5 flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 min-w-0">
-                  <Image size={12} className="text-zinc-600 shrink-0" />
-                  <span className="text-xs font-mono text-zinc-400 truncate">{result.url}</span>
+            {/* Upload result preview */}
+            {result && tab === 'upload' && (
+              <div className="mt-6 border border-zinc-800 rounded-xl overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={result.url} alt="Resultado" className="w-full object-cover" />
+                <div className="p-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5 flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 min-w-0">
+                      <Image size={12} className="text-zinc-600 shrink-0" />
+                      <span className="text-xs font-mono text-zinc-400 truncate">{result.url}</span>
+                    </div>
+                    <button
+                      onClick={copyUrl}
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium bg-zinc-800 hover:bg-zinc-700 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                    >
+                      {copied ? <><Check size={12} /> Copiado</> : <><Copy size={12} /> Copiar</>}
+                    </button>
+                  </div>
+                  <p className="text-xs text-zinc-600 font-mono">{result.public_id}</p>
+                  <button
+                    onClick={() => router.push('/admin/media')}
+                    className="w-full py-2 rounded-lg text-xs text-zinc-500 hover:text-white border border-zinc-800 hover:border-zinc-600 transition-colors cursor-pointer"
+                  >
+                    Ver en la galería →
+                  </button>
                 </div>
-                <button
-                  onClick={copyUrl}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium bg-zinc-800 hover:bg-zinc-700 transition-colors whitespace-nowrap shrink-0"
-                >
-                  {copied ? <><Check size={12} /> Copiado</> : <><Copy size={12} /> Copiar</>}
-                </button>
               </div>
-              <p className="text-xs text-zinc-600 font-mono">{result.public_id}</p>
-              <button
-                onClick={() => router.push('/admin/media')}
-                className="w-full py-2 rounded-lg text-xs text-zinc-500 hover:text-white border border-zinc-800 hover:border-zinc-600 transition-colors"
-              >
-                Ver en la galería →
-              </button>
-            </div>
+            )}
           </div>
         )}
       </div>

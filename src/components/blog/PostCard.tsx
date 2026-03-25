@@ -1,18 +1,13 @@
 import { Link } from '@/i18n/navigation';
-import { ArrowRight, Brain, Code2, Wrench, Calendar, Clock } from 'lucide-react';
+import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import type { PostMeta } from '@/lib/blog';
+import { getCategory } from '@/lib/categories';
 
 interface PostCardProps {
   post: PostMeta;
   locale: string;
   featured?: boolean;
 }
-
-const categoryColors: Record<string, { bg: string; text: string; label: string; Icon: React.ElementType }> = {
-  ia:          { bg: 'bg-violet-500/10', text: 'text-violet-400', label: 'IA',           Icon: Brain  },
-  desarrollo:  { bg: 'bg-sky-500/10',    text: 'text-sky-400',    label: 'Desarrollo',   Icon: Code2  },
-  herramientas:{ bg: 'bg-amber-500/10',  text: 'text-amber-400',  label: 'Herramientas', Icon: Wrench },
-};
 
 function formatDate(date: string, locale: string): string {
   return new Date(date).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', {
@@ -23,13 +18,8 @@ function formatDate(date: string, locale: string): string {
 }
 
 export default function PostCard({ post, locale, featured = false }: PostCardProps) {
-  const category = categoryColors[post.category] ?? {
-    bg: 'bg-zinc-500/10',
-    text: 'text-zinc-400',
-    label: post.category,
-    Icon: Wrench,
-  };
-  const { Icon: CategoryIcon } = category;
+  const category = getCategory(post.category, locale);
+  const { icon: CategoryIcon } = category;
 
   if (featured) {
     return (
@@ -43,7 +33,7 @@ export default function PostCard({ post, locale, featured = false }: PostCardPro
             <div className="flex items-center gap-3">
               <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${category.bg} ${category.text}`}>
                 <CategoryIcon className="w-3 h-3" />
-                {category.label}
+                {category.displayLabel}
               </span>
               <span className="inline-flex items-center gap-1 text-xs text-[#6e6e73]">
                 <Calendar className="w-3 h-3" />{formatDate(post.date, locale)}
@@ -88,7 +78,7 @@ export default function PostCard({ post, locale, featured = false }: PostCardPro
       <div className="flex items-center gap-2">
         <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold ${category.bg} ${category.text}`}>
           <CategoryIcon className="w-3 h-3" />
-          {category.label}
+          {category.displayLabel}
         </span>
       </div>
       <h3 className="text-lg font-bold text-[#f5f5f7] leading-snug group-hover:text-white transition-colors">

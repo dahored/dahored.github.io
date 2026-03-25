@@ -259,7 +259,16 @@
     "filterHerramientas": "Tools",
     "readTime": "{n} min read",
     "backToBlog": "Blog",
-    "allPostsCount": "articles"
+    "allPostsCount": "articles",
+    "description": "Articles on development, AI, gaming and more. Direct takes, no fluff.",
+    "placeholder": "you@email.com",
+    "subscribe": "Subscribe",
+    "categories": {
+      "dev": "Development",
+      "gaming": "Gaming",
+      "travel": "Adventures",
+      "motivation": "Tips"
+    }
   },
   "contact": {
     "label": "Contact",

@@ -1,0 +1,78 @@
+---
+id: react-20-novedades-que-importan
+title: 'React 20: The Updates That Actually Matter for Your Daily Dev'
+description: An honest analysis of React 20. Which features are worth learning now, which are overhyped, and how it impacts real full-stack development.
+date: 2026-03-18
+category: development
+tags: [React, development, JavaScript, frontend]
+readTime: 6
+featured: false
+---
+
+## React keeps dominating and keeps evolving
+
+Every new React version triggers the same cycle: articles saying it will change everything, articles saying it's unnecessary, and confused developers stuck in the middle. React 20 is no different.
+
+I've been using React 20 in real projects for weeks. Here's my analysis without the hype and without the gratuitous pessimism.
+
+## What actually matters
+
+### React Compiler: finally production-ready
+
+The React Compiler — previously known as "React Forget" — shipped stable with React 20. And yes, **it changes the performance optimization game**.
+
+In simple terms: you no longer have to think about `useMemo`, `useCallback`, and `React.memo` for most cases. The compiler analyzes your code and applies optimizations automatically.
+
+I migrated a project that had dozens of manual `useMemo` calls. After enabling the compiler, I removed most of them and performance stayed the same or improved. The code ended up significantly cleaner.
+
+Are there cases where you still need manual optimizations? Yes, in very specific situations with complex logic. But 80% of use cases are covered.
+
+### Native Actions
+
+React 20 consolidates the **Actions** pattern that was being introduced in earlier versions. Essentially, forms can associate directly with async server functions (in frameworks like Next.js) in a cleaner way.
+
+Before:
+```jsx
+// Manual handler, loading state, manual error handling
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  try { await submitData(formData) }
+  catch { setError(true) }
+  finally { setLoading(false) }
+};
+```
+
+With Actions in React 20, much of this is handled automatically with the new `useActionState` hook. Less boilerplate, less surface area for bugs.
+
+### use() as an official API
+
+The `use()` hook that allowed consuming Promises and Contexts directly in render was formalized as a stable API. This simplifies working with async data in components considerably.
+
+## What's less important than it seems
+
+### TypeScript type system changes
+
+React 20 brought some TypeScript type changes that caused noise. In practice, migration is mostly automatic with the official codemod. It's not a reason to delay migration.
+
+### Concurrent mode changes
+
+React's concurrent mode has been stable for a while. React 20 refines some behaviors, but if you were already using Suspense and concurrent features, the changes are incremental.
+
+## Do you need to migrate now?
+
+**For new projects**: yes, start with React 20. There's no reason to start with older versions.
+
+**For existing projects**: it depends. If your project has lots of manual `useMemo` and `useCallback`, migrating to the compiler will simplify your code significantly. If your project is stable and you don't have performance issues, migration can wait — there are no massive breaking changes.
+
+The official codemod handles most changes automatically. I ran the process on a medium-sized project and it took less than an hour to resolve remaining conflicts.
+
+## My honest evaluation
+
+React 20 isn't a revolution. It's a maturation. The React ecosystem had been accumulating patterns that were necessary but verbose — **the compiler and Actions reduce that verbosity significantly**.
+
+The learning curve for React 20 if you already know React 18 or 19 is minimal. The fundamental APIs didn't change. The new concepts are additions, not replacements.
+
+What I like most: the direction is right. React is betting on less boilerplate and more automatic optimization. That benefits everyone — especially teams where not everyone has deep knowledge of React performance optimization.
+
+If you haven't tried it yet: install React 20 and enable the compiler in one of your projects. The difference in the generated output is visible, and the cleaner code speaks for itself.

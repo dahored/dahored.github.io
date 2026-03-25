@@ -1,0 +1,89 @@
+---
+id: nextjs-15-por-que-migrar
+title: 'Next.js 15: por qué deberías migrar (y qué te va a costar)'
+description: Los beneficios reales de migrar a Next.js 15 y los problemas que vas a encontrar en el camino. Mi experiencia migrando proyectos en producción.
+date: 2026-03-08
+category: desarrollo
+tags: [Next.js, React, desarrollo, fullstack]
+readTime: 6
+featured: false
+---
+
+## La migración que vale la pena
+
+Next.js 15 lleva un tiempo disponible y la pregunta que me siguen haciendo es: **¿vale la pena migrar o es mejor esperar?**
+
+Migré dos proyectos en producción a Next.js 15 y tengo una respuesta más matizada que "sí, migrá". Acá está lo que encontré.
+
+## Por qué sí vale la pena
+
+### El sistema de caché revisado es una mejora real
+
+El caching en Next.js 13 y 14 confundió a casi todos. El comportamiento por defecto era demasiado agresivo y la mayoría de los desarrolladores terminaban deshabilitando el caché sin entender bien por qué.
+
+Next.js 15 hizo una corrección importante: **el fetch ya no cachea por defecto**. Ahora tenés que ser explícito sobre qué querés cachear y por cuánto tiempo. Esto significa más código en algunos casos, pero también significa que el comportamiento es predecible.
+
+El nuevo modelo mental es más claro: si no le decís que cachee, no cachea. Simple, predecible, sin sorpresas.
+
+### Turbopack en modo dev (estable por fin)
+
+Turbopack como reemplazo de webpack en modo desarrollo es **notablemente más rápido**. En proyectos medianos, los tiempos de compilación inicial bajaron a la mitad en mis tests. Los HMR (hot module replacement) son casi instantáneos.
+
+¿Funciona perfectamente? En su mayoría sí. Tuve un conflicto con una librería de CSS-in-JS que requirió una configuración manual, pero en general la transición fue suave.
+
+### Server Components más maduros
+
+Los React Server Components ya no son una feature experimental — son el centro del modelo mental de Next.js 15. Y en esta versión, el tooling y la experiencia de desarrollo los hace mucho más fáciles de usar correctamente.
+
+La separación entre Server Components y Client Components es más clara en el código. Los errores cuando violás los límites son más descriptivos. La documentación es más completa.
+
+## Lo que te va a costar (los gotchas reales)
+
+### El cambio en el comportamiento de params y searchParams
+
+En Next.js 15, `params` y `searchParams` en page components son ahora **Promises** en lugar de objetos síncronos. Esto rompe código de Next.js 14 que accede a ellos directamente.
+
+```typescript
+// Next.js 14
+export default function Page({ params }: { params: { id: string } }) {
+  return <div>{params.id}</div>
+}
+
+// Next.js 15
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  return <div>{id}</div>
+}
+```
+
+El codemod oficial detecta la mayoría de estos casos, pero tuve que hacer ajustes manuales en algunas situaciones con tipos TypeScript complejos.
+
+### Algunas librerías todavía no están listas
+
+No todas las librerías del ecosistema son compatibles con Next.js 15 todavía. Antes de migrar, revisá las dependencias críticas de tu proyecto. El problema más común: librerías que usan apis deprecadas de Next.js o que asumen ciertos comportamientos del caché que cambiaron.
+
+### El tiempo de build en producción
+
+Turbopack todavía no está en modo producción — seguís usando webpack para los builds de producción. Hay trabajo en progreso, pero no llegó estable a esta versión. Así que el tiempo de build en producción no mejoró (ni empeoró).
+
+## Mi proceso de migración
+
+Para los dos proyectos que migré, usé este proceso:
+
+1. **Rama de migración separada**, nunca directo en main
+2. **Codemod oficial primero**: `npx @next/codemod@latest upgrade`
+3. **Resolver errores de TypeScript** antes de correr el servidor
+4. **Testing manual** de todos los flujos críticos
+5. **Despliegue gradual** con feature flags
+
+El proceso tomó entre 4 y 8 horas por proyecto dependiendo de la complejidad. No fue traumático, pero requirió atención.
+
+## ¿Deberías migrar?
+
+**Proyectos nuevos**: sí, empezá con Next.js 15. No hay discusión.
+
+**Proyectos existentes en producción**: si tu proyecto tiene tráfico real y el negocio depende de él, esperá a que el ecosistema de librerías madure un poco más (digamos un mes o dos), o planeá una ventana de mantenimiento apropiada. El caché revisado es un cambio de comportamiento que puede tener efectos inesperados si no lo probás bien.
+
+**Proyectos de hobby o staging**: migrá ya, es la mejor forma de aprender las diferencias.
+
+El futuro de Next.js claramente está en la dirección de Next.js 15. Más temprano que tarde, la migración va a ser necesaria. Mejor hacerla cuando es una decisión que cuando es una urgencia.

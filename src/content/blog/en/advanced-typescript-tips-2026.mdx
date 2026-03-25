@@ -1,0 +1,149 @@
+---
+id: typescript-tips-avanzados-2026
+title: Advanced TypeScript Tips That Make Code Cleaner and Safer in 2026
+description: Advanced TypeScript patterns I use in real projects to write cleaner, safer, and more maintainable code. No theory — with real examples.
+date: 2026-02-25
+category: development
+tags: [TypeScript, development, JavaScript, typing]
+readTime: 7
+featured: false
+---
+
+## TypeScript isn't just adding types
+
+There's a level of TypeScript where you're adding `: string` and `: number` and feeling good about it. And there's another level where the type system actively works to make your code more correct.
+
+These are the patterns I use most and that have the most impact on the quality of the code I write.
+
+## 1. Branded types for IDs
+
+The problem: `userId`, `postId`, `commentId` are all `string`. TypeScript won't stop you from passing one where it expects another.
+
+The solution: **branded types**.
+
+```typescript
+type UserId = string & { readonly _brand: 'UserId' };
+type PostId = string & { readonly _brand: 'PostId' };
+
+function createUserId(id: string): UserId {
+  return id as UserId;
+}
+
+function getUser(id: UserId) { /* ... */ }
+
+const postId = createPostId('post-123');
+getUser(postId); // TypeScript error: PostId is not UserId
+```
+
+This seems verbose, but it saves you from bugs where you pass the wrong ID and only find out at runtime (or worse, in production).
+
+## 2. Template literal types for formatted strings
+
+When a string has a specific format, you can type it precisely:
+
+```typescript
+type EventName = `on${Capitalize<string>}`;
+type CSSProperty = `${string}-${string}`;
+type ApiRoute = `/api/${string}`;
+
+function registerHandler(event: EventName, handler: () => void) { /* ... */ }
+
+registerHandler('onClick', () => {}); // OK
+registerHandler('click', () => {}); // Error: doesn't start with 'on'
+```
+
+Especially useful for event APIs, routes, and any string that follows a convention.
+
+## 3. Discriminated unions instead of booleans
+
+Instead of:
+```typescript
+type Result = {
+  data?: User;
+  error?: string;
+  loading: boolean;
+};
+```
+
+Use discriminated unions:
+```typescript
+type Result =
+  | { status: 'loading' }
+  | { status: 'success'; data: User }
+  | { status: 'error'; error: string };
+```
+
+The difference: in the boolean version, you can have `{ loading: false, data: undefined, error: undefined }` which makes no sense. With discriminated unions, **each state is a separate type and TypeScript guarantees you only access properties that exist in that state**.
+
+## 4. The satisfies operator
+
+Introduced in TypeScript 4.9 and still underused:
+
+```typescript
+const config = {
+  api: {
+    url: 'https://api.example.com',
+    timeout: 5000,
+  },
+  features: {
+    darkMode: true,
+  },
+} satisfies Record<string, object>;
+
+// config.api.url is string (TypeScript inferred the exact type)
+// But it also validates that it satisfies Record<string, object>
+```
+
+`satisfies` validates against a type without losing the inferred type information. Before, you had to choose between validating or preserving inference — now you can do both.
+
+## 5. Infer in conditional types to extract types
+
+```typescript
+type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
+type UnwrapArray<T> = T extends Array<infer U> ? U : T;
+
+type UserResponse = Promise<User[]>;
+type Users = UnwrapPromise<UserResponse>; // User[]
+type SingleUser = UnwrapArray<Users>; // User
+```
+
+Useful for working with return types of async functions and transforming complex types without repeating code.
+
+## 6. const assertions for configuration objects
+
+```typescript
+const ROUTES = {
+  HOME: '/',
+  DASHBOARD: '/dashboard',
+  PROFILE: '/profile',
+} as const;
+
+type Route = typeof ROUTES[keyof typeof ROUTES];
+// Route = '/' | '/dashboard' | '/profile'
+```
+
+`as const` converts values into literal types. Combined with `keyof typeof`, you can derive union types directly from your configuration objects. A change in the object automatically reflects in the type.
+
+## 7. Utility types I don't use enough
+
+Some that ship with TypeScript's standard library that not everyone knows:
+
+- **`NoInfer<T>`** (TS 5.4+): prevents TypeScript from inferring a type from a specific parameter
+- **`Awaited<T>`**: similar to my UnwrapPromise above, but native
+- **`Parameters<T>`**: extracts the parameter types from a function
+- **`ReturnType<T>`**: extracts the return type from a function
+
+```typescript
+async function fetchUser(id: string): Promise<User> { /* ... */ }
+
+type FetchUserParams = Parameters<typeof fetchUser>; // [string]
+type FetchUserReturn = Awaited<ReturnType<typeof fetchUser>>; // User
+```
+
+## The principle that unifies all of this
+
+These patterns have something in common: **they move error detection to compile time, not runtime**.
+
+Every time I add a more precise type, I'm moving a class of potential error from "discovered when the user encounters it" to "discovered when the developer writes the code." That's TypeScript used intelligently.
+
+You don't need to implement all of this at once. Pick one or two patterns per project and start applying them where they'll have the most impact. TypeScript's type system is a tool — use it actively, not as decoration.

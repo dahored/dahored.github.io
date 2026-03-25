@@ -1,0 +1,74 @@
+---
+id: claude-opus-cambio-mi-flujo
+title: Claude Opus 4.6 cambió cómo trabajo como desarrollador
+description: Cómo Claude Opus 4.6 transformó mi workflow de desarrollo. Lo que lo hace diferente, cuándo lo uso, y por qué se convirtió en mi modelo principal.
+date: 2026-02-28
+category: ia
+tags: [IA, Claude, Anthropic, workflow]
+readTime: 5
+featured: false
+---
+
+## No era fan de Claude al principio
+
+Lo digo con honestidad: tardé en pasarme a Claude. Estaba cómodo con GPT-4, tenía mis prompts, mi flujo funcionaba. Cambiar de herramienta tiene un costo de fricción que no siempre vale la pena.
+
+Pero hace unos meses probé **Claude Opus 4.6** en serio — no para tareas fáciles, sino para los problemas reales que me daban más trabajo — y la diferencia fue suficiente para cambiar.
+
+## Qué hace diferente a Claude Opus
+
+### El contexto largo de verdad funciona
+
+Claude tiene una ventana de contexto enorme y, más importante, **la usa bien**. No es solo el número de tokens — es que el modelo mantiene coherencia cuando el contexto es largo.
+
+Le pegué una codebase completa de ~15,000 líneas de código en el contexto y le pedí que encontrara inconsistencias en el manejo de errores. No solo encontró los problemas — explicó el patrón subyacente que los estaba causando. Eso requiere entender el código de forma holística, no línea por línea.
+
+Con GPT-4 el mismo ejercicio producía respuestas que se perdían en detalles específicos sin capturar el patrón. Con Opus, la respuesta fue la que hubiera dado un senior developer que pasó tiempo leyendo el código completo.
+
+### Razona antes de responder (de forma útil)
+
+Claude Opus hace algo que al principio me parecía lento: **piensa en voz alta antes de dar la respuesta final**. En GPT se llama "reasoning mode" y es opcional. En Opus se siente más orgánico.
+
+¿Por qué importa? Porque cuando el modelo explica su razonamiento, podés detectar cuándo va por el camino equivocado y corregirlo antes de que llegue a una conclusión incorrecta. Es como pair programming con un dev que verbaliza sus pensamientos.
+
+### Menos alucinaciones en código
+
+No desaparecieron, pero son menos frecuentes y más fáciles de detectar. Cuando Opus no está seguro de algo, tiende a decirlo. GPT-4 a veces inventaba APIs con confianza total. Opus es más cauteloso, lo cual prefiero.
+
+## Cómo lo integré en mi workflow
+
+### Para architecture decisions
+
+Tengo un template de prompt que uso cada vez que tengo que tomar una decisión de arquitectura:
+
+- Contexto del proyecto (stack, escala, constrains)
+- El problema específico que necesito resolver
+- Las opciones que ya consideré
+- Qué tradeoffs me importan más
+
+Claude con ese contexto me da análisis que son genuinamente útiles, no respuestas genéricas de "depende".
+
+### Para code reviews propios
+
+Antes de hacer PR de algo importante, paso el diff completo a Opus con el contexto del proyecto y le pregunto:
+- ¿Qué problemas potenciales ves?
+- ¿Hay edge cases que no estoy manejando?
+- ¿Hay algo que haría diferente y por qué?
+
+No siempre tiene razón. Pero me obliga a pensar en cosas que pude haber pasado por alto.
+
+### Para debugging difícil
+
+Cuando estoy trabado en un bug que no entiendo, Opus es mi primera parada antes de ir a Stack Overflow. Le doy el error, el código relevante, y lo que ya intenté. Las hipótesis que genera son suficientemente buenas para orientar el debugging en la dirección correcta.
+
+## Lo que no cambió
+
+Sigo usando Cursor con GPT-5 o Claude Sonnet (no Opus) para el autocompletado y el Composer. Opus es más lento y más caro — lo reservo para tareas donde la calidad del razonamiento importa más que la velocidad.
+
+Para código repetitivo y tareas mecánicas, cualquier modelo moderno funciona. Para análisis profundo y decisiones importantes, **Opus vale el costo**.
+
+## Mi recomendación
+
+Si sos desarrollador y no has probado Claude Opus para trabajo serio — no para tareas simples, sino para los problemas que realmente te cuestan — probalo por una semana. Usalo donde antes habrías pedido la opinión de un colega senior o donde habrías tardado horas buscando la respuesta.
+
+No es perfecto. Pero para razonamiento complejo sobre código, es el mejor modelo que tengo disponible ahora mismo.

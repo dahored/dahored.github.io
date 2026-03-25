@@ -1,67 +1,70 @@
 'use client';
 
 import { useState } from 'react';
-import { Brain, Code2, Wrench, LayoutGrid } from 'lucide-react';
+import { LayoutGrid } from 'lucide-react';
 import PostCard from '@/components/blog/PostCard';
 import type { PostMeta } from '@/lib/blog';
+import { CATEGORY_REGISTRY } from '@/lib/categories';
 
 interface BlogFilterProps {
   posts: PostMeta[];
   locale: string;
   labels: {
     all: string;
-    ia: string;
-    desarrollo: string;
-    herramientas: string;
     allPostsCount: string;
   };
 }
 
-const CATEGORIES = ['all', 'ia', 'desarrollo', 'herramientas'] as const;
-type Category = (typeof CATEGORIES)[number];
-
-const categoryIcons: Record<Category, React.ElementType> = {
-  all: LayoutGrid,
-  ia: Brain,
-  desarrollo: Code2,
-  herramientas: Wrench,
-};
-
 export default function BlogFilter({ posts, locale, labels }: BlogFilterProps) {
-  const [active, setActive] = useState<Category>('all');
+  const [active, setActive] = useState<string>('all');
+
+  // Collect unique categories present in posts, preserving first-seen order
+  const presentCategories = Array.from(new Set(posts.map((p) => p.category).filter(Boolean)));
 
   const filtered = active === 'all' ? posts : posts.filter((p) => p.category === active);
-
-  const categoryLabel: Record<Category, string> = {
-    all: labels.all,
-    ia: labels.ia,
-    desarrollo: labels.desarrollo,
-    herramientas: labels.herramientas,
-  };
+  const lang = locale === 'en' ? 'en' : 'es';
 
   return (
     <div className="flex flex-col gap-8">
       {/* Filter tabs */}
       <div className="flex flex-wrap gap-2">
-        {CATEGORIES.map((cat) => {
-          const Icon = categoryIcons[cat];
+        {/* All */}
+        <button
+          onClick={() => setActive('all')}
+          className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium transition-all cursor-pointer"
+          style={
+            active === 'all'
+              ? { background: '#6366f1', border: '1px solid #6366f1', color: '#fff' }
+              : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#6e6e73' }
+          }
+        >
+          <LayoutGrid className="w-3.5 h-3.5" />
+          {labels.all}
+        </button>
+
+        {/* Dynamic categories */}
+        {presentCategories.map((cat) => {
+          const def = CATEGORY_REGISTRY[cat];
+          if (!def) return null;
+          const { icon: Icon, label, color } = def;
+          const displayLabel = label[lang];
+          const isActive = active === cat;
           return (
-          <button
-            key={cat}
-            onClick={() => setActive(cat)}
-            className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-              active === cat ? 'text-white' : 'text-[#6e6e73] hover:text-[#f5f5f7]'
-            }`}
-            style={
-              active === cat
-                ? { background: '#6366f1', border: '1px solid #6366f1' }
-                : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }
-            }
-          >
-            <Icon className="w-3.5 h-3.5" />
-            {categoryLabel[cat]}
-          </button>
-        )})}
+            <button
+              key={cat}
+              onClick={() => setActive(cat)}
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium transition-all cursor-pointer"
+              style={
+                isActive
+                  ? { background: color, border: `1px solid ${color}`, color: '#fff' }
+                  : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#6e6e73' }
+              }
+            >
+              <Icon className="w-3.5 h-3.5" />
+              {displayLabel}
+            </button>
+          );
+        })}
       </div>
 
       {/* Post count */}

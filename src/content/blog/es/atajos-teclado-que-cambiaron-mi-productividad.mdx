@@ -1,0 +1,68 @@
+---
+id: atajos-teclado-productividad
+title: 10 atajos de teclado que realmente cambiaron qué tan rápido trabajo
+description: No los atajos básicos de Ctrl+C. Los que uso en VS Code, terminal, navegador y sistema que redujeron mi tiempo en tareas repetitivas de manera real y medible.
+date: 2026-01-28
+category: consejos
+tags: [productividad, atajos de teclado, vscode, consejos]
+readTime: 5
+featured: false
+---
+
+Hay miles de listas de atajos de teclado en internet. La mayoría lista `Ctrl+C`, `Ctrl+V` y `Ctrl+Z` como si fueran revelaciones. Esta lista no es eso. Estos son los atajos que, cuando los aprendí, cambié cómo trabajo de manera que todavía noto hoy.
+
+Los divido por contexto: VS Code, terminal, navegador y sistema. Todos los uso en Mac, con equivalentes en Windows/Linux donde aplica.
+
+## VS Code
+
+### `Cmd+Shift+P` — La paleta de comandos
+
+Parece básico pero la mayoría de developers no lo usa al máximo. La paleta de comandos ejecuta **cualquier acción** de VS Code sin menú. Aprende a buscar las acciones que usas frecuente y te ahorras docenas de clics al día. Mi uso más frecuente: "Sort Lines Ascending" para ordenar imports, "Transform to Uppercase/Lowercase" para transformar texto rápido.
+
+### `Cmd+D` — Selección múltiple del siguiente igual
+
+Selecciona la siguiente ocurrencia de la palabra seleccionada. Presiona varias veces para seleccionar múltiples instancias y edítalas simultáneamente. Para renombrar una variable localmente sin refactoring formal, esto es lo más rápido que existe.
+
+### `Cmd+Shift+L` — Seleccionar todas las ocurrencias
+
+La versión nuclear de `Cmd+D`. Selecciona todas las ocurrencias de la selección actual en el archivo de una vez. Úsalo cuando sabes con certeza que quieres cambiar todas las instancias.
+
+### `Alt+Click` — Cursores múltiples
+
+Click sosteniendo Alt crea un cursor adicional en cada punto donde haces click. Para editar líneas paralelas con contenido diferente que el multi-selección no puede manejar, esto es la herramienta correcta.
+
+### `Cmd+Shift+K` — Eliminar línea completa
+
+Elimina la línea donde está el cursor sin necesidad de seleccionarla. Mucho más rápido que `Home → Shift+End → Delete`.
+
+### `Ctrl+G` — Ir a línea específica
+
+Cuando el stack trace dice "error en línea 342", `Ctrl+G → 342 → Enter` te lleva ahí instantáneamente. El scrolling manual para buscar una línea es tiempo perdido.
+
+## Terminal
+
+### `Ctrl+R` — Búsqueda reversa en historial
+
+Abre la búsqueda en el historial de comandos. Escribe parte del comando que buscas y aparece el más reciente que lo contiene. Para comandos largos que usas seguido (docker run con muchos flags, conexiones SSH específicas), esto elimina la necesidad de recordar la sintaxis exacta.
+
+### `!!` — Último comando
+
+`!!` repite el último comando. El uso más valioso: `sudo !!` cuando ejecutas algo que requería permisos de root y olvidaste el sudo. Es un segundo de tiempo pero elimina completamente la frustración de reescribir un comando largo.
+
+## Navegador
+
+### `Cmd+L` — Foco a la barra de URL
+
+Lleva el foco a la barra de URL inmediatamente. Para buscar algo nuevo sin usar el ratón, es el primer paso. Parece trivial hasta que lo haces automático y te das cuenta cuántas veces al día lo usas.
+
+### `Cmd+Shift+T` — Reabrir pestaña cerrada
+
+Reabre la última pestaña cerrada. En Chrome y Firefox también funciona para múltiples pestañas cerradas en secuencia. El caso de uso clásico: cerrar accidentalmente una pestaña con un formulario llenado a medias.
+
+## Cómo aprendo atajos nuevos
+
+No intento aprender 10 atajos a la vez. Aprendo **uno por semana** y lo uso forzosamente durante esos 7 días hasta que se vuelve automático. Después del primer mes, son parte de mi sistema motor y no requieren pensamiento consciente.
+
+La clave es la fricción deliberada: cuando quiero hacer la acción de otra manera, me detengo y uso el atajo aunque sea más lento al principio. El discomfort temporal es el precio de la velocidad permanente.
+
+Un atajo que usas automáticamente sin pensar es infinitamente más valioso que veinte atajos que recuerdas vagamente cuando los necesitas.
