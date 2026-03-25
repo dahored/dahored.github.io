@@ -258,7 +258,7 @@
     "filterDesarrollo": "Development",
     "filterHerramientas": "Tools",
     "readTime": "{n} min read",
-    "backToBlog": "← Blog",
+    "backToBlog": "Blog",
     "allPostsCount": "{n} articles"
   },
   "contact": {
