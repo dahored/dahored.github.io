@@ -28,7 +28,7 @@ function slugify(str: string) {
     .replace(/\s+/g, '-');
 }
 
-const defaultForm = (): PostFormData => ({
+const defaultForm = (overrides?: Partial<PostFormData>): PostFormData => ({
   locale: 'es',
   slug: '',
   title: '',
@@ -39,6 +39,7 @@ const defaultForm = (): PostFormData => ({
   readTime: 5,
   featured: false,
   content: '',
+  ...overrides,
 });
 
 export default function PostForm({
@@ -52,11 +53,10 @@ export default function PostForm({
   const contentRef = useRef<HTMLTextAreaElement>(null);
 
   const [form, setForm] = useState<PostFormData>(initial ?? defaultForm());
-  const [imagePrompt, setImagePrompt] = useState('');
-  const [previewImage, setPreviewImage] = useState('');
-  const [manualUrl, setManualUrl] = useState('');
+  const [brief, setBrief] = useState('');
+  const [showBrief, setShowBrief] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
   const [generating, setGenerating] = useState(false);
-  const [generatingImage, setGeneratingImage] = useState(false);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState<{ type: 'error' | 'success'; msg: string } | null>(null);
 
@@ -72,35 +72,51 @@ export default function PostForm({
     }));
   };
 
-  const insertImageMarkdown = useCallback(
-    (url: string, alt?: string) => {
+  const insertAtCursor = useCallback(
+    (text: string) => {
       const textarea = contentRef.current;
-      if (!textarea) return;
+      if (!textarea) {
+        setForm((f) => ({ ...f, content: f.content + text }));
+        return;
+      }
       const start = textarea.selectionStart ?? form.content.length;
       const end = textarea.selectionEnd ?? start;
-      const md = `\n![${alt ?? form.title ?? 'imagen'}](${url})\n`;
-      const next = form.content.substring(0, start) + md + form.content.substring(end);
+      const next = form.content.substring(0, start) + text + form.content.substring(end);
       setForm((f) => ({ ...f, content: next }));
       setTimeout(() => {
-        textarea.selectionStart = textarea.selectionEnd = start + md.length;
+        textarea.selectionStart = textarea.selectionEnd = start + text.length;
         textarea.focus();
       }, 0);
     },
-    [form.content, form.title]
+    [form.content]
   );
 
+  const handleInsertImage = () => {
+    const url = imageUrl.trim();
+    if (!url) return;
+    insertAtCursor(`\n![imagen](${url})\n`);
+    setImageUrl('');
+    setStatus({ type: 'success', msg: 'Imagen insertada en el contenido' });
+  };
+
   const handleGenerate = async () => {
-    if (!form.title) {
-      setStatus({ type: 'error', msg: 'Escribe un título antes de generar' });
+    if (!form.title && !brief) {
+      setStatus({ type: 'error', msg: 'Escribe un título o descripción para generar' });
       return;
     }
     setGenerating(true);
     setStatus(null);
+    setShowBrief(false);
     try {
       const res = await fetch('/api/admin/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: form.title, locale: form.locale, category: form.category }),
+        body: JSON.stringify({
+          title: form.title,
+          brief,
+          locale: form.locale,
+          category: form.category,
+        }),
       });
       if (!res.ok) throw new Error();
       const data = await res.json();
@@ -112,36 +128,13 @@ export default function PostForm({
         tags: Array.isArray(data.tags) ? data.tags.join(', ') : f.tags,
         readTime: data.readTime ?? f.readTime,
         content: data.content ?? f.content,
+        ...(mode === 'new' && data.title ? { slug: slugify(data.title) } : {}),
       }));
-      setStatus({ type: 'success', msg: 'Artículo generado' });
+      setStatus({ type: 'success', msg: 'Artículo generado con AI' });
     } catch {
-      setStatus({ type: 'error', msg: 'Error generando artículo con AI' });
+      setStatus({ type: 'error', msg: 'Error generando artículo' });
     } finally {
       setGenerating(false);
-    }
-  };
-
-  const handleGenerateImage = async () => {
-    if (!imagePrompt) {
-      setStatus({ type: 'error', msg: 'Escribe un prompt para la imagen' });
-      return;
-    }
-    setGeneratingImage(true);
-    setStatus(null);
-    try {
-      const res = await fetch('/api/admin/image', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: imagePrompt, slug: form.slug }),
-      });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      setPreviewImage(data.url);
-      setStatus({ type: 'success', msg: 'Imagen generada y subida a Cloudinary' });
-    } catch {
-      setStatus({ type: 'error', msg: 'Error generando imagen' });
-    } finally {
-      setGeneratingImage(false);
     }
   };
 
@@ -159,8 +152,8 @@ export default function PostForm({
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error();
-      setStatus({ type: 'success', msg: 'Post guardado exitosamente' });
-      if (mode === 'new') setTimeout(() => router.push('/admin'), 1200);
+      setStatus({ type: 'success', msg: 'Post guardado' });
+      if (mode === 'new') setTimeout(() => router.push('/admin/posts'), 1000);
     } catch {
       setStatus({ type: 'error', msg: 'Error guardando el post' });
     } finally {
@@ -171,58 +164,89 @@ export default function PostForm({
   const wordCount = form.content.split(/\s+/).filter(Boolean).length;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Top bar */}
-      <div className="sticky top-0 z-10 bg-[#0a0a0a]/95 backdrop-blur border-b border-zinc-800 px-6 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-4">
+    <div className="bg-[#0a0a0a] text-white" style={{ height: 'calc(100vh - 49px)' }}>
+      {/* Toolbar */}
+      <div className="border-b border-zinc-800 px-5 py-2.5 flex items-center justify-between bg-[#0a0a0a]/95 backdrop-blur">
+        <div className="flex items-center gap-3">
           <button
-            onClick={() => router.push('/admin')}
+            onClick={() => router.push('/admin/posts')}
             className="text-zinc-500 hover:text-white text-sm transition-colors"
           >
-            ← Admin
+            ← Posts
           </button>
-          <span className="text-zinc-700">|</span>
-          <span className="text-sm font-medium text-zinc-300">
-            {mode === 'new' ? 'Nuevo post' : `Editando: ${form.slug}`}
+          <span className="text-zinc-800">|</span>
+          <span className="text-sm text-zinc-400">
+            {mode === 'new' ? 'Nuevo post' : form.slug}
           </span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           {status && (
             <span
               className={`text-xs px-3 py-1 rounded-full ${
                 status.type === 'error'
-                  ? 'bg-red-500/10 text-red-400'
-                  : 'bg-green-500/10 text-green-400'
+                  ? 'bg-red-500/10 text-red-400 border border-red-500/20'
+                  : 'bg-green-500/10 text-green-400 border border-green-500/20'
               }`}
             >
               {status.msg}
             </span>
           )}
-          <button
-            onClick={handleGenerate}
-            disabled={generating}
-            className="px-4 py-1.5 rounded-lg text-sm font-medium bg-violet-600 hover:bg-violet-500 disabled:opacity-40 transition-colors"
-          >
-            {generating ? 'Generando...' : '✨ Generar con AI'}
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setShowBrief((v) => !v)}
+              disabled={generating}
+              className="px-4 py-1.5 rounded-lg text-sm font-medium bg-violet-600 hover:bg-violet-500 disabled:opacity-40 transition-colors"
+            >
+              {generating ? 'Generando...' : '✨ Generar con AI'}
+            </button>
+            {showBrief && (
+              <div className="absolute right-0 top-full mt-2 w-96 bg-zinc-900 border border-zinc-700 rounded-xl p-4 shadow-2xl z-20">
+                <p className="text-xs text-zinc-500 mb-2 font-medium">
+                  ¿De qué trata el post? Describe el ángulo, puntos clave, tono.
+                </p>
+                <textarea
+                  autoFocus
+                  value={brief}
+                  onChange={(e) => setBrief(e.target.value)}
+                  rows={4}
+                  className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 resize-none mb-3"
+                  placeholder={`Ej: "Quiero hablar sobre cómo los agentes de IA están cambiando el desarrollo de software en 2026. Incluir ejemplos reales, comparar con el pasado y dar una perspectiva crítica."`}
+                />
+                <div className="flex gap-2">
+                  <button
+                    onClick={handleGenerate}
+                    className="flex-1 py-2 rounded-lg text-sm font-medium bg-violet-600 hover:bg-violet-500 transition-colors"
+                  >
+                    Generar artículo
+                  </button>
+                  <button
+                    onClick={() => setShowBrief(false)}
+                    className="px-3 py-2 rounded-lg text-sm text-zinc-500 hover:text-white transition-colors"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
           <button
             onClick={handleSave}
             disabled={saving}
             className="px-4 py-1.5 rounded-lg text-sm font-medium bg-white text-black hover:bg-zinc-100 disabled:opacity-40 transition-colors"
           >
-            {saving ? 'Guardando...' : 'Guardar post'}
+            {saving ? 'Guardando...' : 'Guardar'}
           </button>
         </div>
       </div>
 
       {/* Main grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-0 h-[calc(100vh-57px)]">
-        {/* Left panel: metadata */}
-        <div className="border-r border-zinc-800 overflow-y-auto p-6 space-y-5">
+      <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] h-full">
+        {/* Left: metadata */}
+        <div className="border-r border-zinc-800 overflow-y-auto p-5 space-y-4 pb-16">
           {/* Locale + Slug */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-zinc-500 mb-1.5 font-medium">Idioma</label>
+              <label className="block text-xs text-zinc-500 mb-1 font-medium">Idioma</label>
               <select
                 value={form.locale}
                 onChange={(e) => set('locale', e.target.value)}
@@ -233,20 +257,20 @@ export default function PostForm({
               </select>
             </div>
             <div>
-              <label className="block text-xs text-zinc-500 mb-1.5 font-medium">Slug</label>
+              <label className="block text-xs text-zinc-500 mb-1 font-medium">Slug</label>
               <input
                 type="text"
                 value={form.slug}
                 onChange={(e) => set('slug', e.target.value)}
                 className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 font-mono text-zinc-300"
-                placeholder="mi-post-slug"
+                placeholder="mi-post"
               />
             </div>
           </div>
 
           {/* Title */}
           <div>
-            <label className="block text-xs text-zinc-500 mb-1.5 font-medium">Título</label>
+            <label className="block text-xs text-zinc-500 mb-1 font-medium">Título</label>
             <input
               type="text"
               value={form.title}
@@ -258,9 +282,9 @@ export default function PostForm({
 
           {/* Description */}
           <div>
-            <label className="block text-xs text-zinc-500 mb-1.5 font-medium">
+            <label className="block text-xs text-zinc-500 mb-1 font-medium">
               Descripción{' '}
-              <span className="text-zinc-700 font-normal">(meta, max 160 chars)</span>
+              <span className="text-zinc-700 font-normal">SEO · max 160</span>
             </label>
             <textarea
               value={form.description}
@@ -268,15 +292,15 @@ export default function PostForm({
               rows={2}
               maxLength={160}
               className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 resize-none"
-              placeholder="Descripción corta para SEO"
+              placeholder="Meta descripción para Google"
             />
-            <p className="text-right text-xs text-zinc-700 mt-0.5">{form.description.length}/160</p>
+            <p className="text-right text-xs text-zinc-700">{form.description.length}/160</p>
           </div>
 
           {/* Category + Date + ReadTime */}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-3 gap-2">
             <div>
-              <label className="block text-xs text-zinc-500 mb-1.5 font-medium">Categoría</label>
+              <label className="block text-xs text-zinc-500 mb-1 font-medium">Categoría</label>
               <select
                 value={form.category}
                 onChange={(e) => set('category', e.target.value)}
@@ -290,7 +314,7 @@ export default function PostForm({
               </select>
             </div>
             <div>
-              <label className="block text-xs text-zinc-500 mb-1.5 font-medium">Fecha</label>
+              <label className="block text-xs text-zinc-500 mb-1 font-medium">Fecha</label>
               <input
                 type="date"
                 value={form.date}
@@ -299,7 +323,7 @@ export default function PostForm({
               />
             </div>
             <div>
-              <label className="block text-xs text-zinc-500 mb-1.5 font-medium">Min lectura</label>
+              <label className="block text-xs text-zinc-500 mb-1 font-medium">Min</label>
               <input
                 type="number"
                 value={form.readTime}
@@ -313,9 +337,9 @@ export default function PostForm({
 
           {/* Tags */}
           <div>
-            <label className="block text-xs text-zinc-500 mb-1.5 font-medium">
+            <label className="block text-xs text-zinc-500 mb-1 font-medium">
               Tags{' '}
-              <span className="text-zinc-700 font-normal">(separados por coma)</span>
+              <span className="text-zinc-700 font-normal">separados por coma</span>
             </label>
             <input
               type="text"
@@ -334,83 +358,45 @@ export default function PostForm({
               onChange={(e) => set('featured', e.target.checked)}
               className="w-4 h-4 accent-violet-500 rounded"
             />
-            <span className="text-sm text-zinc-300">Post destacado (featured)</span>
+            <span className="text-sm text-zinc-300">Post destacado</span>
           </label>
 
-          {/* Divider */}
-          <div className="border-t border-zinc-800 pt-5">
-            <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-4">
-              Imagen con DALL-E 3
-            </p>
-
-            {/* Prompt input */}
-            <div className="flex gap-2 mb-3">
+          {/* Insert image */}
+          <div className="border-t border-zinc-800 pt-4">
+            <label className="block text-xs text-zinc-500 mb-2 font-medium">
+              Insertar imagen{' '}
+              <span className="text-zinc-700 font-normal">— pega URL de Cloudinary</span>
+            </label>
+            <div className="flex gap-2">
               <input
-                type="text"
-                value={imagePrompt}
-                onChange={(e) => setImagePrompt(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleGenerateImage()}
-                className="flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500"
-                placeholder="Describe la imagen en inglés..."
+                type="url"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleInsertImage()}
+                className="flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-violet-500 font-mono"
+                placeholder="https://res.cloudinary.com/..."
               />
               <button
-                onClick={handleGenerateImage}
-                disabled={generatingImage}
-                className="px-3 py-2 rounded-lg text-sm font-medium bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 transition-colors whitespace-nowrap"
+                onClick={handleInsertImage}
+                className="px-3 py-2 rounded-lg text-xs font-medium bg-zinc-800 hover:bg-zinc-700 transition-colors"
               >
-                {generatingImage ? '...' : 'Generar'}
+                Insertar
               </button>
             </div>
-
-            {/* Preview */}
-            {previewImage && (
-              <div className="space-y-2">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={previewImage}
-                  alt="Preview"
-                  className="w-full rounded-lg object-cover aspect-video"
-                />
-                <button
-                  onClick={() => insertImageMarkdown(previewImage)}
-                  className="w-full py-2 rounded-lg text-xs font-medium bg-violet-600/15 border border-violet-600/30 hover:bg-violet-600/25 text-violet-300 transition-colors"
-                >
-                  Insertar en contenido
-                </button>
-                <p className="text-xs text-zinc-700 break-all">{previewImage}</p>
-              </div>
-            )}
-
-            {/* Manual URL */}
-            <div className="mt-4">
-              <p className="text-xs text-zinc-600 mb-2">O inserta una URL de Cloudinary manualmente:</p>
-              <div className="flex gap-2">
-                <input
-                  type="url"
-                  value={manualUrl}
-                  onChange={(e) => setManualUrl(e.target.value)}
-                  className="flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-violet-500 font-mono"
-                  placeholder="https://res.cloudinary.com/..."
-                />
-                <button
-                  onClick={() => {
-                    if (manualUrl) {
-                      insertImageMarkdown(manualUrl);
-                      setManualUrl('');
-                    }
-                  }}
-                  className="px-3 py-2 rounded-lg text-xs font-medium bg-zinc-800 hover:bg-zinc-700 transition-colors"
-                >
-                  Insertar
-                </button>
-              </div>
-            </div>
+            <a
+              href="/admin/media"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block mt-2 text-xs text-zinc-600 hover:text-violet-400 transition-colors"
+            >
+              → Ir a Media para generar o subir imágenes
+            </a>
           </div>
         </div>
 
-        {/* Right panel: content editor */}
+        {/* Right: content editor */}
         <div className="flex flex-col overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-2 border-b border-zinc-800 bg-zinc-900/50">
+          <div className="flex items-center justify-between px-4 py-2 border-b border-zinc-800 bg-zinc-900/30 shrink-0">
             <span className="text-xs text-zinc-600 font-mono">contenido.mdx</span>
             <span className="text-xs text-zinc-700">
               {wordCount} palabras · {form.content.length} chars
@@ -421,7 +407,7 @@ export default function PostForm({
             value={form.content}
             onChange={(e) => set('content', e.target.value)}
             spellCheck={false}
-            className="flex-1 w-full bg-[#0d0d0d] px-6 py-5 text-sm font-mono text-zinc-300 focus:outline-none resize-none leading-7 placeholder-zinc-800"
+            className="flex-1 w-full bg-[#0d0d0d] px-6 py-5 text-sm font-mono text-zinc-300 focus:outline-none resize-none leading-7 placeholder-zinc-800 overflow-y-auto"
             placeholder={`## Título de sección\n\nEscribe el contenido aquí en markdown/MDX...\n\n**Texto en negrita** y _cursiva_\n\n- Item de lista\n- Otro item`}
           />
         </div>

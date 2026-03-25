@@ -1,12 +1,12 @@
-import PostForm, { type PostFormData } from '../../../_components/PostForm';
+import PostForm, { type PostFormData } from '../../../../_components/PostForm';
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
 }
 
 async function fetchPost(locale: string, slug: string): Promise<PostFormData | null> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
-  const res = await fetch(`${baseUrl}/api/admin/posts?slug=${slug}&locale=${locale}`, {
+  const base = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
+  const res = await fetch(`${base}/api/admin/posts?slug=${slug}&locale=${locale}`, {
     cache: 'no-store',
   });
   if (!res.ok) return null;
@@ -31,8 +31,8 @@ export default async function EditPostPage({ params }: Props) {
 
   if (!initial) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
-        <p className="text-zinc-500">Post no encontrado: {locale}/{slug}</p>
+      <div className="flex items-center justify-center h-64 text-zinc-500 text-sm">
+        Post no encontrado: {locale}/{slug}
       </div>
     );
   }

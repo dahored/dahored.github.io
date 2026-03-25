@@ -1,0 +1,40 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { v2 as cloudinary } from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// GET - list all images in blog/ folder
+export async function GET() {
+  const result = await cloudinary.api.resources({
+    type: 'upload',
+    prefix: 'blog/',
+    max_results: 100,
+    direction: 'desc',
+  });
+
+  const images = (result.resources as Record<string, unknown>[]).map((r) => ({
+    public_id: r.public_id as string,
+    url: r.secure_url as string,
+    width: r.width as number,
+    height: r.height as number,
+    bytes: r.bytes as number,
+    created_at: r.created_at as string,
+    format: r.format as string,
+  }));
+
+  return NextResponse.json(images);
+}
+
+// DELETE - remove image from Cloudinary
+export async function DELETE(req: NextRequest) {
+  const { public_id } = await req.json();
+  if (!public_id) {
+    return NextResponse.json({ error: 'public_id requerido' }, { status: 400 });
+  }
+  await cloudinary.uploader.destroy(public_id);
+  return NextResponse.json({ ok: true });
+}

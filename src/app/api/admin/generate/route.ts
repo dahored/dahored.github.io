@@ -4,14 +4,32 @@ import OpenAI from 'openai';
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function POST(req: NextRequest) {
-  const { title, locale, category } = await req.json();
+  const { title, brief, locale, category } = await req.json();
 
-  if (!title) {
-    return NextResponse.json({ error: 'title es requerido' }, { status: 400 });
+  if (!title && !brief) {
+    return NextResponse.json({ error: 'title o brief es requerido' }, { status: 400 });
   }
 
   const lang = locale === 'en' ? 'English' : 'Spanish';
   const catHint = category ?? 'ia';
+
+  const userPrompt = [
+    title ? `Title (working): "${title}"` : null,
+    brief ? `Brief / angle: ${brief}` : null,
+    `Category: ${catHint}`,
+    '',
+    `Return a JSON object with these exact keys:
+{
+  "title": "string — final polished title",
+  "description": "string — 1-2 sentence meta description, max 160 chars",
+  "content": "string — full MDX content, 600-900 words, use ## and ### headings, bold key terms with **text**, include bullet lists where relevant, NO frontmatter",
+  "category": "string — one of: ia | desarrollo | herramientas",
+  "tags": ["array", "of", "3-5", "tags"],
+  "readTime": number
+}`,
+  ]
+    .filter(Boolean)
+    .join('\n');
 
   const completion = await openai.chat.completions.create({
     model: 'gpt-4o',
@@ -22,17 +40,7 @@ export async function POST(req: NextRequest) {
       },
       {
         role: 'user',
-        content: `Write a blog post titled "${title}" in the category "${catHint}".
-
-Return a JSON object with these exact keys:
-{
-  "title": "string — final polished title",
-  "description": "string — 1-2 sentence meta description, max 160 chars",
-  "content": "string — full MDX content, 600-900 words, use ## and ### headings, bold key terms with **text**, include bullet lists where relevant, NO frontmatter",
-  "category": "string — one of: ia | desarrollo | herramientas",
-  "tags": ["array", "of", "3-5", "tags"],
-  "readTime": number
-}`,
+        content: userPrompt,
       },
     ],
     response_format: { type: 'json_object' },
