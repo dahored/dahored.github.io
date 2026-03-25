@@ -1,5 +1,5 @@
 import { Link } from '@/i18n/navigation';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Brain, Code2, Wrench, Calendar, Clock } from 'lucide-react';
 import type { PostMeta } from '@/lib/blog';
 
 interface PostCardProps {
@@ -8,22 +8,10 @@ interface PostCardProps {
   featured?: boolean;
 }
 
-const categoryColors: Record<string, { bg: string; text: string; label: string }> = {
-  ia: {
-    bg: 'bg-violet-500/10',
-    text: 'text-violet-400',
-    label: 'IA',
-  },
-  desarrollo: {
-    bg: 'bg-sky-500/10',
-    text: 'text-sky-400',
-    label: 'Desarrollo',
-  },
-  herramientas: {
-    bg: 'bg-amber-500/10',
-    text: 'text-amber-400',
-    label: 'Herramientas',
-  },
+const categoryColors: Record<string, { bg: string; text: string; label: string; Icon: React.ElementType }> = {
+  ia:          { bg: 'bg-violet-500/10', text: 'text-violet-400', label: 'IA',           Icon: Brain  },
+  desarrollo:  { bg: 'bg-sky-500/10',    text: 'text-sky-400',    label: 'Desarrollo',   Icon: Code2  },
+  herramientas:{ bg: 'bg-amber-500/10',  text: 'text-amber-400',  label: 'Herramientas', Icon: Wrench },
 };
 
 function formatDate(date: string, locale: string): string {
@@ -39,26 +27,29 @@ export default function PostCard({ post, locale, featured = false }: PostCardPro
     bg: 'bg-zinc-500/10',
     text: 'text-zinc-400',
     label: post.category,
+    Icon: Wrench,
   };
+  const { Icon: CategoryIcon } = category;
 
   if (featured) {
     return (
       <Link
         href={`/blog/${post.slug}`}
-        className="group block rounded-2xl p-8 transition-all hover:bg-white/[0.03]"
+        className="group block rounded-2xl p-8 transition-all hover:bg-white/3"
         style={{ border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' }}
       >
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-10">
           <div className="flex flex-col gap-4 flex-1">
             <div className="flex items-center gap-3">
-              <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${category.bg} ${category.text}`}>
+              <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${category.bg} ${category.text}`}>
+                <CategoryIcon className="w-3 h-3" />
                 {category.label}
               </span>
-              <span className="text-xs text-[#6e6e73]">
-                {formatDate(post.date, locale)}
+              <span className="inline-flex items-center gap-1 text-xs text-[#6e6e73]">
+                <Calendar className="w-3 h-3" />{formatDate(post.date, locale)}
               </span>
-              <span className="text-xs text-[#6e6e73]">
-                {post.readTime} min
+              <span className="inline-flex items-center gap-1 text-xs text-[#6e6e73]">
+                <Clock className="w-3 h-3" />{post.readTime} min
               </span>
             </div>
             <h2 className="text-2xl font-bold text-[#f5f5f7] leading-tight group-hover:text-white transition-colors">
@@ -91,11 +82,12 @@ export default function PostCard({ post, locale, featured = false }: PostCardPro
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex flex-col gap-4 rounded-2xl p-6 transition-all hover:bg-white/[0.03]"
+      className="group flex flex-col gap-4 rounded-2xl p-6 transition-all hover:bg-white/3"
       style={{ border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' }}
     >
       <div className="flex items-center gap-2">
-        <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${category.bg} ${category.text}`}>
+        <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold ${category.bg} ${category.text}`}>
+          <CategoryIcon className="w-3 h-3" />
           {category.label}
         </span>
       </div>
@@ -107,8 +99,8 @@ export default function PostCard({ post, locale, featured = false }: PostCardPro
       </p>
       <div className="flex items-center justify-between pt-1">
         <div className="flex items-center gap-3 text-xs text-[#6e6e73]">
-          <span>{formatDate(post.date, locale)}</span>
-          <span>{post.readTime} min</span>
+          <span className="inline-flex items-center gap-1"><Calendar className="w-3 h-3" />{formatDate(post.date, locale)}</span>
+          <span className="inline-flex items-center gap-1"><Clock className="w-3 h-3" />{post.readTime} min</span>
         </div>
         <ArrowRight className="w-4 h-4 text-[#6366f1] group-hover:translate-x-1 transition-transform" />
       </div>

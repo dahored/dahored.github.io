@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Link } from '@/i18n/navigation';
+import { ArrowLeft, Brain, Code2, Wrench, Calendar, Clock } from 'lucide-react';
 import { getAllSlugs, getPost } from '@/lib/blog';
 import { routing } from '@/i18n/routing';
 
@@ -34,10 +35,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const categoryColors: Record<string, { bg: string; text: string; label: string }> = {
-  ia: { bg: 'bg-violet-500/10', text: 'text-violet-400', label: 'IA' },
-  desarrollo: { bg: 'bg-sky-500/10', text: 'text-sky-400', label: 'Desarrollo' },
-  herramientas: { bg: 'bg-amber-500/10', text: 'text-amber-400', label: 'Herramientas' },
+const categoryColors: Record<string, { bg: string; text: string; label: string; Icon: React.ElementType }> = {
+  ia:           { bg: 'bg-violet-500/10', text: 'text-violet-400', label: 'IA',           Icon: Brain  },
+  desarrollo:   { bg: 'bg-sky-500/10',    text: 'text-sky-400',    label: 'Desarrollo',   Icon: Code2  },
+  herramientas: { bg: 'bg-amber-500/10',  text: 'text-amber-400',  label: 'Herramientas', Icon: Wrench },
 };
 
 function formatDate(date: string, locale: string): string {
@@ -58,7 +59,9 @@ export default async function BlogPostPage({ params }: Props) {
     bg: 'bg-zinc-500/10',
     text: 'text-zinc-400',
     label: post.category,
+    Icon: Wrench,
   };
+  const { Icon: CategoryIcon } = category;
 
   return (
     <main className="min-h-screen bg-black text-[#f5f5f7]">
@@ -67,9 +70,9 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="max-w-3xl mx-auto">
           <Link
             href="/blog"
-            className="inline-flex items-center text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors"
           >
-            {t('backToBlog')}
+            <ArrowLeft className="w-4 h-4" />{t('backToBlog')}
           </Link>
         </div>
       </div>
@@ -78,11 +81,11 @@ export default async function BlogPostPage({ params }: Props) {
       <header className="px-4 sm:px-6 pb-12">
         <div className="max-w-3xl mx-auto flex flex-col gap-5">
           <div className="flex flex-wrap items-center gap-3">
-            <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${category.bg} ${category.text}`}>
-              {category.label}
+            <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${category.bg} ${category.text}`}>
+              <CategoryIcon className="w-3 h-3" />{category.label}
             </span>
-            <span className="text-sm text-[#6e6e73]">{formatDate(post.date, locale)}</span>
-            <span className="text-sm text-[#6e6e73]">{post.readTime} min</span>
+            <span className="inline-flex items-center gap-1 text-sm text-[#6e6e73]"><Calendar className="w-3.5 h-3.5" />{formatDate(post.date, locale)}</span>
+            <span className="inline-flex items-center gap-1 text-sm text-[#6e6e73]"><Clock className="w-3.5 h-3.5" />{post.readTime} min</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
@@ -123,9 +126,9 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="max-w-3xl mx-auto" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '2rem' }}>
           <Link
             href="/blog"
-            className="inline-flex items-center text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors"
           >
-            {t('backToBlog')}
+            <ArrowLeft className="w-4 h-4" />{t('backToBlog')}
           </Link>
         </div>
       </div>
