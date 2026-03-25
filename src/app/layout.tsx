@@ -52,6 +52,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale} className="dark scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="preload" href="/images/logo/logo_daho.png" as="image" fetchPriority="high" />
+        <meta name="google-adsense-account" content="ca-pub-5119314285197382" />
       </head>
       <body className={`${geist.variable} font-sans antialiased bg-zinc-950 text-zinc-50 min-h-screen`}>
         <script
