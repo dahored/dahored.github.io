@@ -1,11 +1,19 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Sparkles, Save, ImagePlus, Eye } from 'lucide-react';
+import { ArrowLeft, Sparkles, Save, ImagePlus, Eye, Languages } from 'lucide-react';
 import ImagePickerModal from './ImagePickerModal';
 
 const CATEGORY_SUGGESTIONS = ['ia', 'desarrollo', 'herramientas'];
+
+function localDateString() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
 
 export interface PostFormData {
   locale: 'es' | 'en';
@@ -35,7 +43,7 @@ const defaultForm = (overrides?: Partial<PostFormData>): PostFormData => ({
   slug: '',
   title: '',
   description: '',
-  date: new Date().toISOString().split('T')[0],
+  date: localDateString(),
   category: 'ia',
   tags: '',
   readTime: 5,
@@ -59,12 +67,72 @@ export default function PostForm({
   const [showBrief, setShowBrief] = useState(false);
   const [showImagePicker, setShowImagePicker] = useState(false);
   const [generating, setGenerating] = useState(false);
+  const [translating, setTranslating] = useState(false);
+  const [sourceLocaleExists, setSourceLocaleExists] = useState(false);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState<{ type: 'error' | 'success'; msg: string } | null>(null);
+
+  // Check if the other locale version exists (to show "Traducir" button)
+  useEffect(() => {
+    if (!form.slug) { setSourceLocaleExists(false); return; }
+    const otherLocale = form.locale === 'es' ? 'en' : 'es';
+    fetch(`/api/admin/posts?slug=${form.slug}&locale=${otherLocale}`)
+      .then((r) => setSourceLocaleExists(r.ok))
+      .catch(() => setSourceLocaleExists(false));
+  }, [form.slug, form.locale]);
 
   const set = useCallback((key: keyof PostFormData, value: unknown) => {
     setForm((f) => ({ ...f, [key]: value }));
   }, []);
+
+  // Switching locale: navigate to the other language version (or create it)
+  const handleLocaleSwitch = async (newLocale: 'es' | 'en') => {
+    if (newLocale === form.locale) return;
+
+    // If no slug yet (blank new post), just update the field
+    if (!form.slug) {
+      set('locale', newLocale);
+      return;
+    }
+
+    // Check if that locale version already exists
+    const res = await fetch(`/api/admin/posts?slug=${form.slug}&locale=${newLocale}`);
+    if (res.ok) {
+      router.push(`/admin/posts/edit/${newLocale}/${form.slug}`);
+    } else {
+      router.push(`/admin/posts/new?slug=${form.slug}&locale=${newLocale}`);
+    }
+  };
+
+  const handleTranslate = async () => {
+    const fromLocale = form.locale === 'es' ? 'en' : 'es';
+    setTranslating(true);
+    setStatus(null);
+    try {
+      const res = await fetch('/api/admin/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: form.slug, fromLocale, toLocale: form.locale }),
+      });
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      setForm((f) => ({
+        ...f,
+        title: data.title ?? f.title,
+        description: data.description ?? f.description,
+        content: data.content ?? f.content,
+        category: data.category ?? f.category,
+        tags: Array.isArray(data.tags) ? data.tags.join(', ') : f.tags,
+        readTime: data.readTime ?? f.readTime,
+        featured: data.featured ?? f.featured,
+      }));
+      setStatus({ type: 'success', msg: `Traducido desde ${fromLocale.toUpperCase()}` });
+    } catch {
+      setStatus({ type: 'error', msg: 'Error al traducir' });
+    } finally {
+      setTranslating(false);
+    }
+  };
 
   const handleTitleChange = (title: string) => {
     setForm((f) => ({
@@ -201,6 +269,19 @@ export default function PostForm({
               {status.msg}
             </span>
           )}
+          {/* Translate button — only when other locale exists */}
+          {sourceLocaleExists && (
+            <button
+              onClick={handleTranslate}
+              disabled={translating}
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium border border-zinc-700 text-zinc-300 hover:border-violet-500/50 hover:text-violet-300 disabled:opacity-40 transition-colors"
+            >
+              <Languages size={13} />
+              {translating
+                ? 'Traduciendo...'
+                : `Traducir desde ${form.locale === 'es' ? 'EN' : 'ES'}`}
+            </button>
+          )}
           <div className="relative">
             <button
               onClick={() => setShowBrief((v) => !v)}
@@ -261,29 +342,29 @@ export default function PostForm({
       <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] h-full">
         {/* Left: metadata */}
         <div className="border-r border-zinc-800 overflow-y-auto p-5 space-y-4 pb-16">
-          {/* Locale + Slug */}
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs text-zinc-500 mb-1 font-medium">Idioma</label>
-              <select
-                value={form.locale}
-                onChange={(e) => set('locale', e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 text-white"
-              >
-                <option value="es">Español</option>
-                <option value="en">English</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs text-zinc-500 mb-1 font-medium">Slug</label>
-              <input
-                type="text"
-                value={form.slug}
-                onChange={(e) => set('slug', e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 font-mono text-zinc-300"
-                placeholder="mi-post"
-              />
-            </div>
+          {/* Idioma */}
+          <div>
+            <label className="block text-xs text-zinc-500 mb-1 font-medium">Idioma</label>
+            <select
+              value={form.locale}
+              onChange={(e) => handleLocaleSwitch(e.target.value as 'es' | 'en')}
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 text-white cursor-pointer"
+            >
+              <option value="es">Español</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+
+          {/* Slug */}
+          <div>
+            <label className="block text-xs text-zinc-500 mb-1 font-medium">Slug</label>
+            <input
+              type="text"
+              value={form.slug}
+              onChange={(e) => set('slug', e.target.value)}
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 font-mono text-zinc-300"
+              placeholder="mi-post"
+            />
           </div>
 
           {/* Title */}
@@ -316,24 +397,26 @@ export default function PostForm({
             <p className="text-right text-xs text-zinc-700">{form.description.length}/160</p>
           </div>
 
-          {/* Category + Date + ReadTime */}
-          <div className="grid grid-cols-3 gap-2">
-            <div>
-              <label className="block text-xs text-zinc-500 mb-1 font-medium">Categoría</label>
-              <input
-                type="text"
-                list="category-suggestions"
-                value={form.category}
-                onChange={(e) => set('category', e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 cursor-text"
-                placeholder="ia"
-              />
-              <datalist id="category-suggestions">
-                {CATEGORY_SUGGESTIONS.map((c) => (
-                  <option key={c} value={c} />
-                ))}
-              </datalist>
-            </div>
+          {/* Category */}
+          <div>
+            <label className="block text-xs text-zinc-500 mb-1 font-medium">Categoría</label>
+            <input
+              type="text"
+              list="category-suggestions"
+              value={form.category}
+              onChange={(e) => set('category', e.target.value)}
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 cursor-text"
+              placeholder="ia"
+            />
+            <datalist id="category-suggestions">
+              {CATEGORY_SUGGESTIONS.map((c) => (
+                <option key={c} value={c} />
+              ))}
+            </datalist>
+          </div>
+
+          {/* Date + ReadTime */}
+          <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs text-zinc-500 mb-1 font-medium">Fecha</label>
               <input

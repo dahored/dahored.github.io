@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Plus, Pencil, Trash2, Star, ChevronDown, FileText } from 'lucide-react';
+import { Plus, Pencil, Trash2, Star, FileText, X } from 'lucide-react';
 
 interface PostItem {
   slug: string;
@@ -37,11 +37,80 @@ const CATEGORY_COLOR: Record<string, string> = {
   herramientas: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
 };
 
+// Delete confirmation modal
+function DeleteModal({
+  post,
+  onConfirm,
+  onClose,
+}: {
+  post: PairedPost;
+  onConfirm: (locale?: 'es' | 'en') => void;
+  onClose: () => void;
+}) {
+  const hasBoth = !!post.es && !!post.en;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative bg-zinc-950 border border-zinc-800 rounded-2xl p-6 w-full max-w-sm shadow-2xl">
+        <div className="flex items-start justify-between mb-4">
+          <div>
+            <h3 className="text-sm font-semibold text-white">Eliminar post</h3>
+            <p className="text-xs text-zinc-500 mt-1 font-mono">{post.slug}</p>
+          </div>
+          <button onClick={onClose} className="text-zinc-600 hover:text-white transition-colors cursor-pointer">
+            <X size={16} />
+          </button>
+        </div>
+
+        <p className="text-sm text-zinc-400 mb-5">
+          {hasBoth
+            ? '¿Qué versión deseas eliminar?'
+            : `¿Eliminar la versión ${post.es ? 'ES' : 'EN'}? Esta acción no se puede deshacer.`}
+        </p>
+
+        <div className="flex flex-col gap-2">
+          {post.es && (
+            <button
+              onClick={() => onConfirm('es')}
+              className="w-full py-2.5 rounded-xl text-sm font-medium bg-zinc-800 hover:bg-red-500/15 hover:text-red-400 border border-zinc-700 hover:border-red-500/30 text-zinc-300 transition-colors cursor-pointer"
+            >
+              Eliminar versión ES
+            </button>
+          )}
+          {post.en && (
+            <button
+              onClick={() => onConfirm('en')}
+              className="w-full py-2.5 rounded-xl text-sm font-medium bg-zinc-800 hover:bg-red-500/15 hover:text-red-400 border border-zinc-700 hover:border-red-500/30 text-zinc-300 transition-colors cursor-pointer"
+            >
+              Eliminar versión EN
+            </button>
+          )}
+          {hasBoth && (
+            <button
+              onClick={() => onConfirm()}
+              className="w-full py-2.5 rounded-xl text-sm font-medium bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-600/30 transition-colors cursor-pointer"
+            >
+              Eliminar ambas versiones
+            </button>
+          )}
+          <button
+            onClick={onClose}
+            className="w-full py-2 text-xs text-zinc-600 hover:text-zinc-400 transition-colors cursor-pointer"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PostsPage() {
   const [pairs, setPairs] = useState<PairedPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingSlug, setDeletingSlug] = useState<string | null>(null);
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<PairedPost | null>(null);
 
   useEffect(() => {
     fetch('/api/admin/posts')
@@ -52,21 +121,13 @@ export default function PostsPage() {
       });
   }, []);
 
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handler = () => setOpenMenu(null);
-    document.addEventListener('click', handler);
-    return () => document.removeEventListener('click', handler);
-  }, []);
-
-  const handleDelete = async (slug: string, locale?: 'es' | 'en') => {
-    const label = locale ? `"${slug}" (${locale.toUpperCase()})` : `"${slug}" (ES + EN)`;
-    if (!confirm(`¿Eliminar ${label}?`)) return;
-
+  const handleDelete = async (locale?: 'es' | 'en') => {
+    if (!deleteTarget) return;
+    const slug = deleteTarget.slug;
+    setDeleteTarget(null);
     setDeletingSlug(slug);
-    setOpenMenu(null);
-    const localesToDelete = locale ? [locale] : (['es', 'en'] as const);
 
+    const localesToDelete = locale ? [locale] : (['es', 'en'] as const);
     for (const loc of localesToDelete) {
       await fetch('/api/admin/posts', {
         method: 'DELETE',
@@ -120,10 +181,7 @@ export default function PostsPage() {
           <div className="text-center py-20 border border-dashed border-zinc-800 rounded-xl">
             <FileText size={32} className="mx-auto text-zinc-700 mb-3" />
             <p className="text-zinc-600 text-sm mb-4">Sin posts todavía</p>
-            <Link
-              href="/admin/posts/new"
-              className="text-violet-400 hover:text-violet-300 text-sm transition-colors"
-            >
+            <Link href="/admin/posts/new" className="text-violet-400 hover:text-violet-300 text-sm transition-colors">
               Crea el primero →
             </Link>
           </div>
@@ -140,7 +198,7 @@ export default function PostsPage() {
                   {/* Info */}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 mb-0.5 flex-wrap">
-                      <span className="text-sm font-medium truncate max-w-[280px]">
+                      <span className="text-sm font-medium truncate max-w-70">
                         {p.es?.title ?? p.en?.title ?? p.slug}
                       </span>
                       {(p.es?.featured || p.en?.featured) && (
@@ -163,7 +221,6 @@ export default function PostsPage() {
 
                   {/* Actions */}
                   <div className="flex items-center gap-2 shrink-0">
-                    {/* Locale edit pills */}
                     {(['es', 'en'] as const).map((loc) =>
                       p[loc] ? (
                         <Link
@@ -179,7 +236,6 @@ export default function PostsPage() {
                           key={loc}
                           href={`/admin/posts/new?slug=${p.slug}&locale=${loc}`}
                           className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg border border-dashed border-zinc-700 text-zinc-600 hover:border-violet-600/50 hover:text-violet-400 transition-colors font-medium"
-                          title={`Crear en ${loc.toUpperCase()}`}
                         >
                           <Plus size={10} />
                           {loc.toUpperCase()}
@@ -187,54 +243,12 @@ export default function PostsPage() {
                       )
                     )}
 
-                    {/* Delete dropdown */}
-                    <div className="relative">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setOpenMenu(openMenu === p.slug ? null : p.slug);
-                        }}
-                        className="flex items-center gap-0.5 text-zinc-600 hover:text-red-400 px-2 py-1.5 rounded-lg hover:bg-red-500/5 transition-colors"
-                      >
-                        <Trash2 size={13} />
-                        <ChevronDown size={10} />
-                      </button>
-
-                      {openMenu === p.slug && (
-                        <div
-                          className="absolute right-0 top-full mt-1 bg-zinc-900 border border-zinc-700 rounded-xl overflow-hidden shadow-2xl z-20 min-w-[148px]"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          {p.es && (
-                            <button
-                              onClick={() => handleDelete(p.slug, 'es')}
-                              className="w-full text-left text-xs px-3 py-2.5 text-zinc-400 hover:bg-zinc-800 hover:text-red-400 transition-colors flex items-center gap-2"
-                            >
-                              <Trash2 size={11} /> Eliminar ES
-                            </button>
-                          )}
-                          {p.en && (
-                            <button
-                              onClick={() => handleDelete(p.slug, 'en')}
-                              className="w-full text-left text-xs px-3 py-2.5 text-zinc-400 hover:bg-zinc-800 hover:text-red-400 transition-colors flex items-center gap-2"
-                            >
-                              <Trash2 size={11} /> Eliminar EN
-                            </button>
-                          )}
-                          {p.es && p.en && (
-                            <>
-                              <div className="border-t border-zinc-800" />
-                              <button
-                                onClick={() => handleDelete(p.slug)}
-                                className="w-full text-left text-xs px-3 py-2.5 text-red-500 hover:bg-red-500/10 transition-colors flex items-center gap-2"
-                              >
-                                <Trash2 size={11} /> Eliminar ambos
-                              </button>
-                            </>
-                          )}
-                        </div>
-                      )}
-                    </div>
+                    <button
+                      onClick={() => setDeleteTarget(p)}
+                      className="text-zinc-600 hover:text-red-400 p-1.5 rounded-lg hover:bg-red-500/5 transition-colors cursor-pointer"
+                    >
+                      <Trash2 size={14} />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -242,7 +256,15 @@ export default function PostsPage() {
           </div>
         )}
       </div>
+
+      {/* Delete modal */}
+      {deleteTarget && (
+        <DeleteModal
+          post={deleteTarget}
+          onConfirm={handleDelete}
+          onClose={() => setDeleteTarget(null)}
+        />
+      )}
     </div>
   );
 }
-
