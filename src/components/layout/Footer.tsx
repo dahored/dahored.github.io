@@ -14,6 +14,7 @@ export default async function Footer() {
     { href: '/coexist',    labelKey: 'nav.coexist'    },
     { href: '/give',       labelKey: 'nav.give'       },
     { href: '/adventures', labelKey: 'nav.adventures' },
+    { href: '/blog',       labelKey: 'nav.blog'       },
     { href: '/#contact',   labelKey: 'nav.contact'    },
   ];
 

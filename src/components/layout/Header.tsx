@@ -44,6 +44,7 @@ export default function Header() {
     { href: '/adventures', label: t('adventures'),  color: '#4ade80', submenu: [
       { href: '/adventures/posts', label: t('submenuPosts') },
     ]},
+    { href: '/blog',       label: t('blog'),        color: '#6366f1' },
   ];
 
   function handleMouseEnter(href: string) {

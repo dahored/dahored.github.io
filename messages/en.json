@@ -6,6 +6,7 @@
     "adventures": "Adventures",
     "contact": "Contact",
     "give": "Give",
+    "blog": "Blog",
     "submenuPosts": "Posts"
   },
   "hero": {
@@ -247,16 +248,18 @@
   },
   "blog": {
     "label": "Blog",
-    "heading": "Coming soon",
-    "description": "I'll soon be sharing articles about frontend development, gaming, travel and more.",
-    "subscribe": "Notify me",
-    "placeholder": "Your email address",
-    "categories": {
-      "dev": "Dev",
-      "gaming": "Gaming",
-      "travel": "Travel",
-      "motivation": "Motivation"
-    }
+    "pageTitle": "Blog · Daho",
+    "pageDescription": "Insights on frontend development, AI, tools and the tech world in 2026.",
+    "heading": "Insights & resources",
+    "subheading": "Articles on development, artificial intelligence and the tools that are changing how we build software.",
+    "featured": "Featured",
+    "filterAll": "All",
+    "filterIa": "AI",
+    "filterDesarrollo": "Development",
+    "filterHerramientas": "Tools",
+    "readTime": "{n} min read",
+    "backToBlog": "← Blog",
+    "allPostsCount": "{n} articles"
   },
   "contact": {
     "label": "Contact",
@@ -280,6 +283,7 @@
       "coexist": "Coexist",
       "adventures": "Adventures",
       "give": "Give",
+      "blog": "Blog",
       "contact": "Contact"
     }
   }
