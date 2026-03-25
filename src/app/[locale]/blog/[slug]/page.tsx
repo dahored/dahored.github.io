@@ -132,7 +132,7 @@ export default async function BlogPostPage({ params }: Props) {
       {/* Ad — after content */}
       <div className="px-4 sm:px-6 pb-12">
         <div className="max-w-3xl mx-auto">
-          <AdUnit format="rectangle" slot="post-bottom" />
+          <AdUnit format="horizontal" slot="post-bottom" />
         </div>
       </div>
 
