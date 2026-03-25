@@ -86,6 +86,14 @@ body {
 
 /* ─── Blog MDX prose styles ───────────────────────────────── */
 
+/* Full-bleed utility — escapes any centered container */
+.full-bleed {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+}
+
 .prose-blog {
   color: #c8c8d0;
   font-size: 1.0625rem;
@@ -197,4 +205,47 @@ body {
   border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   margin: 2rem 0;
+}
+
+/* Images */
+.prose-blog img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Wide image — slightly wider than the column */
+.prose-blog .img-wide {
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
+  margin-right: -2rem;
+  max-width: none;
+  border-radius: 16px;
+}
+
+/* Full-bleed image — edge to edge */
+.prose-blog .img-full {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  border-radius: 0;
+  max-width: none;
+  box-shadow: none;
+  max-height: 640px;
+  object-fit: cover;
+}
+
+/* Caption under image */
+.prose-blog figcaption {
+  text-align: center;
+  font-size: 0.8125rem;
+  color: #6e6e73;
+  margin-top: -1rem;
+  margin-bottom: 1.75rem;
+  font-style: italic;
 }

@@ -8,6 +8,39 @@ import AdUnit from '@/components/blog/AdUnit';
 import { getAllSlugs, getPost } from '@/lib/blog';
 import { routing } from '@/i18n/routing';
 
+// Custom MDX image component
+// Conventions (in alt text):
+//   ![alt](url)          → normal: rounded, column-width
+//   ![wide|alt](url)     → wide: breaks slightly outside column
+//   ![full|alt](url)     → full-bleed: edge to edge
+// Caption (optional):
+//   ![alt](url "Caption text")
+function BlogImage({ src, alt, title }: React.ImgHTMLAttributes<HTMLImageElement>) {
+  const rawAlt = alt ?? '';
+  const isFull = rawAlt.startsWith('full|');
+  const isWide = rawAlt.startsWith('wide|');
+  const cleanAlt = rawAlt.replace(/^(full|wide)\|\s*/, '');
+  const imgClass = isFull ? 'img-full' : isWide ? 'img-wide' : '';
+
+  // eslint-disable-next-line @next/next/no-img-element
+  const imgEl = <img src={src} alt={cleanAlt} className={imgClass} />;
+
+  if (title) {
+    return (
+      <span style={{ display: 'block' }}>
+        {imgEl}
+        <span style={{ display: 'block' }} className="text-center text-[0.8125rem] text-[#6e6e73] italic -mt-4 mb-7">
+          {title}
+        </span>
+      </span>
+    );
+  }
+
+  return imgEl;
+}
+
+const mdxComponents = { img: BlogImage };
+
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
 }
@@ -125,7 +158,7 @@ export default async function BlogPostPage({ params }: Props) {
       {/* MDX content */}
       <article className="px-4 sm:px-6 pb-12">
         <div className="max-w-3xl mx-auto prose-blog">
-          <MDXRemote source={post.content} />
+          <MDXRemote source={post.content} components={mdxComponents} />
         </div>
       </article>
 
