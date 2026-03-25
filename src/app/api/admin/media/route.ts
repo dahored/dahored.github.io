@@ -7,14 +7,14 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// GET - list all images in blog/ folder
+// GET - list all images (all folders) sorted by newest
 export async function GET() {
-  const result = await cloudinary.api.resources({
-    type: 'upload',
-    prefix: 'blog/',
-    max_results: 100,
-    direction: 'desc',
-  });
+  const result = await cloudinary.search
+    .expression('resource_type:image')
+    .sort_by('created_at', 'desc')
+    .max_results(200)
+    .with_field('tags')
+    .execute();
 
   const images = (result.resources as Record<string, unknown>[]).map((r) => ({
     public_id: r.public_id as string,
@@ -24,6 +24,7 @@ export async function GET() {
     bytes: r.bytes as number,
     created_at: r.created_at as string,
     format: r.format as string,
+    folder: (r.folder as string) || '',
   }));
 
   return NextResponse.json(images);

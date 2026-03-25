@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { ArrowLeft, Sparkles, Save, ImagePlus, ExternalLink } from 'lucide-react';
 
 const CATEGORIES = ['ia', 'desarrollo', 'herramientas'];
 
@@ -170,9 +171,9 @@ export default function PostForm({
         <div className="flex items-center gap-3">
           <button
             onClick={() => router.push('/admin/posts')}
-            className="text-zinc-500 hover:text-white text-sm transition-colors"
+            className="flex items-center gap-1.5 text-zinc-500 hover:text-white text-sm transition-colors"
           >
-            ← Posts
+            <ArrowLeft size={14} /> Posts
           </button>
           <span className="text-zinc-800">|</span>
           <span className="text-sm text-zinc-400">
@@ -195,9 +196,10 @@ export default function PostForm({
             <button
               onClick={() => setShowBrief((v) => !v)}
               disabled={generating}
-              className="px-4 py-1.5 rounded-lg text-sm font-medium bg-violet-600 hover:bg-violet-500 disabled:opacity-40 transition-colors"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium bg-violet-600 hover:bg-violet-500 disabled:opacity-40 transition-colors"
             >
-              {generating ? 'Generando...' : '✨ Generar con AI'}
+              <Sparkles size={13} />
+              {generating ? 'Generando...' : 'Generar con AI'}
             </button>
             {showBrief && (
               <div className="absolute right-0 top-full mt-2 w-96 bg-zinc-900 border border-zinc-700 rounded-xl p-4 shadow-2xl z-20">
@@ -232,8 +234,9 @@ export default function PostForm({
           <button
             onClick={handleSave}
             disabled={saving}
-            className="px-4 py-1.5 rounded-lg text-sm font-medium bg-white text-black hover:bg-zinc-100 disabled:opacity-40 transition-colors"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium bg-white text-black hover:bg-zinc-100 disabled:opacity-40 transition-colors"
           >
+            <Save size={13} />
             {saving ? 'Guardando...' : 'Guardar'}
           </button>
         </div>
@@ -363,10 +366,19 @@ export default function PostForm({
 
           {/* Insert image */}
           <div className="border-t border-zinc-800 pt-4">
-            <label className="block text-xs text-zinc-500 mb-2 font-medium">
-              Insertar imagen{' '}
-              <span className="text-zinc-700 font-normal">— pega URL de Cloudinary</span>
-            </label>
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-xs text-zinc-500 font-medium flex items-center gap-1.5">
+                <ImagePlus size={12} /> Insertar imagen
+              </label>
+              <a
+                href="/admin/media"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1 text-xs text-zinc-600 hover:text-violet-400 transition-colors"
+              >
+                <ExternalLink size={10} /> Media
+              </a>
+            </div>
             <div className="flex gap-2">
               <input
                 type="url"
@@ -383,14 +395,6 @@ export default function PostForm({
                 Insertar
               </button>
             </div>
-            <a
-              href="/admin/media"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-block mt-2 text-xs text-zinc-600 hover:text-violet-400 transition-colors"
-            >
-              → Ir a Media para generar o subir imágenes
-            </a>
           </div>
         </div>
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Plus, Pencil, Trash2, Star, ChevronDown, FileText } from 'lucide-react';
 
 interface PostItem {
   slug: string;
@@ -25,16 +26,22 @@ function pair(posts: PostItem[]): PairedPost[] {
   for (const p of posts) {
     if (!map[p.slug]) map[p.slug] = { slug: p.slug, date: p.date, category: p.category };
     map[p.slug][p.locale as 'es' | 'en'] = p;
-    // Keep latest date
     if (p.date > map[p.slug].date) map[p.slug].date = p.date;
   }
   return Object.values(map).sort((a, b) => b.date.localeCompare(a.date));
 }
 
+const CATEGORY_COLOR: Record<string, string> = {
+  ia: 'text-violet-400 bg-violet-500/10 border-violet-500/20',
+  desarrollo: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+  herramientas: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
+};
+
 export default function PostsPage() {
   const [pairs, setPairs] = useState<PairedPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingSlug, setDeletingSlug] = useState<string | null>(null);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/api/admin/posts')
@@ -45,11 +52,19 @@ export default function PostsPage() {
       });
   }, []);
 
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handler = () => setOpenMenu(null);
+    document.addEventListener('click', handler);
+    return () => document.removeEventListener('click', handler);
+  }, []);
+
   const handleDelete = async (slug: string, locale?: 'es' | 'en') => {
     const label = locale ? `"${slug}" (${locale.toUpperCase()})` : `"${slug}" (ES + EN)`;
     if (!confirm(`¿Eliminar ${label}?`)) return;
 
     setDeletingSlug(slug);
+    setOpenMenu(null);
     const localesToDelete = locale ? [locale] : (['es', 'en'] as const);
 
     for (const loc of localesToDelete) {
@@ -67,6 +82,7 @@ export default function PostsPage() {
           if (!locale) return null;
           const updated = { ...p };
           delete updated[locale];
+          if (!updated.es && !updated.en) return null;
           return updated;
         })
         .filter(Boolean) as PairedPost[]
@@ -81,113 +97,143 @@ export default function PostsPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-base font-semibold">Posts</h1>
-            <p className="text-xs text-zinc-600 mt-0.5">{pairs.length} publicaciones</p>
+            <p className="text-xs text-zinc-600 mt-0.5">
+              {loading ? '...' : `${pairs.length} publicaciones`}
+            </p>
           </div>
           <Link
             href="/admin/posts/new"
-            className="px-4 py-2 bg-white text-black rounded-lg text-sm font-medium hover:bg-zinc-100 transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2 bg-white text-black rounded-lg text-sm font-medium hover:bg-zinc-100 transition-colors"
           >
-            + Nuevo post
+            <Plus size={14} />
+            Nuevo post
           </Link>
         </div>
 
         {loading ? (
-          <p className="text-zinc-600 text-sm">Cargando...</p>
+          <div className="space-y-2">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="h-16 bg-zinc-900/40 rounded-xl animate-pulse" />
+            ))}
+          </div>
         ) : pairs.length === 0 ? (
-          <p className="text-zinc-700 text-sm text-center py-16 border border-dashed border-zinc-800 rounded-xl">
-            Sin posts. Crea el primero.
-          </p>
+          <div className="text-center py-20 border border-dashed border-zinc-800 rounded-xl">
+            <FileText size={32} className="mx-auto text-zinc-700 mb-3" />
+            <p className="text-zinc-600 text-sm mb-4">Sin posts todavía</p>
+            <Link
+              href="/admin/posts/new"
+              className="text-violet-400 hover:text-violet-300 text-sm transition-colors"
+            >
+              Crea el primero →
+            </Link>
+          </div>
         ) : (
           <div className="space-y-2">
             {pairs.map((p) => (
               <div
                 key={p.slug}
-                className={`group bg-zinc-900/60 hover:bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 transition-colors ${
+                className={`bg-zinc-900/50 hover:bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 transition-colors ${
                   deletingSlug === p.slug ? 'opacity-40 pointer-events-none' : ''
                 }`}
               >
                 <div className="flex items-center justify-between gap-4">
-                  {/* Title + meta */}
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-sm font-medium truncate max-w-[300px]">
+                  {/* Info */}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                      <span className="text-sm font-medium truncate max-w-[280px]">
                         {p.es?.title ?? p.en?.title ?? p.slug}
                       </span>
                       {(p.es?.featured || p.en?.featured) && (
-                        <span className="shrink-0 text-xs px-1.5 py-0.5 bg-violet-500/15 text-violet-400 rounded border border-violet-500/20">
-                          ★
-                        </span>
+                        <Star size={11} className="text-yellow-500 shrink-0" fill="currentColor" />
                       )}
+                      <span
+                        className={`text-xs px-1.5 py-0.5 rounded border font-mono ${
+                          CATEGORY_COLOR[p.category] ?? 'text-zinc-500 bg-zinc-800 border-zinc-700'
+                        }`}
+                      >
+                        {p.category}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-zinc-600">
                       <span className="font-mono">{p.slug}</span>
                       <span>·</span>
                       <span>{p.date}</span>
-                      <span>·</span>
-                      <span>{p.category}</span>
                     </div>
                   </div>
 
                   {/* Actions */}
                   <div className="flex items-center gap-2 shrink-0">
-                    {/* Locale pills */}
-                    {(['es', 'en'] as const).map((loc) => {
-                      const exists = !!p[loc];
-                      return exists ? (
+                    {/* Locale edit pills */}
+                    {(['es', 'en'] as const).map((loc) =>
+                      p[loc] ? (
                         <Link
                           key={loc}
                           href={`/admin/posts/edit/${loc}/${p.slug}`}
-                          className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors font-medium"
+                          className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors font-medium"
                         >
+                          <Pencil size={10} />
                           {loc.toUpperCase()}
                         </Link>
                       ) : (
                         <Link
                           key={loc}
                           href={`/admin/posts/new?slug=${p.slug}&locale=${loc}`}
-                          className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-lg border border-dashed border-zinc-700 text-zinc-600 hover:border-zinc-500 hover:text-zinc-400 transition-colors font-medium"
-                          title={`Crear versión en ${loc.toUpperCase()}`}
+                          className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg border border-dashed border-zinc-700 text-zinc-600 hover:border-violet-600/50 hover:text-violet-400 transition-colors font-medium"
+                          title={`Crear en ${loc.toUpperCase()}`}
                         >
-                          {loc.toUpperCase()} +
+                          <Plus size={10} />
+                          {loc.toUpperCase()}
                         </Link>
-                      );
-                    })}
+                      )
+                    )}
 
-                    {/* Delete */}
-                    <div className="relative group/del ml-1">
-                      <button className="text-xs text-zinc-700 hover:text-red-400 px-2 py-1 rounded transition-colors">
-                        ✕
+                    {/* Delete dropdown */}
+                    <div className="relative">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setOpenMenu(openMenu === p.slug ? null : p.slug);
+                        }}
+                        className="flex items-center gap-0.5 text-zinc-600 hover:text-red-400 px-2 py-1.5 rounded-lg hover:bg-red-500/5 transition-colors"
+                      >
+                        <Trash2 size={13} />
+                        <ChevronDown size={10} />
                       </button>
-                      {/* Dropdown on hover */}
-                      <div className="absolute right-0 top-full mt-1 hidden group-hover/del:flex flex-col bg-zinc-900 border border-zinc-700 rounded-lg overflow-hidden shadow-xl z-10 min-w-[140px]">
-                        {p.es && (
-                          <button
-                            onClick={() => handleDelete(p.slug, 'es')}
-                            className="text-left text-xs px-3 py-2 text-zinc-400 hover:bg-zinc-800 hover:text-red-400 transition-colors"
-                          >
-                            Eliminar ES
-                          </button>
-                        )}
-                        {p.en && (
-                          <button
-                            onClick={() => handleDelete(p.slug, 'en')}
-                            className="text-left text-xs px-3 py-2 text-zinc-400 hover:bg-zinc-800 hover:text-red-400 transition-colors"
-                          >
-                            Eliminar EN
-                          </button>
-                        )}
-                        {p.es && p.en && (
-                          <>
-                            <div className="border-t border-zinc-800" />
+
+                      {openMenu === p.slug && (
+                        <div
+                          className="absolute right-0 top-full mt-1 bg-zinc-900 border border-zinc-700 rounded-xl overflow-hidden shadow-2xl z-20 min-w-[148px]"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {p.es && (
                             <button
-                              onClick={() => handleDelete(p.slug)}
-                              className="text-left text-xs px-3 py-2 text-red-600 hover:bg-red-500/10 hover:text-red-400 transition-colors"
+                              onClick={() => handleDelete(p.slug, 'es')}
+                              className="w-full text-left text-xs px-3 py-2.5 text-zinc-400 hover:bg-zinc-800 hover:text-red-400 transition-colors flex items-center gap-2"
                             >
-                              Eliminar ambos
+                              <Trash2 size={11} /> Eliminar ES
                             </button>
-                          </>
-                        )}
-                      </div>
+                          )}
+                          {p.en && (
+                            <button
+                              onClick={() => handleDelete(p.slug, 'en')}
+                              className="w-full text-left text-xs px-3 py-2.5 text-zinc-400 hover:bg-zinc-800 hover:text-red-400 transition-colors flex items-center gap-2"
+                            >
+                              <Trash2 size={11} /> Eliminar EN
+                            </button>
+                          )}
+                          {p.es && p.en && (
+                            <>
+                              <div className="border-t border-zinc-800" />
+                              <button
+                                onClick={() => handleDelete(p.slug)}
+                                className="w-full text-left text-xs px-3 py-2.5 text-red-500 hover:bg-red-500/10 transition-colors flex items-center gap-2"
+                              >
+                                <Trash2 size={11} /> Eliminar ambos
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -199,3 +245,4 @@ export default function PostsPage() {
     </div>
   );
 }
+
