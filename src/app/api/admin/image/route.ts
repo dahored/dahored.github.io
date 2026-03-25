@@ -3,9 +3,6 @@ import OpenAI, { toFile } from 'openai';
 import { v2 as cloudinary } from 'cloudinary';
 import { translatePromptToEnglish } from '@/lib/gemini';
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const geminiEnabled = process.env.USE_GEMINI === 'true';
-
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -24,21 +21,23 @@ const GPT_IMAGE_SIZES: Record<string, '1024x1024' | '1536x1024' | '1024x1536'> =
   '9:16': '1024x1536',
 };
 
-async function toEnglish(prompt: string): Promise<string> {
-  if (geminiEnabled) return translatePromptToEnglish(prompt);
-  const res = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
-    messages: [
-      { role: 'system', content: 'Translate the following image generation prompt to English. Return only the translated prompt, no explanations.' },
-      { role: 'user', content: prompt },
-    ],
-    temperature: 0.1,
-  });
-  return res.choices[0].message.content?.trim() ?? prompt;
-}
-
 export async function POST(req: NextRequest) {
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const geminiEnabled = process.env.USE_GEMINI === 'true';
   const { prompt, slug, aspectRatio = '16:9', imageModel = 'dalle-3', referenceImage } = await req.json();
+
+  async function toEnglish(p: string): Promise<string> {
+    if (geminiEnabled) return translatePromptToEnglish(p);
+    const res = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: 'Translate the following image generation prompt to English. Return only the translated prompt, no explanations.' },
+        { role: 'user', content: p },
+      ],
+      temperature: 0.1,
+    });
+    return res.choices[0].message.content?.trim() ?? p;
+  }
 
   if (!prompt) {
     return NextResponse.json({ error: 'prompt es requerido' }, { status: 400 });

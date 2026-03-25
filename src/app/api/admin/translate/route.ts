@@ -5,11 +5,11 @@ import path from 'path';
 import matter from 'gray-matter';
 import { translateBlogPost } from '@/lib/gemini';
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const geminiEnabled = process.env.USE_GEMINI === 'true';
 const contentDir = path.join(process.cwd(), 'src', 'content', 'blog');
 
 export async function POST(req: NextRequest) {
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const geminiEnabled = process.env.USE_GEMINI === 'true';
   const { slug: rawSlug, id, fromLocale, toLocale } = await req.json();
 
   if (!fromLocale || !toLocale) {

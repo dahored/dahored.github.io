@@ -2,10 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { generateBlogPost } from '@/lib/gemini';
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const geminiEnabled = process.env.USE_GEMINI === 'true';
-
 export async function POST(req: NextRequest) {
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const geminiEnabled = process.env.USE_GEMINI === 'true';
   const { title, brief, locale, category, model = 'gemini' } = await req.json();
 
   if (!title && !brief) {
