@@ -2,9 +2,10 @@
 
 import { useState, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Sparkles, Save, ImagePlus, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Sparkles, Save, ImagePlus, Eye } from 'lucide-react';
+import ImagePickerModal from './ImagePickerModal';
 
-const CATEGORIES = ['ia', 'desarrollo', 'herramientas'];
+const CATEGORY_SUGGESTIONS = ['ia', 'desarrollo', 'herramientas'];
 
 export interface PostFormData {
   locale: 'es' | 'en';
@@ -56,7 +57,7 @@ export default function PostForm({
   const [form, setForm] = useState<PostFormData>(initial ?? defaultForm());
   const [brief, setBrief] = useState('');
   const [showBrief, setShowBrief] = useState(false);
-  const [imageUrl, setImageUrl] = useState('');
+  const [showImagePicker, setShowImagePicker] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState<{ type: 'error' | 'success'; msg: string } | null>(null);
@@ -92,12 +93,20 @@ export default function PostForm({
     [form.content]
   );
 
-  const handleInsertImage = () => {
-    const url = imageUrl.trim();
-    if (!url) return;
-    insertAtCursor(`\n![imagen](${url})\n`);
-    setImageUrl('');
-    setStatus({ type: 'success', msg: 'Imagen insertada en el contenido' });
+  const handleInsertImage = useCallback(
+    (url: string) => {
+      insertAtCursor(`\n![imagen](${url})\n`);
+      setStatus({ type: 'success', msg: 'Imagen insertada' });
+    },
+    [insertAtCursor]
+  );
+
+  const handlePreview = () => {
+    if (!form.slug) {
+      setStatus({ type: 'error', msg: 'Guarda el post primero para previsualizar' });
+      return;
+    }
+    window.open(`/${form.locale}/blog/${form.slug}`, '_blank');
   };
 
   const handleGenerate = async () => {
@@ -232,9 +241,15 @@ export default function PostForm({
             )}
           </div>
           <button
+            onClick={handlePreview}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-600 transition-colors cursor-pointer"
+          >
+            <Eye size={13} /> Preview
+          </button>
+          <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium bg-white text-black hover:bg-zinc-100 disabled:opacity-40 transition-colors"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium bg-white text-black hover:bg-zinc-100 disabled:opacity-40 transition-colors cursor-pointer"
           >
             <Save size={13} />
             {saving ? 'Guardando...' : 'Guardar'}
@@ -292,9 +307,10 @@ export default function PostForm({
             <textarea
               value={form.description}
               onChange={(e) => set('description', e.target.value)}
-              rows={2}
+              rows={3}
               maxLength={160}
-              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 resize-none"
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 resize-y"
+              style={{ minHeight: '72px', maxHeight: '160px' }}
               placeholder="Meta descripción para Google"
             />
             <p className="text-right text-xs text-zinc-700">{form.description.length}/160</p>
@@ -304,17 +320,19 @@ export default function PostForm({
           <div className="grid grid-cols-3 gap-2">
             <div>
               <label className="block text-xs text-zinc-500 mb-1 font-medium">Categoría</label>
-              <select
+              <input
+                type="text"
+                list="category-suggestions"
                 value={form.category}
                 onChange={(e) => set('category', e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 text-white"
-              >
-                {CATEGORIES.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 cursor-text"
+                placeholder="ia"
+              />
+              <datalist id="category-suggestions">
+                {CATEGORY_SUGGESTIONS.map((c) => (
+                  <option key={c} value={c} />
                 ))}
-              </select>
+              </datalist>
             </div>
             <div>
               <label className="block text-xs text-zinc-500 mb-1 font-medium">Fecha</label>
@@ -322,18 +340,18 @@ export default function PostForm({
                 type="date"
                 value={form.date}
                 onChange={(e) => set('date', e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 text-white"
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 text-white cursor-pointer"
               />
             </div>
             <div>
-              <label className="block text-xs text-zinc-500 mb-1 font-medium">Min</label>
+              <label className="block text-xs text-zinc-500 mb-1 font-medium">Lectura (min)</label>
               <input
                 type="number"
                 value={form.readTime}
                 onChange={(e) => set('readTime', Number(e.target.value))}
                 min={1}
                 max={60}
-                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500"
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-violet-500 cursor-text"
               />
             </div>
           </div>
@@ -368,33 +386,15 @@ export default function PostForm({
           <div className="border-t border-zinc-800 pt-4">
             <div className="flex items-center justify-between mb-2">
               <label className="text-xs text-zinc-500 font-medium flex items-center gap-1.5">
-                <ImagePlus size={12} /> Insertar imagen
+                <ImagePlus size={12} /> Imagen
               </label>
-              <a
-                href="/admin/media"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-1 text-xs text-zinc-600 hover:text-violet-400 transition-colors"
-              >
-                <ExternalLink size={10} /> Media
-              </a>
             </div>
-            <div className="flex gap-2">
-              <input
-                type="url"
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleInsertImage()}
-                className="flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-violet-500 font-mono"
-                placeholder="https://res.cloudinary.com/..."
-              />
-              <button
-                onClick={handleInsertImage}
-                className="px-3 py-2 rounded-lg text-xs font-medium bg-zinc-800 hover:bg-zinc-700 transition-colors"
-              >
-                Insertar
-              </button>
-            </div>
+            <button
+              onClick={() => setShowImagePicker(true)}
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg border border-dashed border-zinc-700 text-sm text-zinc-500 hover:border-violet-600/50 hover:text-violet-400 transition-colors cursor-pointer"
+            >
+              <ImagePlus size={14} /> Seleccionar de Media
+            </button>
           </div>
         </div>
 
@@ -416,6 +416,14 @@ export default function PostForm({
           />
         </div>
       </div>
+
+      {/* Image picker modal */}
+      {showImagePicker && (
+        <ImagePickerModal
+          onSelect={handleInsertImage}
+          onClose={() => setShowImagePicker(false)}
+        />
+      )}
     </div>
   );
 }
