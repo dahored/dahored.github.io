@@ -5,6 +5,7 @@ import { Link } from '@/i18n/navigation';
 import { fetchInstagramPosts, getPostImage } from '@/lib/instagram';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import { ArrowLeft, Play } from 'lucide-react';
+import AdUnit from '@/components/blog/AdUnit';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('developer');
@@ -78,6 +79,9 @@ export default async function DeveloperPostsPage() {
           })}
         </div>
 
+        <div className="mt-12">
+          <AdUnit format="horizontal" slot="posts-bottom" />
+        </div>
       </div>
     </div>
   );
