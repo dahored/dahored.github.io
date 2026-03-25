@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(referenceImage as string, 'base64');
     const imageFile = await toFile(buffer, 'reference.png', { type: 'image/png' });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line
     const imageResponse = await (openai.images.edit as any)({
       model: 'gpt-image-1',
       image: imageFile,

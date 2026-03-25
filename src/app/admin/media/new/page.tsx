@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { Sparkles, Upload, Copy, Check, ArrowLeft, Image } from 'lucide-react';
+import { Sparkles, Upload, Copy, Check, ArrowLeft, ImageIcon } from 'lucide-react';
 import GenerateImageForm, { type GenerateResult } from '@/app/admin/_components/GenerateImageForm';
 
 type Tab = 'generate' | 'upload';
@@ -157,7 +157,7 @@ export default function MediaNewPage() {
                 <div className="p-4 space-y-3">
                   <div className="flex items-center gap-2">
                     <div className="flex items-center gap-1.5 flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 min-w-0">
-                      <Image size={12} className="text-zinc-600 shrink-0" />
+                      <ImageIcon size={12} className="text-zinc-600 shrink-0" />
                       <span className="text-xs font-mono text-zinc-400 truncate">{result.url}</span>
                     </div>
                     <button

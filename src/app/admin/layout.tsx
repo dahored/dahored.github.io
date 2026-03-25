@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FileText, Image, Sparkles } from 'lucide-react';
+import { FileText, ImageIcon, Sparkles } from 'lucide-react';
 
 function AdminNav() {
   return (
@@ -24,7 +24,7 @@ function AdminNav() {
           href="/admin/media"
           className="flex items-center gap-1.5 text-sm text-zinc-400 hover:text-white transition-colors"
         >
-          <Image size={14} />
+          <ImageIcon size={14} />
           Media
         </Link>
       </div>
