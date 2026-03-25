@@ -66,7 +66,7 @@ export default function BlogFilter({ posts, locale, labels }: BlogFilterProps) {
 
       {/* Post count */}
       <p className="text-sm text-[#6e6e73]">
-        {labels.allPostsCount.replace('{n}', String(filtered.length))}
+        {filtered.length} {labels.allPostsCount}
       </p>
 
       {/* Grid */}

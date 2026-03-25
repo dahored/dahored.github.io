@@ -259,7 +259,7 @@
     "filterHerramientas": "Herramientas",
     "readTime": "{n} min de lectura",
     "backToBlog": "Blog",
-    "allPostsCount": "{n} artículos"
+    "allPostsCount": "artículos"
   },
   "contact": {
     "label": "Contacto",
