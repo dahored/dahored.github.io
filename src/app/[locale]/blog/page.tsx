@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { getAllPosts } from '@/lib/blog';
 import PostCard from '@/components/blog/PostCard';
 import BlogFilter from '@/components/blog/BlogFilter';
+import AdUnit from '@/components/blog/AdUnit';
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -54,6 +55,9 @@ export default async function BlogPage({ params }: Props) {
             <PostCard post={featuredPost} locale={locale} featured />
           </section>
         )}
+
+        {/* Ad — between featured and grid */}
+        <AdUnit format="horizontal" slot="listing-top" />
 
         {/* All posts with filter */}
         <section>

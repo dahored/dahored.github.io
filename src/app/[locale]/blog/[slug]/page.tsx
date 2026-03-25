@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Link } from '@/i18n/navigation';
 import { ArrowLeft, Brain, Code2, Wrench, Calendar, Clock } from 'lucide-react';
+import AdUnit from '@/components/blog/AdUnit';
 import { getAllSlugs, getPost } from '@/lib/blog';
 import { routing } from '@/i18n/routing';
 
@@ -114,12 +115,26 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </header>
 
+      {/* Ad — before content */}
+      <div className="px-4 sm:px-6 pb-8">
+        <div className="max-w-3xl mx-auto">
+          <AdUnit format="horizontal" slot="post-top" />
+        </div>
+      </div>
+
       {/* MDX content */}
-      <article className="px-4 sm:px-6 pb-24">
+      <article className="px-4 sm:px-6 pb-12">
         <div className="max-w-3xl mx-auto prose-blog">
           <MDXRemote source={post.content} />
         </div>
       </article>
+
+      {/* Ad — after content */}
+      <div className="px-4 sm:px-6 pb-12">
+        <div className="max-w-3xl mx-auto">
+          <AdUnit format="rectangle" slot="post-bottom" />
+        </div>
+      </div>
 
       {/* Bottom back link */}
       <div className="px-4 sm:px-6 pb-24">
