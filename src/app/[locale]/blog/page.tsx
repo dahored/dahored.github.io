@@ -31,12 +31,7 @@ export default async function BlogPage({ params }: Props) {
       <section className="pt-40 pb-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col gap-4 max-w-2xl">
-            <span
-              className="inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold text-violet-400"
-              style={{ background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.2)' }}
-            >
-              {t('label')}
-            </span>
+            <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73]">{t('label')}</p>
             <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
               {t('heading')}
             </h1>
