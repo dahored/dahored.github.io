@@ -53,6 +53,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <link rel="preload" href="/images/logo/logo_daho.png" as="image" fetchPriority="high" />
         <meta name="google-adsense-account" content="ca-pub-5119314285197382" />
+        {/* Preconnect to Google Ads origins to reduce TCP handshake latency */}
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fundingchoicesmessages.google.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
+        <link rel="dns-prefetch" href="https://www.googletagservices.com" />
       </head>
       <body className={`${geist.variable} font-sans antialiased bg-zinc-950 text-zinc-50 min-h-screen`}>
         <script
@@ -76,10 +81,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
         {children}
         <Script
-          async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5119314285197382"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         <GoogleAnalytics />
         <SpeedInsights />

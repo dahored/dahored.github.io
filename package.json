@@ -38,6 +38,9 @@
       "firefox >= 107",
       "safari >= 16",
       "edge >= 107"
+    ],
+    "development": [
+      "last 1 chrome version"
     ]
   }
 }
