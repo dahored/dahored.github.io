@@ -51,13 +51,11 @@ export default async function HeroSection() {
           </h1>
         </div>
 
-        {/* Tagline — static SSR <p> is the LCP element, replaced by animated version after hydration */}
-        <div className="animate-fade-slide-up" style={{ animationDelay: '180ms' }}>
-          <HeroTagline
-            lines={taglines}
-            className="text-2xl sm:text-3xl lg:text-4xl text-[#6e6e73] font-light"
-          />
-        </div>
+        {/* Tagline — no fade-slide-up wrapper so the LCP <p> is visible immediately */}
+        <HeroTagline
+          lines={taglines}
+          className="text-2xl sm:text-3xl lg:text-4xl text-[#6e6e73] font-light"
+        />
 
         {/* Buttons */}
         <div className="animate-fade-slide-up" style={{ animationDelay: '280ms' }}>
