@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { site } from '@/config/site';
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
@@ -51,15 +52,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const post = getPost(locale, slug);
   if (post) {
+    const canonical = `${site.siteUrl}/${locale}/blog/${slug}`;
     return {
       title: post.title,
       description: post.description,
+      alternates: { canonical },
       openGraph: {
         title: post.title,
         description: post.description,
         type: 'article',
         publishedTime: post.date,
         tags: post.tags,
+        url: canonical,
       },
     };
   }

@@ -34,6 +34,10 @@ export async function generateMetadata(): Promise<Metadata> {
     title: t('pageTitle'),
     description: t('pageDescription'),
     robots: { index: true, follow: true },
+    alternates: {
+      canonical: url,
+      languages: { es: `${site.siteUrl}/es/gamer`, en: `${site.siteUrl}/en/gamer` },
+    },
     openGraph: {
       type: 'website',
       siteName: 'DAHO',

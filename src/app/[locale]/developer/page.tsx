@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import {
   ArrowRight, Linkedin, Mail, ChevronsDown,
@@ -45,9 +45,15 @@ const skillGroups = [
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const url = `${site.siteUrl}/${locale}/developer`;
   return {
     title: 'Developer',
     description: 'Senior Front End Developer — 10+ years building modern web and mobile products at scale.',
+    alternates: {
+      canonical: url,
+      languages: { es: `${site.siteUrl}/es/developer`, en: `${site.siteUrl}/en/developer` },
+    },
   };
 }
 

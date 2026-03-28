@@ -28,6 +28,11 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: '*.fbcdn.net' },
     ],
   },
+  async redirects() {
+    return [
+      { source: '/&', destination: '/es', permanent: true },
+    ];
+  },
   async headers() {
     return [{ source: '/(.*)', headers: securityHeaders }];
   },

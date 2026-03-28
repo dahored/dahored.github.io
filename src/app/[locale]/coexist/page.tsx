@@ -18,6 +18,10 @@ export async function generateMetadata(): Promise<Metadata> {
     title: t('pageTitle'),
     description: t('pageDescription'),
     robots: { index: true, follow: true },
+    alternates: {
+      canonical: url,
+      languages: { es: `${site.siteUrl}/es/coexist`, en: `${site.siteUrl}/en/coexist` },
+    },
     openGraph: {
       type: 'website',
       siteName: 'DAHO',

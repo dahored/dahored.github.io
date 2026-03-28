@@ -12,15 +12,22 @@ import { MapPin, Instagram, Facebook, ArrowRight, ArrowDown, ChevronsDown, Play 
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('adventures');
+  const locale = await getLocale();
+  const url = `${site.siteUrl}/${locale}/adventures`;
   return {
     title: t('pageTitle'),
     description: t('pageDescription'),
     robots: { index: true, follow: true },
+    alternates: {
+      canonical: url,
+      languages: { es: `${site.siteUrl}/es/adventures`, en: `${site.siteUrl}/en/adventures` },
+    },
     openGraph: {
       type: 'website',
       siteName: 'DAHO',
       title: t('pageTitle'),
       description: t('pageDescription'),
+      url,
       images: [{ url: '/images/logo/logo_daho_adventures_bg.png', width: 1200, height: 630, alt: t('pageTitle') }],
     },
     twitter: {
