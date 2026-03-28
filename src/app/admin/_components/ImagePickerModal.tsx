@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { X, Search, Copy, Check, ImageIcon, Loader2, Sparkles } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { X, Search, Copy, Check, ImageIcon, Loader2, Sparkles, Upload } from 'lucide-react';
 import GenerateImageForm, { type GenerateResult } from '@/app/admin/_components/GenerateImageForm';
 
 interface MediaItem {
@@ -19,7 +19,7 @@ interface Props {
   onClose: () => void;
 }
 
-type Tab = 'gallery' | 'generate';
+type Tab = 'gallery' | 'upload' | 'generate';
 
 function formatBytes(b: number) {
   if (b < 1024 * 1024) return `${(b / 1024).toFixed(0)} KB`;
@@ -35,6 +35,12 @@ export default function ImagePickerModal({ onSelect, onClose }: Props) {
   const [search, setSearch] = useState('');
   const [copied, setCopied] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
+
+  // Upload state
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [dragOver, setDragOver] = useState(false);
 
   // Generate state
   const [genResult, setGenResult] = useState<GenerateResult | null>(null);
@@ -64,6 +70,29 @@ export default function ImagePickerModal({ onSelect, onClose }: Props) {
 
   const handleInsert = (url: string) => { onSelect(url); onClose(); };
 
+  const handleUpload = async (file: File) => {
+    if (!file.type.startsWith('image/')) {
+      setUploadError('Solo se permiten imágenes');
+      return;
+    }
+    setUploading(true);
+    setUploadError(null);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/admin/media', { method: 'POST', body: fd });
+      if (!res.ok) throw new Error();
+      const data = await res.json() as MediaItem;
+      setImages((prev) => [data, ...prev]);
+      setSelected(data.url);
+      setTab('gallery');
+    } catch {
+      setUploadError('Error al subir la imagen');
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleGenerated = (r: GenerateResult) => {
     setGenResult(r);
     setImages((prev) => [{ public_id: r.public_id, url: r.url, width: 0, height: 0, bytes: 0, created_at: '', folder: '' }, ...prev]);
@@ -84,6 +113,12 @@ export default function ImagePickerModal({ onSelect, onClose }: Props) {
             >
               <ImageIcon size={11} /> Galería
               {!loadingGallery && <span className="text-zinc-600 font-normal">({filtered.length})</span>}
+            </button>
+            <button
+              onClick={() => setTab('upload')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors cursor-pointer ${tab === 'upload' ? 'bg-zinc-700 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+            >
+              <Upload size={11} /> Subir
             </button>
             <button
               onClick={() => setTab('generate')}
@@ -154,6 +189,52 @@ export default function ImagePickerModal({ onSelect, onClose }: Props) {
                 })}
               </div>
             )
+          )}
+
+          {/* UPLOAD TAB */}
+          {tab === 'upload' && (
+            <div className="max-w-lg mx-auto py-4">
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => { const f = e.target.files?.[0]; if (f) handleUpload(f); }}
+              />
+              <div
+                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                onDragLeave={() => setDragOver(false)}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  setDragOver(false);
+                  const f = e.dataTransfer.files?.[0];
+                  if (f) handleUpload(f);
+                }}
+                onClick={() => !uploading && fileInputRef.current?.click()}
+                className={`flex flex-col items-center justify-center gap-4 border-2 border-dashed rounded-2xl p-12 transition-colors cursor-pointer ${
+                  dragOver ? 'border-violet-500 bg-violet-500/5' : 'border-zinc-700 hover:border-zinc-500 hover:bg-zinc-900/50'
+                } ${uploading ? 'pointer-events-none opacity-60' : ''}`}
+              >
+                {uploading ? (
+                  <>
+                    <Loader2 size={32} className="text-violet-400 animate-spin" />
+                    <p className="text-sm text-zinc-400">Subiendo a Cloudinary...</p>
+                  </>
+                ) : (
+                  <>
+                    <Upload size={32} className="text-zinc-500" />
+                    <div className="text-center">
+                      <p className="text-sm text-zinc-300 font-medium">Arrastra una imagen aquí</p>
+                      <p className="text-xs text-zinc-600 mt-1">o haz clic para seleccionar un archivo</p>
+                      <p className="text-xs text-zinc-700 mt-3">PNG, JPG, WebP, GIF · máx. 10 MB</p>
+                    </div>
+                  </>
+                )}
+              </div>
+              {uploadError && (
+                <p className="mt-3 text-xs text-red-400 text-center">{uploadError}</p>
+              )}
+            </div>
           )}
 
           {/* GENERATE TAB */}

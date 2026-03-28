@@ -1,0 +1,66 @@
+---
+id: claude-memoria-flujo-trabajo-2026
+title: "Claude Gets Memory: How It Changes the Way I Actually Work"
+description: Anthropic rolled out memory features to all Claude users in March 2026. After a month of using it daily, here's what's genuinely different about the workflow.
+date: '2026-03-18'
+category: development
+tags: [Claude, AI, productivity, development, Anthropic]
+readTime: 5
+featured: false
+---
+
+## The context problem, finally addressed
+
+Anyone who uses AI assistants in real work runs into the same limitation repeatedly: you have to re-establish context every single session. Your preferences, your project details, the decisions you've already made, the conventions you follow — all of it has to be re-explained or the AI treats you like a first-time user every conversation.
+
+In early March 2026, Anthropic rolled out persistent memory to all Claude users. After using it daily since launch, here's what's actually different and what I've noticed.
+
+## What memory actually does
+
+The implementation is more nuanced than "the AI remembers everything." Claude's memory is selective and explicit — you can see what it has stored about you, edit it, and delete it. There's no mystery black box of accumulated context.
+
+What gets stored:
+- **Preferences** you express over multiple conversations ("I prefer TypeScript strict mode," "I always want error handling included")
+- **Project context** that you explicitly tell it to remember
+- **Conventions** you've established in previous work together
+- **Facts about your setup** — the frameworks you use, your style preferences, your domain
+
+What doesn't get stored without explicit direction: the actual content of conversations. Confidentiality is preserved. It's closer to a persistent preferences file than a conversation log.
+
+## The workflow changes I've noticed
+
+**The biggest one: no more warm-up.** Previously, starting any meaningful development session with Claude required a context-setting phase — explaining the project, the conventions, the relevant constraints. That friction accumulates significantly across a working day.
+
+Now, Claude knows I'm working in Next.js 15, that I prefer Server Components by default, that I'm opinionated about TypeScript, and a dozen other things that would have required explicit stating. Sessions start at the actual problem, not the preamble.
+
+**Code style consistency.** Across sessions on the same project, Claude now maintains the conventions I've established. The variable naming patterns, the error handling approach, the way I structure component props — it stays consistent without me needing to provide examples every time.
+
+**Context from previous decisions.** This is the subtlest but maybe the most valuable change. When I'm working on something and there's a decision point that connects to a choice I made two weeks ago, Claude can now draw that connection instead of proposing something that conflicts with established direction.
+
+## What hasn't changed (honest)
+
+Memory doesn't solve context windows within a single session. If you're working on a long, complex task, you still hit the same limitations you always did in terms of how much Claude can hold at once.
+
+It also doesn't magically make Claude know things it hasn't been told. It only knows what you've told it across conversations — it can't infer project details from silence.
+
+And there's a calibration phase. The first couple of weeks, I found myself correcting stored preferences that were inaccurate — things Claude had inferred from a single conversation that didn't represent my actual general preferences. The ability to edit memory directly is important precisely because the initial inferences aren't always right.
+
+## The privacy consideration
+
+Being thoughtful about what gets remembered is worth a moment. I don't have sensitive client information stored in Claude's memory. The preferences I've saved are general technical preferences, not project-specific confidential details.
+
+Anthropic's architecture stores memory distinctly from conversation content, but understanding the privacy model before relying on it heavily is the right approach.
+
+## Compared to other memory implementations
+
+The obvious comparison is ChatGPT's memory feature, which has been available longer. Claude's implementation feels more deliberate about what it stores and more transparent about what's in memory. The editing interface is cleaner.
+
+The quality of how memory is used in context — whether it actually informs responses in useful ways rather than superficially — has been meaningfully better in my experience with Claude. Whether that's the memory implementation or the underlying model quality is hard to separate.
+
+## Is it a game changer?
+
+For everyday casual AI use: minor improvement. Nice to have, not transformative.
+
+For regular professional use where you have established preferences and ongoing work: **genuinely significant**. The reduction in session setup friction compounds across weeks and months. The consistency across sessions is better for long-lived projects.
+
+The AI assistant that knows you and your work is meaningfully more useful than one that treats every conversation as a first meeting. Memory is the step toward that, and after a month with it, I wouldn't want to work without it.

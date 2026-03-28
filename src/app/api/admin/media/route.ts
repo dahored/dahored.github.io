@@ -30,6 +30,31 @@ export async function GET() {
   return NextResponse.json(images);
 }
 
+// POST - upload image to Cloudinary
+export async function POST(req: NextRequest) {
+  const formData = await req.formData();
+  const file = formData.get('file') as File | null;
+  if (!file) {
+    return NextResponse.json({ error: 'file requerido' }, { status: 400 });
+  }
+
+  const bytes = await file.arrayBuffer();
+  const buffer = Buffer.from(bytes);
+  const base64 = `data:${file.type};base64,${buffer.toString('base64')}`;
+
+  const result = await cloudinary.uploader.upload(base64, { folder: 'blog' });
+
+  return NextResponse.json({
+    public_id: result.public_id,
+    url: result.secure_url,
+    width: result.width,
+    height: result.height,
+    bytes: result.bytes,
+    created_at: result.created_at,
+    folder: result.folder || '',
+  });
+}
+
 // DELETE - remove image from Cloudinary
 export async function DELETE(req: NextRequest) {
   const { public_id } = await req.json();

@@ -1,0 +1,67 @@
+---
+id: gpt-5-la-era-del-contexto-de-millon-de-tokens
+title: "GPT-5 y la ventana de un millón de tokens: qué cambia en la práctica"
+description: OpenAI lanzó GPT-5.4 en marzo de 2026 con una ventana de contexto de 1.05 millones de tokens. Aquí está lo que ese número significa en la práctica y por qué importa para los desarrolladores.
+date: '2026-03-06'
+category: technology
+tags: [IA, GPT-5, OpenAI, LLM, desarrollo]
+readTime: 6
+featured: false
+---
+
+## Un número que cambia cómo pensamos en la IA
+
+El 5 de marzo de 2026, OpenAI lanzó GPT-5.4 — y el número en el que todos se enfocaron no fueron las puntuaciones de benchmarks. Fue **1.05 millones de tokens**.
+
+Para contexto: el GPT-4 original llegó con una ventana de 8,000 tokens. GPT-4 Turbo la amplió a 128,000. GPT-5.4 ahora ofrece más de 8 veces eso. No es una mejora incremental. Es una herramienta diferente.
+
+## Qué significa un millón de tokens en realidad
+
+Un token equivale aproximadamente a 3/4 de una palabra en inglés. Un millón de tokens equivale aproximadamente a:
+
+- La trilogía completa de El Señor de los Anillos
+- Aproximadamente 750,000 palabras de código
+- Unas 2,500 páginas web de longitud promedio
+- Un día completo de transcripciones de reuniones en una empresa mediana
+
+¿Qué significa esto en la práctica? Ahora puedes pasar un **código base completo** como contexto en un solo prompt. Sin segmentación, sin pipelines de recuperación, sin bases de datos de embeddings para proyectos pequeños. Para un desarrollador trabajando en una aplicación de 50,000 líneas, puedes darle al modelo todo y hacer preguntas.
+
+## Las tres variantes
+
+GPT-5.4 viene en tres configuraciones:
+
+**Standard** — mejor balance costo/rendimiento, adecuado para la mayoría de casos de uso en producción. La ventana de contexto aquí está limitada a 256k tokens.
+
+**Thinking** — activa el razonamiento extendido de cadena de pensamiento para problemas complejos. Este es el que hay que usar para decisiones de arquitectura, debugging complejo y generación de código multi-paso. Contexto completo de 1.05M.
+
+**Pro** — máxima capacidad, mayor costo. Los 1.05M de contexto + modo Thinking. Reservado para escenarios donde la calidad importa más que el costo.
+
+## La mejora de precisión importa más que el tamaño del contexto
+
+Algo que recibió menos atención que la ventana de contexto: GPT-5.4 tiene **33% menos errores factuales** que GPT-5.2 en los mismos benchmarks.
+
+Esto es en realidad más significativo para el uso diario que el contexto extendido. El principal problema de los LLMs en producción no es el tamaño del contexto — son las alucinaciones. Código que no compila, endpoints de API que no existen, documentación que contradice el comportamiento real.
+
+Una reducción del 33% en alucinaciones no es perfección, pero cambia el cálculo costo-beneficio para agentes autónomos de manera significativa.
+
+## Lo que no ha cambiado
+
+El modelo todavía tiene una fecha de corte de conocimiento. Todavía comete errores. Todavía no puede navegar por la web a menos que le des herramientas. Y el costo de un prompt de 1 millón de tokens no es trivial — hay que pensar cuidadosamente si el tamaño del contexto justifica el costo de la API para tu caso de uso.
+
+Para procesamiento por lotes o aplicaciones de alto volumen, probablemente seguirás usando generación aumentada por recuperación (RAG) en lugar de volcar todo en un solo prompt. La economía del RAG sigue siendo favorable a escala.
+
+## Mi cambio real de flujo de trabajo
+
+Antes de GPT-5.4, mantenía un archivo de contexto cuidadosamente curado para cada proyecto — un resumen actualizado manualmente de decisiones de arquitectura, interfaces clave y patrones. Lo incluía al inicio de cada sesión.
+
+Ahora, para proyectos de menos de ~300,000 tokens, simplemente incluyo los archivos fuente reales. La comprensión del modelo sobre el código base es notablemente mejor cuando tiene el material real en lugar de mi resumen.
+
+Esa es la prueba real de una mejora en la ventana de contexto: ¿cambia cómo trabajas realmente? En este caso, sí.
+
+## El panorama más amplio
+
+La carrera para ampliar las ventanas de contexto refleja una apuesta: que **el cuello de botella en la utilidad de la IA es cuánta información puede razonar el modelo a la vez**, no solo la inteligencia del modelo.
+
+Hay un argumento razonable en contra — que mejor recuperación y arquitecturas de agentes pueden lograr resultados similares de manera más eficiente. Probablemente ambos enfoques sean correctos para diferentes casos de uso.
+
+Lo que está claro es que los modelos frontier de 2026 son significativamente más capaces que cualquier cosa que existió hace 18 meses. GPT-5.4 es un punto de datos en una tendencia que no muestra señales de desaceleración.

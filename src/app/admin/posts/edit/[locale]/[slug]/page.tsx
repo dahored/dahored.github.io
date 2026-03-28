@@ -17,7 +17,7 @@ async function fetchPost(locale: string, slug: string): Promise<PostFormData | n
     slug: data.slug,
     title: data.title ?? '',
     description: data.description ?? '',
-    date: data.date ?? new Date().toISOString().split('T')[0],
+    date: data.date ? String(data.date).split('T')[0] : new Date().toISOString().split('T')[0],
     category: data.category ?? 'ia',
     tags: Array.isArray(data.tags) ? data.tags.join(', ') : (data.tags ?? ''),
     readTime: data.readTime ?? 5,

@@ -1,0 +1,67 @@
+---
+id: gpt-5-la-era-del-contexto-de-millon-de-tokens
+title: "GPT-5 and the Million-Token Context Window: What It Actually Changes"
+description: OpenAI's GPT-5.4 arrived in March 2026 with a 1.05 million-token context window. Here's what that number means in practice and why it matters for developers.
+date: '2026-03-06'
+category: technology
+tags: [AI, GPT-5, OpenAI, LLM, development]
+readTime: 6
+featured: false
+---
+
+## A number that changes how we think about AI
+
+On March 5, 2026, OpenAI released GPT-5.4 — and the number everyone focused on wasn't the benchmark scores. It was **1.05 million tokens**.
+
+For context: the original GPT-4 shipped with an 8,000-token window. GPT-4 Turbo pushed that to 128,000. GPT-5.4 now offers more than 8x that. That's not an incremental improvement. That's a different tool.
+
+## What a million tokens actually means
+
+A token is roughly 3/4 of a word in English. One million tokens is approximately:
+
+- The entire Lord of the Rings trilogy
+- About 750,000 words of code
+- Roughly 2,500 average-length web pages
+- A full day of meeting transcripts from a mid-sized company
+
+What does this mean in practice? You can now pass an **entire codebase** as context in a single prompt. No chunking, no retrieval pipelines, no embedding databases for smaller projects. For a developer working on a 50,000-line application, you can hand the model the whole thing and ask questions.
+
+## The three variants
+
+GPT-5.4 ships in three configurations:
+
+**Standard** — best cost/performance balance, suitable for most production use cases. The context window here is capped at 256k tokens.
+
+**Thinking** — enables extended chain-of-thought reasoning for complex problems. This is the one to use for architecture decisions, complex debugging, and multi-step code generation. Full 1.05M context.
+
+**Pro** — highest capability, highest cost. The 1.05M context + Thinking mode. Reserved for scenarios where quality matters more than cost.
+
+## The accuracy improvement matters more than the context size
+
+Something that got less attention than the context window: GPT-5.4 has **33% fewer factual errors** than GPT-5.2 on the same benchmarks.
+
+This is actually more significant for daily use than the extended context. The single biggest problem with LLMs in production isn't context size — it's hallucinations. Code that doesn't compile, API endpoints that don't exist, documentation that contradicts the actual behavior.
+
+A 33% reduction in hallucinations isn't perfect, but it changes the cost-benefit calculation for autonomous agents significantly. You can now deploy agents that take real actions with fewer human checkpoints.
+
+## What hasn't changed
+
+The model still has a knowledge cutoff. It still makes mistakes. It still can't browse the web unless you give it tools. And the cost of a 1-million-token prompt is not trivial — you need to think carefully about whether the context size justifies the API cost for your use case.
+
+For batch processing or high-volume applications, you'll likely still use retrieval-augmented generation (RAG) rather than dumping everything into a single prompt. The economics of RAG remain favorable at scale.
+
+## My actual workflow change
+
+Before GPT-5.4, I maintained a carefully curated context file for each project — a manually updated summary of architecture decisions, key interfaces, and patterns. I'd include this at the start of every session.
+
+Now, for projects under ~300,000 tokens, I just include the actual source files. The model's understanding of the codebase is noticeably better when it has the real thing rather than my summary of it.
+
+That's the real test of a context window improvement: does it change how you actually work? In this case, it does.
+
+## The bigger picture
+
+The race to expand context windows reflects a bet: that **the bottleneck in AI usefulness is how much information the model can reason over at once**, not just model intelligence.
+
+There's a reasonable counter-argument — that better retrieval and agent architectures can achieve similar results more efficiently. Both approaches are probably right for different use cases.
+
+What's clear is that the frontier models of 2026 are meaningfully more capable than anything that existed 18 months ago. GPT-5.4 is one data point in a trend that shows no sign of slowing down.

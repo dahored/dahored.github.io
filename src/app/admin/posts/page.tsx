@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Plus, Pencil, Trash2, Star, FileText, X } from 'lucide-react';
+import { Plus, Pencil, Trash2, Star, FileText, X, Search, ArrowUpDown } from 'lucide-react';
 
 interface PostItem {
   id?: string;
@@ -26,17 +26,39 @@ function pair(posts: PostItem[]): PairedPost[] {
   const map: Record<string, PairedPost> = {};
   for (const p of posts) {
     const key = p.id ?? p.slug;
-    if (!map[key]) map[key] = { id: key, date: p.date, category: p.category };
+    if (!map[key]) map[key] = { id: key, date: p.date ?? '', category: p.category };
     map[key][p.locale as 'es' | 'en'] = p;
-    if (p.date > map[key].date) map[key].date = p.date;
+    if ((p.date ?? '') > (map[key].date ?? '')) map[key].date = p.date ?? '';
   }
-  return Object.values(map).sort((a, b) => b.date.localeCompare(a.date));
+  return Object.values(map).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
 }
 
 const CATEGORY_COLOR: Record<string, string> = {
   ia: 'text-violet-400 bg-violet-500/10 border-violet-500/20',
+  ai: 'text-violet-400 bg-violet-500/10 border-violet-500/20',
   desarrollo: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+  development: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
   herramientas: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
+  tools: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
+  gaming: 'text-green-400 bg-green-500/10 border-green-500/20',
+  tecnología: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+  technology: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+  noticias: 'text-rose-400 bg-rose-500/10 border-rose-500/20',
+  news: 'text-rose-400 bg-rose-500/10 border-rose-500/20',
+  ciencia: 'text-teal-400 bg-teal-500/10 border-teal-500/20',
+  science: 'text-teal-400 bg-teal-500/10 border-teal-500/20',
+  entretenimiento: 'text-pink-400 bg-pink-500/10 border-pink-500/20',
+  entertainment: 'text-pink-400 bg-pink-500/10 border-pink-500/20',
+  deportes: 'text-orange-400 bg-orange-500/10 border-orange-500/20',
+  sports: 'text-orange-400 bg-orange-500/10 border-orange-500/20',
+  salud: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
+  health: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
+  finanzas: 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20',
+  finance: 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20',
+  mundo: 'text-sky-400 bg-sky-500/10 border-sky-500/20',
+  world: 'text-sky-400 bg-sky-500/10 border-sky-500/20',
+  ambiente: 'text-lime-400 bg-lime-500/10 border-lime-500/20',
+  environment: 'text-lime-400 bg-lime-500/10 border-lime-500/20',
 };
 
 // Delete confirmation modal
@@ -113,6 +135,8 @@ export default function PostsPage() {
   const [loading, setLoading] = useState(true);
   const [deletingSlug, setDeletingSlug] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<PairedPost | null>(null);
+  const [search, setSearch] = useState('');
+  const [sortOrder, setSortOrder] = useState<'desc' | 'asc'>('desc');
 
   useEffect(() => {
     fetch('/api/admin/posts')
@@ -155,15 +179,34 @@ export default function PostsPage() {
     setDeletingSlug(null);
   };
 
+  const q = search.trim().toLowerCase();
+  const filtered = pairs
+    .filter((p) => {
+      if (!q) return true;
+      return (
+        (p.id ?? '').toLowerCase().includes(q) ||
+        (p.category ?? '').toLowerCase().includes(q) ||
+        (p.es?.title ?? '').toLowerCase().includes(q) ||
+        (p.en?.title ?? '').toLowerCase().includes(q) ||
+        (p.es?.slug ?? '').toLowerCase().includes(q) ||
+        (p.en?.slug ?? '').toLowerCase().includes(q)
+      );
+    })
+    .sort((a, b) =>
+      sortOrder === 'desc'
+        ? (b.date ?? '').localeCompare(a.date ?? '')
+        : (a.date ?? '').localeCompare(b.date ?? '')
+    );
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       <div className="max-w-5xl mx-auto px-6 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-5">
           <div>
             <h1 className="text-base font-semibold">Posts</h1>
             <p className="text-xs text-zinc-600 mt-0.5">
-              {loading ? '...' : `${pairs.length} publicaciones`}
+              {loading ? '...' : `${filtered.length}${q ? ` de ${pairs.length}` : ''} publicaciones`}
             </p>
           </div>
           <Link
@@ -174,6 +217,35 @@ export default function PostsPage() {
             Nuevo post
           </Link>
         </div>
+
+        {/* Search + sort toolbar */}
+        {!loading && pairs.length > 0 && (
+          <div className="flex items-center gap-2 mb-4">
+            <div className="flex-1 flex items-center gap-2 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 focus-within:border-zinc-600 transition-colors">
+              <Search size={13} className="text-zinc-600 shrink-0" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Buscar por título, slug, categoría…"
+                className="flex-1 bg-transparent text-sm focus:outline-none placeholder-zinc-700"
+              />
+              {search && (
+                <button onClick={() => setSearch('')} className="text-zinc-600 hover:text-white transition-colors cursor-pointer">
+                  <X size={13} />
+                </button>
+              )}
+            </div>
+            <button
+              onClick={() => setSortOrder((o) => (o === 'desc' ? 'asc' : 'desc'))}
+              className="flex items-center gap-1.5 px-3 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-xs text-zinc-400 hover:text-white hover:border-zinc-600 transition-colors cursor-pointer shrink-0"
+              title={sortOrder === 'desc' ? 'Más nuevos primero' : 'Más antiguos primero'}
+            >
+              <ArrowUpDown size={13} />
+              {sortOrder === 'desc' ? 'Más nuevos' : 'Más antiguos'}
+            </button>
+          </div>
+        )}
 
         {loading ? (
           <div className="space-y-2">
@@ -189,9 +261,14 @@ export default function PostsPage() {
               Crea el primero →
             </Link>
           </div>
+        ) : filtered.length === 0 ? (
+          <div className="text-center py-16 text-zinc-700">
+            <Search size={24} className="mx-auto mb-3" />
+            <p className="text-sm">Sin resultados para &quot;{search}&quot;</p>
+          </div>
         ) : (
           <div className="space-y-2">
-            {pairs.map((p) => (
+            {filtered.map((p) => (
               <div
                 key={p.id}
                 className={`bg-zinc-900/50 hover:bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 transition-colors ${
@@ -219,7 +296,7 @@ export default function PostsPage() {
                     <div className="flex items-center gap-2 text-xs text-zinc-600">
                       <span className="font-mono">{p.id}</span>
                       <span>·</span>
-                      <span>{p.date}</span>
+                      <span>{(p.date ?? '').split('T')[0]}</span>
                     </div>
                   </div>
 

@@ -1,0 +1,86 @@
+---
+id: agentes-ia-del-hype-al-trabajo-real-2026
+title: "AI Agents in 2026: From Demo to Real Work"
+description: 2025 was the year everyone talked about AI agents. 2026 is the year companies are actually deploying them in production workflows. Here's what's changed and what to watch.
+date: '2026-01-15'
+category: technology
+tags: [AI, agents, automation, development, productivity]
+readTime: 6
+featured: false
+---
+
+## The shift from impressive to useful
+
+Last year, AI agent demos were spectacular. Autonomous systems browsing the web, writing and running code, managing files, sending emails — the demos made it look like knowledge work was about to be fully automated.
+
+The reality in production was more complicated. Agents hallucinated, got stuck in loops, took expensive wrong turns, and required constant human monitoring that often cost more time than just doing the task manually.
+
+2026 is different. Not because the fundamental limitations are gone, but because the industry has learned how to work within them productively.
+
+## What changed technically
+
+A few key developments made agents more deployable in 2026:
+
+**Million-token context windows.** GPT-5.4 and Claude's latest models can now hold an enormous amount of working context. This means agents can maintain coherence over much longer task sequences without losing track of where they are or what they've done.
+
+**Better tool use reliability.** The specific failure mode of agents calling tools incorrectly — wrong parameters, wrong timing, misinterpreting results — has improved significantly. This is harder to quantify than benchmark scores but has enormous practical impact on agent reliability.
+
+**Structured output improvements.** Agents that output structured data (JSON, specific formats) rather than free-form text are dramatically more reliable as components in automated pipelines. The models have gotten better at this.
+
+**Reduced hallucination rates.** GPT-5.4's 33% reduction in factual errors compared to the previous generation compounds in agent settings — because agents take sequences of actions, and errors early in the sequence cascade.
+
+## What the enterprise is actually deploying
+
+The IBM Institute for Business Value has been tracking enterprise AI adoption closely. The shift they're documenting in 2026 is from **individual tools to workflow orchestration**.
+
+The first wave of enterprise AI was individual: give employees access to ChatGPT or Copilot and let them use it in their work. The second wave — where 2026 sits — is about **AI coordinating entire workflows**, connecting data across departments and moving projects from initial request to completion.
+
+Concrete examples:
+
+**Software development pipelines.** Not just "AI writes code," but AI that can: receive a bug report, identify relevant code sections, generate a fix, write tests, verify the tests pass, and create a pull request for human review. The human remains in the loop for review, but the entire preceding sequence is autonomous.
+
+**Legal document processing.** Contract review agents that can extract key terms, identify deviations from standard templates, flag unusual clauses, and produce a structured summary — tasks that previously required junior associate hours for every contract.
+
+**Customer service escalation.** First-line issue resolution handled autonomously, with clear rules for when to escalate to a human and full context passed seamlessly when escalation happens.
+
+## The Eli Lilly case: AI in drug development
+
+One of the most significant enterprise AI deployments of early 2026 came from an unexpected place: pharmaceutical manufacturing.
+
+Eli Lilly inaugurated **LillyPod** — the pharmaceutical industry's most powerful AI supercomputer, built on 1,016 NVIDIA Blackwell Ultra GPUs delivering over 9,000 petaflops of performance. The explicit goal: cut the typical 10-year drug development timeline in half.
+
+This isn't chatbots helping researchers search literature. This is AI running drug-target interaction simulations at a scale that changes what's computationally feasible. The implications for how quickly new treatments can be developed and tested are significant.
+
+## The human-in-the-loop question
+
+The agents being deployed successfully in 2026 almost universally retain human oversight at key decision points. Fully autonomous agents that take consequential real-world actions without any human checkpoints remain the exception, not the rule.
+
+This isn't a failure of AI capability — it's good system design. The right architecture for an agent system depends on:
+
+- **Reversibility of actions**: can errors be undone easily?
+- **Consequence magnitude**: how bad is a mistake?
+- **Verification cost**: how expensive is it for a human to verify a result?
+
+Agents that draft documents for human review have different oversight requirements than agents that delete files or send communications. The industry has generally learned this the hard way.
+
+## What's still hard
+
+Agents still fail badly on:
+
+- **Novel situations** that fall outside their training distribution
+- **Multi-day tasks** where context gets complex and distant
+- **Physical world integration** where digital outputs have physical consequences
+- **Ambiguous instructions** where clarification is needed but not sought
+
+The last one is particularly important: agents that confidently execute an ambiguous instruction incorrectly are worse than agents that ask for clarification. Teaching models to recognize when they need more information remains an active research problem.
+
+## My recommendation for developers and businesses
+
+If you're evaluating where to deploy AI agents in 2026:
+
+1. **Start with reversible actions** — draft-then-review workflows are lower risk than execute-then-check
+2. **Instrument heavily** — you can't improve what you can't measure; log every agent decision
+3. **Define failure explicitly** — what does "wrong" look like, and how do you detect it?
+4. **Don't automate everything** — identify the 20% of tasks where automation provides 80% of the value and start there
+
+The demos are still more impressive than the production deployments. But the gap is narrowing, and the organizations learning to close it now will have meaningful advantages in 18 months.
