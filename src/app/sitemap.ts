@@ -20,7 +20,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/coexist',    priority: 0.9, freq: 'monthly' as const },
     { path: '/adventures', priority: 0.9, freq: 'monthly' as const },
     { path: '/give',       priority: 0.9, freq: 'monthly' as const },
+    { path: '/about',      priority: 0.9, freq: 'monthly' as const },
     { path: '/blog',       priority: 0.8, freq: 'weekly'  as const },
+    { path: '/privacy',    priority: 0.5, freq: 'yearly'  as const },
+    { path: '/terms',      priority: 0.5, freq: 'yearly'  as const },
   ];
 
   // Collect all blog slugs per locale, deduplicate across locales

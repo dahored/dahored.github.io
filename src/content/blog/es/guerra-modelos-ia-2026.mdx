@@ -48,8 +48,38 @@ Lo que ahora define la elección es **fit de flujo de trabajo**:
 
 La velocidad de iteración también importa. Con actualizaciones cada 2-3 semanas, la ventaja competitiva de cualquier modelo puede durar poco tiempo. Los equipos que ganan son los que tienen la infraestructura para cambiar de modelo rápidamente — no los que apostaron todo a un solo proveedor.
 
+## Cómo los uso en la práctica real
+
+Este es mi flujo actual como developer que construye productos web y móviles:
+
+**Coding del día a día:** Claude Opus 4.6. Sigue instrucciones multi-archivo complejas mejor que nadie, alucina menos en decisiones de arquitectura, y sus explicaciones son más claras cuando necesito entender algo que no escribí yo.
+
+**Investigación y escritura:** También Claude, principalmente. El razonamiento es transparente — te muestra su trabajo de una forma que te ayuda a atrapar errores.
+
+**Análisis de documentos largos:** GPT-5.4 para el contexto de 1M tokens. Cuando necesito analizar un codebase completo o una especificación de API masiva, nada se acerca ahora mismo.
+
+**Experimentación:** Tengo Gemini 3.1 abierto en Google AI Studio. Cada vez que estoy probando algo en la frontera — razonamiento complejo, tareas multimodales — lo pruebo ahí. Los números de benchmarks son reales y vale la pena mantenerse cerca.
+
+## El costo oculto: el impuesto del context switching
+
+Algo que he notado y que nadie menciona: cambiar de modelo constantemente tiene un costo de productividad oculto. Cada modelo tiene sus propias particularidades, sus patrones de respuesta, la forma en que interpreta instrucciones ambiguas.
+
+Cuando cambio de Claude a GPT en medio de una tarea compleja, paso 10-15 minutos recalibrando — reformulando prompts, ajustando expectativas, redescubriendo qué hace bien y qué no hace bien este modelo.
+
+Mi recomendación: **elige un modelo primario y úsalo al menos un mes**. Usa los otros para tareas específicas donde claramente destacan, pero evita la trampa de probar cada nuevo lanzamiento solo porque lideró un benchmark.
+
+Los benchmarks miden modelos en tareas estandarizadas. Tu trabajo no está estandarizado.
+
+## Lo que viene y que nadie está hablando
+
+Las ventanas de contexto están llegando al punto donde un modelo puede cargar todo tu codebase, tu documentación, tus conversaciones pasadas y tus especificaciones simultáneamente. Eso no es un escenario futuro — GPT-5.4 y Claude Opus 4.6 ya pueden hacerlo dentro de ciertos límites.
+
+Cuando el contexto sea efectivamente ilimitado, el cuello de botella pasa de "cuánto puede recordar el modelo" a "qué tan bien puede razonar sobre esa información". Y ahí es donde vamos a ver la diferenciación real en los próximos 12-18 meses.
+
+Los laboratorios que descifren razonamiento confiable en contextos largos — no solo cargar tokens sino realmente usarlos bien — ganarán esta fase de la carrera.
+
 ## Un pensamiento final
 
 Estamos en el momento más extraño y más emocionante de la historia del software. Los modelos que tenemos disponibles hoy habrían parecido ciencia ficción hace dos años. Y en dos semanas probablemente haya algo nuevo.
 
-La estrategia no es encontrar el mejor modelo. La estrategia es aprender a trabajar con todos ellos.
+La estrategia no es encontrar el mejor modelo. La estrategia es construir la flexibilidad de flujo de trabajo para cambiar cuando importa — y la disciplina de no cambiar cuando no importa.

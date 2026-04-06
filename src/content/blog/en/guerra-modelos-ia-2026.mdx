@@ -48,8 +48,38 @@ What now defines the choice is **workflow fit**:
 
 Iteration speed also matters. With updates every 2-3 weeks, any model's competitive advantage can be short-lived. The teams that win are those with the infrastructure to switch models quickly — not those who bet everything on a single provider.
 
+## How I actually use them in practice
+
+This is what my own workflow looks like right now, as a developer who builds web and mobile products:
+
+**Day-to-day coding:** Claude Opus 4.6. It follows complex multi-file instructions better than anyone else, hallucinates less on architecture decisions, and its explanations are clearer when I need to understand something I didn't write.
+
+**Research and writing:** Also Claude, primarily. The reasoning is transparent — it shows you its work in a way that helps you catch errors.
+
+**Long document analysis:** GPT-5.4 for the 1M token context. When I need to analyze an entire codebase or a massive API specification, nothing comes close right now.
+
+**Experimenting:** I keep Gemini 3.1 open through Google AI Studio. Whenever I'm trying something at the frontier — complex reasoning, multimodal tasks — I test it there. The benchmark numbers are real and it's worth staying close.
+
+## The hidden cost: context switching tax
+
+Here's something I've noticed that nobody talks about: switching models constantly has a hidden productivity cost. Every model has its own quirks, its response patterns, the way it interprets ambiguous instructions.
+
+When I switch from Claude to GPT in the middle of a complex task, I spend 10-15 minutes recalibrating — rephrasing prompts, adjusting expectations, rediscovering what this model does or doesn't do well.
+
+My recommendation: **pick a primary model and stick to it for at least a month**. Use others for specific tasks where they clearly shine, but avoid the trap of testing every new release just because it topped a benchmark.
+
+Benchmarks test models on standardized tasks. Your work isn't standardized.
+
+## What's coming that nobody is talking about
+
+Context windows are approaching the point where a model can load your entire codebase, your documentation, your past conversations, and your specifications simultaneously. That's not a future scenario — GPT-5.4 and Claude Opus 4.6 can already do it within certain limits.
+
+When context is effectively unlimited, the bottleneck shifts from "how much can the model remember" to "how well can the model reason over that information." And that's where we're going to see the real differentiation over the next 12-18 months.
+
+The labs that figure out reliable long-context reasoning — not just loading tokens but actually using them well — will win this phase of the race.
+
 ## A final thought
 
 We're at the strangest and most exciting moment in the history of software. The models available today would have seemed like science fiction two years ago. And in two weeks there will probably be something new.
 
-The strategy isn't to find the best model. The strategy is to learn to work with all of them.
+The strategy isn't to find the best model. The strategy is to build the workflow flexibility to switch when it matters — and the discipline to not switch when it doesn't.
