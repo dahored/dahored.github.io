@@ -33,7 +33,7 @@
       "heading": "El código corre por mis venas.",
       "text1": "Soy un desarrollador frontend apasionado con más de 10 años de experiencia construyendo aplicaciones web modernas. He trabajado como Senior Front End Developer en empresas como NICE y Playvox, creando experiencias de usuario excepcionales a escala.",
       "text2": "Me especializo en Vue, React, Next.js y TypeScript. Además del web, construyo apps móviles con React Native — incluyendo mi propio estudio indie myappcube, con dos juegos sociales disponibles en iOS y Android.",
-      "openToWork": "Open to work",
+      "openToWork": "Disponible para trabajar",
       "openToWorkSub": "Disponible para nuevos proyectos y colaboraciones."
     },
     "exp": {
@@ -74,7 +74,7 @@
     "exp1Label": "Experiencia",
     "exp2Value": "Senior FE Dev",
     "exp2Label": "Último cargo",
-    "exp3Value": "Open to work",
+    "exp3Value": "Disponible",
     "exp3Label": "Estado",
     "linkedinBtn": "Ver perfil en LinkedIn",
     "devCardTitle": "10+ años de experiencia",
@@ -285,7 +285,10 @@
     "colNav": "Navegar",
     "colWorlds": "Mis Mundos",
     "colFollow": "Sígueme",
+    "colLegal": "Legal",
     "copyright": "© {year} Daho · dahoofficial.com",
+    "privacyPolicy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
     "nav": {
       "developer": "Developer",
       "gamer": "Gamer",
@@ -295,5 +298,49 @@
       "blog": "Blog",
       "contact": "Contacto"
     }
+  },
+  "privacy": {
+    "pageTitle": "Política de Privacidad · Daho",
+    "pageDescription": "Política de privacidad de dahoofficial.com. Información sobre el uso de datos, cookies y publicidad.",
+    "heading": "Política de Privacidad",
+    "lastUpdated": "Última actualización: {date}",
+    "intro": "En dahoofficial.com tomamos tu privacidad en serio. Esta política explica qué información recopilamos, cómo la usamos y cómo la protegemos.",
+    "s1Title": "Información que recopilamos",
+    "s1Body": "No recopilamos datos personales directamente. Al navegar este sitio, se pueden recopilar datos técnicos a través de servicios de terceros como Google Analytics y Google AdSense, incluyendo dirección IP, tipo de navegador, páginas visitadas y duración de la visita.",
+    "s2Title": "Cookies",
+    "s2Body": "Este sitio utiliza cookies propias y de terceros. Las cookies son pequeños archivos de texto almacenados en tu dispositivo. Las utilizamos para mejorar la experiencia de usuario y para mostrar publicidad relevante a través de Google AdSense. Puedes desactivar las cookies desde la configuración de tu navegador.",
+    "s3Title": "Google AdSense y publicidad",
+    "s3Body": "Utilizamos Google AdSense para mostrar anuncios. Google puede usar cookies para mostrar anuncios basados en tus visitas anteriores a este y otros sitios. Puedes optar por no recibir publicidad personalizada visitando la Configuración de anuncios de Google.",
+    "s4Title": "Google Analytics",
+    "s4Body": "Utilizamos Google Analytics para analizar el tráfico del sitio. Google Analytics recopila datos de forma anónima. Puedes optar por no ser rastreado instalando el complemento de inhabilitación de Google Analytics.",
+    "s5Title": "Servicios de terceros",
+    "s5Body": "Este sitio puede incluir contenido de servicios de terceros como YouTube, Twitch e Instagram. Estos servicios tienen sus propias políticas de privacidad independientes.",
+    "s6Title": "Tus derechos",
+    "s6Body": "Tienes derecho a acceder, corregir o eliminar cualquier dato personal que podamos tener sobre ti. Para ejercer estos derechos, contáctanos por email.",
+    "s7Title": "Contacto",
+    "s7Body": "Si tienes preguntas sobre esta política de privacidad, escríbenos a:",
+    "backHome": "Volver al inicio"
+  },
+  "terms": {
+    "pageTitle": "Términos de Servicio · Daho",
+    "pageDescription": "Términos y condiciones de uso de dahoofficial.com.",
+    "heading": "Términos de Servicio",
+    "lastUpdated": "Última actualización: {date}",
+    "intro": "Al acceder y usar dahoofficial.com, aceptas los siguientes términos y condiciones. Si no estás de acuerdo, por favor no uses este sitio.",
+    "s1Title": "Uso del sitio",
+    "s1Body": "Este sitio es de uso personal e informativo. Puedes leer y compartir el contenido con fines no comerciales, siempre citando la fuente. Queda prohibido reproducir el contenido completo sin autorización expresa.",
+    "s2Title": "Propiedad intelectual",
+    "s2Body": "Todo el contenido de este sitio — textos, imágenes, diseño y código — es propiedad de Diego Hernández (Daho) a menos que se indique lo contrario. Todos los derechos reservados.",
+    "s3Title": "Contenido de terceros",
+    "s3Body": "Este sitio puede enlazar a sitios web de terceros. No somos responsables del contenido, las políticas de privacidad ni las prácticas de esos sitios. Te recomendamos revisar las políticas de privacidad de cualquier sitio que visites.",
+    "s4Title": "Publicidad",
+    "s4Body": "Este sitio muestra anuncios a través de Google AdSense. Los anuncios son gestionados por Google y pueden ser personalizados según tu historial de navegación. No somos responsables del contenido de los anuncios.",
+    "s5Title": "Limitación de responsabilidad",
+    "s5Body": "El contenido de este sitio se proporciona 'tal cual', sin garantías de ningún tipo. No nos responsabilizamos por errores, omisiones o por los resultados obtenidos del uso de esta información.",
+    "s6Title": "Cambios en los términos",
+    "s6Body": "Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios entran en vigor al publicarse en esta página. El uso continuado del sitio tras los cambios implica la aceptación de los nuevos términos.",
+    "s7Title": "Contacto",
+    "s7Body": "Para cualquier consulta sobre estos términos, contáctanos en:",
+    "backHome": "Volver al inicio"
   }
 }

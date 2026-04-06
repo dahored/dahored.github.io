@@ -18,6 +18,11 @@ export default async function Footer() {
     { href: '/#contact',   labelKey: 'nav.contact'    },
   ];
 
+  const legalLinks = [
+    { href: '/privacy', label: t('privacyPolicy') },
+    { href: '/terms',   label: t('terms')          },
+  ];
+
   const worldLinks = [
     { href: 'https://www.youtube.com/@dahogaming',        label: 'Daho Gaming'     },
     { href: 'https://www.instagram.com/daho.coexist/',    label: 'Daho Coexist'    },
@@ -38,7 +43,7 @@ export default async function Footer() {
 
       {/* Main grid */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
 
           {/* Brand */}
           <div className="flex flex-col gap-4">
@@ -119,15 +124,45 @@ export default async function Footer() {
             </div>
           </div>
 
+          {/* Legal */}
+          <div>
+            <h3 className="text-xs font-semibold tracking-widest uppercase text-[#3a3a3c] mb-4">
+              {t('colLegal')}
+            </h3>
+            <ul className="flex flex-col gap-3">
+              {legalLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
         </div>
       </div>
 
       {/* Bottom bar */}
       <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-sm text-[#3a3a3c]">
             {t('copyright', { year })}
           </p>
+          <div className="flex items-center gap-4">
+            {legalLinks.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="text-xs text-[#3a3a3c] hover:text-[#6e6e73] transition-colors"
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 

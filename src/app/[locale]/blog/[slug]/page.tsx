@@ -53,10 +53,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost(locale, slug);
   if (post) {
     const canonical = `${site.siteUrl}/${locale}/blog/${slug}`;
+    const ogImage = post.image || `${site.siteUrl}/images/og/og-cover.png`;
     return {
       title: post.title,
       description: post.description,
-      alternates: { canonical },
+      alternates: {
+        canonical,
+        languages: { es: `${site.siteUrl}/es/blog/${slug}`, en: `${site.siteUrl}/en/blog/${slug}` },
+      },
       openGraph: {
         title: post.title,
         description: post.description,
@@ -64,6 +68,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         publishedTime: post.date,
         tags: post.tags,
         url: canonical,
+        images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: post.title,
+        description: post.description,
+        images: [ogImage],
       },
     };
   }
@@ -97,9 +108,38 @@ export default async function BlogSlugPage({ params }: Props) {
     const t = await getTranslations({ locale, namespace: 'blog' });
     const category = getCategory(post.category, locale);
     const { icon: CategoryIcon } = category;
+    const canonical = `${site.siteUrl}/${locale}/blog/${slug}`;
+    const ogImage = post.image || `${site.siteUrl}/images/og/og-cover.png`;
+
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.description,
+      image: ogImage,
+      datePublished: post.date,
+      dateModified: post.date,
+      url: canonical,
+      author: {
+        '@type': 'Person',
+        name: site.fullName,
+        url: site.siteUrl,
+      },
+      publisher: {
+        '@type': 'Person',
+        name: site.fullName,
+        url: site.siteUrl,
+      },
+      keywords: post.tags.join(', '),
+      inLanguage: locale === 'en' ? 'en-US' : 'es-ES',
+    };
 
     return (
       <main className="min-h-screen bg-black text-[#f5f5f7]">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <div className="pt-24 pb-6 px-4 sm:px-6">
           <div className="max-w-3xl mx-auto">
             <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors">

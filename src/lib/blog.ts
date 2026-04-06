@@ -11,6 +11,7 @@ export interface PostMeta {
   tags: string[];
   readTime: number;
   featured: boolean;
+  image?: string;
 }
 
 export interface Post extends PostMeta {
@@ -38,6 +39,7 @@ export function getAllPosts(locale: string): PostMeta[] {
       tags: (data.tags as string[]) ?? [],
       readTime: (data.readTime as number) ?? 5,
       featured: (data.featured as boolean) ?? false,
+      image: (data.image as string) ?? '',
     };
   });
 
@@ -60,6 +62,7 @@ export function getPost(locale: string, slug: string): Post | null {
     tags: (data.tags as string[]) ?? [],
     readTime: (data.readTime as number) ?? 5,
     featured: (data.featured as boolean) ?? false,
+    image: (data.image as string) ?? '',
     content,
   };
 }
@@ -106,6 +109,7 @@ export function getPostById(locale: string, id: string): (Post & { slug: string 
         tags: (data.tags as string[]) ?? [],
         readTime: (data.readTime as number) ?? 5,
         featured: (data.featured as boolean) ?? false,
+        image: (data.image as string) ?? '',
         content,
       };
     }
