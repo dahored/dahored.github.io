@@ -21,7 +21,7 @@ const formatMap: Record<string, { style: React.CSSProperties; dataAdFormat: stri
   auto:        { style: { display: 'block', minHeight: 0, overflow: 'hidden' }, dataAdFormat: 'auto', dataFullWidthResponsive: 'true' },
 };
 
-export default function AdUnit({ slot, className = '', format = 'horizontal' }: AdUnitProps) {
+function AdUnitInner({ slot, className = '', format = 'horizontal' }: AdUnitProps) {
   const ref = useRef<HTMLModElement>(null);
   const pushed = useRef(false);
 
@@ -53,4 +53,9 @@ export default function AdUnit({ slot, className = '', format = 'horizontal' }: 
       />
     </div>
   );
+}
+
+export default function AdUnit(props: AdUnitProps) {
+  if (process.env.NEXT_PUBLIC_ADSENSE_ACTIVE !== 'true') return null;
+  return <AdUnitInner {...props} />;
 }
