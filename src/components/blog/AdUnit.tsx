@@ -15,10 +15,10 @@ interface AdUnitProps {
 }
 
 const formatMap: Record<string, { style: React.CSSProperties; dataAdFormat: string; dataFullWidthResponsive?: string }> = {
-  horizontal:  { style: { display: 'block' }, dataAdFormat: 'auto', dataFullWidthResponsive: 'true' },
+  horizontal:  { style: { display: 'block', minHeight: 0, overflow: 'hidden' }, dataAdFormat: 'auto', dataFullWidthResponsive: 'true' },
   rectangle:   { style: { display: 'inline-block', width: '300px', height: '250px' }, dataAdFormat: 'rectangle' },
   vertical:    { style: { display: 'inline-block', width: '160px', height: '600px' }, dataAdFormat: 'vertical' },
-  auto:        { style: { display: 'block' }, dataAdFormat: 'auto', dataFullWidthResponsive: 'true' },
+  auto:        { style: { display: 'block', minHeight: 0, overflow: 'hidden' }, dataAdFormat: 'auto', dataFullWidthResponsive: 'true' },
 };
 
 export default function AdUnit({ slot, className = '', format = 'horizontal' }: AdUnitProps) {
@@ -41,7 +41,7 @@ export default function AdUnit({ slot, className = '', format = 'horizontal' }: 
   const { style, dataAdFormat, dataFullWidthResponsive } = formatMap[format] ?? formatMap.horizontal;
 
   return (
-    <div className={className}>
+    <div className={`min-h-0 overflow-hidden ${className}`}>
       <ins
         ref={ref}
         className="adsbygoogle"

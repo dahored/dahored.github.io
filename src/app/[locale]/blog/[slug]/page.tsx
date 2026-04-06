@@ -172,22 +172,14 @@ export default async function BlogSlugPage({ params }: Props) {
           </div>
         </header>
 
-        <div className="px-4 sm:px-6 pb-8">
-          <div className="max-w-3xl mx-auto">
-            <AdUnit format="horizontal" slot="post-top" />
-          </div>
-        </div>
-
         <article className="px-4 sm:px-6 pb-12">
           <div className="max-w-3xl mx-auto prose-blog">
             <MDXRemote source={post.content} components={mdxComponents} />
           </div>
         </article>
 
-        <div className="px-4 sm:px-6 pb-12">
-          <div className="max-w-3xl mx-auto">
-            <AdUnit format="horizontal" slot="post-bottom" />
-          </div>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-12">
+          <AdUnit format="horizontal" slot="post-bottom" />
         </div>
 
         <div className="px-4 sm:px-6 pb-24">

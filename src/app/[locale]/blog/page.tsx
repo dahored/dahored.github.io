@@ -56,9 +56,6 @@ export default async function BlogPage({ params }: Props) {
           </section>
         )}
 
-        {/* Ad — between featured and grid */}
-        <AdUnit format="horizontal" slot="listing-top" />
-
         {/* All posts with filter */}
         <section>
           <BlogFilter
@@ -70,8 +67,10 @@ export default async function BlogPage({ params }: Props) {
             }}
           />
         </section>
+      </div>
 
-        {/* Ad — bottom of listing */}
+      {/* Ad — bottom of listing, outside gap container */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
         <AdUnit format="horizontal" slot="listing-bottom" />
       </div>
     </main>
