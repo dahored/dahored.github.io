@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 
 export interface PostMeta {
+  id?: string;
   slug: string;
   title: string;
   description: string;
@@ -31,6 +32,7 @@ export function getAllPosts(locale: string): PostMeta[] {
     const raw = fs.readFileSync(path.join(dir, filename), 'utf-8');
     const { data } = matter(raw);
     return {
+      id: (data.id as string) || undefined,
       slug,
       title: data.title as string,
       description: data.description as string,
@@ -54,6 +56,7 @@ export function getPost(locale: string, slug: string): Post | null {
   const { data, content } = matter(raw);
 
   return {
+    id: (data.id as string) || undefined,
     slug,
     title: data.title as string,
     description: data.description as string,
@@ -101,6 +104,7 @@ export function getPostById(locale: string, id: string): (Post & { slug: string 
     if (data.id === id) {
       const slug = file.replace(/\.mdx$/, '');
       return {
+        id: (data.id as string) || undefined,
         slug,
         title: data.title as string,
         description: data.description as string,

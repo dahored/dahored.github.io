@@ -52,14 +52,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const post = getPost(locale, slug);
   if (post) {
-    const canonical = `${site.siteUrl}/${locale}/blog/${slug}`;
+    // Resolve EN and ES versions via the shared post ID
+    const postId = post.id;
+    const enPost = locale === 'en' ? post : (postId ? getPostById('en', postId) : null);
+    const esPost = locale === 'es' ? post : (postId ? getPostById('es', postId) : null);
+
+    // Canonical always points to the English version (primary language)
+    const canonicalSlug = enPost?.slug ?? slug;
+    const canonicalLocale = enPost ? 'en' : locale;
+    const canonical = `${site.siteUrl}/${canonicalLocale}/blog/${canonicalSlug}`;
+
+    const languages: Record<string, string> = {};
+    if (enPost) languages['en'] = `${site.siteUrl}/en/blog/${enPost.slug}`;
+    if (esPost) languages['es'] = `${site.siteUrl}/es/blog/${esPost.slug}`;
+
     const ogImage = post.image || `${site.siteUrl}/images/og/og-cover.png`;
     return {
       title: post.title,
       description: post.description,
       alternates: {
         canonical,
-        languages: { es: `${site.siteUrl}/es/blog/${slug}`, en: `${site.siteUrl}/en/blog/${slug}` },
+        languages: Object.keys(languages).length > 0 ? languages : undefined,
       },
       openGraph: {
         title: post.title,
