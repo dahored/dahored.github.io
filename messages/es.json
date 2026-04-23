@@ -24,9 +24,12 @@
       "label": "Developer",
       "heading": "Construyendo experiencias digitales.",
       "subtitle": "Senior Front End Developer con 10+ años construyendo productos web y móviles modernos a escala.",
-      "stat1Value": "10+", "stat1Label": "Años de experiencia",
-      "stat2Value": "2",   "stat2Label": "Empresas top",
-      "stat3Value": "∞",   "stat3Label": "Líneas de código"
+      "stat1Value": "10+",
+      "stat1Label": "Años de experiencia",
+      "stat2Value": "2",
+      "stat2Label": "Empresas top",
+      "stat3Value": "∞",
+      "stat3Label": "Líneas de código"
     },
     "bio": {
       "label": "Sobre mí",
@@ -209,7 +212,7 @@
   "gamer": {
     "pageTitle": "Daho Gaming",
     "pageDescription": "Gaming, streams en vivo y contenido de videojuegos en múltiples plataformas por Daho.",
-    "description": "Gaming, streams en vivo y contenido de videojuegos en múltiples plataformas.",
+    "description": "De shooters competitivos a RPGs narrativos — gameplay, reviews, streams en vivo y comunidad en YouTube, Twitch, TikTok e Instagram. Contenido real de un gamer de toda la vida, hecho para gente que de verdad ama los videojuegos.",
     "heroCta": "Explorar plataformas",
     "tagline": "El juego es vida.",
     "taglineDesc": "Gameplay, reviews y streams en vivo desde múltiples plataformas. Únete a la comunidad gamer.",
@@ -229,16 +232,21 @@
     "followHeading": "Encuéntrame en",
     "ytLabel": "YouTube",
     "ytHeading": "Gameplay, reviews y mucho más.",
-    "ytDesc": "Contenido gaming de calidad: gameplays, reviews y tops. Suscríbete y no te pierdas ningún video.",
+    "ytDesc": "Gameplays en profundidad, reviews honestas y tops curados por un gamer que lleva jugando desde niño. Cada video está hecho con calidad — sin relleno, solo contenido que vale la pena ver. Suscríbete y no te pierdas ninguna subida.",
     "ytCta": "Ver canal",
     "twitchLabel": "Twitch",
     "twitchHeading": "Streams en vivo, comunidad en vivo.",
-    "twitchDesc": "Únete al stream en directo. Gameplay en tiempo real, charlas con la comunidad y momentos épicos.",
+    "twitchDesc": "Streams en vivo varias veces por semana — desde primeras partidas hasta matchs competitivos. El chat de Twitch es el lugar para estar en tiempo real, reaccionar juntos y convertir sesiones de juego en momentos memorables. Sígueme para saber cuándo estoy en vivo.",
     "twitchCta": "Seguir en Twitch",
     "tiktokLabel": "TikTok",
     "tiktokHeading": "Los mejores clips y momentos épicos.",
-    "tiktokDesc": "Los highlights más épicos en formato corto. Sígueme para no perderte los mejores momentos.",
-    "tiktokCta": "Seguir en TikTok"
+    "tiktokDesc": "Los mejores highlights de streams y gameplays, destilados en clips cortos y de alto impacto. Momentos divertidos, jugadas épicas y resultados inesperados — todo en menos de 60 segundos. Sígueme para no perderte los momentos que importan.",
+    "tiktokCta": "Seguir en TikTok",
+    "storyLabel": "Mi Historia",
+    "storyHeading": "Gamer desde siempre.",
+    "storyP1": "Los videojuegos han sido parte de mi vida desde que tuve el primer mando en las manos. De Mario en la tele familiar a noches largas en lobbies competitivos — los juegos moldearon cómo pienso, cómo resuelvo problemas y cómo me conecto con gente alrededor del mundo.",
+    "storyP2": "Daho Gaming nació como una forma de compartir esa pasión. No solo para mostrar gameplay, sino para crear un espacio donde los gamers podemos hablar con honestidad sobre los juegos que amamos, los que nos decepcionan y todo lo que hay en el medio. Reviews, streams, clips — todo lo que hago es algo que yo mismo querría ver.",
+    "storyP3": "Hoy creo contenido en YouTube, Twitch, TikTok e Instagram con una comunidad que sigue creciendo. Ya sea por los streams, los clips o las reviews — bienvenido. El mando siempre está caliente."
   },
   "comingSoon": {
     "label": "Próximamente",

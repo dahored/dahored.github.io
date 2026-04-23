@@ -24,9 +24,12 @@
       "label": "Developer",
       "heading": "Crafting digital experiences.",
       "subtitle": "Senior Front End Developer with 10+ years building modern web and mobile products at scale.",
-      "stat1Value": "10+", "stat1Label": "Years of experience",
-      "stat2Value": "2",   "stat2Label": "Top-tier companies",
-      "stat3Value": "∞",   "stat3Label": "Lines of code"
+      "stat1Value": "10+",
+      "stat1Label": "Years of experience",
+      "stat2Value": "2",
+      "stat2Label": "Top-tier companies",
+      "stat3Value": "∞",
+      "stat3Label": "Lines of code"
     },
     "bio": {
       "label": "About me",
@@ -209,7 +212,7 @@
   "gamer": {
     "pageTitle": "Daho Gaming",
     "pageDescription": "Gaming, live streams and video game content across multiple platforms by Daho.",
-    "description": "Gaming, live streams and video game content across multiple platforms.",
+    "description": "From competitive shooters to narrative RPGs — gameplay, reviews, live streams and community across YouTube, Twitch, TikTok and Instagram. Real content from a lifelong gamer, built for people who actually care about games.",
     "heroCta": "Explore platforms",
     "tagline": "The game is life.",
     "taglineDesc": "Gameplay, reviews and live streams across multiple platforms. Join the gaming community.",
@@ -229,16 +232,21 @@
     "followHeading": "Find me on",
     "ytLabel": "YouTube",
     "ytHeading": "Gameplay, reviews and more.",
-    "ytDesc": "Quality gaming content: gameplays, reviews and top lists. Subscribe and never miss a video.",
+    "ytDesc": "Deep-dive gameplays, honest reviews, and curated top lists from a gamer who has been playing since childhood. Every video is crafted for quality — no filler, just content worth watching. Subscribe and never miss a new upload.",
     "ytCta": "Visit channel",
     "twitchLabel": "Twitch",
     "twitchHeading": "Live streams, live community.",
-    "twitchDesc": "Join the stream live. Real-time gameplay, community chat and epic moments every week.",
+    "twitchDesc": "Live streams multiple times per week — from first-time playthroughs to competitive matches. The Twitch chat is the place to hang out in real time, react together, and turn random gaming sessions into something memorable. Follow to get notified when I go live.",
     "twitchCta": "Follow on Twitch",
     "tiktokLabel": "TikTok",
     "tiktokHeading": "Best clips and epic moments.",
-    "tiktokDesc": "The most epic highlights in short format. Follow to never miss the best stream moments.",
-    "tiktokCta": "Follow on TikTok"
+    "tiktokDesc": "The best highlights from streams and gameplays, distilled into short high-energy clips. Funny moments, clutch plays, and unexpected outcomes — all under 60 seconds. Follow and you will never miss the moments that matter most.",
+    "tiktokCta": "Follow on TikTok",
+    "storyLabel": "My Story",
+    "storyHeading": "Gamer since day one.",
+    "storyP1": "Gaming has been a constant in my life since I picked up my first controller as a kid. From Mario on the family TV to late nights in competitive lobbies — video games shaped how I think, how I problem-solve, and how I connect with people around the world.",
+    "storyP2": "Daho Gaming started as a way to share that passion. Not just to show off gameplay, but to build a space where gamers can talk honestly about the games we love, the ones that disappoint us, and everything in between. Reviews, streams, clips — everything I make is something I would want to watch myself.",
+    "storyP3": "Today I create content across YouTube, Twitch, TikTok and Instagram with a community that keeps growing. Whether you are here for the streams, the clips, or the reviews — welcome. The controller is always warm."
   },
   "comingSoon": {
     "label": "Coming soon",
