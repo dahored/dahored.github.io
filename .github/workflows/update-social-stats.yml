@@ -61,4 +61,5 @@ jobs:
           git add src/data/social-stats.json
           git diff --staged --quiet && echo "No changes to commit" && exit 0
           git commit -m "chore: update social stats (TikTok + YouTube)"
+          git pull --rebase origin master
           git push
