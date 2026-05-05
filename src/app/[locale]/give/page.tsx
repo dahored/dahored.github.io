@@ -235,6 +235,19 @@ export default async function GivePage() {
         </ScrollReveal>
       </section>
 
+      {/* ── STORY ────────────────────────────────────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-0">
+        <ScrollReveal>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: BRAND }}>{t('storyLabel')}</p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-10" style={{ letterSpacing: '-0.02em' }}>{t('storyHeading')}</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 text-zinc-400 text-lg leading-relaxed">
+            <p>{t('storyP1')}</p>
+            <p>{t('storyP2')}</p>
+            <p>{t('storyP3')}</p>
+          </div>
+        </ScrollReveal>
+      </section>
+
       {/* ── CAROUSEL ─────────────────────────────────────────────────────────── */}
       {postsList.length > 0 && (
         <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-40 pb-20">

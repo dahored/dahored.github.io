@@ -195,6 +195,26 @@ export default async function BlogSlugPage({ params }: Props) {
           <AdUnit format="horizontal" slot="post-bottom" />
         </div>
 
+        {/* ── RELATED POSTS ─────────────────────────────────────────────────── */}
+        {(() => {
+          const related = getAllPosts(locale)
+            .filter((p) => p.slug !== post.slug && p.category === post.category)
+            .slice(0, 3);
+          if (related.length === 0) return null;
+          return (
+            <div className="px-4 sm:px-6 pb-16" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '3rem' }}>
+              <div className="max-w-6xl mx-auto">
+                <p className="text-xs font-semibold tracking-widest uppercase text-[#6e6e73] mb-6">{t('relatedPosts')}</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                  {related.map((p) => (
+                    <PostCard key={p.slug} post={p} locale={locale} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+        })()}
+
         <div className="px-4 sm:px-6 pb-24">
           <div className="max-w-3xl mx-auto" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '2rem' }}>
             <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-[#6e6e73] hover:text-[#f5f5f7] transition-colors">
