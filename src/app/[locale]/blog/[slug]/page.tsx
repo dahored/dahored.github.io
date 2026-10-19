@@ -40,6 +40,7 @@ interface Props {
 }
 
 export function generateStaticParams() {
+  if (!site.blogEnabled) return [];
   const slugs = getAllSlugs();
   const categories = Object.keys(CATEGORY_REGISTRY);
   const all = Array.from(new Set([...slugs, ...categories]));
@@ -49,6 +50,7 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  if (!site.blogEnabled) return { robots: { index: false, follow: false } };
   const { locale, slug } = await params;
   const post = getPost(locale, slug);
   if (post) {
@@ -105,6 +107,7 @@ function formatDate(date: string, locale: string): string {
 }
 
 export default async function BlogSlugPage({ params }: Props) {
+  if (!site.blogEnabled) notFound();
   const { locale, slug } = await params;
 
   // ── Try post first ──────────────────────────────────────────────

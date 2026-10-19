@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/adventures', priority: 0.9, freq: 'monthly' as const },
     { path: '/give',       priority: 0.9, freq: 'monthly' as const },
     { path: '/about',      priority: 0.9, freq: 'monthly' as const },
-    { path: '/blog',       priority: 0.8, freq: 'weekly'  as const },
+    ...(site.blogEnabled ? [{ path: '/blog', priority: 0.8, freq: 'weekly' as const }] : []),
     { path: '/privacy',    priority: 0.5, freq: 'yearly'  as const },
     { path: '/terms',      priority: 0.5, freq: 'yearly'  as const },
   ];
@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Collect all blog slugs per locale, deduplicate across locales
   const slugsByLocale: Record<string, Set<string>> = {};
   for (const locale of locales) {
-    slugsByLocale[locale] = new Set(getAllPosts(locale).map((p) => p.slug));
+    slugsByLocale[locale] = new Set(site.blogEnabled ? getAllPosts(locale).map((p) => p.slug) : []);
   }
   // Union of all slugs
   const allSlugs = new Set([...Object.values(slugsByLocale).flatMap((s) => [...s])]);

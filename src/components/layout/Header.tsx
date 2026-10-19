@@ -7,6 +7,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import LocaleSwitcher from '@/components/ui/LocaleSwitcher';
+import { site } from '@/config/site';
 
 interface SubItem { href: string; label: string }
 interface NavLink { href: string; label: string; color: string; submenu?: SubItem[] }
@@ -45,12 +46,12 @@ export default function Header() {
     { href: '/adventures', label: t('adventures'),  color: '#4ade80', submenu: [
       { href: '/adventures/posts', label: t('submenuPosts') },
     ]},
-    { href: '/blog', label: t('blog'), color: '#6366f1', submenu: [
+    ...(!site.blogEnabled ? [] : [{ href: '/blog', label: t('blog'), color: '#6366f1', submenu: [
       { href: '/blog/gaming',                             label: 'Gaming' },
       { href: locale === 'en' ? '/blog/ai' : '/blog/ia', label: locale === 'en' ? 'AI' : 'IA' },
       { href: locale === 'en' ? '/blog/tools' : '/blog/herramientas', label: locale === 'en' ? 'Tools' : 'Herramientas' },
       { href: locale === 'en' ? '/blog/news' : '/blog/noticias',      label: locale === 'en' ? 'News' : 'Noticias' },
-    ]},
+    ]}]),
   ];
 
   function handleMouseEnter(href: string) {

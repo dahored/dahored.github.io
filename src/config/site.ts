@@ -3,6 +3,8 @@ export const site = {
   fullName: 'Diego Hernández',
   alternateName: 'DAHO',
   siteUrl: 'https://www.dahoofficial.com',
+  // Blog hidden while content is reviewed for AdSense (low-value content policy)
+  blogEnabled: false,
   email: 'dahoreddiegohernandez+dahoofficial@gmail.com',
   jobTitle: 'Senior Front End Developer',
   description:

@@ -6,6 +6,7 @@ import ProjectsSection from '@/components/sections/ProjectsSection';
 import BrandsSection from '@/components/sections/BrandsSection';
 import BlogSection from '@/components/sections/BlogSection';
 import ContactSection from '@/components/sections/ContactSection';
+import { site } from '@/config/site';
 
 export default function HomePage() {
   return (
@@ -16,7 +17,7 @@ export default function HomePage() {
       <WorldsSection />
       <ProjectsSection />
       <BrandsSection />
-      <BlogSection />
+      {site.blogEnabled && <BlogSection />}
       <ContactSection />
     </>
   );

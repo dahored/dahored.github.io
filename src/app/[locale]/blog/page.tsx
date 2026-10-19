@@ -4,6 +4,8 @@ import { getAllPosts } from '@/lib/blog';
 import PostCard from '@/components/blog/PostCard';
 import BlogFilter from '@/components/blog/BlogFilter';
 import AdUnit from '@/components/blog/AdUnit';
+import { notFound } from 'next/navigation';
+import { site } from '@/config/site';
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -12,6 +14,7 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'blog' });
+  if (!site.blogEnabled) return { robots: { index: false, follow: false } };
   return {
     title: t('pageTitle'),
     description: t('pageDescription'),
@@ -19,6 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPage({ params }: Props) {
+  if (!site.blogEnabled) notFound();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'blog' });
 
